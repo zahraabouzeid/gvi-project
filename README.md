@@ -4,7 +4,7 @@
 
 Teammitglieder: Zahraa, Masuma, Rebecca, Amélie, Dominik, Sascha
 
- [Storboard](https://gamificationoflearning.atlassian.net/jira/software/projects/SCRUM/boards/1?jql=)
+ [Storyboard](https://gamificationoflearning.atlassian.net/jira/software/projects/SCRUM/boards/1?jql=)
 
 ## 1. Meeting
 Entscheidungen: 
