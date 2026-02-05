@@ -2,7 +2,7 @@
 
 ## Thema: SQL und Datenbankmodellierung
 
-Teammitglieder: Zahra, Masuma, Rebecca, Amélie, Dominik, Sascha
+Teammitglieder: Zahraa, Masuma, Rebecca, Amélie, Dominik, Sascha
 
 ## 1. Meeting
 Entscheidungen: 
