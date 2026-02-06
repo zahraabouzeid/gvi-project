@@ -24,3 +24,4 @@ Entscheidungen:
 ## Regeln
 * Eindeutige und beschreibende Commit Messages
 * Dokumentieren des geschriebenen Codes
+* Code wird auf nur auf Englisch geschrieben Kommentare und Doku auf Deutsch
