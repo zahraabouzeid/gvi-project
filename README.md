@@ -16,9 +16,11 @@ Entscheidungen:
 * Keine Gameengine
 * Java mit Maven
 
-Zeitplan
+## Zeitplan
 <img width="1155" height="700" alt="image" src="https://github.com/user-attachments/assets/d4297df6-a121-4f33-883e-8f276fd0d2cd" />
 
 
 
-
+## Regeln
+* Eindeutige und beschreibende Commit Messages
+* Dokumentieren des geschriebenen Codes
