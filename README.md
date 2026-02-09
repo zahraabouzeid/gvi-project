@@ -48,11 +48,10 @@ mvn -q javafx:run
 mvn -q -DskipTests clean javafx:run
 ```
 
-**Alternative Kompilier/Ausführ variante**  
-Wenn man mit Debugger arbeiten möchte ist man leider hierzu gezwungen, anderweitig läuft die complierte version über eine seperate Instance zur IDE  
+**Alternative Kompilier/Ausführ variante:**    
+Wenn man mit Debugger arbeiten möchte ist man leider hierzu gezwungen, anderweitig läuft die complierte version über eine separate Instance zur IDE.  
 In IntelliJ, rechts in der Seitenleiste m -> gviProject -> plugins -> javafx -> javafx:run, ausführen mit doppelclick.  
-Alternativ JavaFx 21.0.2 <a href="https://gluonhq.com/products/javafx/" target="_blank">downloaden</a>,  
-ihr müsst archivierte Versionen anzeigen lassen um die zu finden, und in entpacken an einer von euch gewünschten stelle.  
+Alternativ JavaFx 21.0.2 <a href="https://gluonhq.com/products/javafx/" target="_blank">downloaden</a>, ihr müsst archivierte Versionen anzeigen lassen um die zu finden, und in entpacken an einer von euch gewünschten stelle.  
 <img width="1224" height="667" alt="image" src="https://github.com/user-attachments/assets/87ce7d17-4782-4eac-9747-79be57b1873e" />  
 Anschließend ein Run conifig anlegen, über modify options -> add VM options, die VM options anzeigen lassen und folgende Argumente eintragen
 
