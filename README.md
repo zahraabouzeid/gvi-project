@@ -49,7 +49,7 @@ mvn -q -DskipTests clean javafx:run
 ```
 
 **Alternative Kompilier/Ausführ variante**
-
+Wenn man mit Debugger arbeiten möchte ist man leider hierzu gezwungen, anderweitig läuft die complierte version über eine seperate Instance zur IDE
 In IntelliJ, rechts in der Seitenleiste m -> gviProject -> plugins -> javafx -> javafx:run, ausführen mit doppelclick.
 Alternativ JavaFx 21.0.2 <a href="https://gluonhq.com/products/javafx/" target="_blank">downloaden</a>, 
 ihr müsst archivierte Versionen anzeigen lassen um die zu finden, und in entpacken an einer von euch gewünschten stelle.
