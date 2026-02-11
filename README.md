@@ -56,5 +56,5 @@ Alternativ JavaFx 21.0.2 <a href="https://gluonhq.com/products/javafx/" target="
 Anschließend ein Run conifig anlegen, über modify options -> add VM options, die VM options anzeigen lassen und folgende Argumente eintragen
 
 ```powershell
---module-path "%%hier deinen pfad zur javaFx sdk eintragen%%\javafx-sdk-21.0.2\lib" --add-modules javafx.controls,javafx.fxml 
+--module-path "C:\SDK\java\javaFx\javafx-sdk-21.0.2\lib" --add-modules javafx.controls,javafx.fxml --enable-native-access=ALL-UNNAMED --enable-native-access=javafx.graphics
 ```
