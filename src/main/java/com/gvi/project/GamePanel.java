@@ -9,8 +9,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
 public class GamePanel {
-	final int originalTileSize = 16;  // 16x16 px
-	final int scale = 3;
+	final int originalTileSize = 16;  // 16x16 px ein Tile ist 16x16 Pixel groß
+	final int scale = 3;// 3x16 = 48x48 px pro Tile
 
 	public final int tileSize = originalTileSize * scale; // 48x48 px
 	public final int maxScreenCol = 16;

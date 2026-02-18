@@ -1,6 +1,6 @@
 package com.gvi.project;
 
-import com.gvi.project.models.entities.Entity;
+import com.gvi.project.models.objects.SuperObject;
 
 public class CollisionChecker {
 	GamePanel gp;
@@ -9,124 +9,26 @@ public class CollisionChecker {
 		this.gp = gp;
 	}
 
-	public void checkCollision(Entity entity) {
-		int entityLeftWorldX = entity.worldX + entity.collisionBox.x;
-		int entityRightWorldX = entity.worldX + entity.collisionBox.x + entity.collisionBox.width;
-		int entityTopWorldY = entity.worldY + entity.collisionBox.y;
-		int entityBottomWorldY = entity.worldY + entity.collisionBox.y + entity.collisionBox.height;
-
-		int entityLeftCol = entityLeftWorldX / gp.tileSize;
-		int entityRightCol = entityRightWorldX / gp.tileSize;
-		int entityTopRow = entityTopWorldY / gp.tileSize;
-		int entityBottomRow = entityBottomWorldY / gp.tileSize;
-
-		int tileNumber1, tileNumber2;
-
-		switch (entity.direction) {
-			case "up":
-				entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
-				tileNumber1 = gp.tileManager.mapTileNumber[entityLeftCol][entityTopRow];
-				tileNumber2 = gp.tileManager.mapTileNumber[entityRightCol][entityTopRow];
-
-				if (gp.tileManager.tiles[tileNumber1].hasCollision || gp.tileManager.tiles[tileNumber2].hasCollision) {
-					entity.collisionActive = true;
-				}
-				break;
-			case "down":
-				entityBottomRow = (entityBottomWorldY + entity.speed) / gp.tileSize;
-				tileNumber1 = gp.tileManager.mapTileNumber[entityLeftCol][entityBottomRow];
-				tileNumber2 = gp.tileManager.mapTileNumber[entityRightCol][entityBottomRow];
-
-				if (gp.tileManager.tiles[tileNumber1].hasCollision || gp.tileManager.tiles[tileNumber2].hasCollision) {
-					entity.collisionActive = true;
-				}
-				break;
-			case "left":
-				entityLeftCol = (entityLeftWorldX - entity.speed) / gp.tileSize;
-				tileNumber1 = gp.tileManager.mapTileNumber[entityLeftCol][entityTopRow];
-				tileNumber2 = gp.tileManager.mapTileNumber[entityLeftCol][entityBottomRow];
-
-				if (gp.tileManager.tiles[tileNumber1].hasCollision || gp.tileManager.tiles[tileNumber2].hasCollision) {
-					entity.collisionActive = true;
-				}
-				break;
-			case "right":
-				entityRightCol = (entityRightWorldX + entity.speed) / gp.tileSize;
-				tileNumber1 = gp.tileManager.mapTileNumber[entityRightCol][entityTopRow];
-				tileNumber2 = gp.tileManager.mapTileNumber[entityRightCol][entityBottomRow];
-
-				if (gp.tileManager.tiles[tileNumber1].hasCollision || gp.tileManager.tiles[tileNumber2].hasCollision) {
-					entity.collisionActive = true;
-				}
-				break;
+	// Prüft, ob ein Tile im Grid begehbar ist (Wand, Wasser, Baum blockiert)
+	// Gibt auch true zurück, wenn die Position außerhalb der Weltkarte liegt
+	public boolean isTileBlocked(int gridX, int gridY) {
+		if (gridX < 0 || gridX >= gp.maxWorldCol || gridY < 0 || gridY >= gp.maxWorldRow) {
+			return true; // außerhalb der Karte wird blockiert
 		}
+		int tileNum = gp.tileManager.mapTileNumber[gridX][gridY];
+		return gp.tileManager.tiles[tileNum].hasCollision;
 	}
 
-	public int checkObject(Entity entity, boolean isPlayer){
-		int index = 999;
-
-		for (int i = 0; i < gp.obj.length; i++) {
-			if(gp.obj[i] != null){
-				entity.collisionBox.x = entity.collisionBox.x + entity.worldX;
-				entity.collisionBox.y = entity.collisionBox.y + entity.worldY;
-
-				gp.obj[i].collisionBox.x = gp.obj[i].collisionBox.x + gp.obj[i].worldX;
-				gp.obj[i].collisionBox.y = gp.obj[i].collisionBox.y + gp.obj[i].worldY;
-
-
-				switch (entity.direction) {
-					case "up":
-						entity.collisionBox.y -= entity.speed;
-						if(entity.collisionBox.intersects(gp.obj[i].collisionBox)){
-							if(gp.obj[i].collision){
-								entity.collisionActive = true;
-							}
-							if(isPlayer){
-								index = i;
-							}
-						}
-						break;
-					case "down":
-						entity.collisionBox.y += entity.speed;
-						if(entity.collisionBox.intersects(gp.obj[i].collisionBox)){
-							if(gp.obj[i].collision){
-								entity.collisionActive = true;
-							}
-							if(isPlayer){
-								index = i;
-							}
-						}
-						break;
-					case "left":
-						entity.collisionBox.x -= entity.speed;
-						if(entity.collisionBox.intersects(gp.obj[i].collisionBox)){
-							if(gp.obj[i].collision){
-								entity.collisionActive = true;
-							}
-							if(isPlayer){
-								index = i;
-							}
-						}
-						break;
-					case "right":
-						entity.collisionBox.x += entity.speed;
-						if(entity.collisionBox.intersects(gp.obj[i].collisionBox)){
-							if(gp.obj[i].collision){
-								entity.collisionActive = true;
-							}
-							if(isPlayer){
-								index = i;
-							}
-						}
-						break;
-				}
-				entity.collisionBox.x = entity.collisionBoxDefaultX;
-				entity.collisionBox.y = entity.collisionBoxDefaultY;
-				gp.obj[i].collisionBox.x = gp.obj[i].collisionBoxDefaultX;
-				gp.obj[i].collisionBox.y = gp.obj[i].collisionBoxDefaultY;
+	// Prüft, ob ein blockierendes Objekt (z.B. Tür) auf dem Ziel-Tile steht
+	// Vergleicht die Pixel-Position des Objekts mit dem Ziel-Grid-Feld
+	public boolean isObjectBlocking(int gridX, int gridY) {
+		int targetWorldX = gridX * gp.tileSize;
+		int targetWorldY = gridY * gp.tileSize;
+		for (SuperObject obj : gp.obj) {
+			if (obj != null && obj.collision && obj.worldX == targetWorldX && obj.worldY == targetWorldY) {
+				return true;
 			}
 		}
-
-		return index;
+		return false;
 	}
 }
