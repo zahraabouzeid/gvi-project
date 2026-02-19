@@ -1,0 +1,124 @@
+package com.gvi.project.ui;
+
+import com.gvi.project.GamePanel;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
+import static com.gvi.project.ui.UITheme.*;
+
+public class Minimap {
+
+    private final GamePanel gp;
+    private final int pixelSize = 3;
+
+    public Minimap(GamePanel gp) {
+        this.gp = gp;
+    }
+
+    public void draw(GraphicsContext gc) {
+        int minimapW = gp.maxWorldCol * pixelSize;
+        int minimapH = gp.maxWorldRow * pixelSize;
+        int margin = 10;
+        int startX = gp.screenWidth - minimapW - margin;
+        int startY = margin;
+
+        double centerX = startX + minimapW / 2.0;
+        double centerY = startY + minimapH / 2.0;
+        double radius = Math.min(minimapW, minimapH) / 2.0;
+
+        // Background circle
+        drawCircleBackground(gc, centerX, centerY, radius);
+
+        // Gold pixel border ring
+        drawCircleBorder(gc, centerX, centerY, radius);
+
+        // Tiles (clipped to circle)
+        drawTiles(gc, startX, startY, centerX, centerY, radius);
+
+        // Objects (clipped to circle)
+        drawObjects(gc, startX, startY, centerX, centerY, radius);
+
+        // Player marker (clipped to circle)
+        drawPlayer(gc, startX, startY, centerX, centerY, radius);
+    }
+
+    private void drawCircleBackground(GraphicsContext gc, double cx, double cy, double radius) {
+        gc.setFill(MINIMAP_BG);
+        for (int px = (int) (cx - radius - 3); px <= (int) (cx + radius + 3); px++) {
+            for (int py = (int) (cy - radius - 3); py <= (int) (cy + radius + 3); py++) {
+                double dist = Math.sqrt((px - cx) * (px - cx) + (py - cy) * (py - cy));
+                if (dist <= radius + 2) {
+                    gc.fillRect(px, py, 1, 1);
+                }
+            }
+        }
+    }
+
+    private void drawCircleBorder(GraphicsContext gc, double cx, double cy, double radius) {
+        gc.setFill(MINIMAP_BORDER);
+        for (int angle = 0; angle < 360; angle++) {
+            double rad = Math.toRadians(angle);
+            for (double r = radius; r <= radius + 2; r += 1) {
+                int bx = (int) (cx + r * Math.cos(rad));
+                int by = (int) (cy + r * Math.sin(rad));
+                gc.fillRect(bx, by, 2, 2);
+            }
+        }
+    }
+
+    private void drawTiles(GraphicsContext gc, int startX, int startY,
+                           double cx, double cy, double radius) {
+        for (int col = 0; col < gp.maxWorldCol; col++) {
+            for (int row = 0; row < gp.maxWorldRow; row++) {
+                double tileX = startX + col * pixelSize + pixelSize / 2.0;
+                double tileY = startY + row * pixelSize + pixelSize / 2.0;
+                if (distance(tileX, tileY, cx, cy) > radius) continue;
+
+                int tileNum = gp.tileManager.mapTileNumber[col][row];
+                gc.setFill(getTileColor(tileNum));
+                gc.fillRect(startX + col * pixelSize, startY + row * pixelSize, pixelSize, pixelSize);
+            }
+        }
+    }
+
+    private void drawObjects(GraphicsContext gc, int startX, int startY,
+                             double cx, double cy, double radius) {
+        gc.setFill(Color.YELLOW);
+        for (int i = 0; i < gp.obj.length; i++) {
+            if (gp.obj[i] != null) {
+                int objCol = gp.obj[i].worldX / gp.tileSize;
+                int objRow = gp.obj[i].worldY / gp.tileSize;
+                double ox = startX + objCol * pixelSize + pixelSize / 2.0;
+                double oy = startY + objRow * pixelSize + pixelSize / 2.0;
+                if (distance(ox, oy, cx, cy) <= radius) {
+                    gc.fillRect(startX + objCol * pixelSize, startY + objRow * pixelSize, pixelSize, pixelSize);
+                }
+            }
+        }
+    }
+
+    private void drawPlayer(GraphicsContext gc, int startX, int startY,
+                            double cx, double cy, double radius) {
+        int playerCol = gp.player.worldX / gp.tileSize;
+        int playerRow = gp.player.worldY / gp.tileSize;
+        gc.setFill(Color.RED);
+        gc.fillRect(startX + playerCol * pixelSize - 1, startY + playerRow * pixelSize - 1,
+                    pixelSize + 2, pixelSize + 2);
+    }
+
+    private double distance(double x1, double y1, double x2, double y2) {
+        return Math.sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+    }
+
+    private Color getTileColor(int tileNum) {
+        return switch (tileNum) {
+            case 0 -> Color.rgb(76, 153, 0);     // Grass
+            case 1 -> Color.rgb(128, 128, 128);   // Wall
+            case 2 -> Color.rgb(51, 102, 204);    // Water
+            case 3 -> Color.rgb(139, 90, 43);     // Earth
+            case 4 -> Color.rgb(34, 102, 0);      // Tree
+            case 5 -> Color.rgb(210, 180, 120);   // Sand
+            default -> Color.BLACK;
+        };
+    }
+}

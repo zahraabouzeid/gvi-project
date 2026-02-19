@@ -1,0 +1,506 @@
+[
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 1,
+    "topicArea": "SQL_GRUNDLAGEN",
+    "introText": "SQL Grundlagen",
+    "questionText": "Welches SQL-Kommando wird verwendet, um Daten aus einer Tabelle abzufragen?",
+    "answers": [
+      {"text": "SELECT", "points": 10},
+      {"text": "INSERT", "points": 0},
+      {"text": "UPDATE", "points": 0},
+      {"text": "DELETE", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 2,
+    "topicArea": "SQL_GRUNDLAGEN",
+    "introText": "SQL Grundlagen",
+    "questionText": "SQL steht fuer 'Structured Query Language'.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 3,
+    "topicArea": "SQL_GRUNDLAGEN",
+    "introText": "SQL Grundlagen",
+    "questionText": "Welches Schluesselwort entfernt Duplikate aus dem Ergebnis?",
+    "answers": [
+      {"text": "DISTINCT", "points": 10},
+      {"text": "UNIQUE", "points": 0},
+      {"text": "DIFFERENT", "points": 0},
+      {"text": "REMOVE", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 4,
+    "topicArea": "SQL_GRUNDLAGEN",
+    "introText": "SQL Grundlagen",
+    "questionText": "SQL ist case-sensitive bei Schluesselwoertern.",
+    "correctAnswer": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 5,
+    "topicArea": "SQL_GRUNDLAGEN",
+    "introText": "SQL Grundlagen",
+    "questionText": "Welcher Datentyp eignet sich fuer Ganzzahlen?",
+    "answers": [
+      {"text": "INT", "points": 10},
+      {"text": "VARCHAR", "points": 0},
+      {"text": "BOOLEAN", "points": 0},
+      {"text": "FLOAT", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 6,
+    "topicArea": "SQL_GRUNDLAGEN",
+    "introText": "SQL Grundlagen",
+    "questionText": "Was ist ein Primaerschluessel (Primary Key)?",
+    "answers": [
+      {"text": "Ein eindeutiger Bezeichner fuer jeden Datensatz", "points": 10},
+      {"text": "Ein Fremdschluessel aus einer anderen Tabelle", "points": 0},
+      {"text": "Ein Index fuer schnelle Suche", "points": 0},
+      {"text": "Ein Spaltenname", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 7,
+    "topicArea": "SQL_GRUNDLAGEN",
+    "introText": "SQL Grundlagen",
+    "questionText": "NULL bedeutet in SQL dasselbe wie 0 oder ein leerer String.",
+    "correctAnswer": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 8,
+    "topicArea": "SELECT_ABFRAGEN",
+    "introText": "SELECT Abfragen",
+    "questionText": "Welche Klausel wird verwendet, um Ergebnisse zu filtern?",
+    "answers": [
+      {"text": "WHERE", "points": 10},
+      {"text": "GROUP BY", "points": 0},
+      {"text": "ORDER BY", "points": 0},
+      {"text": "HAVING", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 9,
+    "topicArea": "SELECT_ABFRAGEN",
+    "introText": "SELECT Abfragen",
+    "questionText": "Welche Klausel sortiert die Ergebnisse?",
+    "answers": [
+      {"text": "ORDER BY", "points": 10},
+      {"text": "SORT BY", "points": 0},
+      {"text": "GROUP BY", "points": 0},
+      {"text": "ARRANGE BY", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 10,
+    "topicArea": "SELECT_ABFRAGEN",
+    "introText": "SELECT Abfragen",
+    "questionText": "HAVING kann nur zusammen mit GROUP BY verwendet werden.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 11,
+    "topicArea": "SELECT_ABFRAGEN",
+    "introText": "SELECT Abfragen",
+    "questionText": "Welche Aggregatfunktion zaehlt die Anzahl der Zeilen?",
+    "answers": [
+      {"text": "COUNT()", "points": 10},
+      {"text": "SUM()", "points": 0},
+      {"text": "AVG()", "points": 0},
+      {"text": "TOTAL()", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 12,
+    "topicArea": "SELECT_ABFRAGEN",
+    "introText": "SELECT Abfragen",
+    "questionText": "Was bewirkt LIKE '%test%' in einer WHERE-Klausel?",
+    "answers": [
+      {"text": "Sucht nach Werten, die 'test' enthalten", "points": 10},
+      {"text": "Sucht nach exakt 'test'", "points": 0},
+      {"text": "Sucht nach Werten, die mit 'test' beginnen", "points": 0},
+      {"text": "Sucht nach Werten, die mit 'test' enden", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 13,
+    "topicArea": "SELECT_ABFRAGEN",
+    "introText": "SELECT Abfragen",
+    "questionText": "ORDER BY sortiert standardmaessig absteigend (DESC).",
+    "correctAnswer": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 14,
+    "topicArea": "SELECT_ABFRAGEN",
+    "introText": "SELECT Abfragen",
+    "questionText": "Welches Schluesselwort begrenzt die Anzahl der Ergebnisse?",
+    "answers": [
+      {"text": "LIMIT", "points": 10},
+      {"text": "TOP", "points": 0},
+      {"text": "MAX", "points": 0},
+      {"text": "RESTRICT", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 15,
+    "topicArea": "NORMALISIERUNG",
+    "introText": "Normalisierung",
+    "questionText": "Welche Normalform beseitigt transitive Abhaengigkeiten?",
+    "answers": [
+      {"text": "1. Normalform", "points": 0},
+      {"text": "2. Normalform", "points": 0},
+      {"text": "3. Normalform", "points": 10},
+      {"text": "Boyce-Codd Normalform", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 16,
+    "topicArea": "NORMALISIERUNG",
+    "introText": "Normalisierung",
+    "questionText": "Die 1. Normalform verlangt, dass alle Attribute atomar sind.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 17,
+    "topicArea": "NORMALISIERUNG",
+    "introText": "Normalisierung",
+    "questionText": "Was ist das Ziel der Normalisierung?",
+    "answers": [
+      {"text": "Redundanzen vermeiden", "points": 10},
+      {"text": "Performance verbessern", "points": 0},
+      {"text": "Tabellen zusammenfuehren", "points": 0},
+      {"text": "Daten verschluesseln", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 18,
+    "topicArea": "NORMALISIERUNG",
+    "introText": "Normalisierung",
+    "questionText": "Was beseitigt die 2. Normalform?",
+    "answers": [
+      {"text": "Partielle Abhaengigkeiten", "points": 10},
+      {"text": "Transitive Abhaengigkeiten", "points": 0},
+      {"text": "Mehrwertige Abhaengigkeiten", "points": 0},
+      {"text": "Redundante Schluessel", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 19,
+    "topicArea": "NORMALISIERUNG",
+    "introText": "Normalisierung",
+    "questionText": "Denormalisierung wird manchmal bewusst eingesetzt, um die Leseperformance zu verbessern.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 20,
+    "topicArea": "NORMALISIERUNG",
+    "introText": "Normalisierung",
+    "questionText": "Was ist eine funktionale Abhaengigkeit?",
+    "answers": [
+      {"text": "A bestimmt B eindeutig (A -> B)", "points": 10},
+      {"text": "A und B sind immer gleich", "points": 0},
+      {"text": "A ist ein Fremdschluessel von B", "points": 0},
+      {"text": "A und B sind in derselben Tabelle", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 21,
+    "topicArea": "NORMALISIERUNG",
+    "introText": "Normalisierung",
+    "questionText": "Was ist ein Kandidatenschluessel?",
+    "answers": [
+      {"text": "Ein minimaler Superschluessel", "points": 10},
+      {"text": "Ein Fremdschluessel", "points": 0},
+      {"text": "Ein zusammengesetzter Schluessel", "points": 0},
+      {"text": "Ein alternativer Name fuer Primary Key", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 22,
+    "topicArea": "ER_MODELLIERUNG",
+    "introText": "ER-Modellierung",
+    "questionText": "Was stellt ein Diamant (Raute) in einem ER-Diagramm dar?",
+    "answers": [
+      {"text": "Entitaet", "points": 0},
+      {"text": "Attribut", "points": 0},
+      {"text": "Beziehung", "points": 10},
+      {"text": "Primaerschluessel", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 23,
+    "topicArea": "ER_MODELLIERUNG",
+    "introText": "ER-Modellierung",
+    "questionText": "Ein Rechteck stellt eine Entitaet im ER-Diagramm dar.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 24,
+    "topicArea": "ER_MODELLIERUNG",
+    "introText": "ER-Modellierung",
+    "questionText": "Was bedeutet eine 1:n Beziehung?",
+    "answers": [
+      {"text": "Ein Datensatz ist mit vielen verknuepft", "points": 10},
+      {"text": "Viele Datensaetze sind mit vielen verknuepft", "points": 0},
+      {"text": "Genau ein Datensatz pro Seite", "points": 0},
+      {"text": "Keine Beziehung", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 25,
+    "topicArea": "ER_MODELLIERUNG",
+    "introText": "ER-Modellierung",
+    "questionText": "Wie wird ein Attribut im ER-Diagramm dargestellt?",
+    "answers": [
+      {"text": "Ellipse (Oval)", "points": 10},
+      {"text": "Rechteck", "points": 0},
+      {"text": "Raute", "points": 0},
+      {"text": "Dreieck", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 26,
+    "topicArea": "ER_MODELLIERUNG",
+    "introText": "ER-Modellierung",
+    "questionText": "Eine schwache Entitaet kann ohne eine starke Entitaet nicht existieren.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 27,
+    "topicArea": "ER_MODELLIERUNG",
+    "introText": "ER-Modellierung",
+    "questionText": "Was ist Kardinalitaet in der ER-Modellierung?",
+    "answers": [
+      {"text": "Die Anzahl der Beziehungen zwischen Entitaeten", "points": 10},
+      {"text": "Die Anzahl der Attribute", "points": 0},
+      {"text": "Die Anzahl der Tabellen", "points": 0},
+      {"text": "Die Anzahl der Primaerschluessel", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 28,
+    "topicArea": "ER_MODELLIERUNG",
+    "introText": "ER-Modellierung",
+    "questionText": "Was ist ein zusammengesetztes Attribut?",
+    "answers": [
+      {"text": "Ein Attribut, das aus Teilattributen besteht", "points": 10},
+      {"text": "Ein Attribut mit mehreren Werten", "points": 0},
+      {"text": "Ein berechnetes Attribut", "points": 0},
+      {"text": "Ein Fremdschluessel", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 29,
+    "topicArea": "DDL_DML",
+    "introText": "DDL & DML",
+    "questionText": "CREATE TABLE ist ein DML-Befehl.",
+    "correctAnswer": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 30,
+    "topicArea": "DDL_DML",
+    "introText": "DDL & DML",
+    "questionText": "Mit ALTER TABLE kann man eine Spalte zu einer bestehenden Tabelle hinzufuegen.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 31,
+    "topicArea": "DDL_DML",
+    "introText": "DDL & DML",
+    "questionText": "Welcher Befehl gehoert zu DDL (Data Definition Language)?",
+    "answers": [
+      {"text": "CREATE", "points": 10},
+      {"text": "INSERT", "points": 0},
+      {"text": "SELECT", "points": 0},
+      {"text": "UPDATE", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 32,
+    "topicArea": "DDL_DML",
+    "introText": "DDL & DML",
+    "questionText": "Welcher Befehl gehoert zu DML (Data Manipulation Language)?",
+    "answers": [
+      {"text": "INSERT", "points": 10},
+      {"text": "CREATE", "points": 0},
+      {"text": "DROP", "points": 0},
+      {"text": "ALTER", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 33,
+    "topicArea": "DDL_DML",
+    "introText": "DDL & DML",
+    "questionText": "Was macht DROP TABLE?",
+    "answers": [
+      {"text": "Loescht die gesamte Tabelle und ihre Struktur", "points": 10},
+      {"text": "Loescht nur die Daten", "points": 0},
+      {"text": "Entfernt eine Spalte", "points": 0},
+      {"text": "Benennt die Tabelle um", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 34,
+    "topicArea": "DDL_DML",
+    "introText": "DDL & DML",
+    "questionText": "Was ist der Unterschied zwischen DELETE und TRUNCATE?",
+    "answers": [
+      {"text": "DELETE kann mit WHERE filtern, TRUNCATE loescht alles", "points": 10},
+      {"text": "Kein Unterschied", "points": -5},
+      {"text": "TRUNCATE ist schneller und kann gefiltert werden", "points": 0},
+      {"text": "DELETE loescht die Tabelle, TRUNCATE nur Daten", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 35,
+    "topicArea": "DDL_DML",
+    "introText": "DDL & DML",
+    "questionText": "GRANT und REVOKE gehoeren zur DCL (Data Control Language).",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 36,
+    "topicArea": "JOINS_SUBQUERIES",
+    "introText": "Joins & Subqueries",
+    "questionText": "Welcher JOIN gibt alle Zeilen aus beiden Tabellen zurueck, auch ohne Uebereinstimmung?",
+    "answers": [
+      {"text": "INNER JOIN", "points": 0},
+      {"text": "LEFT JOIN", "points": 0},
+      {"text": "RIGHT JOIN", "points": 0},
+      {"text": "FULL OUTER JOIN", "points": 10}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 37,
+    "topicArea": "JOINS_SUBQUERIES",
+    "introText": "Joins & Subqueries",
+    "questionText": "Ein INNER JOIN gibt nur die Zeilen zurueck, die in beiden Tabellen uebereinstimmen.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 38,
+    "topicArea": "JOINS_SUBQUERIES",
+    "introText": "Joins & Subqueries",
+    "questionText": "Was ist eine korrelierte Subquery?",
+    "answers": [
+      {"text": "Eine Unterabfrage, die auf die aeussere Abfrage verweist", "points": 10},
+      {"text": "Eine Unterabfrage ohne Bezug zur aeusseren Abfrage", "points": 0},
+      {"text": "Ein Synonym fuer JOIN", "points": -5},
+      {"text": "Eine gespeicherte Prozedur", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 39,
+    "topicArea": "JOINS_SUBQUERIES",
+    "introText": "Joins & Subqueries",
+    "questionText": "Was macht ein LEFT JOIN?",
+    "answers": [
+      {"text": "Gibt alle Zeilen der linken Tabelle zurueck, mit passenden rechten", "points": 10},
+      {"text": "Gibt nur uebereinstimmende Zeilen zurueck", "points": 0},
+      {"text": "Gibt alle Zeilen der rechten Tabelle zurueck", "points": 0},
+      {"text": "Gibt alle Zeilen beider Tabellen zurueck", "points": 0}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "TRUE_FALSE",
+    "id": 40,
+    "topicArea": "JOINS_SUBQUERIES",
+    "introText": "Joins & Subqueries",
+    "questionText": "Eine Subquery kann im SELECT, FROM und WHERE Teil stehen.",
+    "correctAnswer": true
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 41,
+    "topicArea": "JOINS_SUBQUERIES",
+    "introText": "Joins & Subqueries",
+    "questionText": "Welches Schluesselwort prueft, ob eine Subquery Ergebnisse liefert?",
+    "answers": [
+      {"text": "EXISTS", "points": 10},
+      {"text": "IN", "points": 0},
+      {"text": "CONTAINS", "points": 0},
+      {"text": "HAS", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  },
+  {
+    "type": "MULTIPLE_CHOICE",
+    "id": 42,
+    "topicArea": "JOINS_SUBQUERIES",
+    "introText": "Joins & Subqueries",
+    "questionText": "Was ist ein CROSS JOIN?",
+    "answers": [
+      {"text": "Das kartesische Produkt beider Tabellen", "points": 10},
+      {"text": "Ein JOIN mit WHERE-Bedingung", "points": 0},
+      {"text": "Ein JOIN ueber drei Tabellen", "points": 0},
+      {"text": "Ein Self-Join", "points": -5}
+    ],
+    "allowMultipleSelection": false
+  }
+]
