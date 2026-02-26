@@ -36,3 +36,6 @@ build/
 .DS_Store
 /.idea/
 /.idea/
+
+### run scripts
+*.ps1
