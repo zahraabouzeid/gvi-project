@@ -1,83 +1,64 @@
 package com.gvi.project.models.tiles;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gvi.project.GamePanel;
-import com.gvi.project.helper.ImageHelper;
+import com.gvi.project.models.game_levels.GameLevelLayer;
+import com.gvi.project.models.game_levels.config.GameLevelConfig;
+import com.gvi.project.models.game_levels.GameLevels;
+import com.gvi.project.models.game_levels.config.GameLevelLayerConfig;
+import com.gvi.project.models.game_levels.config.GameLevelSpriteSheetConfig;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.Map;
 
 public class TileManager {
-	GamePanel gp;
-	public Tile[] tiles;
-	public int[][] mapTileNumber;
+	private ObjectMapper mapper = new ObjectMapper();
+	private GamePanel gp;
+
+	private Map<String, int[][]> currentGameLevelLayers;
 
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
-		tiles = new Tile[10];
-		mapTileNumber = new int[gp.maxWorldCol][gp.maxWorldRow];
-		getTileImage();
-		loadMap("/maps/map_01.txt");
+		loadMap(GameLevels.TEST_LEVEL);
 	}
 
-	public void getTileImage() {
-		try{
-			tiles[0] = new Tile();
-			tiles[0].image = ImageHelper.getImage("/sprites/tiles/grass.png");
+	public void loadGameLevelLayers(GameLevelConfig levelConfig) {
+		for (GameLevelLayerConfig layerConfig : levelConfig.layers){
+			GameLevelLayer gameLevelLayer = new GameLevelLayer(layerConfig, levelConfig.width, levelConfig.height);
+			currentGameLevelLayers.put(layerConfig.id, layerConfig.spriteLayout);
 
-			tiles[1] = new Tile();
-			tiles[1].image = ImageHelper.getImage("/sprites/tiles/wall.png");
-			tiles[1].hasCollision = true;
-
-			tiles[2] = new Tile();
-			tiles[2].image = ImageHelper.getImage("/sprites/tiles/water.png");
-			tiles[2].hasCollision = true;
-
-			tiles[3] = new Tile();
-			tiles[3].image = ImageHelper.getImage("/sprites/tiles/earth.png");
-
-			tiles[4] = new Tile();
-			tiles[4].image = ImageHelper.getImage("/sprites/tiles/tree.png");
-			tiles[4].hasCollision = true;
-
-			tiles[5] = new Tile();
-			tiles[5].image = ImageHelper.getImage("/sprites/tiles/sand.png");
-		} catch (IOException e) {
-			e.printStackTrace();
+			loadUsedSprites(layerConfig);
 		}
 	}
 
-	public void loadMap(String filePath) {
-		try {
-			InputStream is = getClass().getResourceAsStream(filePath);
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+	public void loadUsedSprites(GameLevelLayerConfig layerConfig){
+		for (GameLevelSpriteSheetConfig spriteSheetConfig : layerConfig.usedSpriteSheets){
 
-			int col = 0;
-			int row = 0;
+		}
+	}
 
-			while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
-				String line = br.readLine();
+	public void loadMap(GameLevels gameLevel) {
+		GameLevelConfig levelConfig = null;
 
-				while (col < gp.maxWorldCol) {
-					String numbers[] = line.split(" ");
+		try (InputStream is = getClass().getResourceAsStream(
+				"/maps/" + gameLevel.getConfigFileName())) {
 
-					int num = Integer.parseInt(numbers[col]);
-
-					mapTileNumber[col][row] = num;
-					col++;
-				}
-
-				if (col == gp.maxWorldCol) {
-					col = 0;
-					row++;
-				}
+			if (is == null) {
+				throw new RuntimeException("File not found in resources");
 			}
 
-			br.close();
-		} catch (Exception e) {
+			levelConfig = mapper.readValue(is, GameLevelConfig.class);
+
+		} catch (IOException e) {
+			System.out.println("Error while parsing file: " + gameLevel.getConfigFileName());
 			e.printStackTrace();
+		}
+
+		if (levelConfig != null) {
+			loadGameLevelLayers(levelConfig);
 		}
 	}
 
@@ -88,7 +69,7 @@ public class TileManager {
 
 		while (worldCol < gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 
-			int tileNum = mapTileNumber[worldCol][worldRow];
+			//int tileNum = mapTileNumber[worldCol][worldRow];
 
 			int worldX = worldCol * gp.tileSize;
 			int worldY = worldRow * gp.tileSize;
@@ -99,7 +80,7 @@ public class TileManager {
 					worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
 					worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
 					worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-				gc.drawImage(tiles[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize);
+				// gc.drawImage(tiles[tileNum].image, screenX, screenY, gp.tileSize, gp.tileSize);
 			}
 
 			worldCol++;

@@ -21,7 +21,7 @@ public class CollisionChecker {
 		int entityBottomRow = entityBottomWorldY / gp.tileSize;
 
 		int tileNumber1, tileNumber2;
-
+		/*
 		switch (entity.direction) {
 			case "up":
 				entityTopRow = (entityTopWorldY - entity.speed) / gp.tileSize;
@@ -60,6 +60,8 @@ public class CollisionChecker {
 				}
 				break;
 		}
+
+		 */
 	}
 
 	public int checkObject(Entity entity, boolean isPlayer){

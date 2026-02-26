@@ -1,12 +1,12 @@
-package com.gvi.project.models.tiles;
+package com.gvi.project.models.tiles.config;
 
-public class SpriteData {
+public class SpriteConfig {
 	public String spriteId;
 	public int spriteX;
 	public int spriteY;
 	public int spriteWidth;
 	public int spriteHeight;
 
-	public SpriteData() {}
+	public SpriteConfig() {}
 }
 
