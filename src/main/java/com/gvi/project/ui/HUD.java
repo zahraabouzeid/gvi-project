@@ -38,6 +38,11 @@ public class HUD {
         double hudX = gp.tileSize / 2.0;
         double hudY = gp.tileSize / 2.0;
 
+        // Display player name
+        gc.setFont(FONT_SM);
+        gc.setFill(TEXT_GOLD);
+        gc.fillText("Name: " + gp.player.playerName, hudX, hudY - 10);
+
         drawHearts(gc);
 
         int keySize = 28;

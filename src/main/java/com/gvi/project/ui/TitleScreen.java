@@ -72,25 +72,7 @@ public class TitleScreen {
     }
 
     private void drawBorder(GraphicsContext gc) {
-        int p = 3;
-        gc.setFill(BOX_BORDER_OUTER);
-        for (int i = p * 3; i < screenWidth - p * 3; i += p) {
-            gc.fillRect(i, p * 2, p, p);
-            gc.fillRect(i, screenHeight - p * 3, p, p);
-        }
-        for (int i = p * 3; i < screenHeight - p * 3; i += p) {
-            gc.fillRect(p * 2, i, p, p);
-            gc.fillRect(screenWidth - p * 3, i, p, p);
-        }
-
-        gc.setFill(BOX_CORNER);
-        gc.fillRect(p * 2, p * 2, p * 2, p);
-        gc.fillRect(p * 2, p * 2, p, p * 2);
-        gc.fillRect(screenWidth - p * 4, p * 2, p * 2, p);
-        gc.fillRect(screenWidth - p * 3, p * 2, p, p * 2);
-        gc.fillRect(p * 2, screenHeight - p * 3, p * 2, p);
-        gc.fillRect(p * 2, screenHeight - p * 4, p, p * 2);
-        gc.fillRect(screenWidth - p * 4, screenHeight - p * 3, p * 2, p);
-        gc.fillRect(screenWidth - p * 3, screenHeight - p * 4, p, p * 2);
+        // now delegated to shared utility
+        UIUtils.drawScreenBorder(gc, screenWidth, screenHeight);
     }
 }
