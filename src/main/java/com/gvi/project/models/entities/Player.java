@@ -17,6 +17,7 @@ public class Player extends Entity {
 	public final int screenX;
 	public final int screenY;
 
+	public String playerName = "Player";
 	public int playerKeys = 0;
 	public int nearbyObjectIndex = -1;
 	public int maxHealthHalf = 10;
