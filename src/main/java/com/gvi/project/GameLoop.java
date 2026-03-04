@@ -3,6 +3,7 @@ package com.gvi.project;
 import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.Answer;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class GameLoop extends AnimationTimer {
 	long lastTime = System.nanoTime();
 	int drawCount = 0;
 	long timer = 0;
+	private int pauseNavCooldown = 0;
 
 	public GameLoop(GamePanel gp) {
 		this.gp = gp;
@@ -67,6 +69,12 @@ public class GameLoop extends AnimationTimer {
 			return;
 		}
 		if (gp.gameState == GameState.PLAY) {
+			if (gp.keyHandler.escPressed) {
+				gp.keyHandler.escPressed = false;
+				gp.ui.resetPauseScreen();
+				gp.gameState = GameState.PAUSE;
+				return;
+			}
 			gp.player.update();
 		} else if (gp.gameState == GameState.QUIZ) {
 			if (gp.ui.isAnswerFeedback()) {
@@ -124,6 +132,35 @@ public class GameLoop extends AnimationTimer {
 					gp.gameState = GameState.PLAY;
 				}
 			}
+		} else if (gp.gameState == GameState.PAUSE) {
+			handlePauseInput();
+		}
+	}
+
+	private void handlePauseInput() {
+		if (pauseNavCooldown > 0) pauseNavCooldown--;
+		if (gp.keyHandler.escPressed) {
+			gp.keyHandler.escPressed = false;
+			gp.gameState = GameState.PLAY;
+			return;
+		}
+		if (pauseNavCooldown == 0) {
+			if (gp.keyHandler.upPressed) {
+				gp.ui.navigatePauseUp();
+				pauseNavCooldown = 12;
+			} else if (gp.keyHandler.downPressed) {
+				gp.ui.navigatePauseDown();
+				pauseNavCooldown = 12;
+			}
+		}
+		if (gp.keyHandler.enterPressed) {
+			gp.keyHandler.enterPressed = false;
+			switch (gp.ui.getPauseSelectedOption()) {
+				case 0 -> gp.gameState = GameState.PLAY;
+				case 1 -> { }
+				case 2 -> { }
+				case 3 -> Platform.exit();
+			}
 		}
 	}
 
@@ -177,16 +214,23 @@ public class GameLoop extends AnimationTimer {
 			return;
 		}
 
-		gp.tileManager.draw(gp.gc);
+		drawGameWorld();
 
+		if (gp.gameState == GameState.PAUSE) {
+			gp.ui.drawPauseScreen(gp.gc);
+		} else {
+			gp.ui.draw(gp.gc);
+		}
+	}
+
+	private void drawGameWorld() {
+		gp.tileManager.draw(gp.gc);
 		for (SuperObject obj : gp.obj) {
-			if(obj != null) {
+			if (obj != null) {
 				obj.draw(gp);
 			}
 		}
-
 		gp.player.draw(gp.gc);
 		gp.ui.minimap.draw(gp.gc);
-		gp.ui.draw(gp.gc);
 	}
 }
