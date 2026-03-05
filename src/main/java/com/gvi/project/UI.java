@@ -14,8 +14,10 @@ public class UI {
     private final GamePanel gp;
 
     private final TitleScreen titleScreen;
+    private final CharacterNameScreen characterNameScreen;
     private final GameOverScreen gameOverScreen;
     private final WinScreen winScreen;
+    private final PauseScreen pauseScreen;
     private final HUD hud;
     private final QuizDialog quizDialog;
     public final Minimap minimap;
@@ -34,8 +36,10 @@ public class UI {
         this.gp = gp;
 
         titleScreen = new TitleScreen(gp.screenWidth, gp.screenHeight);
+        characterNameScreen = new CharacterNameScreen(gp.screenWidth, gp.screenHeight);
         gameOverScreen = new GameOverScreen(gp.screenWidth, gp.screenHeight);
         winScreen = new WinScreen(gp.screenWidth, gp.screenHeight);
+        pauseScreen = new PauseScreen(gp.screenWidth, gp.screenHeight);
         hud = new HUD(gp, new OBJ_Key().image);
         quizDialog = new QuizDialog(gp.screenWidth, gp.screenHeight);
         minimap = new Minimap(gp);
@@ -93,6 +97,35 @@ public class UI {
 
     public void drawTitleScreen(GraphicsContext gc) {
         titleScreen.draw(gc);
+    }
+
+    public void drawPauseScreen(GraphicsContext gc) {
+        hud.draw(gc, "Time: " + df.format(playtime));
+        pauseScreen.draw(gc);
+    }
+
+    public void resetPauseScreen() {
+        pauseScreen.reset();
+    }
+
+    public void navigatePauseUp() {
+        pauseScreen.navigateUp();
+    }
+
+    public void navigatePauseDown() {
+        pauseScreen.navigateDown();
+    }
+
+    public int getPauseSelectedOption() {
+        return pauseScreen.getSelectedOption();
+    }
+
+    public void drawCharacterNameScreen(GraphicsContext gc) {
+        characterNameScreen.draw(gc, gp.player.playerName);
+    }
+
+    public int getCharacterNameMaxLength() {
+        return characterNameScreen.getMaxNameLength();
     }
 
     public void draw(GraphicsContext gc) {

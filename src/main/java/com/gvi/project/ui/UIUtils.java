@@ -83,4 +83,28 @@ public final class UIUtils {
         }
         return lines;
     }
+
+    // Draws the pixelated border used by the title and character-name screens.
+    public static void drawScreenBorder(GraphicsContext gc, int screenWidth, int screenHeight) {
+        int p = 3;
+        gc.setFill(UITheme.BOX_BORDER_OUTER);
+        for (int i = p * 3; i < screenWidth - p * 3; i += p) {
+            gc.fillRect(i, p * 2, p, p);
+            gc.fillRect(i, screenHeight - p * 3, p, p);
+        }
+        for (int i = p * 3; i < screenHeight - p * 3; i += p) {
+            gc.fillRect(p * 2, i, p, p);
+            gc.fillRect(screenWidth - p * 3, i, p, p);
+        }
+
+        gc.setFill(UITheme.BOX_CORNER);
+        gc.fillRect(p * 2, p * 2, p * 2, p);
+        gc.fillRect(p * 2, p * 2, p, p * 2);
+        gc.fillRect(screenWidth - p * 4, p * 2, p * 2, p);
+        gc.fillRect(screenWidth - p * 3, p * 2, p, p * 2);
+        gc.fillRect(p * 2, screenHeight - p * 3, p * 2, p);
+        gc.fillRect(p * 2, screenHeight - p * 4, p, p * 2);
+        gc.fillRect(screenWidth - p * 4, screenHeight - p * 3, p * 2, p);
+        gc.fillRect(screenWidth - p * 3, screenHeight - p * 4, p, p * 2);
+    }
 }
