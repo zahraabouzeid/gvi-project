@@ -32,7 +32,6 @@ public class RenderSystem {
 		renderLayer(gp.currentMap.getLayer("CEILING"));
 
 		gp.ui.minimap.draw(gp.gc);
-		gp.ui.draw(gp.gc);
 	}
 
 	private void renderLayer(GameMapLayer layer) {
