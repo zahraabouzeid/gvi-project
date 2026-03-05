@@ -125,10 +125,23 @@ public class Player extends Entity {
 				int nextGridX = gridX;
 				int nextGridY = gridY;
 
-				if (keyH.upPressed)         { direction = "up";    nextGridY--; }
-				else if (keyH.downPressed)  { direction = "down";  nextGridY++; }
-				else if (keyH.leftPressed)  { direction = "left";  nextGridX--; }
-				else if (keyH.rightPressed) { direction = "right"; nextGridX++; }
+				// Multi-Key-Input: Beide Achsen separat prüfen für diagonale Bewegung
+				if (keyH.upPressed)    nextGridY--;
+				if (keyH.downPressed)  nextGridY++;
+				if (keyH.leftPressed)  nextGridX--;
+				if (keyH.rightPressed) nextGridX++;
+
+				// Direction für Sprite-Animation bestimmen
+				// Priorität: horizontale Bewegung bei Diagonalen
+				if (keyH.leftPressed) {
+					direction = "left";
+				} else if (keyH.rightPressed) {
+					direction = "right";
+				} else if (keyH.upPressed) {
+					direction = "up";
+				} else if (keyH.downPressed) {
+					direction = "down";
+				}
 
 				// Kollision prüfen: Tile und Objekte am Ziel-Grid-Feld
 				// Nur wenn frei Bewegung starten
