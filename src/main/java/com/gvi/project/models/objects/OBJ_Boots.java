@@ -13,7 +13,9 @@ public class OBJ_Boots extends SuperObject {
 		interactHint = "[F] Equip Boots";
 
 		try {
-			image = ImageHelper.getImage("/sprites/objects/boots.png");
+			sprite.image = ImageHelper.getImage("/sprites/objects/boots.png");
+			sprite.imageHeight = 1;
+			sprite.imageWidth = 1;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

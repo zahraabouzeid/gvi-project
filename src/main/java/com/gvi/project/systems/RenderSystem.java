@@ -3,6 +3,7 @@ package com.gvi.project.systems;
 import com.gvi.project.GamePanel;
 import com.gvi.project.models.core.Renderable;
 import com.gvi.project.models.game_maps.GameMapLayer;
+import com.gvi.project.models.sprite_sheets.Sprite;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -18,6 +19,7 @@ public class RenderSystem {
 	public void render() {
 		renderLayer(gp.currentMap.getLayer("FLOOR"));
 		renderLayer(gp.currentMap.getLayer("WALLS"));
+//		renderLayer(gp.currentMap.getLayer("DECORATIONS"));
 
 		List<Renderable> dynamic = new ArrayList<>();
 		dynamic.addAll(gp.entityList);
@@ -41,19 +43,41 @@ public class RenderSystem {
 		int worldRow = 0;
 
 		while (worldCol < gp.currentMap.width && worldRow < gp.currentMap.height) {
-
 			String spriteKey = layer.layout[worldCol][worldRow];
+			Sprite sprite = gp.spriteManager.getStoredSprite(spriteKey);
 
-			int worldX = worldCol * gp.generalSettings.tileSize;
-			int worldY = worldRow * gp.generalSettings.tileSize;
+			int tileSize = gp.generalSettings.tileSize;
+
+			int worldX = worldCol * tileSize;
+			int worldY = worldRow * tileSize;
+
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-			if (worldX + gp.generalSettings.tileSize > gp.player.worldX - gp.player.screenX &&
-					worldX - gp.generalSettings.tileSize < gp.player.worldX + gp.player.screenX &&
-					worldY + gp.generalSettings.tileSize > gp.player.worldY - gp.player.screenY &&
-					worldY - gp.generalSettings.tileSize < gp.player.worldY + gp.player.screenY) {
-				gp.gc.drawImage(gp.spriteManager.getStoredSprite(spriteKey).image, screenX, screenY, gp.generalSettings.tileSize, gp.generalSettings.tileSize);
+			int spriteWidth  = tileSize * sprite.imageWidth;
+			int spriteHeight = tileSize * sprite.imageHeight;
+
+			int screenLeft   = screenX;
+			int screenRight  = screenX + spriteWidth;
+			int screenTop    = screenY - (spriteHeight - tileSize);
+			int screenBottom = screenY + tileSize;
+
+			if (
+				screenRight > 0 &&
+				screenLeft < gp.generalSettings.screenWidth &&
+				screenBottom > 0 &&
+				screenTop < gp.generalSettings.screenHeight)
+			{
+				int drawX = screenX;
+				int drawY = screenY - (sprite.imageHeight - 1) * tileSize;
+
+				gp.gc.drawImage(
+						sprite.image,
+						drawX,
+						drawY,
+						spriteWidth,
+						spriteHeight
+				);
 			}
 
 			worldCol++;

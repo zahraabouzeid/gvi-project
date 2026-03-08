@@ -40,7 +40,7 @@ public class UI {
         gameOverScreen = new GameOverScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         winScreen = new WinScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         pauseScreen = new PauseScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        hud = new HUD(gp, new OBJ_Key().image);
+        hud = new HUD(gp, new OBJ_Key().sprite.image);
         quizDialog = new QuizDialog(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         minimap = new Minimap(gp);
     }

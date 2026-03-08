@@ -1,8 +1,10 @@
 package com.gvi.project.models.core;
 
-import javafx.scene.image.Image;
+import com.gvi.project.models.sprite_sheets.Sprite;
 
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Entity implements Renderable{
 	public int worldX, worldY;
@@ -17,7 +19,7 @@ public abstract class Entity implements Renderable{
 	// true = Spieler ist gerade zwischen zwei Tiles unterwegs
 	public boolean isMoving = false;
 
-	public Image up1, down1, left1, right1, up2, down2, left2, right2;
+	public Map<String,Sprite> spriteMap;
 	public String direction;
 
 	public int spriteCounter = 0;
@@ -26,6 +28,10 @@ public abstract class Entity implements Renderable{
 	public Rectangle collisionBox;
 	public int collisionBoxDefaultX, collisionBoxDefaultY;
 	public boolean collisionActive = false;
+
+	public Entity (){
+		spriteMap = new HashMap<String,Sprite>();
+	}
 
 	@Override
 	public int getY() {

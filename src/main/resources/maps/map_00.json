@@ -1,8 +1,8 @@
 {
   "id": 1,
-  "name": "TestMap_01",
+  "name": "Map_00",
   "width": 10,
-  "height": 10,
+  "height": 11,
   "layers": [
     {
       "renderId": "FLOOR",
@@ -30,7 +30,7 @@
         }
       ],
       "spriteLayout": [
-        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,998,998,999,999,999,999],
         [999,999,999,999,0  ,0  ,999,999,999,999],
         [999,999,999,999,0  ,0  ,999,999,999,999],
         [999,999,999,999,0  ,0  ,999,999,999,999],
@@ -39,7 +39,8 @@
         [0  ,0  ,0  ,1  ,2  ,1  ,2  ,0  ,0  ,0  ],
         [999,0  ,0  ,2  ,1  ,2  ,1  ,0  ,0  ,999],
         [999,0  ,0  ,1  ,2  ,1  ,2  ,0  ,0  ,999],
-        [999,999,999,999,0  ,0  ,999,999,999,999]
+        [999,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,999],
+        [998,998,998,999,0  ,0  ,999,998,998,998]
       ]
     },
     {
@@ -92,6 +93,7 @@
         [999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999]
       ]
     },
@@ -102,21 +104,6 @@
           "fileName": "Dungeon_WallsAndFloors",
           "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
           "usedSprites": [
-            {
-              "spriteGroup": "stone_trim",
-              "spriteId":"top_left_outer",
-              "hasCollision": true
-            },
-            {
-              "spriteGroup": "stone_trim",
-              "spriteId":"top",
-              "hasCollision": true
-            },
-            {
-              "spriteGroup": "stone_trim",
-              "spriteId":"top_right_outer",
-              "hasCollision": true
-            },
             {
               "spriteGroup": "stone_trim",
               "spriteId":"left",
@@ -211,16 +198,17 @@
         }
       ],
       "spriteLayout": [
-        [19 ,17 ,17 ,17 ,17 ,17 ,17 ,17 ,17 ,20 ],
-        [4  ,10 ,10 ,10 ,999,999,10 ,10 ,10 ,3  ],
-        [18 ,11 ,11 ,14 ,999,999,8  ,11 ,11 ,16 ],
-        [13 ,12 ,12 ,15 ,999,999,9  ,12 ,12 ,7  ],
-        [14 ,999,999,999,999,999,999,999,999,8  ],
-        [15 ,999,999,999,999,999,999,999,999,9  ],
+        [16 ,14 ,14 ,14 ,999,999,14 ,14 ,14 ,17 ],
+        [1  ,7  ,7  ,7  ,999,999,7  ,7  ,7  ,0  ],
+        [15 ,8  ,8  ,11 ,999,999,5  ,8  ,8  ,13 ],
+        [10 ,9  ,9  ,12 ,999,999,6  ,9  ,9  ,4  ],
+        [11 ,999,999,999,999,999,999,999,999,5  ],
+        [12 ,999,999,999,999,999,999,999,999,6  ],
         [999,999,999,999,999,999,999,999,999,999],
-        [2  ,999,999,999,999,999,999,999,999,0  ],
-        [4  ,999,999,999,999,999,999,999,999,3  ],
-        [5  ,1  ,1  ,2  ,999,999,0  ,1  ,1  ,6  ]
+        [999,999,999,999,999,999,999,999,999,999],
+        [1  ,999,999,999,999,999,999,999,999,0  ],
+        [2  ,999,999,999,999,999,999,999,999,3  ],
+        [999,999,999,1  ,999,999,0  ,999,999,999]
       ]
     },
     {
@@ -230,51 +218,6 @@
           "fileName": "DungeonDecorations",
           "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
           "usedSprites": [
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "column_head_end",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "column_head_beam",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "beam_horizontal",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "beam_horizontal_damaged",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "beam_horizontal_end_right",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "beam_horizontal_end_left",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "beam_vertical",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "beam_vertical_damaged",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "beam_vertical_end",
-              "hasCollision": false
-            },
             {
               "spriteGroup": "cut_stone_wall_assets",
               "spriteId": "lintel_left",
@@ -286,62 +229,91 @@
               "hasCollision": false
             }
           ]
+        },
+        {
+          "fileName": "Dungeon_WallsAndFloors",
+          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
+          "usedSprites": [
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId": "bottom",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top_left_outer",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top_right_outer",
+              "hasCollision": false
+            }
+          ]
         }
       ],
       "spriteLayout": [
-        [999,999,999,999,999,999,999,999,999,999],
-        [999,999,999,999,9  ,10 ,999,999,999,999],
-        [999,999,999,999,999,999,999,999,999,999],
-        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,2  ,2  ,999,999,999,999],
+        [999,999,999,999,0  ,1  ,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999],
+        [5  ,999,999,999,999,999,999,999,999,3  ],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,4  ,4  ,5  ,999,999,3  ,4  ,4  ,999],
         [999,999,999,999,999,999,999,999,999,999]
       ]
     }
   ],
   "objects": [
     {
-      "objectId": "QUIZ_STATION_JOINS_SUBQUERIES",
-      "x": 5,
-      "y": 7
-    },
-    {
-      "objectId": "QUIZ_STATION_DDL_DML",
-      "x": 4,
-      "y": 7
-    },
-    {
-      "objectId": "QUIZ_STATION_ER_MODELLIERUNG",
-      "x": 3,
-      "y": 7
-    },
-    {
-      "objectId": "QUIZ_STATION_NORMALISIERUNG",
-      "x": 6,
-      "y": 7
-    },
-    {
-      "objectId": "QUIZ_STATION_SELECT_ABFRAGEN",
-      "x": 7,
-      "y": 7
-    },
-    {
-      "objectId": "QUIZ_STATION_SQL_GRUNDLAGEN",
-      "x": 5,
-      "y": 3
-    },
-    {
       "objectId": "DOOR",
       "x": 7,
-      "y": 3
+      "y": 3,
+      "data": {}
     },
     {
-      "objectId": "BOOTS",
-      "x": 3,
-      "y": 3
+      "objectId": "MAP_CHANGE_TRIGGER",
+      "x": 0,
+      "y": 25,
+      "data": {
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
+        "direction": "left",
+        "map_id": "3",
+        "height": "2"
+      }
+    },
+    {
+      "objectId": "MAP_CHANGE_TRIGGER",
+      "x": 0,
+      "y": 25,
+      "data": {
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
+        "direction": "right",
+        "map_id": "1",
+        "height": "2"
+      }
+    },
+    {
+      "objectId": "MAP_CHANGE_TRIGGER",
+      "x": 0,
+      "y": 25,
+      "data": {
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
+        "direction": "down",
+        "map_id": "2",
+        "width": "2"
+      }
     }
   ]
 }

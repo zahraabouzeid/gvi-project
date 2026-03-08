@@ -17,4 +17,5 @@ public class ImageHelper {
 
 		return new Image(stream);
 	}
+
 }

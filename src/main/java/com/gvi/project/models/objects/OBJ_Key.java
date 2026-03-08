@@ -12,7 +12,9 @@ public class OBJ_Key extends SuperObject {
 		interactHint = "[F] Pick up Key";
 
 		try {
-			image = ImageHelper.getImage("/sprites/objects/key.png");
+			sprite.image = ImageHelper.getImage("/sprites/objects/key.png");
+			sprite.imageHeight = 1;
+			sprite.imageWidth = 1;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

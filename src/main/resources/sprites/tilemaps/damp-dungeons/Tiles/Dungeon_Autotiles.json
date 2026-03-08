@@ -250,61 +250,61 @@
     "cobble_sand_stone_dusty": {
       "sprites": {
         "dusty_bottom_right": {
-          "spriteX": 5,
+          "spriteX": 0,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_bottom": {
-          "spriteX": 6,
+          "spriteX": 1,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_bottom_left": {
-          "spriteX": 7,
+          "spriteX": 2,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_right": {
-          "spriteX": 8,
+          "spriteX": 3,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_left": {
-          "spriteX": 9,
+          "spriteX": 4,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_right": {
-          "spriteX": 5,
+          "spriteX": 0,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_full": {
-          "spriteX": 6,
+          "spriteX": 1,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_left": {
-          "spriteX": 7,
+          "spriteX": 2,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_right": {
-          "spriteX": 8,
+          "spriteX": 3,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_left": {
-          "spriteX": 9,
+          "spriteX": 4,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -332,61 +332,61 @@
     "cobble_sand_stone_wet": {
       "sprites": {
         "wet_bottom_right": {
-          "spriteX": 0,
+          "spriteX": 5,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "wet_bottom": {
-          "spriteX": 1,
+          "spriteX": 6,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "wet_bottom_left": {
-          "spriteX": 2,
+          "spriteX": 7,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_bottom_right": {
-          "spriteX": 3,
+          "spriteX": 8,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_bottom_left": {
-          "spriteX": 4,
+          "spriteX": 9,
           "spriteY": 3,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "wet_right": {
-          "spriteX": 0,
+          "spriteX": 5,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "wet_full": {
-          "spriteX": 1,
+          "spriteX": 6,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "wet_left": {
-          "spriteX": 2,
+          "spriteX": 7,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_top_right": {
-          "spriteX": 3,
+          "spriteX": 8,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_top_left": {
-          "spriteX": 4,
+          "spriteX": 9,
           "spriteY": 4,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -508,19 +508,19 @@
           "spriteHeight": 1
         },
         "wet_bottom_left": {
-          "spriteX": 3,
+          "spriteX": 2,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_bottom_right": {
-          "spriteX": 4,
+          "spriteX": 3,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_bottom_left": {
-          "spriteX": 5,
+          "spriteX": 4,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -538,19 +538,19 @@
           "spriteHeight": 1
         },
         "wet_left": {
-          "spriteX": 3,
+          "spriteX": 2,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_top_right": {
-          "spriteX": 4,
+          "spriteX": 3,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_top_left": {
-          "spriteX": 5,
+          "spriteX": 4,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -578,61 +578,61 @@
     "cobble_sand_stone_grass": {
       "sprites": {
         "grass_bottom_right": {
-          "spriteX": 6,
+          "spriteX": 5,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "grass_bottom": {
-          "spriteX": 7,
+          "spriteX": 6,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "grass_bottom_left": {
-          "spriteX": 8,
+          "spriteX": 7,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_right": {
-          "spriteX": 9,
+          "spriteX": 8,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_left": {
-          "spriteX": 10,
+          "spriteX": 9,
           "spriteY": 6,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "grass_right": {
-          "spriteX": 6,
+          "spriteX": 5,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "grass_full": {
-          "spriteX": 7,
+          "spriteX": 6,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "grass_left": {
-          "spriteX": 8,
+          "spriteX": 7,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_right": {
-          "spriteX": 9,
+          "spriteX": 8,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_left": {
-          "spriteX": 10,
+          "spriteX": 9,
           "spriteY": 7,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -672,19 +672,19 @@
           "spriteHeight": 1
         },
         "grass_bottom_left": {
-          "spriteX": 3,
+          "spriteX": 2,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_right": {
-          "spriteX": 4,
+          "spriteX": 3,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_left": {
-          "spriteX": 5,
+          "spriteX": 4,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -702,19 +702,19 @@
           "spriteHeight": 1
         },
         "grass_left": {
-          "spriteX": 3,
+          "spriteX": 2,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_right": {
-          "spriteX": 4,
+          "spriteX": 3,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_left": {
-          "spriteX": 5,
+          "spriteX": 4,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -742,61 +742,61 @@
     "cobble_stone_puddle": {
       "sprites": {
         "puddle_bottom_right": {
-          "spriteX": 6,
+          "spriteX": 5,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "puddle_bottom": {
-          "spriteX": 7,
+          "spriteX": 6,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "puddle_bottom_left": {
-          "spriteX": 8,
+          "spriteX": 7,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_right": {
-          "spriteX": 9,
+          "spriteX": 8,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_left": {
-          "spriteX": 10,
+          "spriteX": 9,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "puddle_right": {
-          "spriteX": 6,
+          "spriteX": 5,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "puddle_full": {
-          "spriteX": 7,
+          "spriteX": 6,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "puddle_left": {
-          "spriteX": 8,
+          "spriteX": 7,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_right": {
-          "spriteX": 9,
+          "spriteX": 8,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_left": {
-          "spriteX": 10,
+          "spriteX": 9,
           "spriteY": 10,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -836,19 +836,19 @@
           "spriteHeight": 1
         },
         "puddle_bottom_left": {
-          "spriteX": 3,
+          "spriteX": 2,
           "spriteY": 12,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_bottom_right": {
-          "spriteX": 4,
+          "spriteX": 3,
           "spriteY": 12,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_bottom_left": {
-          "spriteX": 5,
+          "spriteX": 4,
           "spriteY": 12,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -866,19 +866,19 @@
           "spriteHeight": 1
         },
         "puddle_left": {
-          "spriteX": 3,
+          "spriteX": 2,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_top_right": {
-          "spriteX": 4,
+          "spriteX": 3,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dry_top_left": {
-          "spriteX": 5,
+          "spriteX": 4,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
@@ -906,61 +906,61 @@
     "cobble_stone_dusty": {
       "sprites": {
         "dusty_bottom_right": {
-          "spriteX": 6,
+          "spriteX": 5,
           "spriteY": 12,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_bottom": {
-          "spriteX": 7,
+          "spriteX": 6,
           "spriteY": 12,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_bottom_left": {
-          "spriteX": 8,
+          "spriteX": 7,
           "spriteY": 12,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_right": {
-          "spriteX": 9,
+          "spriteX": 8,
           "spriteY": 12,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_bottom_left": {
-          "spriteX": 10,
+          "spriteX": 9,
           "spriteY": 12,
           "spriteWidth": 1,
             "spriteHeight": 1
         },
         "dusty_right": {
-          "spriteX": 6,
+          "spriteX": 5,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_full": {
-          "spriteX": 7,
+          "spriteX": 6,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "dusty_left": {
-          "spriteX": 8,
+          "spriteX": 7,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_right": {
-          "spriteX": 9,
+          "spriteX": 8,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "cobble_top_left": {
-          "spriteX": 10,
+          "spriteX": 9,
           "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1

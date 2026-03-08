@@ -69,12 +69,17 @@ public class GameMapLoader {
 	private void parseSpriteInformation(GameMapLayer layer, GameMapLayerConfig layerConfig, int width, int height){
 		List<String> usedSpriteKeys = registerUsedSprites(layerConfig.usedSpriteSheets);
 
-		for (int y = 0; y < width; y++){
-			for (int x = 0; x < height; x++){
+		for (int y = 0; y < height; y++){
+			for (int x = 0; x < width; x++){
 				int spriteId = layerConfig.spriteLayout[y][x];
 
 				if (spriteId == 999) {
 					layer.layout[x][y] = "empty";
+					continue;
+				};
+
+				if (spriteId == 998) {
+					layer.layout[x][y] = "blocker";
 					continue;
 				};
 
@@ -90,22 +95,24 @@ public class GameMapLoader {
 		List<String> spriteKeys = new ArrayList<>();
 		registerBasicSprites();
 
-		for (GameMapSpriteSheetConfig mapSheetConfig : sheetConfigs) {
+		for (GameMapSpriteSheetConfig sheetConfig : sheetConfigs) {
 			//Überprüfen ob SpriteSheet geladen wurde. Wenn nicht lade SpriteSheet und speicher es in spriteSheets Map
-			if (!this.spriteSheets.containsKey(mapSheetConfig.fileName)){
-				spriteSheets.put(mapSheetConfig.fileName, new SpriteSheet(mapSheetConfig.filePath + mapSheetConfig.fileName));
+			if (!this.spriteSheets.containsKey(sheetConfig.fileName)){
+				spriteSheets.put(sheetConfig.fileName, new SpriteSheet(sheetConfig.filePath + sheetConfig.fileName));
 			}
 
-			SpriteSheet spriteSheet = spriteSheets.get(mapSheetConfig.fileName);
+			SpriteSheet spriteSheet = spriteSheets.get(sheetConfig.fileName);
 
 			//Iteriere über Spritegruppen, isoliere Teilbilder und registriere Sprites in SpriteManager
-			for (GameMapSpriteConfig usedSprite : mapSheetConfig.usedSprites){
+			for (GameMapSpriteConfig usedSprite : sheetConfig.usedSprites){
 
 				Sprite sprite = new Sprite();
-				sprite.image = spriteSheet.getSpriteImage(usedSprite.spriteGroup, usedSprite.spriteId);
+				sprite.image = spriteSheet.getImage(usedSprite.spriteGroup, usedSprite.spriteId);
+				sprite.imageHeight = spriteSheet.getSpriteConfig(usedSprite.spriteGroup, usedSprite.spriteId).spriteHeight;
+				sprite.imageWidth = spriteSheet.getSpriteConfig(usedSprite.spriteGroup, usedSprite.spriteId).spriteWidth;
 				sprite.hasCollision = usedSprite.hasCollision;
 
-				String key = "%s:%s:%s:%s".formatted(usedSprite.hasCollision ? "1": "0",mapSheetConfig.fileName, usedSprite.spriteGroup, usedSprite.spriteId);
+				String key = "%s:%s:%s:%s".formatted(usedSprite.hasCollision ? "1": "0",sheetConfig.fileName, usedSprite.spriteGroup, usedSprite.spriteId);
 				this.gp.spriteManager.registerSprite(key, sprite);
 				spriteKeys.add(key);
 			}
@@ -115,11 +122,7 @@ public class GameMapLoader {
 	}
 
 	private void registerBasicSprites(){
-		Sprite emptySprite = new Sprite();
-		emptySprite.hasCollision = false;
-		emptySprite.image = new WritableImage(gp.generalSettings.tileSize, gp.generalSettings.tileSize);
-
-		this.gp.spriteManager.registerSprite("empty", emptySprite);
-
+		this.gp.spriteManager.registerSprite("empty", new Sprite(new WritableImage(gp.generalSettings.tileSize, gp.generalSettings.tileSize),1,1,false));
+		this.gp.spriteManager.registerSprite("blocker", new Sprite(new WritableImage(gp.generalSettings.tileSize, gp.generalSettings.tileSize),1,1,true));
 	}
 }

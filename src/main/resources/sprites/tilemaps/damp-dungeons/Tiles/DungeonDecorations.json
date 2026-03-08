@@ -233,7 +233,13 @@
           "spriteX": 7,
           "spriteY": 10,
           "spriteWidth": 1,
-          "spriteHeight": 4
+          "spriteHeight": 3
+        },
+        "mossy_column_bottom": {
+          "spriteX": 7,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
         },
         "mossy_indent": {
           "spriteX": 6,
@@ -245,7 +251,13 @@
           "spriteX": 5,
           "spriteY": 10,
           "spriteWidth": 1,
-          "spriteHeight": 4
+          "spriteHeight": 3
+        },
+        "column_bottom": {
+          "spriteX": 5,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
         },
         "indent": {
           "spriteX": 4,

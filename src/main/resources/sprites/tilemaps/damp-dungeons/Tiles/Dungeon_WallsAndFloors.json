@@ -680,13 +680,13 @@
           "spriteHeight": 1
         },
         "bottom_left_diagonal_short": {
-          "spriteX": 5,
+          "spriteX": 4,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1
         },
         "bottom_right_diagonal_short": {
-          "spriteX": 6,
+          "spriteX": 5,
           "spriteY": 9,
           "spriteWidth": 1,
           "spriteHeight": 1

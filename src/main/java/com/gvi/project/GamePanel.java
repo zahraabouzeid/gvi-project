@@ -1,7 +1,6 @@
 package com.gvi.project;
 
 import com.gvi.project.models.core.Entity;
-import com.gvi.project.models.core.Renderable;
 import com.gvi.project.models.game_maps.GameMap;
 import com.gvi.project.models.game_maps.GameMapLoader;
 import com.gvi.project.models.entities.Player;
@@ -54,7 +53,7 @@ public class GamePanel {
 	}
 
 	public void setupGame() {
-		loadMap(GameMaps.TEST_MAP);
+		loadMap(GameMaps.MAP_00);
 		assetSetter.setObject();
 		playMusic(0);
 		se.preload(1);

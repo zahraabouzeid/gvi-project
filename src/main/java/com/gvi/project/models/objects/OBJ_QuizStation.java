@@ -23,8 +23,13 @@ public class OBJ_QuizStation extends SuperObject {
 		name = "Crystal";
 		interactHint = "[F] " + topicArea.getDisplayName();
 
+		collision = true;
+
 		try {
-			image = ImageHelper.getImage("/sprites/objects/crystal.png");
+			sprite.image = ImageHelper.getImage("/sprites/objects/crystal.png");
+			sprite.imageHeight = 2;
+			sprite.imageWidth = 1;
+			spriteDirectionUp = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
