@@ -1,22 +1,26 @@
 package com.gvi.project.models.objects;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.models.core.Renderable;
 import com.gvi.project.models.entities.Player;
-import javafx.scene.image.Image;
+import com.gvi.project.models.sprite_sheets.Sprite;
 
 import java.awt.*;
 
-public abstract class SuperObject {
+public abstract class SuperObject implements Renderable {
 
-	public Image image;
+	public Sprite sprite;
+	public Boolean spriteDirectionUp = false;
 	public String name;
 	public boolean collision = false;
 	public int worldX, worldY;
 	public Rectangle collisionBox = new Rectangle(0, 0, 48, 48);
-	public int collisionBoxDefaultX = 0;
-	public int collisionBoxDefaultY = 0;
 
 	public String interactHint = "[F] Interact";
+
+	public SuperObject() {
+		sprite = new Sprite();
+	}
 
 	public void onInteract(Player player, GamePanel gp, int objIndex) {
 		onConfirm(player, gp, objIndex);
@@ -26,15 +30,29 @@ public abstract class SuperObject {
 		// Default behavior: do nothing
 	}
 
-	public void draw(GamePanel gp) {
+
+	@Override
+	public int getY() {
+		return worldY;
+	}
+
+	@Override
+	public void render(GamePanel gp) {
+		int tileSize = gp.generalSettings.tileSize;
+
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-		if (worldX + gp.tileSize > gp.player.worldX - gp.player.screenX &&
-			worldX - gp.tileSize < gp.player.worldX + gp.player.screenX &&
-			worldY + gp.tileSize > gp.player.worldY - gp.player.screenY &&
-			worldY - gp.tileSize < gp.player.worldY + gp.player.screenY) {
-			gp.gc.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize);
+		if (worldX + gp.generalSettings.tileSize > gp.player.worldX - gp.player.screenX &&
+			worldX - gp.generalSettings.tileSize < gp.player.worldX + gp.player.screenX &&
+			worldY + gp.generalSettings.tileSize > gp.player.worldY - gp.player.screenY &&
+			worldY - gp.generalSettings.tileSize < gp.player.worldY + gp.player.screenY) {
+
+			if (spriteDirectionUp) {
+				gp.gc.drawImage(sprite.image, screenX, screenY - (sprite.imageHeight - 1) * tileSize, tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+			} else {
+				gp.gc.drawImage(sprite.image, screenX, screenY, tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+			}
 		}
 	}
 }

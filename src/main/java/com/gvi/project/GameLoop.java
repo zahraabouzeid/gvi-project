@@ -1,6 +1,5 @@
 package com.gvi.project;
 
-import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.Answer;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -89,8 +88,8 @@ public class GameLoop extends AnimationTimer {
 						gp.ui.showFloatingScore(10);
 						gp.ui.closeQuiz();
 						int idx = gp.interactingObjectIndex;
-						if (idx != -1 && gp.obj[idx] != null) {
-							gp.obj[idx].onConfirm(gp.player, gp, idx);
+						if (idx != -1 && gp.obj.get(idx) != null) {
+							gp.obj.get(idx).onConfirm(gp.player, gp, idx);
 						if (!gp.ui.isQuizOpen()) {
 								gp.interactingObjectIndex = -1;
 								gp.gameState = GameState.PLAY;
@@ -200,9 +199,9 @@ public class GameLoop extends AnimationTimer {
 	}
 
 	private void renderScreen() {
-		gp.gc.clearRect(0, 0, gp.screenWidth, gp.screenHeight);
+		gp.gc.clearRect(0, 0, gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
 		gp.gc.setFill(Color.BLACK);
-		gp.gc.fillRect(0, 0, gp.screenWidth, gp.screenHeight);
+		gp.gc.fillRect(0, 0, gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
 
 		if (gp.gameState == GameState.TITLE) {
 			gp.ui.drawTitleScreen(gp.gc);
@@ -214,23 +213,12 @@ public class GameLoop extends AnimationTimer {
 			return;
 		}
 
-		drawGameWorld();
+		gp.renderSystem.render();
 
 		if (gp.gameState == GameState.PAUSE) {
 			gp.ui.drawPauseScreen(gp.gc);
 		} else {
 			gp.ui.draw(gp.gc);
 		}
-	}
-
-	private void drawGameWorld() {
-		gp.tileManager.draw(gp.gc);
-		for (SuperObject obj : gp.obj) {
-			if (obj != null) {
-				obj.draw(gp);
-			}
-		}
-		gp.player.draw(gp.gc);
-		gp.ui.minimap.draw(gp.gc);
 	}
 }

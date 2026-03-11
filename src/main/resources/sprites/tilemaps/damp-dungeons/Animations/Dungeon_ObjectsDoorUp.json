@@ -1,0 +1,33 @@
+{
+  "spriteSize": 16,
+  "spriteGroups": {
+    "door": {
+      "sprites": {
+        "frame_0":{
+          "spriteX": 0,
+          "spriteY": 0,
+          "spriteWidth": 2,
+          "spriteHeight": 3
+        },
+        "frame_1":{
+          "spriteX": 0,
+          "spriteY": 3,
+          "spriteWidth": 2,
+          "spriteHeight": 3
+        },
+        "frame_2":{
+          "spriteX": 0,
+          "spriteY": 6,
+          "spriteWidth": 2,
+          "spriteHeight": 3
+        },
+        "frame_3":{
+          "spriteX": 0,
+          "spriteY": 9,
+          "spriteWidth": 2,
+          "spriteHeight": 3
+        }
+      }
+    }
+  }
+}

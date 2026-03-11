@@ -1,0 +1,473 @@
+{
+  "spriteSize": 16,
+  "spriteGroups": [
+    {
+      "spriteGroupId": "cut_stone_top_left_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 0,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 3,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 6,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_top",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 1,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 4,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 7,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_top_right_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 2,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 5,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 8,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_left_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 0,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 3,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 6,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_full",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 1,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 4,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 7,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_right_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 2,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 5,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 8,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_bottom_left_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 0,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 3,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 6,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_bottom",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 1,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 4,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 7,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cut_stone_bottom_right_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 2,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 5,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 8,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_top_left_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 0,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 3,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 6,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_top",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 1,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 4,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 7,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_top_right_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 2,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 5,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 8,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_left_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 0,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 3,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 6,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_full",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 1,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 4,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 7,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_right_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 2,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 5,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 8,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_bottom_left_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 0,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 3,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 6,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_bottom",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 1,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 4,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 7,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    },
+    {
+      "spriteGroupId": "cobble_stone_bottom_right_edge",
+      "sprites": [
+        {
+          "spriteId": "frame_1",
+          "spriteX": 2,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_2",
+          "spriteX": 5,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        {
+          "spriteId": "frame_3",
+          "spriteX": 8,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      ]
+    }
+  ]
+}

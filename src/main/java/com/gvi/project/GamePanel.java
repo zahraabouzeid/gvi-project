@@ -1,56 +1,59 @@
 package com.gvi.project;
 
+import com.gvi.project.models.core.Entity;
+import com.gvi.project.models.game_maps.GameMap;
+import com.gvi.project.models.game_maps.GameMapLoader;
 import com.gvi.project.models.entities.Player;
+import com.gvi.project.models.game_maps.GameMaps;
 import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.QuestionProvider;
 import com.gvi.project.models.questions.QuestionService;
-import com.gvi.project.models.tiles.TileManager;
+import com.gvi.project.manager.SpriteManager;
+import com.gvi.project.systems.RenderSystem;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GamePanel {
-	final int originalTileSize = 16;  // 16x16 px ein Tile ist 16x16 Pixel groß
-	final int scale = 3;// 3x16 = 48x48 px pro Tile
 
-	public final int tileSize = originalTileSize * scale; // 48x48 px
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 12;
-
-	public final int screenWidth = maxScreenCol * tileSize;
-	public final int screenHeight = maxScreenRow * tileSize;
-
-	public final int maxWorldCol = 50;
-	public final int maxWorldRow = 50;
+	public GeneralSettings generalSettings = new GeneralSettings();
 
 	int FPS = 60;
 
 	double drawInterval = 1000000000.0 / FPS;
 
 	public GameState gameState = GameState.TITLE;
-	public TileManager tileManager = new TileManager(this);
+	public SpriteManager spriteManager = new SpriteManager();
 	public KeyHandler keyHandler = new KeyHandler();
+	public GameMap currentMap;
 	Sound music = new Sound();
 	Sound se = new Sound();
 
-	public final Canvas canvas = new Canvas(screenWidth, screenHeight);
+	public final List<Entity> entityList = new ArrayList<>();
+	public final List<SuperObject> obj = new ArrayList<>();
+	public final Canvas canvas = new Canvas(generalSettings.screenWidth, generalSettings.screenHeight);
 	public final GraphicsContext gc = canvas.getGraphicsContext2D();
 	public final GameLoop gameLoop = new GameLoop(this);
 	public final AssetSetter assetSetter = new AssetSetter(this);
 	public final Player player = new Player(this, keyHandler);
 	public final UI ui = new UI(this);
 	public final CollisionChecker cChecker = new CollisionChecker(this);
-	public final SuperObject[] obj = new SuperObject[20];
 	public int interactingObjectIndex = -1;
 	public final QuestionService questionProvider = new QuestionProvider();
+	public final RenderSystem renderSystem = new RenderSystem(this);
 
 	public GamePanel(){
 		keyHandler.setupKeyListeners(canvas);
 		gc.setImageSmoothing(false);
+
 		setupGame();
 		startGameLoop();
 	}
 
 	public void setupGame() {
+		loadMap(GameMaps.MAP_00);
 		assetSetter.setObject();
 		playMusic(0);
 		se.preload(1);
@@ -82,5 +85,10 @@ public class GamePanel {
 	public void playSE(int i){
 		se.setFile(i);
 		se.play();
+	}
+
+	public void loadMap(GameMaps map){
+		GameMapLoader mapLoader = new GameMapLoader(this);
+		this.currentMap = mapLoader.loadMap(map.getConfigFileName());
 	}
 }

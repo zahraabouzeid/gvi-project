@@ -1,0 +1,989 @@
+{
+  "spriteSize": 16,
+  "spriteGroups": {
+    "cobble_stone_sandy_wet": {
+      "sprites": {
+        "wet_bottom_right": {
+          "spriteX": 0,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom": {
+          "spriteX": 1,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom_left": {
+          "spriteX": 2,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_right": {
+          "spriteX": 3,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_left": {
+          "spriteX": 4,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_right": {
+          "spriteX": 0,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_full": {
+          "spriteX": 1,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_left": {
+          "spriteX": 2,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_right": {
+          "spriteX": 3,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_left": {
+          "spriteX": 4,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_right": {
+          "spriteX": 0,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top": {
+          "spriteX": 1,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_left": {
+          "spriteX": 2,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_stone_sandy_dusty": {
+      "sprites": {
+        "dusty_bottom_right": {
+          "spriteX": 5,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom": {
+          "spriteX": 6,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom_left": {
+          "spriteX": 7,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 8,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 9,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_right": {
+          "spriteX": 5,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_full": {
+          "spriteX": 6,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_left": {
+          "spriteX": 7,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 8,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 9,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_right": {
+          "spriteX": 5,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top": {
+          "spriteX": 6,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_left": {
+          "spriteX": 7,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_stone_sandy_covert": {
+      "sprites": {
+        "covert_bottom_right": {
+          "spriteX": 10,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_bottom": {
+          "spriteX": 11,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_bottom_left": {
+          "spriteX": 12,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 13,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 14,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_right": {
+          "spriteX": 10,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_full": {
+          "spriteX": 11,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_left": {
+          "spriteX": 12,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 13,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 14,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_top_right": {
+          "spriteX": 10,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_top": {
+          "spriteX": 11,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "covert_top_left": {
+          "spriteX": 12,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_sand_stone_dusty": {
+      "sprites": {
+        "dusty_bottom_right": {
+          "spriteX": 0,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom": {
+          "spriteX": 1,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom_left": {
+          "spriteX": 2,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 3,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 4,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_right": {
+          "spriteX": 0,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_full": {
+          "spriteX": 1,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_left": {
+          "spriteX": 2,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 3,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 4,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_right": {
+          "spriteX": 0,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top": {
+          "spriteX": 1,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_left": {
+          "spriteX": 2,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_sand_stone_wet": {
+      "sprites": {
+        "wet_bottom_right": {
+          "spriteX": 5,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom": {
+          "spriteX": 6,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom_left": {
+          "spriteX": 7,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_right": {
+          "spriteX": 8,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_left": {
+          "spriteX": 9,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_right": {
+          "spriteX": 5,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_full": {
+          "spriteX": 6,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_left": {
+          "spriteX": 7,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_right": {
+          "spriteX": 8,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_left": {
+          "spriteX": 9,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_right": {
+          "spriteX": 5,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top": {
+          "spriteX": 6,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_left": {
+          "spriteX": 7,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cut_sand_stone_wet": {
+      "sprites": {
+        "wet_bottom_right": {
+          "spriteX": 10,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom": {
+          "spriteX": 11,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom_left": {
+          "spriteX": 12,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_right": {
+          "spriteX": 13,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_left": {
+          "spriteX": 14,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_right": {
+          "spriteX": 10,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_full": {
+          "spriteX": 11,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_left": {
+          "spriteX": 12,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_right": {
+          "spriteX": 13,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_left": {
+          "spriteX": 14,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_right": {
+          "spriteX": 10,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top": {
+          "spriteX": 11,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_left": {
+          "spriteX": 12,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cut_stone_wet": {
+      "sprites": {
+        "wet_bottom_right": {
+          "spriteX": 0,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom": {
+          "spriteX": 1,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_bottom_left": {
+          "spriteX": 2,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_right": {
+          "spriteX": 3,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_left": {
+          "spriteX": 4,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_right": {
+          "spriteX": 0,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_full": {
+          "spriteX": 1,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_left": {
+          "spriteX": 2,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_right": {
+          "spriteX": 3,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_left": {
+          "spriteX": 4,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_right": {
+          "spriteX": 0,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top": {
+          "spriteX": 1,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "wet_top_left": {
+          "spriteX": 2,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_sand_stone_grass": {
+      "sprites": {
+        "grass_bottom_right": {
+          "spriteX": 5,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_bottom": {
+          "spriteX": 6,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_bottom_left": {
+          "spriteX": 7,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 8,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 9,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_right": {
+          "spriteX": 5,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_full": {
+          "spriteX": 6,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_left": {
+          "spriteX": 7,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 8,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 9,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top_right": {
+          "spriteX": 5,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top": {
+          "spriteX": 6,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top_left": {
+          "spriteX": 7,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_stone_grass": {
+      "sprites": {
+        "grass_bottom_right": {
+          "spriteX": 0,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_bottom": {
+          "spriteX": 1,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_bottom_left": {
+          "spriteX": 2,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 3,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 4,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_right": {
+          "spriteX": 0,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_full": {
+          "spriteX": 1,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_left": {
+          "spriteX": 2,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 3,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 4,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top_right": {
+          "spriteX": 0,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top": {
+          "spriteX": 1,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top_left": {
+          "spriteX": 2,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_stone_puddle": {
+      "sprites": {
+        "puddle_bottom_right": {
+          "spriteX": 5,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_bottom": {
+          "spriteX": 6,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_bottom_left": {
+          "spriteX": 7,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 8,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 9,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_right": {
+          "spriteX": 5,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_full": {
+          "spriteX": 6,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_left": {
+          "spriteX": 7,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 8,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 9,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top_right": {
+          "spriteX": 5,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top": {
+          "spriteX": 6,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top_left": {
+          "spriteX": 7,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cut_stone_puddle": {
+      "sprites": {
+        "puddle_bottom_right": {
+          "spriteX": 0,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_bottom": {
+          "spriteX": 1,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_bottom_left": {
+          "spriteX": 2,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_right": {
+          "spriteX": 3,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_bottom_left": {
+          "spriteX": 4,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_right": {
+          "spriteX": 0,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_full": {
+          "spriteX": 1,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_left": {
+          "spriteX": 2,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_right": {
+          "spriteX": 3,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dry_top_left": {
+          "spriteX": 4,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top_right": {
+          "spriteX": 0,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top": {
+          "spriteX": 1,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top_left": {
+          "spriteX": 2,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_stone_dusty": {
+      "sprites": {
+        "dusty_bottom_right": {
+          "spriteX": 5,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom": {
+          "spriteX": 6,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom_left": {
+          "spriteX": 7,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 8,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 9,
+          "spriteY": 12,
+          "spriteWidth": 1,
+            "spriteHeight": 1
+        },
+        "dusty_right": {
+          "spriteX": 5,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_full": {
+          "spriteX": 6,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_left": {
+          "spriteX": 7,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 8,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 9,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_right": {
+          "spriteX": 5,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top": {
+            "spriteX": 6,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_left": {
+            "spriteX": 7,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    }
+  }
+}

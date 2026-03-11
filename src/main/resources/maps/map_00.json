@@ -1,0 +1,319 @@
+{
+  "id": 1,
+  "name": "Map_00",
+  "width": 10,
+  "height": 11,
+  "layers": [
+    {
+      "renderId": "FLOOR",
+      "usedSpriteSheets": [
+        {
+          "fileName": "Dungeon_WallsAndFloors",
+          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
+          "usedSprites": [
+            {
+              "spriteGroup": "floor_tiles",
+              "spriteId":"cobble_stone_sandy",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "floor_tiles",
+              "spriteId":"tiles_stone_ornate_sandy",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "floor_tiles",
+              "spriteId":"tiles_stone_sandy",
+              "hasCollision": false
+            }
+          ]
+        }
+      ],
+      "spriteLayout": [
+        [999,999,999,999,998,998,999,999,999,999],
+        [999,999,999,999,0  ,0  ,999,999,999,999],
+        [999,999,999,999,0  ,0  ,999,999,999,999],
+        [999,999,999,999,0  ,0  ,999,999,999,999],
+        [999,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,999],
+        [999,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,999],
+        [0  ,0  ,0  ,1  ,2  ,1  ,2  ,0  ,0  ,0  ],
+        [999,0  ,0  ,2  ,1  ,2  ,1  ,0  ,0  ,999],
+        [999,0  ,0  ,1  ,2  ,1  ,2  ,0  ,0  ,999],
+        [999,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,999],
+        [998,998,998,999,0  ,0  ,999,998,998,998]
+      ]
+    },
+    {
+      "renderId": "DEKORATIONS",
+      "usedSpriteSheets": [
+        {
+          "fileName": "DungeonDecorations",
+          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
+          "usedSprites": [
+            {
+              "spriteGroup": "shelf",
+              "spriteId":"horizontal_base_empty",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "shelf",
+              "spriteId":"horizontal_base_books",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "shelf",
+              "spriteId":"horizontal_base_bones",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "shelf",
+              "spriteId":"horizontal_top",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "shelf",
+              "spriteId":"vertical",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "wood_colum_beam_framing",
+              "spriteId": "column_base",
+              "hasCollision": false
+            }
+          ]
+        }
+      ],
+      "spriteLayout": [
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999]
+      ]
+    },
+    {
+      "renderId": "WALLS",
+      "usedSpriteSheets": [
+        {
+          "fileName": "Dungeon_WallsAndFloors",
+          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
+          "usedSprites": [
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"left",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"right",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top_right_inner",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top_left_inner",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"top_edge_left",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"middle_edge_left",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"bottom_edge_left",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"top",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"middle",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"bottom",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"top_edge_right",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"middle_edge_right",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_wall",
+              "spriteId":"bottom_edge_right",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"bottom_left_outer",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"bottom",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"bottom_right_outer",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"bottom_right_inner",
+              "hasCollision": true
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"bottom_left_inner",
+              "hasCollision": true
+            }
+          ]
+        }
+      ],
+      "spriteLayout": [
+        [16 ,14 ,14 ,14 ,999,999,14 ,14 ,14 ,17 ],
+        [1  ,7  ,7  ,7  ,999,999,7  ,7  ,7  ,0  ],
+        [15 ,8  ,8  ,11 ,999,999,5  ,8  ,8  ,13 ],
+        [10 ,9  ,9  ,12 ,999,999,6  ,9  ,9  ,4  ],
+        [11 ,999,999,999,999,999,999,999,999,5  ],
+        [12 ,999,999,999,999,999,999,999,999,6  ],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [1  ,999,999,999,999,999,999,999,999,0  ],
+        [2  ,999,999,999,999,999,999,999,999,3  ],
+        [999,999,999,1  ,999,999,0  ,999,999,999]
+      ]
+    },
+    {
+      "renderId": "CEILING",
+      "usedSpriteSheets": [
+        {
+          "fileName": "DungeonDecorations",
+          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
+          "usedSprites": [
+            {
+              "spriteGroup": "cut_stone_wall_assets",
+              "spriteId": "lintel_left",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "cut_stone_wall_assets",
+              "spriteId": "lintel_right",
+              "hasCollision": false
+            }
+          ]
+        },
+        {
+          "fileName": "Dungeon_WallsAndFloors",
+          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
+          "usedSprites": [
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId": "bottom",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top_left_outer",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "stone_trim",
+              "spriteId":"top_right_outer",
+              "hasCollision": false
+            }
+          ]
+        }
+      ],
+      "spriteLayout": [
+        [999,999,999,999,2  ,2  ,999,999,999,999],
+        [999,999,999,999,0  ,1  ,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,999,999,999,999,999,999,999,999,999],
+        [5  ,999,999,999,999,999,999,999,999,3  ],
+        [999,999,999,999,999,999,999,999,999,999],
+        [999,4  ,4  ,5  ,999,999,3  ,4  ,4  ,999],
+        [999,999,999,999,999,999,999,999,999,999]
+      ]
+    }
+  ],
+  "objects": [
+    {
+      "objectId": "DOOR",
+      "x": 7,
+      "y": 3,
+      "data": {}
+    },
+    {
+      "objectId": "MAP_CHANGE_TRIGGER",
+      "x": 0,
+      "y": 25,
+      "data": {
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
+        "direction": "left",
+        "map_id": "3",
+        "height": "2"
+      }
+    },
+    {
+      "objectId": "MAP_CHANGE_TRIGGER",
+      "x": 0,
+      "y": 25,
+      "data": {
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
+        "direction": "right",
+        "map_id": "1",
+        "height": "2"
+      }
+    },
+    {
+      "objectId": "MAP_CHANGE_TRIGGER",
+      "x": 0,
+      "y": 25,
+      "data": {
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
+        "direction": "down",
+        "map_id": "2",
+        "width": "2"
+      }
+    }
+  ]
+}

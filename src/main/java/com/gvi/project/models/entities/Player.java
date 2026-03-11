@@ -2,13 +2,11 @@ package com.gvi.project.models.entities;
 
 import com.gvi.project.GamePanel;
 import com.gvi.project.KeyHandler;
-import com.gvi.project.helper.ImageHelper;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import com.gvi.project.models.core.Entity;
+import com.gvi.project.models.sprite_sheets.Sprite;
+import com.gvi.project.models.sprite_sheets.SpriteSheet;
 
 import java.awt.*;
-import java.io.IOException;
-
 
 public class Player extends Entity {
 	private GamePanel gp;
@@ -30,8 +28,8 @@ public class Player extends Entity {
 		this.gp = gp;
 		this.keyH = keyH;
 
-		screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
-		screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
+		screenX = gp.generalSettings.screenWidth / 2 - (gp.generalSettings.tileSize / 2);
+		screenY = gp.generalSettings.screenHeight / 2 - (gp.generalSettings.tileSize / 2);
 
 		this.collisionBox = new Rectangle(8, 16, 32, 32);
 
@@ -40,20 +38,22 @@ public class Player extends Entity {
 
 		setDefaultValues();
 		getPlayerSprites();
+
+		this.gp.entityList.add(this);
 	}
 
 	public void setDefaultValues() {
 		// Startposition des Spielers im Grid (Tile-Koordinaten, nicht Pixel)
-		gridX = 23; // vorher worldX = 48 * 23 = 1104px jetzt ist es grid movement
-		gridY = 23;
+		gridX = 4; // vorher worldX = 48 * 23 = 1154px jetzt ist es grid movement
+		gridY = 6;
 
 		// Ziel-Tile ist am Anfang gleich wie die aktuelle Position (kein laufende Bewegung)
 		targetGridX = gridX;
 		targetGridY = gridY;
 
 		// Pixel-Position berechnen: gridX * 48px = worldX
-		worldX = gp.tileSize * gridX;
-		worldY = gp.tileSize * gridY;
+		worldX = gp.generalSettings.tileSize * gridX;
+		worldY = gp.generalSettings.tileSize * gridY;
 
 		isMoving = false;
 
@@ -75,26 +75,24 @@ public class Player extends Entity {
 	}
 
 	public void getPlayerSprites() {
-		try {
-			up1 = ImageHelper.getImage("/sprites/entities/player/player_up_1.png");
-			up2 = ImageHelper.getImage("/sprites/entities/player/player_up_2.png");
-			down1 = ImageHelper.getImage("/sprites/entities/player/player_down_1.png");
-			down2 = ImageHelper.getImage("/sprites/entities/player/player_down_2.png");
-			left1 = ImageHelper.getImage("/sprites/entities/player/player_left_1.png");
-			left2 = ImageHelper.getImage("/sprites/entities/player/player_left_2.png");
-			right1 = ImageHelper.getImage("/sprites/entities/player/player_right_1.png");
-			right2 = ImageHelper.getImage("/sprites/entities/player/player_right_2.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		SpriteSheet sheet = new SpriteSheet("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_HeroMan1");
+
+		spriteMap.put("up_1", sheet.getSprite("walk", "up_1"));
+		spriteMap.put("up_2", sheet.getSprite("walk", "up_2"));
+		spriteMap.put("down_1", sheet.getSprite("walk", "down_1"));
+		spriteMap.put("down_2", sheet.getSprite("walk", "down_2"));
+		spriteMap.put("left_1", sheet.getSprite("walk", "left_1"));
+		spriteMap.put("left_2", sheet.getSprite("walk", "left_2"));
+		spriteMap.put("right_1", sheet.getSprite("walk", "right_1"));
+		spriteMap.put("right_2", sheet.getSprite("walk", "right_2"));
 	}
 
 	// bewegung und animation
 	public void update() {
 		if (isMoving) {
 			// Ziel-Position in Pixel berechnen (targetGridX/Y * 48px)
-			int targetWorldX = targetGridX * gp.tileSize;
-			int targetWorldY = targetGridY * gp.tileSize;
+			int targetWorldX = targetGridX * gp.generalSettings.tileSize;
+			int targetWorldY = targetGridY * gp.generalSettings.tileSize;
 
 			// Spieler Schritt für Schritt Richtung Ziel bewegen (4px pro Frame)
 			// Math.min/max verhindert, dass der Spieler über das Ziel hinausschießt
@@ -119,7 +117,7 @@ public class Player extends Entity {
 				isMoving = false;
 			}
 		} else {
-			// Eingaber verarbeiten nur wenn der Spieler stillsteht
+			// Eingabe verarbeiten nur wenn der Spieler stillsteht
 			if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
 				// Nächste Grid-Position berechnen basierend auf gedrückter Taste
 				int nextGridX = gridX;
@@ -160,22 +158,22 @@ public class Player extends Entity {
 		// F-Taste: Objekt in der Nähe interagieren (z.B. Quiz-Station öffnen)
 		if (keyH.fPressed) {
 			keyH.fPressed = false;
-			if (nearbyObjectIndex != -1 && gp.obj[nearbyObjectIndex] != null) {
-				gp.obj[nearbyObjectIndex].onInteract(this, gp, nearbyObjectIndex);
+			if (nearbyObjectIndex != -1 && gp.obj.get(nearbyObjectIndex) != null) {
+				gp.obj.get(nearbyObjectIndex).onInteract(this, gp, nearbyObjectIndex);
 			}
 		}
 	}
 
 	private int findNearbyObject() {
-		int interactRange = gp.tileSize;
+		int interactRange = gp.generalSettings.tileSize;
 
 		int playerCenterX = worldX + collisionBox.x + collisionBox.width / 2;
 		int playerCenterY = worldY + collisionBox.y + collisionBox.height / 2;
 
-		for (int i = 0; i < gp.obj.length; i++) {
-			if (gp.obj[i] != null) {
-				int objCenterX = gp.obj[i].worldX + gp.tileSize / 2;
-				int objCenterY = gp.obj[i].worldY + gp.tileSize / 2;
+		for (int i = 0; i < gp.obj.size(); i++) {
+			if (gp.obj.get(i) != null) {
+				int objCenterX = gp.obj.get(i).worldX + gp.generalSettings.tileSize / 2;
+				int objCenterY = gp.obj.get(i).worldY + gp.generalSettings.tileSize / 2;
 
 				int dx = Math.abs(playerCenterX - objCenterX);
 				int dy = Math.abs(playerCenterY - objCenterY);
@@ -188,45 +186,48 @@ public class Player extends Entity {
 		return -1;
 	}
 
-	public void draw(GraphicsContext gc) {
-		Image image = null;
+	@Override
+	public void render(GamePanel gp) {
+		Sprite sprite = null;
+		int tileSize = gp.generalSettings.tileSize;
 
 		switch (direction) {
 			case "up":
-
 				if (spriteNumber == 1) {
-					image = up1;
+					sprite = spriteMap.get("up_1");
 				}
 				if (spriteNumber == 2) {
-					image = up2;
+					sprite = spriteMap.get("up_2");
 				}
 				break;
 			case "down":
 				if (spriteNumber == 1) {
-					image = down1;
+					sprite = spriteMap.get("down_1");
 				}
 				if (spriteNumber == 2) {
-					image = down2;
+					sprite = spriteMap.get("down_2");
 				}
 				break;
 			case "left":
 				if (spriteNumber == 1) {
-					image = left1;
+					sprite = spriteMap.get("left_1");
 				}
 				if (spriteNumber == 2) {
-					image = left2;
+					sprite = spriteMap.get("left_2");
 				}
 				break;
 			case "right":
 				if (spriteNumber == 1) {
-					image = right1;
+					sprite = spriteMap.get("right_1");
 				}
 				if (spriteNumber == 2) {
-					image = right2;
+					sprite = spriteMap.get("right_2");
 				}
 				break;
 		}
 
-		gc.drawImage(image, this.screenX, this.screenY, gp.tileSize, gp.tileSize);
+		assert sprite != null;
+
+		gp.gc.drawImage(sprite.image, this.screenX, this.screenY - (sprite.imageHeight - 1) * tileSize , tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
 	}
 }

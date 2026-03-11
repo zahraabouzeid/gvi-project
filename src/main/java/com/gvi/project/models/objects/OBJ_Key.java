@@ -12,7 +12,9 @@ public class OBJ_Key extends SuperObject {
 		interactHint = "[F] Pick up Key";
 
 		try {
-			image = ImageHelper.getImage("/sprites/objects/key.png");
+			sprite.image = ImageHelper.getImage("/sprites/objects/key.png");
+			sprite.imageHeight = 1;
+			sprite.imageWidth = 1;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -22,7 +24,7 @@ public class OBJ_Key extends SuperObject {
 	public void onConfirm(Player player, GamePanel gp, int objIndex) {
 		gp.playSE(1);
 		player.playerKeys++;
-		gp.obj[objIndex] = null;
+		gp.obj.remove(objIndex);
 		gp.ui.openMessage("You got a key!");
 	}
 }

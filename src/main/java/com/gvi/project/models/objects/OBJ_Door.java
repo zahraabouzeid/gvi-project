@@ -1,21 +1,25 @@
 package com.gvi.project.models.objects;
 
 import com.gvi.project.GamePanel;
-import com.gvi.project.helper.ImageHelper;
 import com.gvi.project.models.entities.Player;
+import com.gvi.project.models.sprite_sheets.Sprite;
+import com.gvi.project.models.sprite_sheets.SpriteSheet;
 
-import java.io.IOException;
+import java.util.Map;
 
 public class OBJ_Door extends SuperObject {
+	Map<String, Sprite> sprites;
+
 	public OBJ_Door() {
 		name = "Door";
 		interactHint = "[F] Unlock Door";
 
-		try {
-			image = ImageHelper.getImage("/sprites/objects/door.png");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		spriteDirectionUp = true;
+
+		SpriteSheet spriteSheet = new SpriteSheet("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDoorUp");
+		sprites = spriteSheet.getGroupSprites("door");
+
+		sprite = sprites.get("frame_3");
 
 		collision = true;
 	}
@@ -23,7 +27,7 @@ public class OBJ_Door extends SuperObject {
 	@Override
 	public void onConfirm(Player player, GamePanel gp, int objIndex) {
 		if (player.playerKeys > 0) {
-			gp.obj[objIndex] = null;
+			gp.obj.remove(objIndex);
 			gp.playSE(3);
 			player.playerKeys--;
 			gp.ui.openMessage("You opened the door!");

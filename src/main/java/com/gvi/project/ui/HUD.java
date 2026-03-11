@@ -35,8 +35,8 @@ public class HUD {
     }
 
     public void draw(GraphicsContext gc, String formattedTime) {
-        double hudX = gp.tileSize / 2.0;
-        double hudY = gp.tileSize / 2.0;
+        double hudX = gp.generalSettings.tileSize / 2.0;
+        double hudY = gp.generalSettings.tileSize / 2.0;
 
         // Display player name
         gc.setFont(FONT_SM);
@@ -56,7 +56,7 @@ public class HUD {
         gc.setFont(FONT_MD);
         gc.setFill(TEXT_WHITE);
 
-        double minimapStartX = gp.screenWidth - gp.maxWorldCol * 3 - 10;
+        double minimapStartX = gp.generalSettings.screenWidth - gp.currentMap.width * 3 - 10;
         double scoreW = getTextWidth(scoreStr, FONT_MD);
         double scoreX = minimapStartX - scoreW - 14;
         double scoreY = 30;
@@ -76,7 +76,7 @@ public class HUD {
         gc.setFont(FONT_XS);
         gc.setFill(TEXT_WHITE);
         double timeW = getTextWidth(formattedTime, FONT_XS);
-        gc.fillText(formattedTime, gp.screenWidth - timeW - 14, gp.screenHeight - 14);
+        gc.fillText(formattedTime, gp.generalSettings.screenWidth - timeW - 14, gp.generalSettings.screenHeight - 14);
 
         if (gp.player.speed > 4) {
             drawSpeedBoost(gc);
@@ -85,13 +85,13 @@ public class HUD {
 
     public void drawInteractHint(GraphicsContext gc) {
         int idx = gp.player.nearbyObjectIndex;
-        if (idx < 0 || idx >= gp.obj.length || gp.obj[idx] == null) return;
+        if (idx < 0 || idx >= gp.obj.size() || gp.obj.get(idx) == null) return;
 
-        String hint = gp.obj[idx].interactHint;
+        String hint = gp.obj.get(idx).interactHint;
         gc.setFont(FONT_XS);
 
         double textW = getTextWidth(hint, FONT_XS);
-        double px = gp.screenWidth / 2.0 - textW / 2.0;
+        double px = gp.generalSettings.screenWidth / 2.0 - textW / 2.0;
         double py = gp.player.screenY - 20;
 
         // Shadow
@@ -104,8 +104,8 @@ public class HUD {
 
     private void drawHearts(GraphicsContext gc) {
         int hearts = (int) Math.ceil(gp.player.maxHealthHalf / 2.0);
-        int startX = (int) (gp.tileSize / 2.0);
-        int startY = (int) (gp.tileSize / 2.0);
+        int startX = (int) (gp.generalSettings.tileSize / 2.0);
+        int startY = (int) (gp.generalSettings.tileSize / 2.0);
         int spacing = 30;
 
         for (int i = 0; i < hearts; i++) {
@@ -159,7 +159,7 @@ public class HUD {
         String text = "SPEED BOOST";
         gc.setFont(FONT_XS);
         double tw = getTextWidth(text, FONT_XS);
-        double x = gp.screenWidth / 2.0 - tw / 2.0;
+        double x = gp.generalSettings.screenWidth / 2.0 - tw / 2.0;
         double y = 14;
 
         drawPixelBox(gc, x - 10, y - 12, tw + 20, 22);

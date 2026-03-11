@@ -23,8 +23,13 @@ public class OBJ_QuizStation extends SuperObject {
 		name = "Crystal";
 		interactHint = "[F] " + topicArea.getDisplayName();
 
+		collision = true;
+
 		try {
-			image = ImageHelper.getImage("/sprites/objects/crystal.png");
+			sprite.image = ImageHelper.getImage("/sprites/objects/crystal.png");
+			sprite.imageHeight = 2;
+			sprite.imageWidth = 1;
+			spriteDirectionUp = true;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -100,8 +105,9 @@ public class OBJ_QuizStation extends SuperObject {
 	}
 
 	private void spawnKey(GamePanel gp, int objIndex) {
-		gp.obj[objIndex] = new OBJ_Key();
-		gp.obj[objIndex].worldX = this.worldX;
-		gp.obj[objIndex].worldY = this.worldY;
+		gp.obj.remove(objIndex);
+		gp.obj.add(objIndex, new OBJ_Key());
+		gp.obj.get(objIndex).worldX = this.worldX;
+		gp.obj.get(objIndex).worldY = this.worldY;
 	}
 }

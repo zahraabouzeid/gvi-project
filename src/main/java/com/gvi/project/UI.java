@@ -35,13 +35,13 @@ public class UI {
     public UI(GamePanel gp) {
         this.gp = gp;
 
-        titleScreen = new TitleScreen(gp.screenWidth, gp.screenHeight);
-        characterNameScreen = new CharacterNameScreen(gp.screenWidth, gp.screenHeight);
-        gameOverScreen = new GameOverScreen(gp.screenWidth, gp.screenHeight);
-        winScreen = new WinScreen(gp.screenWidth, gp.screenHeight);
-        pauseScreen = new PauseScreen(gp.screenWidth, gp.screenHeight);
-        hud = new HUD(gp, new OBJ_Key().image);
-        quizDialog = new QuizDialog(gp.screenWidth, gp.screenHeight);
+        titleScreen = new TitleScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        characterNameScreen = new CharacterNameScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        gameOverScreen = new GameOverScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        winScreen = new WinScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        pauseScreen = new PauseScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        hud = new HUD(gp, new OBJ_Key().sprite.image);
+        quizDialog = new QuizDialog(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         minimap = new Minimap(gp);
     }
 
@@ -159,8 +159,8 @@ public class UI {
     private void drawMessage(GraphicsContext gc) {
         gc.setFont(UITheme.FONT_SM);
         double msgW = UIUtils.getTextWidth(message, UITheme.FONT_SM);
-        double msgX = gp.screenWidth / 2.0 - msgW / 2.0;
-        double msgY = gp.screenHeight / 2.0 - 80;
+        double msgX = gp.generalSettings.screenWidth / 2.0 - msgW / 2.0;
+        double msgY = gp.generalSettings.screenHeight / 2.0 - 80;
         UIUtils.drawPixelBox(gc, msgX - 16, msgY - 22, msgW + 32, 34);
         gc.setFill(UITheme.TEXT_WHITE);
         gc.fillText(message, msgX, msgY);
