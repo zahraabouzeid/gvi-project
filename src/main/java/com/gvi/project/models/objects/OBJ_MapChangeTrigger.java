@@ -1,5 +1,8 @@
 package com.gvi.project.models.objects;
 
+import com.gvi.project.GamePanel;
+import com.gvi.project.models.entities.Player;
+import com.gvi.project.models.game_maps.GameMaps;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 
 public class OBJ_MapChangeTrigger extends SuperObject {
@@ -10,6 +13,13 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 	public OBJ_MapChangeTrigger(String direction) {
 		initImageLoad(direction);
 		setCollisionBox(direction);
+	}
+
+	public OBJ_MapChangeTrigger(String direction, int targetMapId, int targetMapSpawnLocationX, int targetMapSpawnLocationY) {
+		this(direction);
+		this.targetMapId = targetMapId;
+		this.targetMapSpawnLocationX = targetMapSpawnLocationX;
+		this.targetMapSpawnLocationY = targetMapSpawnLocationY;
 	}
 
 	private void initImageLoad(String direction){
@@ -45,4 +55,15 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 				break;
 		}
 	};
+
+	@Override
+	public void onStep(Player player, GamePanel gp, int objIndex) {
+		gp.loadMap(GameMaps.fromId(targetMapId));
+		player.gridX = targetMapSpawnLocationX;
+		player.gridY = targetMapSpawnLocationY;
+		player.targetGridX = player.gridX;
+		player.targetGridY = player.gridY;
+		player.worldX = player.gridX * gp.generalSettings.tileSize;
+		player.worldY = player.gridY * gp.generalSettings.tileSize;
+	}
 }

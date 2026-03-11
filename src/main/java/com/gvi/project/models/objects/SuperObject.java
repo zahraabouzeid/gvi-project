@@ -30,6 +30,10 @@ public abstract class SuperObject implements Renderable {
 		// Default behavior: do nothing
 	}
 
+	public void onStep(Player player, GamePanel gp, int objIndex) {
+		// Default behavior: do nothing
+	}
+
 
 	@Override
 	public int getY() {

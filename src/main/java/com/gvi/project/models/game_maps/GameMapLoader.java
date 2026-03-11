@@ -3,6 +3,8 @@ package com.gvi.project.models.game_maps;
 import com.gvi.project.GamePanel;
 import com.gvi.project.helper.ConfigHelper;
 import com.gvi.project.models.game_maps.config.*;
+import com.gvi.project.models.objects.ObjectFactory;
+import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 import javafx.scene.image.WritableImage;
@@ -58,12 +60,13 @@ public class GameMapLoader {
 	}
 
 	private void initMapObjects(GameMapConfig config){
-		/*
+		if (config.objects == null) return;
 		for (GameObjectConfig objectConfig : config.objects){
-			// TODO GameObject factory call einbauen.
+			SuperObject obj = ObjectFactory.create(objectConfig);
+			obj.worldX = objectConfig.x * gp.generalSettings.tileSize;
+			obj.worldY = objectConfig.y * gp.generalSettings.tileSize;
+			gp.obj.add(obj);
 		}
-
-		 */
 	}
 
 	private void parseSpriteInformation(GameMapLayer layer, GameMapLayerConfig layerConfig, int width, int height){

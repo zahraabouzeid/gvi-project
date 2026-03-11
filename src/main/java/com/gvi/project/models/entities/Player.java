@@ -115,6 +115,7 @@ public class Player extends Entity {
 				gridX = targetGridX;
 				gridY = targetGridY;
 				isMoving = false;
+				checkStepObjects();
 			}
 		} else {
 			// Eingabe verarbeiten nur wenn der Spieler stillsteht
@@ -160,6 +161,16 @@ public class Player extends Entity {
 			keyH.fPressed = false;
 			if (nearbyObjectIndex != -1 && gp.obj.get(nearbyObjectIndex) != null) {
 				gp.obj.get(nearbyObjectIndex).onInteract(this, gp, nearbyObjectIndex);
+			}
+		}
+	}
+
+	private void checkStepObjects() {
+		for (int i = 0; i < gp.obj.size(); i++) {
+			var obj = gp.obj.get(i);
+			if (obj != null && !obj.collision && obj.worldX == worldX && obj.worldY == worldY) {
+				obj.onStep(this, gp, i);
+				return;
 			}
 		}
 	}
