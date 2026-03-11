@@ -184,8 +184,6 @@ public class QuizDialog {
             // Answer background
             if (answerFeedback && selectedAnswer == i + 1) {
                 gc.setFill(answers.get(i).points() > 0 ? CORRECT_BG : WRONG_BG);
-            } else if (answerFeedback && answers.get(i).points() > 0) {
-                gc.setFill(CORRECT_BG.deriveColor(0, 1, 1, 0.5));
             } else {
                 gc.setFill(ANSWER_BG);
             }
