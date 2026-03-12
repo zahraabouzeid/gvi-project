@@ -282,34 +282,37 @@
     {
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 0,
-      "y": 6,
+      "y": 25,
       "data": {
-        "target_map_spawn_location_x": "38",
-        "target_map_spawn_location_y": "13",
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
         "direction": "left",
-        "map_id": "3"
+        "map_id": "3",
+        "height": "2"
       }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 9,
-      "y": 6,
+      "x": 0,
+      "y": 25,
       "data": {
-        "target_map_spawn_location_x": "1",
-        "target_map_spawn_location_y": "13",
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
         "direction": "right",
-        "map_id": "1"
+        "map_id": "1",
+        "height": "2"
       }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 4,
-      "y": 10,
+      "x": 0,
+      "y": 25,
       "data": {
-        "target_map_spawn_location_x": "20",
-        "target_map_spawn_location_y": "1",
+        "target_map_spawn_location_x": "0",
+        "target_map_spawn_location_y": "0",
         "direction": "down",
-        "map_id": "2"
+        "map_id": "2",
+        "width": "2"
       }
     }
   ]
