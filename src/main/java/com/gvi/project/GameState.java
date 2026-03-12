@@ -5,5 +5,8 @@ public enum GameState {
 	CHARACTER_NAME,
 	PLAY,
 	QUIZ,
-	PAUSE
+	PAUSE,
+	SAVE_SLOT,
+	LOAD_SLOT,
+	LOADING
 }

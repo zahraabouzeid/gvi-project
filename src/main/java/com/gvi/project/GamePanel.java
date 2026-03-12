@@ -1,5 +1,6 @@
 package com.gvi.project;
 
+import com.gvi.project.helper.SaveManager;
 import com.gvi.project.models.core.Entity;
 import com.gvi.project.models.game_maps.GameMap;
 import com.gvi.project.models.game_maps.GameMapLoader;
@@ -40,6 +41,7 @@ public class GamePanel {
 	public final Player player = new Player(this, keyHandler);
 	public final UI ui = new UI(this);
 	public final CollisionChecker cChecker = new CollisionChecker(this);
+	public final SaveManager saveManager = new SaveManager();
 	public int interactingObjectIndex = -1;
 	public final QuestionService questionProvider = new QuestionProvider();
 	public final RenderSystem renderSystem = new RenderSystem(this);

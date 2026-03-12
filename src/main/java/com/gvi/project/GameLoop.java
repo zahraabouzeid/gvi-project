@@ -1,6 +1,7 @@
 package com.gvi.project;
 
 import com.gvi.project.models.questions.Answer;
+import com.gvi.project.ui.LoadingScreen;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
@@ -16,6 +17,8 @@ public class GameLoop extends AnimationTimer {
 	int drawCount = 0;
 	long timer = 0;
 	private int pauseNavCooldown = 0;
+	private int slotNavCooldown  = 0;
+	private int loadingCounter   = 0;
 
 	public GameLoop(GamePanel gp) {
 		this.gp = gp;
@@ -54,6 +57,13 @@ public class GameLoop extends AnimationTimer {
 		}
 		if (gp.gameState == GameState.CHARACTER_NAME) {
 			handleCharacterNameInput();
+			return;
+		}
+		if (gp.gameState == GameState.LOADING) {
+			loadingCounter++;
+			if (loadingCounter >= LoadingScreen.DURATION) {
+				gp.gameState = GameState.PLAY;
+			}
 			return;
 		}
 		if (gp.player.isDead) {
@@ -133,6 +143,10 @@ public class GameLoop extends AnimationTimer {
 			}
 		} else if (gp.gameState == GameState.PAUSE) {
 			handlePauseInput();
+		} else if (gp.gameState == GameState.SAVE_SLOT) {
+			handleSaveSlotInput();
+		} else if (gp.gameState == GameState.LOAD_SLOT) {
+			handleLoadSlotInput();
 		}
 	}
 
@@ -156,9 +170,72 @@ public class GameLoop extends AnimationTimer {
 			gp.keyHandler.enterPressed = false;
 			switch (gp.ui.getPauseSelectedOption()) {
 				case 0 -> gp.gameState = GameState.PLAY;
-				case 1 -> { }
-				case 2 -> { }
+				case 1 -> {
+					gp.ui.openSaveSlot();
+					slotNavCooldown = 12;
+					gp.gameState = GameState.SAVE_SLOT;
+				}
+				case 2 -> {
+					gp.ui.openLoadSlot();
+					slotNavCooldown = 12;
+					gp.gameState = GameState.LOAD_SLOT;
+				}
 				case 3 -> Platform.exit();
+			}
+		}
+	}
+
+	private void handleSaveSlotInput() {
+		if (slotNavCooldown > 0) slotNavCooldown--;
+		if (gp.keyHandler.escPressed) {
+			gp.keyHandler.escPressed = false;
+			gp.ui.resetPauseScreen();
+			gp.gameState = GameState.PAUSE;
+			return;
+		}
+		if (slotNavCooldown == 0) {
+			if (gp.keyHandler.upPressed) {
+				gp.ui.navigateSlotUp();
+				slotNavCooldown = 12;
+			} else if (gp.keyHandler.downPressed) {
+				gp.ui.navigateSlotDown();
+				slotNavCooldown = 12;
+			}
+		}
+		if (gp.keyHandler.enterPressed) {
+			gp.keyHandler.enterPressed = false;
+			int slot = gp.ui.getSelectedSlot();
+			boolean ok = gp.saveManager.save(gp, slot);
+			gp.ui.openMessage(ok ? "Saved to Slot " + slot + "!" : "Save failed!");
+			gp.gameState = GameState.PLAY;
+		}
+	}
+
+	private void handleLoadSlotInput() {
+		if (slotNavCooldown > 0) slotNavCooldown--;
+		if (gp.keyHandler.escPressed) {
+			gp.keyHandler.escPressed = false;
+			gp.ui.resetPauseScreen();
+			gp.gameState = GameState.PAUSE;
+			return;
+		}
+		if (slotNavCooldown == 0) {
+			if (gp.keyHandler.upPressed) {
+				gp.ui.navigateSlotUp();
+				slotNavCooldown = 12;
+			} else if (gp.keyHandler.downPressed) {
+				gp.ui.navigateSlotDown();
+				slotNavCooldown = 12;
+			}
+		}
+		if (gp.keyHandler.enterPressed) {
+			gp.keyHandler.enterPressed = false;
+			int slot = gp.ui.getSelectedSlot();
+			if (gp.saveManager.hasSave(slot)) {
+				gp.saveManager.load(gp, slot);
+				gp.ui.resetGame();
+				loadingCounter = 0;
+				gp.gameState = GameState.LOADING;
 			}
 		}
 	}
@@ -212,11 +289,19 @@ public class GameLoop extends AnimationTimer {
 			gp.ui.drawCharacterNameScreen(gp.gc);
 			return;
 		}
+		if (gp.gameState == GameState.LOADING) {
+			gp.ui.drawLoadingScreen(gp.gc, loadingCounter);
+			return;
+		}
 
 		gp.renderSystem.render();
 
 		if (gp.gameState == GameState.PAUSE) {
 			gp.ui.drawPauseScreen(gp.gc);
+		} else if (gp.gameState == GameState.SAVE_SLOT) {
+			gp.ui.drawSaveSlotScreen(gp.gc);
+		} else if (gp.gameState == GameState.LOAD_SLOT) {
+			gp.ui.drawLoadSlotScreen(gp.gc);
 		} else {
 			gp.ui.draw(gp.gc);
 		}
