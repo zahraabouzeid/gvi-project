@@ -64,7 +64,6 @@ public class PauseScreen {
         for (int i = 0; i < OPTION_COUNT; i++) {
             double oy = optionStartY + i * optionSpacing;
             boolean isSelected = i == selectedOption;
-            boolean isDisabled = i == 1 || i == 2;
 
             if (isSelected) {
                 gc.setFont(FONT_MD);
@@ -73,11 +72,7 @@ public class PauseScreen {
             }
 
             gc.setFont(FONT_MD);
-            if (isDisabled) {
-                gc.setFill(isSelected ? Color.rgb(130, 105, 32) : TEXT_GRAY);
-            } else {
-                gc.setFill(isSelected ? TEXT_GOLD : TEXT_WHITE);
-            }
+            gc.setFill(isSelected ? TEXT_GOLD : TEXT_WHITE);
 
             double optW = getTextWidth(OPTIONS[i], FONT_MD);
             gc.fillText(OPTIONS[i], screenWidth / 2.0 - optW / 2.0, oy);

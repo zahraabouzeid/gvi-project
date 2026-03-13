@@ -102,6 +102,11 @@ public class CharacterNameScreen {
         String info2 = "ESC - Go back to title";
         double i2w = getTextWidth(info2, FONT_XS);
         gc.fillText(info2, screenWidth / 2.0 - i2w / 2.0, screenHeight - 50);
+
+        String infoLoad = "TAB - Load existing save";
+        double ilw = getTextWidth(infoLoad, FONT_XS);
+        gc.setFill(TEXT_GOLD);
+        gc.fillText(infoLoad, screenWidth / 2.0 - ilw / 2.0, screenHeight - 28);
     }
 
     public int getMaxNameLength() {
