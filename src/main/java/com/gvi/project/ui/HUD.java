@@ -52,24 +52,21 @@ public class HUD {
         gc.setFill(TEXT_WHITE);
         gc.fillText("x" + gp.player.playerKeys, hudX + keySize + 4, keyY + 20);
 
-        String scoreStr = "" + gp.player.score;
-        gc.setFont(FONT_MD);
+        String scoreStr = "Score: " + gp.player.score;
+        double scoreX = 14;
+        double scoreY = gp.generalSettings.screenHeight - 14;
+        gc.setFont(FONT_XS);
         gc.setFill(TEXT_WHITE);
-
-        double minimapStartX = gp.generalSettings.screenWidth - gp.currentMap.width * 3 - 10;
-        double scoreW = getTextWidth(scoreStr, FONT_MD);
-        double scoreX = minimapStartX - scoreW - 14;
-        double scoreY = 30;
         gc.fillText(scoreStr, scoreX, scoreY);
 
         if (floatingCounter > 0 && floatingText != null) {
             double alpha = floatingCounter / (double) FLOATING_DURATION;
             double floatOffset = (FLOATING_DURATION - floatingCounter) * 0.5;
-            gc.setFont(FONT_SM);
+            gc.setFont(FONT_XS);
             gc.setFill(floatingPositive
                     ? Color.rgb(80, 240, 80, alpha)
                     : Color.rgb(240, 80, 80, alpha));
-            gc.fillText(floatingText, scoreX + scoreW + 4, scoreY - floatOffset);
+            gc.fillText(floatingText, scoreX + getTextWidth(scoreStr, FONT_XS) + 4, scoreY - floatOffset);
             floatingCounter--;
         }
 

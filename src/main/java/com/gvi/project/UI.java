@@ -1,5 +1,6 @@
 package com.gvi.project;
 
+import com.gvi.project.helper.SaveManager;
 import com.gvi.project.models.objects.OBJ_Key;
 import com.gvi.project.models.questions.Answer;
 import com.gvi.project.models.questions.Question;
@@ -18,9 +19,13 @@ public class UI {
     private final GameOverScreen gameOverScreen;
     private final WinScreen winScreen;
     private final PauseScreen pauseScreen;
+    private final SaveSlotScreen saveSlotScreen;
+    private final LoadingScreen loadingScreen;
     private final HUD hud;
     private final QuizDialog quizDialog;
     public final Minimap minimap;
+
+    private SaveManager.SlotInfo[] cachedSlotInfos;
 
     public boolean messageOn = false;
     public String message = "";
@@ -40,6 +45,8 @@ public class UI {
         gameOverScreen = new GameOverScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         winScreen = new WinScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         pauseScreen = new PauseScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        saveSlotScreen = new SaveSlotScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        loadingScreen = new LoadingScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         hud = new HUD(gp, new OBJ_Key().sprite.image);
         quizDialog = new QuizDialog(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         minimap = new Minimap(gp);
@@ -118,6 +125,40 @@ public class UI {
 
     public int getPauseSelectedOption() {
         return pauseScreen.getSelectedOption();
+    }
+
+    public void openSaveSlot() {
+        saveSlotScreen.open("save");
+        refreshSlotInfos();
+    }
+
+    public void openLoadSlot() {
+        saveSlotScreen.open("load");
+        refreshSlotInfos();
+    }
+
+    private void refreshSlotInfos() {
+        cachedSlotInfos = new SaveManager.SlotInfo[] {
+            gp.saveManager.getSlotInfo(1),
+            gp.saveManager.getSlotInfo(2),
+            gp.saveManager.getSlotInfo(3)
+        };
+    }
+
+    public void navigateSlotUp()   { saveSlotScreen.navigateUp(); }
+    public void navigateSlotDown() { saveSlotScreen.navigateDown(); }
+    public int  getSelectedSlot()  { return saveSlotScreen.getSelectedSlot(); }
+
+    public void drawSaveSlotScreen(GraphicsContext gc) {
+        saveSlotScreen.draw(gc, cachedSlotInfos);
+    }
+
+    public void drawLoadSlotScreen(GraphicsContext gc) {
+        saveSlotScreen.draw(gc, cachedSlotInfos);
+    }
+
+    public void drawLoadingScreen(GraphicsContext gc, int frame) {
+        loadingScreen.draw(gc, frame);
     }
 
     public void drawCharacterNameScreen(GraphicsContext gc) {

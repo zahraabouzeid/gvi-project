@@ -2,7 +2,6 @@ package com.gvi.project.ui;
 
 import com.gvi.project.GamePanel;
 import com.gvi.project.helper.ColorHelper;
-import com.gvi.project.models.sprite_sheets.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -12,22 +11,25 @@ import static com.gvi.project.ui.UITheme.*;
 public class Minimap {
 
     private final GamePanel gp;
-    private final int pixelSize = 3;
+    private static final int MINIMAP_SIZE = 120;
 
     public Minimap(GamePanel gp) {
         this.gp = gp;
     }
 
     public void draw(GraphicsContext gc) {
+        int mapMax = Math.max(gp.currentMap.width, gp.currentMap.height);
+        int pixelSize = Math.max(1, MINIMAP_SIZE / mapMax);
+
         int minimapW = gp.currentMap.width * pixelSize;
         int minimapH = gp.currentMap.height * pixelSize;
         int margin = 10;
-        int startX = gp.generalSettings.screenWidth - minimapW - margin;
-        int startY = margin;
+        int startX = gp.generalSettings.screenWidth - MINIMAP_SIZE - margin + (MINIMAP_SIZE - minimapW) / 2;
+        int startY = margin + (MINIMAP_SIZE - minimapH) / 2;
 
-        double centerX = startX + minimapW / 2.0;
-        double centerY = startY + minimapH / 2.0;
-        double radius = Math.min(minimapW, minimapH) / 2.0;
+        double centerX = gp.generalSettings.screenWidth - MINIMAP_SIZE / 2.0 - margin;
+        double centerY = margin + MINIMAP_SIZE / 2.0;
+        double radius = MINIMAP_SIZE / 2.0;
 
         // Background circle
         drawCircleBackground(gc, centerX, centerY, radius);
@@ -36,13 +38,13 @@ public class Minimap {
         drawCircleBorder(gc, centerX, centerY, radius);
 
         // Tiles (clipped to circle)
-        drawTiles(gc, startX, startY, centerX, centerY, radius);
+        drawTiles(gc, startX, startY, centerX, centerY, radius, pixelSize);
 
         // Objects (clipped to circle)
-        drawObjects(gc, startX, startY, centerX, centerY, radius);
+        drawObjects(gc, startX, startY, centerX, centerY, radius, pixelSize);
 
         // Player marker (clipped to circle)
-        drawPlayer(gc, startX, startY, centerX, centerY, radius);
+        drawPlayer(gc, startX, startY, centerX, centerY, radius, pixelSize);
     }
 
     private void drawCircleBackground(GraphicsContext gc, double cx, double cy, double radius) {
@@ -70,7 +72,7 @@ public class Minimap {
     }
 
     private void drawTiles(GraphicsContext gc, int startX, int startY,
-                           double cx, double cy, double radius) {
+                           double cx, double cy, double radius, int pixelSize) {
         for (int col = 0; col < gp.currentMap.width; col++) {
             for (int row = 0; row < gp.currentMap.height; row++) {
                 double tileX = startX + col * pixelSize + pixelSize / 2.0;
@@ -85,7 +87,7 @@ public class Minimap {
     }
 
     private void drawObjects(GraphicsContext gc, int startX, int startY,
-                             double cx, double cy, double radius) {
+                             double cx, double cy, double radius, int pixelSize) {
         gc.setFill(Color.YELLOW);
         for (int i = 0; i < gp.obj.size(); i++) {
             if (gp.obj.get(i) != null) {
@@ -101,7 +103,7 @@ public class Minimap {
     }
 
     private void drawPlayer(GraphicsContext gc, int startX, int startY,
-                            double cx, double cy, double radius) {
+                            double cx, double cy, double radius, int pixelSize) {
         int playerCol = gp.player.worldX / gp.generalSettings.tileSize;
         int playerRow = gp.player.worldY / gp.generalSettings.tileSize;
         gc.setFill(Color.RED);
