@@ -1,77 +1,84 @@
 package com.gvi.project.models;
 
-import jakarta.persistence.*;
 import java.util.Arrays;
 import java.util.List;
+
 /**
- * Entity-Klasse fuer Fragen in der Datenbank
- * Speichert Fragen mit Antworten und moeglichen Antwortoptionen
+ * Simple POJO for Question data transfer.
+ * This is a data model class, not a JPA entity.
+ * For database operations, use QuestionEntity from the repository package.
+ *
+ * Stores questions with answers and possible answer options
  */
-@Entity
-@Table(name = "questions")
 public class Question {
-    // Primaerschluessel mit automatischer Generierung
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // Primary key
     private Long id;
-    // Die Fragestellung
-    @Column(name = "question", nullable = false)
+    // The question text
     private String question;
-    // Die richtige Antwort
-    @Column(name = "answer", nullable = false)
+    // The correct answer
     private String answer;
-    // Antwortmoeglichkeiten als CSV-String in der Datenbank
-    @Column(name = "possibilities", nullable = false)
+    // Answer options as CSV string in the database
     private String possibilities;
-    // Standard-Konstruktor (erforderlich fuer JPA)
+
+    // Default constructor
     public Question() {
     }
+
     /**
-     * Konstruktor mit allen Feldern
-     * @param question Die Fragestellung
-     * @param answer Die richtige Antwort
-     * @param possibilities Antwortmoeglichkeiten als CSV-String
+     * Constructor with all fields
+     * @param question The question text
+     * @param answer The correct answer
+     * @param possibilities Answer options as CSV string
      */
     public Question(String question, String answer, String possibilities) {
         this.question = question;
         this.answer = answer;
         this.possibilities = possibilities;
     }
-    // Getter und Setter
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getQuestion() {
         return question;
     }
+
     public void setQuestion(String question) {
         this.question = question;
     }
+
     public String getAnswer() {
         return answer;
     }
+
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
     /**
-     * Gibt den rohen CSV-String der Moeglichkeiten zurueck
-     * @return Moeglichkeiten als CSV-String
+     * Returns the raw CSV string of possibilities
+     * @return Possibilities as CSV string
      */
     public String getPossibilities() {
         return possibilities;
     }
+
     public void setPossibilities(String possibilities) {
         this.possibilities = possibilities;
     }
+
     /**
-     * Konvertiert den CSV-String der Moeglichkeiten in eine Liste
-     * @return Liste der Antwortmoeglichkeiten
+     * Converts the CSV string of possibilities into a list
+     * @return List of answer options
      */
     public List<String> getPossibilitiesAsList() {
-        // CSV-String aufteilen und Leerzeichen entfernen
+        // Split CSV string and trim whitespace
         if (possibilities == null || possibilities.isEmpty()) {
             return List.of();
         }
@@ -79,11 +86,14 @@ public class Question {
                 .map(String::trim)
                 .toList();
     }
+
     /**
-     * Setzt die Moeglichkeiten aus einer Liste (konvertiert zu CSV)
-     * @param possibilitiesList Liste der Antwortmoeglichkeiten
+     * Sets possibilities from a list (converts to CSV)
+     * @param possibilitiesList List of answer options
      */
     public void setPossibilitiesFromList(List<String> possibilitiesList) {
         this.possibilities = String.join(",", possibilitiesList);
     }
 }
+
+

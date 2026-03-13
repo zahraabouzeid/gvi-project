@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 /**
  * Service layer for Question data operations.
- * Provides methods to retrieve questions in various formats including the requested Map structure.
+ * Provides methods to retrieve questions in various formats and filter by type.
  */
 @Service
 public class QuestionDataService {
@@ -21,99 +21,80 @@ public class QuestionDataService {
     }
 
     /**
-     * Get all questions as a Map with Map<Question, Answer> as key and List<Possibilities> as value.
-     * Structure: Map<Map<Question, Answer>, List<Possibilities>>
-     *
-     * @return Map where each entry contains a single question-answer pair mapped to its possibilities
+     * Get all questions
      */
-    public Map<Map<String, String>, List<String>> getAllQuestionsAsMap() {
-        List<QuestionEntity> allQuestions = questionRepository.findAll();
-        Map<Map<String, String>, List<String>> result = new LinkedHashMap<>();
-
-        for (QuestionEntity entity : allQuestions) {
-            // Create inner map with Question -> Answer
-            Map<String, String> questionAnswerMap = new HashMap<>();
-            questionAnswerMap.put(entity.getQuestion(), entity.getAnswer());
-
-            // Parse CSV possibilities into List
-            List<String> possibilitiesList = parsePossibilities(entity.getPossibilities());
-
-            result.put(questionAnswerMap, possibilitiesList);
-        }
-
-        return result;
-    }
-
-    /**
-     * Alternative: Get as a simpler structure using a custom DTO
-     */
-    public List<QuestionDTO> getAllQuestionsAsDTOs() {
-        return questionRepository.findAll().stream()
-                .map(entity -> new QuestionDTO(
-                        entity.getQuestion(),
-                        entity.getAnswer(),
-                        parsePossibilities(entity.getPossibilities())
-                ))
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Get a single question's data as Map structure
-     */
-    public Optional<Map<Map<String, String>, List<String>>> getQuestionAsMap(Long id) {
-        return questionRepository.findById(id)
-                .map(entity -> {
-                    Map<Map<String, String>, List<String>> result = new HashMap<>();
-                    Map<String, String> questionAnswerMap = new HashMap<>();
-                    questionAnswerMap.put(entity.getQuestion(), entity.getAnswer());
-                    result.put(questionAnswerMap, parsePossibilities(entity.getPossibilities()));
-                    return result;
-                });
-    }
-
-    /**
-     * Save a new question from Map structure
-     */
-    public QuestionEntity saveFromMap(Map<String, String> questionAnswer, List<String> possibilities) {
-        if (questionAnswer.isEmpty()) {
-            throw new IllegalArgumentException("Question-Answer map cannot be empty");
-        }
-
-        Map.Entry<String, String> entry = questionAnswer.entrySet().iterator().next();
-        String question = entry.getKey();
-        String answer = entry.getValue();
-        String possibilitiesCsv = String.join(",", possibilities);
-
-        QuestionEntity entity = new QuestionEntity(question, answer, possibilitiesCsv);
-        return questionRepository.save(entity);
-    }
-
-    /**
-     * Parse CSV string into List of possibilities
-     */
-    private List<String> parsePossibilities(String csv) {
-        if (csv == null || csv.trim().isEmpty()) {
-            return new ArrayList<>();
-        }
-        return Arrays.stream(csv.split(","))
-                .map(String::trim)
-                .collect(Collectors.toList());
-    }
-
-    // CRUD operations delegating to repository
-    public List<QuestionEntity> findAll() {
+    public List<QuestionEntity> getAllQuestions() {
         return questionRepository.findAll();
     }
 
-    public Optional<QuestionEntity> findById(Long id) {
+    /**
+     * Get all Multiple Choice (MC) questions
+     */
+    public List<QuestionEntity> getAllMultipleChoiceQuestions() {
+        return questionRepository.findAllMultipleChoice();
+    }
+
+    /**
+     * Get all True/False (TF) questions
+     */
+    public List<QuestionEntity> getAllTrueFalseQuestions() {
+        return questionRepository.findAllTrueFalse();
+    }
+
+    /**
+     * Get all Gap/Fill-in-the-blank (GAP) questions
+     */
+    public List<QuestionEntity> getAllGapQuestions() {
+        return questionRepository.findAllGapQuestions();
+    }
+
+    /**
+     * Get questions by type
+     * @param questionType the type of question (MC, TF, or GAP)
+     */
+    public List<QuestionEntity> getQuestionsByType(QuestionType questionType) {
+        return questionRepository.findByQuestionType(questionType);
+    }
+
+    /**
+     * Get questions by question set id
+     */
+    public List<QuestionEntity> getQuestionsByQuestionSet(Long questionSetId) {
+        return questionRepository.findByQuestionSetId(questionSetId);
+    }
+
+    /**
+     * Get questions by question set id and type
+     */
+    public List<QuestionEntity> getQuestionsByQuestionSetAndType(Long questionSetId, QuestionType questionType) {
+        return questionRepository.findByQuestionSetIdAndQuestionType(questionSetId, questionType);
+    }
+
+    /**
+     * Get a single question
+     */
+    public Optional<QuestionEntity> getQuestion(Long id) {
         return questionRepository.findById(id);
     }
 
+    /**
+     * Find questions by keyword in start text
+     */
+    public List<QuestionEntity> searchQuestions(String keyword) {
+        return questionRepository.findByStartTextContainingIgnoreCase(keyword);
+    }
+
+    /**
+     * Save a question
+     */
     public QuestionEntity save(QuestionEntity entity) {
         return questionRepository.save(entity);
     }
 
-    public void deleteById(Long id) {
+    /**
+     * Delete a question
+     */
+    public void delete(Long id) {
         questionRepository.deleteById(id);
     }
 
@@ -121,34 +102,69 @@ public class QuestionDataService {
      * DTO class for cleaner data transfer
      */
     public static class QuestionDTO {
-        private final String question;
-        private final String answer;
-        private final List<String> possibilities;
+        private final Long id;
+        private final Long questionSetId;
+        private final QuestionType questionType;
+        private final String startText;
+        private final String imageUrl;
+        private final String endText;
+        private final Boolean allowsMultiple;
+        private final Integer points;
 
-        public QuestionDTO(String question, String answer, List<String> possibilities) {
-            this.question = question;
-            this.answer = answer;
-            this.possibilities = possibilities;
+        public QuestionDTO(QuestionEntity entity) {
+            this.id = entity.getId();
+            this.questionSetId = entity.getQuestionSetId();
+            this.questionType = entity.getQuestionType();
+            this.startText = entity.getStartText();
+            this.imageUrl = entity.getImageUrl();
+            this.endText = entity.getEndText();
+            this.allowsMultiple = entity.getAllowsMultiple();
+            this.points = entity.getPoints();
         }
 
-        public String getQuestion() {
-            return question;
+        public Long getId() {
+            return id;
         }
 
-        public String getAnswer() {
-            return answer;
+        public Long getQuestionSetId() {
+            return questionSetId;
         }
 
-        public List<String> getPossibilities() {
-            return possibilities;
+        public QuestionType getQuestionType() {
+            return questionType;
+        }
+
+        public String getStartText() {
+            return startText;
+        }
+
+        public String getImageUrl() {
+            return imageUrl;
+        }
+
+        public String getEndText() {
+            return endText;
+        }
+
+        public Boolean getAllowsMultiple() {
+            return allowsMultiple;
+        }
+
+        public Integer getPoints() {
+            return points;
         }
 
         @Override
         public String toString() {
             return "QuestionDTO{" +
-                    "question='" + question + '\'' +
-                    ", answer='" + answer + '\'' +
-                    ", possibilities=" + possibilities +
+                    "id=" + id +
+                    ", questionSetId=" + questionSetId +
+                    ", questionType=" + questionType +
+                    ", startText='" + startText + '\'' +
+                    ", imageUrl='" + imageUrl + '\'' +
+                    ", endText='" + endText + '\'' +
+                    ", allowsMultiple=" + allowsMultiple +
+                    ", points=" + points +
                     '}';
         }
     }

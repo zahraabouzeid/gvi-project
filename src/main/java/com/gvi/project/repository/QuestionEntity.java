@@ -4,32 +4,46 @@ import jakarta.persistence.*;
 
 /**
  * JPA Entity representing a Question in the database.
- * Maps to a table with columns: question, answer, possibilities (CSV format)
+ * Maps to the question table with support for different question types (MC, TF, GAP)
  */
 @Entity
-@Table(name = "questions")
+@Table(name = "question")
 public class QuestionEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "question_id")
     private Long id;
 
-    @Column(name = "question", nullable = false)
-    private String question;
+    @Column(name = "question_set_id", nullable = false)
+    private Long questionSetId;
 
-    @Column(name = "answer", nullable = false)
-    private String answer;
+    @Column(name = "question_type", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private QuestionType questionType;
 
-    @Column(name = "possibilities")
-    private String possibilities; // CSV format: "A,B,C,D"
+    @Column(name = "start_text")
+    private String startText;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    @Column(name = "end_text")
+    private String endText;
+
+    @Column(name = "allows_multiple")
+    private Boolean allowsMultiple = false;
+
+    @Column(name = "points")
+    private Integer points = 1;
 
     public QuestionEntity() {
     }
 
-    public QuestionEntity(String question, String answer, String possibilities) {
-        this.question = question;
-        this.answer = answer;
-        this.possibilities = possibilities;
+    public QuestionEntity(Long questionSetId, QuestionType questionType, String startText) {
+        this.questionSetId = questionSetId;
+        this.questionType = questionType;
+        this.startText = startText;
     }
 
     // Getters and Setters
@@ -41,37 +55,73 @@ public class QuestionEntity {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public Long getQuestionSetId() {
+        return questionSetId;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestionSetId(Long questionSetId) {
+        this.questionSetId = questionSetId;
     }
 
-    public String getAnswer() {
-        return answer;
+    public QuestionType getQuestionType() {
+        return questionType;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setQuestionType(QuestionType questionType) {
+        this.questionType = questionType;
     }
 
-    public String getPossibilities() {
-        return possibilities;
+    public String getStartText() {
+        return startText;
     }
 
-    public void setPossibilities(String possibilities) {
-        this.possibilities = possibilities;
+    public void setStartText(String startText) {
+        this.startText = startText;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getEndText() {
+        return endText;
+    }
+
+    public void setEndText(String endText) {
+        this.endText = endText;
+    }
+
+    public Boolean getAllowsMultiple() {
+        return allowsMultiple;
+    }
+
+    public void setAllowsMultiple(Boolean allowsMultiple) {
+        this.allowsMultiple = allowsMultiple;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 
     @Override
     public String toString() {
         return "QuestionEntity{" +
                 "id=" + id +
-                ", question='" + question + '\'' +
-                ", answer='" + answer + '\'' +
-                ", possibilities='" + possibilities + '\'' +
+                ", questionSetId=" + questionSetId +
+                ", questionType=" + questionType +
+                ", startText='" + startText + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", endText='" + endText + '\'' +
+                ", allowsMultiple=" + allowsMultiple +
+                ", points=" + points +
                 '}';
     }
 }
