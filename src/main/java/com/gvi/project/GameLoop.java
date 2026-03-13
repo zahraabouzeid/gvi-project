@@ -18,6 +18,7 @@ public class GameLoop extends AnimationTimer {
 	long timer = 0;
 	private int pauseNavCooldown = 0;
 	private int slotNavCooldown  = 0;
+	private int creationNavCooldown = 0;
 	private int loadingCounter   = 0;
 	private GameState loadSlotOrigin = GameState.PAUSE;
 
