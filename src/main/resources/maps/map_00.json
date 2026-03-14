@@ -275,44 +275,41 @@
   "objects": [
     {
       "objectId": "DOOR",
-      "x": 7,
+      "x": 4,
       "y": 3,
       "data": {}
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 0,
-      "y": 25,
+      "y": 6,
       "data": {
-        "target_map_spawn_location_x": "0",
-        "target_map_spawn_location_y": "0",
+        "target_map_spawn_location_x": "38",
+        "target_map_spawn_location_y": "5",
         "direction": "left",
-        "map_id": "3",
-        "height": "2"
+        "map_id": "3"
       }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 0,
-      "y": 25,
+      "x": 9,
+      "y": 6,
       "data": {
-        "target_map_spawn_location_x": "0",
-        "target_map_spawn_location_y": "0",
+        "target_map_spawn_location_x": "1",
+        "target_map_spawn_location_y": "24",
         "direction": "right",
-        "map_id": "1",
-        "height": "2"
+        "map_id": "1"
       }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 0,
-      "y": 25,
+      "x": 4,
+      "y": 10,
       "data": {
-        "target_map_spawn_location_x": "0",
-        "target_map_spawn_location_y": "0",
+        "target_map_spawn_location_x": "12",
+        "target_map_spawn_location_y": "1",
         "direction": "down",
-        "map_id": "2",
-        "width": "2"
+        "map_id": "2"
       }
     }
   ]

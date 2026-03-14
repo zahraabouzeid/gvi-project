@@ -709,14 +709,13 @@
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 0,
-      "y": 25,
+      "x": 12,
+      "y": 0,
       "data": {
-        "target_map_spawn_location_x": "0",
-        "target_map_spawn_location_y": "0",
+        "target_map_spawn_location_x": "4",
+        "target_map_spawn_location_y": "9",
         "direction": "up",
-        "map_id": "0",
-        "width": "2"
+        "map_id": "0"
       }
     }
   ]
