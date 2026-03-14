@@ -51,11 +51,6 @@ public abstract class SuperObject implements Renderable {
 			worldY + gp.generalSettings.tileSize > gp.player.worldY - gp.player.screenY &&
 			worldY - gp.generalSettings.tileSize < gp.player.worldY + gp.player.screenY) {
 
-			if(gp.generalSettings.isDevMode){
-				gp.gc.setFill(new Color(1, 0, 0, 0.3));
-				gp.gc.fillRect(screenX, screenY, collisionBox.getWidth(), collisionBox.getHeight());
-			}
-
 			if (spriteDirectionUp) {
 				gp.gc.drawImage(sprite.image, screenX, screenY - (sprite.imageHeight - 1) * tileSize, tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
 			} else {
@@ -74,9 +69,9 @@ public abstract class SuperObject implements Renderable {
 			worldY + gp.generalSettings.tileSize > gp.player.worldY - gp.player.screenY &&
 			worldY - gp.generalSettings.tileSize < gp.player.worldY + gp.player.screenY) {
 
-			if (gp.generalSettings.isDevMode) {
+			if (gp.generalSettings.isDevMode && this.collision) {
 				gp.gc.setFill(new Color(1, 0, 0, 0.3));
-				gp.gc.fillRect(screenX, screenY, collisionBox.getWidth(), collisionBox.getHeight());
+				gp.gc.fillRect(screenX + collisionBox.getX(), screenY + collisionBox.getY(), collisionBox.getWidth(), collisionBox.getHeight());
 			}
 		}
 	}

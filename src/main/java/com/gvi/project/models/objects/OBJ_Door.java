@@ -22,6 +22,7 @@ public class OBJ_Door extends SuperObject {
 		sprite = sprites.get("frame_3");
 
 		collision = true;
+		collisionBox.setWidth(2 * 16 * 3);
 	}
 
 	@Override

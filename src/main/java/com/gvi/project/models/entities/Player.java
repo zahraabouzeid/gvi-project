@@ -31,7 +31,7 @@ public class Player extends Entity {
 		screenX = gp.generalSettings.screenWidth / 2 - (gp.generalSettings.tileSize / 2);
 		screenY = gp.generalSettings.screenHeight / 2 - (gp.generalSettings.tileSize / 2);
 
-		this.collisionBox = new Rectangle(8,16,46,46);
+		this.collisionBox = new Rectangle(0,0, 48, 48);
 
 		collisionBoxDefaultX = (int) collisionBox.getX();
 		collisionBoxDefaultY = (int) collisionBox.getY();
@@ -144,8 +144,7 @@ public class Player extends Entity {
 
 				// Kollision prüfen: Tile und Objekte am Ziel-Grid-Feld
 				// Nur wenn frei Bewegung starten
-				if (!gp.cChecker.isTileBlocked(nextGridX, nextGridY) &&
-						!gp.cChecker.isObjectBlocking(nextGridX, nextGridY)) {
+				if (!gp.cChecker.isTileBlocked(nextGridX, nextGridY) && !gp.cChecker.isObjectBlocking(nextGridX, nextGridY)) {
 					targetGridX = nextGridX;
 					targetGridY = nextGridY;
 					isMoving = true;
@@ -239,10 +238,6 @@ public class Player extends Entity {
 
 		assert sprite != null;
 
-		if(gp.generalSettings.isDevMode){
-			gp.gc.setFill(new Color(0,0,1,0.3));
-			gp.gc.fillRect(screenX, this.screenY - (sprite.imageHeight - 1), this.collisionBox.getWidth(), this.collisionBox.getHeight());
-		}
 		gp.gc.drawImage(sprite.image, this.screenX, this.screenY - (sprite.imageHeight - 1) * tileSize , tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
 	}
 
@@ -251,7 +246,7 @@ public class Player extends Entity {
 	public void renderCollisionBox(GamePanel gp) {
 		if(gp.generalSettings.isDevMode){
 			gp.gc.setFill(new Color(0,0,1,0.3));
-			gp.gc.fillRect(screenX, this.screenY, this.collisionBox.getWidth(), this.collisionBox.getHeight());
+			gp.gc.fillRect(screenX + collisionBox.getX(), this.screenY + collisionBox.getY(), this.collisionBox.getWidth(), this.collisionBox.getHeight());
 		}
 	}
 }
