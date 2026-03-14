@@ -45,13 +45,13 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 		switch (direction){
 			case "up":
 			case "down":
-				this.collisionBox.height = 16 * 3;
-				this.collisionBox.width = 16 * 3 * 2;
+				this.collisionBox.setHeight(16 * 3);
+				this.collisionBox.setWidth(16 * 3 * 2);
 				break;
 			case "left":
 			case "right":
-				this.collisionBox.height = 16 * 3 * 2;
-				this.collisionBox.width = 16 * 3;
+				this.collisionBox.setHeight(16 * 3 * 2);
+				this.collisionBox.setWidth(16 * 3);
 				break;
 		}
 	};

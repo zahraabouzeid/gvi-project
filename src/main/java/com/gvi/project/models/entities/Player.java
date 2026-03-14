@@ -5,8 +5,8 @@ import com.gvi.project.KeyHandler;
 import com.gvi.project.models.core.Entity;
 import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
-
-import java.awt.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class Player extends Entity {
 	private GamePanel gp;
@@ -31,10 +31,10 @@ public class Player extends Entity {
 		screenX = gp.generalSettings.screenWidth / 2 - (gp.generalSettings.tileSize / 2);
 		screenY = gp.generalSettings.screenHeight / 2 - (gp.generalSettings.tileSize / 2);
 
-		this.collisionBox = new Rectangle(8, 16, 32, 32);
+		this.collisionBox = new Rectangle(8,16,46,46);
 
-		collisionBoxDefaultX = collisionBox.x;
-		collisionBoxDefaultY = collisionBox.y;
+		collisionBoxDefaultX = (int) collisionBox.getX();
+		collisionBoxDefaultY = (int) collisionBox.getY();
 
 		setDefaultValues();
 		getPlayerSprites();
@@ -178,8 +178,8 @@ public class Player extends Entity {
 	private int findNearbyObject() {
 		int interactRange = gp.generalSettings.tileSize;
 
-		int playerCenterX = worldX + collisionBox.x + collisionBox.width / 2;
-		int playerCenterY = worldY + collisionBox.y + collisionBox.height / 2;
+		int playerCenterX = (int)(worldX + collisionBox.getX() + collisionBox.getWidth() / 2);
+		int playerCenterY = (int)(worldY + collisionBox.getY() + collisionBox.getHeight() / 2);
 
 		for (int i = 0; i < gp.obj.size(); i++) {
 			if (gp.obj.get(i) != null) {
@@ -239,6 +239,19 @@ public class Player extends Entity {
 
 		assert sprite != null;
 
+		if(gp.generalSettings.isDevMode){
+			gp.gc.setFill(new Color(0,0,1,0.3));
+			gp.gc.fillRect(screenX, this.screenY - (sprite.imageHeight - 1), this.collisionBox.getWidth(), this.collisionBox.getHeight());
+		}
 		gp.gc.drawImage(sprite.image, this.screenX, this.screenY - (sprite.imageHeight - 1) * tileSize , tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+	}
+
+
+	@Override
+	public void renderCollisionBox(GamePanel gp) {
+		if(gp.generalSettings.isDevMode){
+			gp.gc.setFill(new Color(0,0,1,0.3));
+			gp.gc.fillRect(screenX, this.screenY, this.collisionBox.getWidth(), this.collisionBox.getHeight());
+		}
 	}
 }
