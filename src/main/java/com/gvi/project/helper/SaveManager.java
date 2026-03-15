@@ -110,7 +110,6 @@ public class SaveManager {
 
         gp.loadMap(parseMap(data.currentMap));
         gp.obj.clear();
-        gp.assetSetter.setObject();
         applyObjectStates(gp, data.presentObjects);
 
         return true;

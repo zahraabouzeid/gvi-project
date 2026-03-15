@@ -34,6 +34,10 @@ public class RenderSystem {
 
 		renderLayer(gp.currentMap.getLayer("CEILING"));
 
+		for (Renderable r : dynamic) {
+			r.renderCollisionBox(gp);
+		}
+
 		gp.ui.minimap.draw(gp.gc);
 	}
 

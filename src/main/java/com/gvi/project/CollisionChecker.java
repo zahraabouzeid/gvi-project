@@ -23,13 +23,28 @@ public class CollisionChecker {
 	// Prüft, ob ein blockierendes Objekt (z.B. Tür) auf dem Ziel-Tile steht
 	// Vergleicht die Pixel-Position des Objekts mit dem Ziel-Grid-Feld
 	public boolean isObjectBlocking(int gridX, int gridY) {
-		int targetWorldX = gridX * gp.generalSettings.tileSize;
-		int targetWorldY = gridY * gp.generalSettings.tileSize;
+		int targetX = gridX * gp.generalSettings.tileSize + (int) gp.player.collisionBox.getX();
+		int targetY = gridY * gp.generalSettings.tileSize + (int) gp.player.collisionBox.getY();
+		int targetW = (int) gp.player.collisionBox.getWidth();
+		int targetH = (int) gp.player.collisionBox.getHeight();
+
 		for (SuperObject obj : gp.obj) {
-			if (obj != null && obj.collision && obj.worldX == targetWorldX && obj.worldY == targetWorldY) {
-				return true;
+			if (obj != null && obj.collision) {
+				int objX = obj.worldX + (int) obj.collisionBox.getX();
+				int objY = obj.worldY + (int) obj.collisionBox.getY();
+				int objW = (int) obj.collisionBox.getWidth();
+				int objH = (int) obj.collisionBox.getHeight();
+
+				if (targetX < objX + objW &&
+					targetX + targetW > objX &&
+					targetY < objY + objH &&
+					targetY + targetH > objY
+				) {
+					return true;
+				}
 			}
 		}
+
 		return false;
 	}
 }

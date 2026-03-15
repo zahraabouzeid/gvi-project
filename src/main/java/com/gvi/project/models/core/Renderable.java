@@ -5,4 +5,5 @@ import com.gvi.project.GamePanel;
 public interface Renderable {
 	int getY();
 	void render(GamePanel gp);
+	void renderCollisionBox(GamePanel gp);
 }

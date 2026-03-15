@@ -9,6 +9,7 @@ public class GeneralSettings {
 	public final int maxScreenRow = 22;
 	public final int screenWidth = maxScreenCol *  tileSize;
 	public final int screenHeight = maxScreenRow * tileSize;
+	public boolean isDevMode = true;
 
 
 	public GeneralSettings () {}

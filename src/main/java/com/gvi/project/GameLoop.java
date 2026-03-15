@@ -42,7 +42,7 @@ public class GameLoop extends AnimationTimer {
 		}
 
 		if (timer >= 1_000_000_000) {
-			System.out.println("FPS: " + drawCount);
+//			System.out.println("FPS: " + drawCount);
 			drawCount = 0;
 			timer = 0;
 		}
@@ -72,13 +72,14 @@ public class GameLoop extends AnimationTimer {
 				gp.keyHandler.enterPressed = false;
 				gp.player.setDefaultValues();
 				gp.ui.resetGame();
-				gp.assetSetter.setObject();
 				gp.interactingObjectIndex = -1;
 				gp.gameState = GameState.PLAY;
 			}
 			return;
 		}
 		if (gp.gameState == GameState.PLAY) {
+			gp.generalSettings.isDevMode = gp.keyHandler.f2Pressed;
+
 			if (gp.keyHandler.escPressed) {
 				gp.keyHandler.escPressed = false;
 				gp.ui.resetPauseScreen();

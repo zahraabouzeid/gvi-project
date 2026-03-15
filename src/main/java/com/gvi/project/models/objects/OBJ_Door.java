@@ -19,9 +19,10 @@ public class OBJ_Door extends SuperObject {
 		SpriteSheet spriteSheet = new SpriteSheet("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDoorUp");
 		sprites = spriteSheet.getGroupSprites("door");
 
-		sprite = sprites.get("frame_3");
+		sprite = sprites.get("frame_0");
 
 		collision = true;
+		collisionBox.setWidth(2 * 16 * 3);
 	}
 
 	@Override

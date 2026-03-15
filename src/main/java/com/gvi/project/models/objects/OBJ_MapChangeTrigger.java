@@ -10,16 +10,12 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 	public int targetMapSpawnLocationX;
 	public int targetMapSpawnLocationY;
 
-	public OBJ_MapChangeTrigger(String direction) {
-		initImageLoad(direction);
-		setCollisionBox(direction);
-	}
-
 	public OBJ_MapChangeTrigger(String direction, int targetMapId, int targetMapSpawnLocationX, int targetMapSpawnLocationY) {
-		this(direction);
 		this.targetMapId = targetMapId;
 		this.targetMapSpawnLocationX = targetMapSpawnLocationX;
 		this.targetMapSpawnLocationY = targetMapSpawnLocationY;
+		initImageLoad(direction);
+		setCollisionBox(direction);
 	}
 
 	private void initImageLoad(String direction){
@@ -45,25 +41,26 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 		switch (direction){
 			case "up":
 			case "down":
-				this.collisionBox.height = 16 * 3;
-				this.collisionBox.width = 16 * 3 * 2;
+				this.collisionBox.setHeight(16 * 3);
+				this.collisionBox.setWidth(16 * 3 * 2);
 				break;
 			case "left":
 			case "right":
-				this.collisionBox.height = 16 * 3 * 2;
-				this.collisionBox.width = 16 * 3;
+				if (spriteDirectionUp){
+					collisionBox.setY(-48 * (sprite.imageHeight - 1));
+				}
+				this.collisionBox.setHeight(48 * 2);
+				this.collisionBox.setWidth(16 * 3);
 				break;
 		}
 	};
 
 	@Override
 	public void onStep(Player player, GamePanel gp, int objIndex) {
+		int xDiff = player.gridX - this.worldX / gp.generalSettings.tileSize;
+		int yDiff = player.gridY - this.worldY / gp.generalSettings.tileSize;
+
 		gp.loadMap(GameMaps.fromId(targetMapId));
-		player.gridX = targetMapSpawnLocationX;
-		player.gridY = targetMapSpawnLocationY;
-		player.targetGridX = player.gridX;
-		player.targetGridY = player.gridY;
-		player.worldX = player.gridX * gp.generalSettings.tileSize;
-		player.worldY = player.gridY * gp.generalSettings.tileSize;
+		player.setPlayerPosition(targetMapSpawnLocationX + xDiff, targetMapSpawnLocationY + yDiff);
 	}
 }
