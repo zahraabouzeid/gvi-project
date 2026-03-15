@@ -37,7 +37,6 @@ public class GamePanel {
 	public final Canvas canvas = new Canvas(generalSettings.screenWidth, generalSettings.screenHeight);
 	public final GraphicsContext gc = canvas.getGraphicsContext2D();
 	public final GameLoop gameLoop = new GameLoop(this);
-	public final AssetSetter assetSetter = new AssetSetter(this);
 	public final Player player = new Player(this, keyHandler);
 	public final UI ui = new UI(this);
 	public final CollisionChecker cChecker = new CollisionChecker(this);

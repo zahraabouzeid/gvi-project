@@ -11,6 +11,7 @@ public class KeyHandler {
 	public boolean enterPressed;
 	public boolean backspacePressed;
 	public boolean tabPressed;
+	public boolean f2Pressed = false;
 	public int numberPressed = -1;
 	public String typedCharacter = "";
 
@@ -54,6 +55,7 @@ public class KeyHandler {
 			if (code == KeyCode.ESCAPE) escPressed = false;
 			if (code == KeyCode.ENTER) enterPressed = false;
 			if (code == KeyCode.TAB) tabPressed = false;
+			if (code == KeyCode.F2) f2Pressed = !f2Pressed;
 		});
 
 		node.setFocusTraversable(true);

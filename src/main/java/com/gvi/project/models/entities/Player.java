@@ -3,6 +3,7 @@ package com.gvi.project.models.entities;
 import com.gvi.project.GamePanel;
 import com.gvi.project.KeyHandler;
 import com.gvi.project.models.core.Entity;
+import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 import javafx.scene.paint.Color;
@@ -64,6 +65,15 @@ public class Player extends Entity {
 		healthHalf = 10;
 		isDead = false;
 		score = 0;
+	}
+
+	public void setPlayerPosition(int gridPosX, int gridPosY){
+		this.gridX = gridPosX;
+		this.gridY = gridPosY;
+		this.targetGridX = this.gridX;
+		this.targetGridY = this.gridY;
+		this.worldX = this.gridX * gp.generalSettings.tileSize;
+		this.worldY = this.gridY * gp.generalSettings.tileSize;
 	}
 
 	public void takeHalfHeartDamage() {
@@ -165,11 +175,28 @@ public class Player extends Entity {
 	}
 
 	private void checkStepObjects() {
+		int targetX = worldX + (int) collisionBox.getX();
+		int targetY = worldY + (int) collisionBox.getY();
+		int targetW = (int) collisionBox.getWidth();
+		int targetH = (int) collisionBox.getHeight();
+
 		for (int i = 0; i < gp.obj.size(); i++) {
-			var obj = gp.obj.get(i);
-			if (obj != null && !obj.collision && obj.worldX == worldX && obj.worldY == worldY) {
-				obj.onStep(this, gp, i);
-				return;
+			SuperObject obj = gp.obj.get(i);
+
+			if (obj != null && !obj.collision) {
+				int objX = obj.worldX + (int) obj.collisionBox.getX();
+				int objY = obj.worldY + (int) obj.collisionBox.getY();
+				int objW = (int) obj.collisionBox.getWidth();
+				int objH = (int) obj.collisionBox.getHeight();
+
+				if (targetX < objX + objW &&
+						targetX + targetW > objX &&
+						targetY < objY + objH &&
+						targetY + targetH > objY
+				) {
+					obj.onStep(this, gp, i);
+					return;
+				}
 			}
 		}
 	}

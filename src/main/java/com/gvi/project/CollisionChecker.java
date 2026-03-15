@@ -1,7 +1,6 @@
 package com.gvi.project;
 
 import com.gvi.project.models.objects.SuperObject;
-import javafx.scene.shape.Rectangle;
 
 public class CollisionChecker {
 	GamePanel gp;

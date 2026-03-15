@@ -73,6 +73,11 @@ public abstract class SuperObject implements Renderable {
 				gp.gc.setFill(new Color(1, 0, 0, 0.3));
 				gp.gc.fillRect(screenX + collisionBox.getX(), screenY + collisionBox.getY(), collisionBox.getWidth(), collisionBox.getHeight());
 			}
+
+			if (gp.generalSettings.isDevMode && !this.collision) {
+				gp.gc.setFill(new Color(0, 1, 0, 0.3));
+				gp.gc.fillRect(screenX + collisionBox.getX(), screenY + collisionBox.getY(), collisionBox.getWidth(), collisionBox.getHeight());
+			}
 		}
 	}
 }
