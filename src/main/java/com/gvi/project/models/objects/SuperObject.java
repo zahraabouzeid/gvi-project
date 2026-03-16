@@ -1,11 +1,15 @@
 package com.gvi.project.models.objects;
 
+import com.gvi.project.Components.Component;
 import com.gvi.project.GamePanel;
 import com.gvi.project.models.core.Renderable;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.sprite_sheets.Sprite;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class SuperObject implements Renderable {
 
@@ -16,6 +20,8 @@ public abstract class SuperObject implements Renderable {
 	public int worldX, worldY;
 	public Rectangle collisionBox = new Rectangle(0, 0, 48, 48);
 	public String interactHint = "[F] Interact";
+	public final Map<String, Component> components = new HashMap<>();
+	public boolean canInteract = false;
 
 	public SuperObject() {
 		sprite = new Sprite();
@@ -33,6 +39,9 @@ public abstract class SuperObject implements Renderable {
 		// Default behavior: do nothing
 	}
 
+	public void addComponent(Component component){
+		this.components.put(component.getComponentId(), component);
+	}
 
 	@Override
 	public int getY() {

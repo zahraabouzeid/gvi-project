@@ -1,6 +1,8 @@
 package com.gvi.project;
 
+import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.Answer;
+import com.gvi.project.systems.AnimationSystem;
 import com.gvi.project.ui.LoadingScreen;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -28,27 +30,27 @@ public class GameLoop extends AnimationTimer {
 	@Override
 	public void handle(long now) {
 
-		long currentTime = System.nanoTime();
+		double deltaSeconds = (now - lastTime) / 1_000_000_000.0;
 
-		delta += (currentTime - lastTime) / gp.drawInterval;
-		timer += (currentTime - lastTime);
-		lastTime = currentTime;
+		delta += (now - lastTime) / gp.generalSettings.drawInterval;
+		timer += (now - lastTime);
+		lastTime = now;
 
-		if (delta >= 1) {
-			update();
-			renderScreen();
+		while (delta >= 1) {
+			update(deltaSeconds);
 			delta--;
 			drawCount++;
 		}
 
+		renderScreen();
+
 		if (timer >= 1_000_000_000) {
-//			System.out.println("FPS: " + drawCount);
 			drawCount = 0;
 			timer = 0;
 		}
 	}
 
-	private void update() {
+	private void update(double deltaSeconds) {
 		if (gp.gameState == GameState.TITLE) {
 			if (gp.keyHandler.enterPressed) {
 				gp.keyHandler.enterPressed = false;
@@ -86,6 +88,7 @@ public class GameLoop extends AnimationTimer {
 				gp.gameState = GameState.PAUSE;
 				return;
 			}
+			gp.animationSystem.tick(deltaSeconds);
 			gp.player.update();
 		} else if (gp.gameState == GameState.QUIZ) {
 			if (gp.ui.isAnswerFeedback()) {

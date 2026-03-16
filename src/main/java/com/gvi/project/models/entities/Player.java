@@ -215,7 +215,7 @@ public class Player extends Entity {
 				int dx = Math.abs(playerCenterX - objCenterX);
 				int dy = Math.abs(playerCenterY - objCenterY);
 
-				if (dx <= interactRange && dy <= interactRange) {
+				if (dx <= interactRange && dy <= interactRange && gp.obj.get(i).canInteract) {
 					return i;
 				}
 			}

@@ -1,0 +1,217 @@
+{
+  "spriteSize": 16,
+  "spriteGroups": {
+    "key_iron": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 6,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_2": {
+          "spriteX": 7,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_3": {
+          "spriteX": 8,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "key_copper": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 6,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_2": {
+          "spriteX": 7,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_3": {
+          "spriteX": 8,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "key_gold": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 6,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_2": {
+          "spriteX": 7,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_3": {
+          "spriteX": 8,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "potion_blue": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 6,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_2": {
+          "spriteX": 7,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_3": {
+          "spriteX": 8,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_4": {
+          "spriteX": 9,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "potion_red": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 6,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_2": {
+          "spriteX": 7,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_3": {
+          "spriteX": 8,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_4": {
+          "spriteX": 9,
+          "spriteY": 3,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "coin": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 6,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_2": {
+          "spriteX": 7,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "frame_3": {
+          "spriteX": 8,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "crystal_red": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 0,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_2": {
+          "spriteX": 1,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_3": {
+          "spriteX": 2,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        }
+      }
+    },
+    "crystal_blue": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 0,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_2": {
+          "spriteX": 1,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_3": {
+          "spriteX": 2,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        }
+      }
+    },
+    "crystal_green": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 3,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_2": {
+          "spriteX": 4,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_3": {
+          "spriteX": 5,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        }
+      }
+    }
+  }
+}
+
+

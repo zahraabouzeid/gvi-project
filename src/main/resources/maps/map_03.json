@@ -656,7 +656,9 @@
       "x": 36,
       "y": 6,
       "data": {
-        "topicArea": "JOINS_SUBQUERIES"
+        "topicArea": "JOINS_SUBQUERIES",
+        "spriteGroup": "crystal_green"
+
       }
     },
     {
@@ -664,7 +666,9 @@
       "x": 11,
       "y": 24,
       "data": {
-        "topicArea": "DDL_DML"
+        "topicArea": "DDL_DML",
+        "spriteGroup": "crystal_green"
+
       }
     },
     {
@@ -672,7 +676,9 @@
       "x": 37,
       "y": 24,
       "data": {
-        "topicArea": "ER_MODELLIERUNG"
+        "topicArea": "ER_MODELLIERUNG",
+        "spriteGroup": "crystal_green"
+
       }
     },
     {
@@ -680,7 +686,9 @@
       "x": 24,
       "y": 23,
       "data": {
-        "topicArea": "NORMALISIERUNG"
+        "topicArea": "NORMALISIERUNG",
+        "spriteGroup": "crystal_green"
+
       }
     },
     {
@@ -688,7 +696,9 @@
       "x": 24,
       "y": 5,
       "data": {
-        "topicArea": "SELECT_ABFRAGEN"
+        "topicArea": "SELECT_ABFRAGEN",
+        "spriteGroup": "crystal_green"
+
       }
     },
     {
@@ -696,7 +706,9 @@
       "x": 2,
       "y": 5,
       "data": {
-        "topicArea": "SQL_GRUNDLAGEN"
+        "topicArea": "SQL_GRUNDLAGEN",
+        "spriteGroup": "crystal_green"
+
       }
     },
     {

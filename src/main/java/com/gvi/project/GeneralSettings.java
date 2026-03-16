@@ -10,7 +10,8 @@ public class GeneralSettings {
 	public final int screenWidth = maxScreenCol *  tileSize;
 	public final int screenHeight = maxScreenRow * tileSize;
 	public boolean isDevMode = true;
-
+	public int FPS = 60;
+	public double drawInterval = 1000000000.0 / FPS;
 
 	public GeneralSettings () {}
 }

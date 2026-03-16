@@ -11,7 +11,7 @@ public class ObjectFactory {
 		var data = config.data != null ? config.data : Map.<String, String>of();
 
 		return switch (config.objectId) {
-			case "QUIZ_STATION" -> new OBJ_QuizStation(TopicArea.valueOf(data.get("topicArea")));
+			case "QUIZ_STATION" -> new OBJ_QuizStation(TopicArea.valueOf(data.get("topicArea")), data.getOrDefault("spriteGroup", "crystal_blue"));
 			case "MAP_CHANGE_TRIGGER" -> new OBJ_MapChangeTrigger(
 					data.getOrDefault("direction", "up"),
 					Integer.parseInt(data.getOrDefault("map_id", "0")),
@@ -19,6 +19,7 @@ public class ObjectFactory {
 					Integer.parseInt(data.getOrDefault("target_map_spawn_location_y", "0")));
 			case "BOOTS" -> new OBJ_Boots();
 			case "DOOR" -> new OBJ_Door();
+			case "HEALING_POTION" -> new OBJ_HealingPotion();
 			default -> throw new IllegalArgumentException("Unknown objectId: " + config.objectId);
 		};
 	}

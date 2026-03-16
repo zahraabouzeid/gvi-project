@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,13 +44,27 @@ public class SpriteSheet {
 		return new Sprite(image, spriteConfig.spriteHeight, spriteConfig.spriteWidth);
 	}
 
-	public Map<String, Sprite> getGroupSprites(String spriteGroupId) {
+	public Map<String, Sprite> getGroupSpritesAsMap(String spriteGroupId) {
 		SpriteGroupConfig spriteGroupConfig = config.spriteGroups.get(spriteGroupId);
 
 		Map<String, Sprite> sprites = new HashMap<>();
 
 		for (Map.Entry<String, SpriteConfig> entry : spriteGroupConfig.sprites.entrySet()){
 			sprites.put(entry.getKey(), getSprite(spriteGroupId, entry.getKey()));
+		}
+
+		return sprites;
+	}
+
+	public ArrayList<Sprite> getGroupSpritesAsList(String spriteGroupId) {
+		SpriteGroupConfig spriteGroupConfig = config.spriteGroups.get(spriteGroupId);
+
+		ArrayList<Sprite> sprites = new ArrayList<>();
+
+		for (Map.Entry<String, SpriteConfig> entry : spriteGroupConfig.sprites.entrySet()){
+			Sprite sprite = getSprite(spriteGroupId, entry.getKey());
+
+			sprites.add(sprite);
 		}
 
 		return sprites;

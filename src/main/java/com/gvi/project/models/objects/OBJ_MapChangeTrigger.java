@@ -60,6 +60,7 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 		int xDiff = player.gridX - this.worldX / gp.generalSettings.tileSize;
 		int yDiff = player.gridY - this.worldY / gp.generalSettings.tileSize;
 
+		gp.playSE(3);
 		gp.loadMap(GameMaps.fromId(targetMapId));
 		player.setPlayerPosition(targetMapSpawnLocationX + xDiff, targetMapSpawnLocationY + yDiff);
 	}

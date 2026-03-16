@@ -10,6 +10,7 @@ import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.QuestionProvider;
 import com.gvi.project.models.questions.QuestionService;
 import com.gvi.project.manager.SpriteManager;
+import com.gvi.project.systems.AnimationSystem;
 import com.gvi.project.systems.RenderSystem;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,9 +22,7 @@ public class GamePanel {
 
 	public GeneralSettings generalSettings = new GeneralSettings();
 
-	int FPS = 60;
 
-	double drawInterval = 1000000000.0 / FPS;
 
 	public GameState gameState = GameState.TITLE;
 	public SpriteManager spriteManager = new SpriteManager();
@@ -44,6 +43,7 @@ public class GamePanel {
 	public int interactingObjectIndex = -1;
 	public final QuestionService questionProvider = new QuestionProvider();
 	public final RenderSystem renderSystem = new RenderSystem(this);
+	public final AnimationSystem animationSystem = new AnimationSystem(this);
 
 	public GamePanel(){
 		keyHandler.setupKeyListeners(canvas);

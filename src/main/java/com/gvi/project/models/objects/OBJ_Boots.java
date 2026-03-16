@@ -11,6 +11,7 @@ public class OBJ_Boots extends SuperObject {
 	public OBJ_Boots() {
 		name = "Boots";
 		interactHint = "[F] Equip Boots";
+		canInteract = true;
 
 		try {
 			sprite.image = ImageHelper.getImage("/sprites/objects/boots.png");

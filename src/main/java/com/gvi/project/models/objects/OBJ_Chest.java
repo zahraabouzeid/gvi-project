@@ -10,7 +10,7 @@ public class OBJ_Chest extends SuperObject {
 	public OBJ_Chest() {
 		name = "Chest";
 		interactHint = "[F] Open Chest";
-
+		canInteract = true;
 		try {
 			sprite.image = ImageHelper.getImage("/sprites/objects/chest.png");
 			sprite.imageHeight = 1;
