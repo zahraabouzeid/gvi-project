@@ -1,25 +1,19 @@
 package com.gvi.project.models.objects;
 
+import com.gvi.project.Components.AnimationComponent;
 import com.gvi.project.GamePanel;
-import com.gvi.project.helper.ImageHelper;
 import com.gvi.project.helper.TimeoutHelper;
 import com.gvi.project.models.entities.Player;
 
-import java.io.IOException;
 
-public class OBJ_Boots extends SuperObject {
+public class OBJ_Boots extends AnimatedObject {
 	public OBJ_Boots() {
+		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDungeon", "boots");
 		name = "Boots";
 		interactHint = "[F] Equip Boots";
 		canInteract = true;
-
-		try {
-			sprite.image = ImageHelper.getImage("/sprites/objects/boots.png");
-			sprite.imageHeight = 1;
-			sprite.imageWidth = 1;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		collision = true;
+		setUpAnimationComponent();
 	}
 
 	@Override
@@ -32,4 +26,15 @@ public class OBJ_Boots extends SuperObject {
 			player.speed = 4;
 		}, 10000);
 	}
+
+	@Override
+	public void setUpAnimationComponent(){
+		AnimationComponent animComp = (AnimationComponent) this.components.get("Animation");
+		animComp.isLooping();
+		animComp.cycleLength = 0.4;
+		animComp.delayBetweenCycles = 2;
+		animComp.delay = 0.8;
+
+		sprite = animComp.getCurrentSprite();
+	};
 }

@@ -29,7 +29,8 @@ public class OBJ_Key extends AnimatedObject {
 	public void setUpAnimationComponent(){
 		AnimationComponent animComp = (AnimationComponent) this.components.get("Animation");
 		animComp.isLooping();
-		animComp.cycleLength = 0.4;
+		animComp.cycleLength = 0.5;
+		animComp.delayBetweenCycles = 0.8;
 
 		sprite = animComp.getCurrentSprite();
 	};

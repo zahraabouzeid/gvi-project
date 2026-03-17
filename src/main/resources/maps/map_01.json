@@ -657,7 +657,7 @@
       "y": 6,
       "data": {
         "topicArea": "JOINS_SUBQUERIES",
-        "spriteGroup": "crystal_blue"
+        "spriteGroup": "crystal_green"
       }
     },
     {
@@ -666,7 +666,7 @@
       "y": 24,
       "data": {
         "topicArea": "DDL_DML",
-        "spriteGroup": "crystal_blue"
+        "spriteGroup": "crystal_green"
       }
     },
     {
@@ -675,7 +675,7 @@
       "y": 24,
       "data": {
         "topicArea": "ER_MODELLIERUNG",
-        "spriteGroup": "crystal_blue"
+        "spriteGroup": "crystal_green"
       }
     },
     {
@@ -684,7 +684,7 @@
       "y": 23,
       "data": {
         "topicArea": "NORMALISIERUNG",
-        "spriteGroup": "crystal_blue"
+        "spriteGroup": "crystal_green"
       }
     },
     {
@@ -693,7 +693,7 @@
       "y": 5,
       "data": {
         "topicArea": "SELECT_ABFRAGEN",
-        "spriteGroup": "crystal_blue"
+        "spriteGroup": "crystal_green"
       }
     },
     {
@@ -702,7 +702,7 @@
       "y": 5,
       "data": {
         "topicArea": "SQL_GRUNDLAGEN",
-        "spriteGroup": "crystal_blue"
+        "spriteGroup": "crystal_green"
       }
     },
     {
