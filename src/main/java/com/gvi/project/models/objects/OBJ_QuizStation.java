@@ -112,9 +112,9 @@ public class OBJ_QuizStation extends AnimatedObject {
 
 	private void spawnKey(GamePanel gp, int objIndex) {
 		OBJ_Key key = switch (this.name) {
-			case "crystal_blue" -> new OBJ_Key("key_copper");
+			case "crystal_blue" -> new OBJ_Key("key_iron");
 			case "crystal_green" -> new OBJ_Key("key_gold");
-			default -> new OBJ_Key("key_iron");
+			default -> new OBJ_Key("key_copper");
 		};
 
 		gp.obj.remove(objIndex);

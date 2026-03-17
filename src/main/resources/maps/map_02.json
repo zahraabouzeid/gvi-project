@@ -13,42 +13,42 @@
           "usedSprites": [
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cobble_stone",
+              "spriteId":"cobble_sand_stone",
               "hasCollision": false
             },
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cut_stone_bottom_right_broken",
+              "spriteId":"cut_sand_stone_bottom_right_broken",
               "hasCollision": false
             },
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cut_stone_bottom_left_broken",
+              "spriteId":"cut_sand_stone_bottom_left_broken",
               "hasCollision": false
             },
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cut_stone",
+              "spriteId":"cut_sand_stone",
               "hasCollision": false
             },
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cut_stone_top_right_broken",
+              "spriteId":"cut_sand_stone_top_right_broken",
               "hasCollision": false
             },
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cut_stone_top_left_broken",
+              "spriteId":"cut_sand_stone_top_left_broken",
               "hasCollision": false
             },
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cut_stone_cracked",
+              "spriteId":"cut_sand_stone_cracked",
               "hasCollision": false
             },
             {
               "spriteGroup": "floor_tiles",
-              "spriteId":"cut_stone_cracked_2",
+              "spriteId":"cut_sand_stone_cracked_2",
               "hasCollision": false
             }
           ]
@@ -58,77 +58,77 @@
           "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
           "usedSprites": [
             {
-              "spriteGroup": "cobble_stone_dusty",
+              "spriteGroup": "cobble_sand_stone_dusty",
               "spriteId":"dusty_full",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"puddle_full",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"wet_full",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"puddle_left",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"wet_left",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"puddle_bottom_left",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"wet_bottom_left",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"puddle_bottom",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"wet_bottom",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"cobble_top_right",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"dry_top_right",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"puddle_bottom_right",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"wet_bottom_right",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"puddle_right",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"wet_right",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
-              "spriteId":"cobble_top_left",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"dry_top_left",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_puddle",
+              "spriteGroup": "cobble_sand_stone_wet",
+              "spriteId":"dry_bottom_right",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "cobble_sand_stone_grass",
               "spriteId":"cobble_bottom_right",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_grass",
-              "spriteId":"cobble_bottom_right",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "cobble_stone_grass",
+              "spriteGroup": "cobble_sand_stone_grass",
               "spriteId":"grass_left",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_grass",
+              "spriteGroup": "cobble_sand_stone_grass",
               "spriteId":"grass_top_left",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_grass",
+              "spriteGroup": "cobble_sand_stone_grass",
               "spriteId":"grass_top",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cobble_stone_grass",
+              "spriteGroup": "cobble_sand_stone_grass",
               "spriteId":"grass_right",
               "hasCollision": false
             }
@@ -261,177 +261,177 @@
           "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
           "usedSprites": [
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"top_left_outer",
               "hasCollision": false
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"top",
               "hasCollision": false
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"top_right_outer",
               "hasCollision": false
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"left",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"right",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"top_right_inner",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"top_left_inner",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"top_edge_left",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"middle_edge_left",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"bottom_edge_left",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"top",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"middle",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"bottom",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"top_edge_right",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"middle_edge_right",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"bottom_edge_right",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_left_outer",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_right_outer",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_right_inner",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_left_inner",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_up_top",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_up_middle_upper",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_up_middle_lower",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_up_bottom",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_down_top",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_down_middle_upper",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_down_middle_lower",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"diagonal_down_bottom",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"top_broken",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"middle_broken",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"bottom_broken",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"top_cracked",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"middle_cracked",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_wall",
+              "spriteGroup": "sand_stone_wall",
               "spriteId":"bottom_cracked",
               "hasCollision": true
             }
@@ -442,27 +442,27 @@
         "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
         "usedSprites": [
           {
-            "spriteGroup": "cut_stone_wall_assets",
+            "spriteGroup": "sand_stone_wall_assets",
             "spriteId":"column",
             "hasCollision": true
           },
           {
-            "spriteGroup": "cut_stone_wall_assets",
+            "spriteGroup": "sand_stone_wall_assets",
             "spriteId":"indent",
             "hasCollision": true
           },
           {
-            "spriteGroup": "cut_stone_wall_assets",
+            "spriteGroup": "sand_stone_wall_assets",
             "spriteId":"trim_column",
             "hasCollision": true
           },
           {
-            "spriteGroup": "cut_stone_wall_assets",
+            "spriteGroup": "sand_stone_wall_assets",
             "spriteId":"trim_indent",
             "hasCollision": true
           },
           {
-            "spriteGroup": "cut_stone_wall_assets",
+            "spriteGroup": "sand_stone_wall_assets",
             "spriteId":"column_bottom",
             "hasCollision": false
           }
@@ -508,42 +508,42 @@
           "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
           "usedSprites": [
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"top_right_diagonal_long",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"top_left_diagonal_long",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_left_diagonal_short",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_right_diagonal_short",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_left_bevel_outer",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_right_bevel_outer",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_left_bevel_inner",
               "hasCollision": true
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId":"bottom_right_bevel_inner",
               "hasCollision": true
             }
@@ -554,42 +554,42 @@
           "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
           "usedSprites": [
             {
-              "spriteGroup": "cut_stone_wall_assets",
+              "spriteGroup": "sand_stone_wall_assets",
               "spriteId": "lintel_left",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cut_stone_wall_assets",
+              "spriteGroup": "sand_stone_wall_assets",
               "spriteId": "lintel_center",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cut_stone_wall_assets",
+              "spriteGroup": "sand_stone_wall_assets",
               "spriteId": "lintel_right",
               "hasCollision": false
             },
             {
-              "spriteGroup": "cut_stone_wall_assets",
+              "spriteGroup": "sand_stone_wall_assets",
               "spriteId": "lintel_trim",
               "hasCollision": false
             },
             {
-              "spriteGroup": "wood_colum_beam_framing",
+              "spriteGroup": "wood_colum_beam_framing_dark",
               "spriteId": "beam_horizontal",
               "hasCollision": false
             },
             {
-              "spriteGroup": "wood_colum_beam_framing",
+              "spriteGroup": "wood_colum_beam_framing_dark",
               "spriteId": "beam_horizontal_damaged",
               "hasCollision": false
             },
             {
-              "spriteGroup": "wood_colum_beam_framing",
+              "spriteGroup": "wood_colum_beam_framing_dark",
               "spriteId": "beam_horizontal_end_right",
               "hasCollision": false
             },
             {
-              "spriteGroup": "wood_colum_beam_framing",
+              "spriteGroup": "wood_colum_beam_framing_dark",
               "spriteId": "beam_horizontal_end_left",
               "hasCollision": false
             }
@@ -601,17 +601,17 @@
           "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
           "usedSprites": [
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId": "top_left_outer",
               "hasCollision": false
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId": "top",
               "hasCollision": false
             },
             {
-              "spriteGroup": "stone_trim",
+              "spriteGroup": "sand_stone_trim",
               "spriteId": "top_right_outer",
               "hasCollision": false
             }
@@ -657,7 +657,7 @@
       "y": 6,
       "data": {
         "topicArea": "JOINS_SUBQUERIES",
-        "spriteGroup": "crystal_red"
+        "spriteGroup": "crystal_blue"
       }
     },
     {
@@ -666,7 +666,7 @@
       "y": 24,
       "data": {
         "topicArea": "DDL_DML",
-        "spriteGroup": "crystal_red"
+        "spriteGroup": "crystal_blue"
       }
     },
     {
@@ -675,7 +675,7 @@
       "y": 24,
       "data": {
         "topicArea": "ER_MODELLIERUNG",
-        "spriteGroup": "crystal_red"
+        "spriteGroup": "crystal_blue"
       }
     },
     {
@@ -684,7 +684,7 @@
       "y": 23,
       "data": {
         "topicArea": "NORMALISIERUNG",
-        "spriteGroup": "crystal_red"
+        "spriteGroup": "crystal_blue"
       }
     },
     {
@@ -693,7 +693,7 @@
       "y": 5,
       "data": {
         "topicArea": "SELECT_ABFRAGEN",
-        "spriteGroup": "crystal_red"
+        "spriteGroup": "crystal_blue"
       }
     },
     {
@@ -702,7 +702,7 @@
       "y": 5,
       "data": {
         "topicArea": "SQL_GRUNDLAGEN",
-        "spriteGroup": "crystal_red"
+        "spriteGroup": "crystal_blue"
       }
     },
     {
