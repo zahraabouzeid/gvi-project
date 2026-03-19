@@ -718,7 +718,7 @@
       "x": 0,
       "y": 24,
       "data": {
-        "target_map_spawn_location_x": "8",
+        "target_map_spawn_location_x": "9",
         "target_map_spawn_location_y": "6",
         "direction": "left",
         "map_id": "0"
