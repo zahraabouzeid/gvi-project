@@ -52,21 +52,33 @@ public class HUD {
         gc.setFill(TEXT_WHITE);
         gc.fillText("x" + gp.player.playerKeys, hudX + keySize + 4, keyY + 20);
 
+        // Score in top center with pixel-art rounded box
         String scoreStr = "Score: " + gp.player.score;
-        double scoreX = 14;
-        double scoreY = gp.generalSettings.screenHeight - 14;
-        gc.setFont(FONT_XS);
+        gc.setFont(FONT_LG);
+        double scoreTextWidth = getTextWidth(scoreStr, FONT_LG);
+        double bgPadding = 16;
+        double bgWidth = scoreTextWidth + bgPadding * 2;
+        double bgHeight = 36;
+        double boxX = gp.generalSettings.screenWidth / 2.0 - bgWidth / 2.0;
+        double boxY = 18;
+        
+        // Draw pixel-art box with rounded corners
+        drawPixelBox(gc, boxX, boxY, bgWidth, bgHeight);
+        
+        // Draw score text (centered in box)
+        double scoreX = gp.generalSettings.screenWidth / 2.0 - scoreTextWidth / 2.0;
+        double scoreY = boxY + bgHeight / 2.0 + 6;
         gc.setFill(TEXT_WHITE);
         gc.fillText(scoreStr, scoreX, scoreY);
 
         if (floatingCounter > 0 && floatingText != null) {
             double alpha = floatingCounter / (double) FLOATING_DURATION;
-            double floatOffset = (FLOATING_DURATION - floatingCounter) * 0.5;
-            gc.setFont(FONT_XS);
+            double floatOffset = (FLOATING_DURATION - floatingCounter) * 0.8;
+            gc.setFont(FONT_MD);
             gc.setFill(floatingPositive
                     ? Color.rgb(80, 240, 80, alpha)
                     : Color.rgb(240, 80, 80, alpha));
-            gc.fillText(floatingText, scoreX + getTextWidth(scoreStr, FONT_XS) + 4, scoreY - floatOffset);
+            gc.fillText(floatingText, boxX + bgWidth + 10, scoreY - floatOffset);
             floatingCounter--;
         }
 
