@@ -984,6 +984,252 @@
           "spriteHeight": 1
         }
       }
+    },
+    "cobble_stone_mossy_puddle": {
+      "sprites": {
+        "puddle_bottom_right": {
+          "spriteX": 10,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_bottom": {
+          "spriteX": 11,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_bottom_left": {
+          "spriteX": 12,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 13,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 14,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_right": {
+          "spriteX": 10,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_full": {
+          "spriteX": 11,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_left": {
+          "spriteX": 12,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 13,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 14,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top_right": {
+          "spriteX": 10,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top": {
+          "spriteX": 11,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "puddle_top_left": {
+          "spriteX": 12,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_stone_mossy_grass": {
+      "sprites": {
+        "grass_bottom_right": {
+          "spriteX": 15,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_bottom": {
+          "spriteX": 16,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_bottom_left": {
+          "spriteX": 17,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 18,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 19,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_right": {
+          "spriteX": 15,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_full": {
+          "spriteX": 16,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_left": {
+          "spriteX": 17,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 18,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 19,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top_right": {
+          "spriteX": 15,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top": {
+          "spriteX": 16,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "grass_top_left": {
+          "spriteX": 17,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cobble_stone_mossy_dusty": {
+      "sprites": {
+        "dusty_bottom_right": {
+          "spriteX": 10,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom": {
+          "spriteX": 11,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_bottom_left": {
+          "spriteX": 12,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_right": {
+          "spriteX": 13,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_bottom_left": {
+          "spriteX": 14,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_right": {
+          "spriteX": 10,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_full": {
+          "spriteX": 11,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_left": {
+          "spriteX": 12,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_right": {
+          "spriteX": 13,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "cobble_top_left": {
+          "spriteX": 14,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_right": {
+          "spriteX": 10,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top": {
+          "spriteX": 11,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "dusty_top_left": {
+          "spriteX": 12,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
     }
   }
 }

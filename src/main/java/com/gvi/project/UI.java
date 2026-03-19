@@ -49,7 +49,7 @@ public class UI {
         pauseScreen = new PauseScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         saveSlotScreen = new SaveSlotScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         loadingScreen = new LoadingScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        hud = new HUD(gp, new OBJ_Key().sprite.image);
+        hud = new HUD(gp, new OBJ_Key("key_iron").sprite.image);
         quizDialog = new QuizDialog(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         minimap = new Minimap(gp);
     }
@@ -139,7 +139,7 @@ public class UI {
         refreshSlotInfos();
     }
 
-    private void refreshSlotInfos() {
+    public void refreshSlotInfos() {
         cachedSlotInfos = new SaveManager.SlotInfo[] {
             gp.saveManager.getSlotInfo(1),
             gp.saveManager.getSlotInfo(2),
@@ -150,6 +150,8 @@ public class UI {
     public void navigateSlotUp()   { saveSlotScreen.navigateUp(); }
     public void navigateSlotDown() { saveSlotScreen.navigateDown(); }
     public int  getSelectedSlot()  { return saveSlotScreen.getSelectedSlot(); }
+    public boolean isConfirmDelete() { return saveSlotScreen.isConfirmDelete(); }
+    public void setConfirmDelete(boolean confirm) { saveSlotScreen.setConfirmDelete(confirm); }
 
     public void drawSaveSlotScreen(GraphicsContext gc) {
         saveSlotScreen.draw(gc, cachedSlotInfos);

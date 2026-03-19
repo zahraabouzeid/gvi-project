@@ -10,11 +10,11 @@ public class Sound {
 	URL[] soundURL = new URL[30];
 
 	public Sound() {
-		soundURL[0] = getClass().getResource("/sounds/BlueBoyAdventure.wav");
+		soundURL[0] = getClass().getResource("/sounds/Dungeon.wav");
 		soundURL[1] = getClass().getResource("/sounds/coin.wav");
 		soundURL[2] = getClass().getResource("/sounds/powerup.wav");
 		soundURL[3] = getClass().getResource("/sounds/unlock.wav");
-		soundURL[4] = getClass().getResource("/sounds/fanfare.wav");
+		soundURL[4] = getClass().getResource("/sounds/dooropen.wav");
 		soundURL[5] = getClass().getResource("/sounds/receivedamage.wav");
 		soundURL[6] = getClass().getResource("/sounds/gameover.wav");
 	}
@@ -46,6 +46,10 @@ public class Sound {
 
 	public void loop() {
 		clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
+
+	public void loop(int i) {
+		clip.loop(i);
 	}
 
 	public void stop() {

@@ -3,10 +3,11 @@ package com.gvi.project.models.entities;
 import com.gvi.project.GamePanel;
 import com.gvi.project.KeyHandler;
 import com.gvi.project.models.core.Entity;
+import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
-
-import java.awt.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class Player extends Entity {
 	private GamePanel gp;
@@ -34,10 +35,10 @@ public class Player extends Entity {
 		screenX = gp.generalSettings.screenWidth / 2 - (gp.generalSettings.tileSize / 2);
 		screenY = gp.generalSettings.screenHeight / 2 - (gp.generalSettings.tileSize / 2);
 
-		this.collisionBox = new Rectangle(8, 16, 32, 32);
+		this.collisionBox = new Rectangle(0,0, 48, 48);
 
-		collisionBoxDefaultX = collisionBox.x;
-		collisionBoxDefaultY = collisionBox.y;
+		collisionBoxDefaultX = (int) collisionBox.getX();
+		collisionBoxDefaultY = (int) collisionBox.getY();
 
 		setDefaultValues();
 		getPlayerSprites();
@@ -67,6 +68,15 @@ public class Player extends Entity {
 		healthHalf = 10;
 		isDead = false;
 		score = 0;
+	}
+
+	public void setPlayerPosition(int gridPosX, int gridPosY){
+		this.gridX = gridPosX;
+		this.gridY = gridPosY;
+		this.targetGridX = this.gridX;
+		this.targetGridY = this.gridY;
+		this.worldX = this.gridX * gp.generalSettings.tileSize;
+		this.worldY = this.gridY * gp.generalSettings.tileSize;
 	}
 
 	public void takeHalfHeartDamage() {
@@ -143,6 +153,7 @@ public class Player extends Entity {
 				gridX = targetGridX;
 				gridY = targetGridY;
 				isMoving = false;
+				checkStepObjects();
 			}
 		} else {
 			// Eingabe verarbeiten nur wenn der Spieler stillsteht
@@ -171,8 +182,7 @@ public class Player extends Entity {
 
 				// Kollision prüfen: Tile und Objekte am Ziel-Grid-Feld
 				// Nur wenn frei Bewegung starten
-				if (!gp.cChecker.isTileBlocked(nextGridX, nextGridY) &&
-						!gp.cChecker.isObjectBlocking(nextGridX, nextGridY)) {
+				if (!gp.cChecker.isTileBlocked(nextGridX, nextGridY) && !gp.cChecker.isObjectBlocking(nextGridX, nextGridY)) {
 					targetGridX = nextGridX;
 					targetGridY = nextGridY;
 					isMoving = true;
@@ -192,11 +202,38 @@ public class Player extends Entity {
 		}
 	}
 
+	private void checkStepObjects() {
+		int targetX = worldX + (int) collisionBox.getX();
+		int targetY = worldY + (int) collisionBox.getY();
+		int targetW = (int) collisionBox.getWidth();
+		int targetH = (int) collisionBox.getHeight();
+
+		for (int i = 0; i < gp.obj.size(); i++) {
+			SuperObject obj = gp.obj.get(i);
+
+			if (obj != null && !obj.collision) {
+				int objX = obj.worldX + (int) obj.collisionBox.getX();
+				int objY = obj.worldY + (int) obj.collisionBox.getY();
+				int objW = (int) obj.collisionBox.getWidth();
+				int objH = (int) obj.collisionBox.getHeight();
+
+				if (targetX < objX + objW &&
+						targetX + targetW > objX &&
+						targetY < objY + objH &&
+						targetY + targetH > objY
+				) {
+					obj.onStep(this, gp, i);
+					return;
+				}
+			}
+		}
+	}
+
 	private int findNearbyObject() {
 		int interactRange = gp.generalSettings.tileSize;
 
-		int playerCenterX = worldX + collisionBox.x + collisionBox.width / 2;
-		int playerCenterY = worldY + collisionBox.y + collisionBox.height / 2;
+		int playerCenterX = (int)(worldX + collisionBox.getX() + collisionBox.getWidth() / 2);
+		int playerCenterY = (int)(worldY + collisionBox.getY() + collisionBox.getHeight() / 2);
 
 		for (int i = 0; i < gp.obj.size(); i++) {
 			if (gp.obj.get(i) != null) {
@@ -206,7 +243,7 @@ public class Player extends Entity {
 				int dx = Math.abs(playerCenterX - objCenterX);
 				int dy = Math.abs(playerCenterY - objCenterY);
 
-				if (dx <= interactRange && dy <= interactRange) {
+				if (dx <= interactRange && dy <= interactRange && gp.obj.get(i).canInteract) {
 					return i;
 				}
 			}
@@ -257,5 +294,14 @@ public class Player extends Entity {
 		assert sprite != null;
 
 		gp.gc.drawImage(sprite.image, this.screenX, this.screenY - (sprite.imageHeight - 1) * tileSize , tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+	}
+
+
+	@Override
+	public void renderCollisionBox(GamePanel gp) {
+		if(gp.generalSettings.isDevMode){
+			gp.gc.setFill(new Color(0,0,1,0.3));
+			gp.gc.fillRect(screenX + collisionBox.getX(), this.screenY + collisionBox.getY(), this.collisionBox.getWidth(), this.collisionBox.getHeight());
+		}
 	}
 }

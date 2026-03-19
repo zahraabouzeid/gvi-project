@@ -10,6 +10,7 @@ import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.QuestionProvider;
 import com.gvi.project.models.questions.QuestionService;
 import com.gvi.project.manager.SpriteManager;
+import com.gvi.project.systems.AnimationSystem;
 import com.gvi.project.systems.RenderSystem;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -21,9 +22,7 @@ public class GamePanel {
 
 	public GeneralSettings generalSettings = new GeneralSettings();
 
-	int FPS = 60;
 
-	double drawInterval = 1000000000.0 / FPS;
 
 	public GameState gameState = GameState.TITLE;
 	public SpriteManager spriteManager = new SpriteManager();
@@ -37,7 +36,6 @@ public class GamePanel {
 	public final Canvas canvas = new Canvas(generalSettings.screenWidth, generalSettings.screenHeight);
 	public final GraphicsContext gc = canvas.getGraphicsContext2D();
 	public final GameLoop gameLoop = new GameLoop(this);
-	public final AssetSetter assetSetter = new AssetSetter(this);
 	public final Player player = new Player(this, keyHandler);
 	public final UI ui = new UI(this);
 	public final CollisionChecker cChecker = new CollisionChecker(this);
@@ -45,6 +43,7 @@ public class GamePanel {
 	public int interactingObjectIndex = -1;
 	public final QuestionService questionProvider = new QuestionProvider();
 	public final RenderSystem renderSystem = new RenderSystem(this);
+	public final AnimationSystem animationSystem = new AnimationSystem(this);
 
 	public GamePanel(){
 		keyHandler.setupKeyListeners(canvas);
@@ -55,8 +54,7 @@ public class GamePanel {
 	}
 
 	public void setupGame() {
-		loadMap(GameMaps.MAP_01);
-		assetSetter.setObject();
+		loadMap(GameMaps.MAP_00);
 		playMusic(0);
 		se.preload(1);
 		se.preload(2);
@@ -90,7 +88,9 @@ public class GamePanel {
 	}
 
 	public void loadMap(GameMaps map){
+		obj.clear();
 		GameMapLoader mapLoader = new GameMapLoader(this);
 		this.currentMap = mapLoader.loadMap(map.getConfigFileName());
+//		cChecker.printCollisionMap();
 	}
 }

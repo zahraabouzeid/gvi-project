@@ -211,42 +211,6 @@
     },
     "cut_stone_wall_assets": {
       "sprites": {
-        "mossy_door_arch_left": {
-          "spriteX": 0,
-          "spriteY": 8,
-          "spriteWidth": 1,
-          "spriteHeight": 3
-        },
-        "mossy_door_arch_right": {
-          "spriteX": 3,
-          "spriteY": 8,
-          "spriteWidth": 1,
-          "spriteHeight": 3
-        },
-        "mossy_door_arch_top": {
-          "spriteX": 1,
-          "spriteY": 8,
-          "spriteWidth": 2,
-          "spriteHeight": 1
-        },
-        "mossy_column": {
-          "spriteX": 7,
-          "spriteY": 10,
-          "spriteWidth": 1,
-          "spriteHeight": 3
-        },
-        "mossy_column_bottom": {
-          "spriteX": 7,
-          "spriteY": 13,
-          "spriteWidth": 1,
-          "spriteHeight": 1
-        },
-        "mossy_indent": {
-          "spriteX": 6,
-          "spriteY": 10,
-          "spriteWidth": 1,
-          "spriteHeight": 3
-        },
         "column": {
           "spriteX": 5,
           "spriteY": 10,
@@ -298,6 +262,140 @@
         "lintel_right": {
           "spriteX": 10,
           "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "cut_stone_mossy_wall_assets": {
+      "sprites": {
+        "door_arch_left": {
+          "spriteX": 0,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 3
+        },
+        "door_arch_right": {
+          "spriteX": 3,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 3
+        },
+        "door_arch_top": {
+          "spriteX": 1,
+          "spriteY": 8,
+          "spriteWidth": 2,
+          "spriteHeight": 1
+        },
+        "column": {
+          "spriteX": 7,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 3
+        },
+        "column_bottom": {
+          "spriteX": 7,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "indent": {
+          "spriteX": 6,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 3
+        },
+        "trim_indent": {
+          "spriteX": 4,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "trim_column": {
+          "spriteX": 5,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_trim": {
+          "spriteX": 8,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_left": {
+          "spriteX": 8,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_center": {
+          "spriteX": 9,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_right": {
+          "spriteX": 10,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "sand_stone_wall_assets": {
+      "sprites": {
+        "column": {
+          "spriteX": 3,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 3
+        },
+        "column_bottom": {
+          "spriteX": 3,
+          "spriteY": 16,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "indent": {
+          "spriteX": 2,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 3
+        },
+        "trim_indent": {
+          "spriteX": 2,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "trim_column": {
+          "spriteX": 3,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_trim": {
+          "spriteX": 4,
+          "spriteY": 13,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_left": {
+          "spriteX": 4,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_center": {
+          "spriteX": 5,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "lintel_right": {
+          "spriteX": 6,
+          "spriteY": 14,
           "spriteWidth": 1,
           "spriteHeight": 1
         }
@@ -396,6 +494,70 @@
         "beam_horizontal_end_left": {
           "spriteX": 12,
           "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "beam_vertical": {
+          "spriteX": 11,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "beam_vertical_damaged": {
+          "spriteX": 12,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "beam_vertical_end": {
+          "spriteX": 11,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "wood_colum_beam_framing_dark": {
+      "sprites": {
+        "column_base": {
+          "spriteX": 11,
+          "spriteY": 12,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "column_head_end": {
+          "spriteX": 11,
+          "spriteY": 11,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "column_head_beam": {
+          "spriteX": 11,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "beam_horizontal": {
+          "spriteX": 8,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "beam_horizontal_damaged": {
+          "spriteX": 7,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "beam_horizontal_end_right": {
+          "spriteX": 9,
+          "spriteY": 14,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "beam_horizontal_end_left": {
+          "spriteX": 8,
+          "spriteY": 13,
           "spriteWidth": 1,
           "spriteHeight": 1
         },

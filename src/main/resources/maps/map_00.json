@@ -25,22 +25,73 @@
               "spriteGroup": "floor_tiles",
               "spriteId":"tiles_stone_sandy",
               "hasCollision": false
+            },
+            {
+              "spriteGroup": "floor_tiles",
+              "spriteId":"cobble_stone_mossy",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "floor_tiles",
+              "spriteId":"cobble_sand_stone",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "floor_tiles",
+              "spriteId":"cobble_stone",
+              "hasCollision": false
+            }
+          ]
+        },
+        {
+          "fileName": "Dungeon_Autotiles",
+          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
+          "usedSprites": [
+            {
+              "spriteGroup": "cobble_stone_dusty",
+              "spriteId":"dusty_full",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "cobble_sand_stone_dusty",
+              "spriteId":"dusty_full",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "cobble_stone_mossy_dusty",
+              "spriteId":"dusty_full",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "cobble_stone_sandy_dusty",
+              "spriteId":"dusty_full",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "cobble_stone_sandy_covert",
+              "spriteId":"covert_full",
+              "hasCollision": false
+            },
+            {
+              "spriteGroup": "cobble_stone_sandy_covert",
+              "spriteId":"covert_top",
+              "hasCollision": false
             }
           ]
         }
       ],
       "spriteLayout": [
         [999,999,999,999,998,998,999,999,999,999],
-        [999,999,999,999,0  ,0  ,999,999,999,999],
-        [999,999,999,999,0  ,0  ,999,999,999,999],
-        [999,999,999,999,0  ,0  ,999,999,999,999],
-        [999,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,999],
-        [999,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,999],
-        [0  ,0  ,0  ,1  ,2  ,1  ,2  ,0  ,0  ,0  ],
-        [999,0  ,0  ,2  ,1  ,2  ,1  ,0  ,0  ,999],
-        [999,0  ,0  ,1  ,2  ,1  ,2  ,0  ,0  ,999],
-        [999,0  ,0  ,0  ,0  ,0  ,0  ,0  ,0  ,999],
-        [998,998,998,999,0  ,0  ,999,998,998,998]
+        [999,999,999,999,10 ,10 ,999,999,999,999],
+        [999,999,999,999,10 ,10 ,999,999,999,999],
+        [999,999,999,999,11 ,11 ,999,999,999,999],
+        [999,3  ,0  ,9  ,9  ,9  ,9  ,0  ,5  ,999],
+        [999,3  ,8  ,1  ,2  ,1  ,2  ,6  ,5  ,999],
+        [3  ,3  ,3  ,2  ,1  ,2  ,1  ,5  ,5  ,5  ],
+        [999,3  ,8  ,1  ,2  ,1  ,2  ,6  ,5  ,999],
+        [999,3  ,7  ,7  ,4  ,4  ,7  ,7  ,5  ,999],
+        [999,8  ,4  ,4  ,4  ,4  ,4  ,4  ,6  ,999],
+        [998,998,998,999,4  ,4  ,999,998,998,998]
       ]
     },
     {
@@ -275,44 +326,41 @@
   "objects": [
     {
       "objectId": "DOOR",
-      "x": 7,
+      "x": 4,
       "y": 3,
       "data": {}
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 0,
-      "y": 25,
+      "y": 6,
       "data": {
-        "target_map_spawn_location_x": "0",
-        "target_map_spawn_location_y": "0",
+        "target_map_spawn_location_x": "38",
+        "target_map_spawn_location_y": "5",
         "direction": "left",
-        "map_id": "3",
-        "height": "2"
+        "map_id": "3"
       }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 0,
-      "y": 25,
+      "x": 9,
+      "y": 6,
       "data": {
-        "target_map_spawn_location_x": "0",
-        "target_map_spawn_location_y": "0",
+        "target_map_spawn_location_x": "1",
+        "target_map_spawn_location_y": "24",
         "direction": "right",
-        "map_id": "1",
-        "height": "2"
+        "map_id": "1"
       }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 0,
-      "y": 25,
+      "x": 4,
+      "y": 10,
       "data": {
-        "target_map_spawn_location_x": "0",
-        "target_map_spawn_location_y": "0",
+        "target_map_spawn_location_x": "12",
+        "target_map_spawn_location_y": "1",
         "direction": "down",
-        "map_id": "2",
-        "width": "2"
+        "map_id": "2"
       }
     }
   ]

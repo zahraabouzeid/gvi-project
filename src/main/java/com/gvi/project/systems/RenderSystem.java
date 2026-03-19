@@ -34,57 +34,53 @@ public class RenderSystem {
 
 		renderLayer(gp.currentMap.getLayer("CEILING"));
 
+		for (Renderable r : dynamic) {
+			r.renderCollisionBox(gp);
+		}
+
 		gp.ui.minimap.draw(gp.gc);
 	}
 
 	private void renderLayer(GameMapLayer layer) {
 
-		int worldCol = 0;
-		int worldRow = 0;
+		for (int worldRow = 0; worldRow < gp.currentMap.height; worldRow++) {
+			for (int worldCol = 0; worldCol < gp.currentMap.width; worldCol++) {
+				String spriteKey = layer.layout[worldCol][worldRow];
+				Sprite sprite = gp.spriteManager.getStoredSprite(spriteKey);
 
-		while (worldCol < gp.currentMap.width && worldRow < gp.currentMap.height) {
-			String spriteKey = layer.layout[worldCol][worldRow];
-			Sprite sprite = gp.spriteManager.getStoredSprite(spriteKey);
+				int tileSize = gp.generalSettings.tileSize;
 
-			int tileSize = gp.generalSettings.tileSize;
+				int worldX = worldCol * tileSize;
+				int worldY = worldRow * tileSize;
 
-			int worldX = worldCol * tileSize;
-			int worldY = worldRow * tileSize;
+				int screenX = worldX - gp.player.worldX + gp.player.screenX;
+				int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-			int screenX = worldX - gp.player.worldX + gp.player.screenX;
-			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+				int spriteWidth  = tileSize * sprite.imageWidth;
+				int spriteHeight = tileSize * sprite.imageHeight;
 
-			int spriteWidth  = tileSize * sprite.imageWidth;
-			int spriteHeight = tileSize * sprite.imageHeight;
+				int screenLeft   = screenX;
+				int screenRight  = screenX + spriteWidth;
+				int screenTop    = screenY - (spriteHeight - tileSize);
+				int screenBottom = screenY + tileSize;
 
-			int screenLeft   = screenX;
-			int screenRight  = screenX + spriteWidth;
-			int screenTop    = screenY - (spriteHeight - tileSize);
-			int screenBottom = screenY + tileSize;
+				if (
+					screenRight > 0 &&
+					screenLeft < gp.generalSettings.screenWidth &&
+					screenBottom > 0 &&
+					screenTop < gp.generalSettings.screenHeight)
+				{
+					int drawX = screenX;
+					int drawY = screenY - (sprite.imageHeight - 1) * tileSize;
 
-			if (
-				screenRight > 0 &&
-				screenLeft < gp.generalSettings.screenWidth &&
-				screenBottom > 0 &&
-				screenTop < gp.generalSettings.screenHeight)
-			{
-				int drawX = screenX;
-				int drawY = screenY - (sprite.imageHeight - 1) * tileSize;
-
-				gp.gc.drawImage(
-						sprite.image,
-						drawX,
-						drawY,
-						spriteWidth,
-						spriteHeight
-				);
-			}
-
-			worldCol++;
-
-			if (worldCol == gp.currentMap.width) {
-				worldCol = 0;
-				worldRow++;
+					gp.gc.drawImage(
+							sprite.image,
+							drawX,
+							drawY,
+							spriteWidth,
+							spriteHeight
+					);
+				}
 			}
 		}
 	}

@@ -15,6 +15,7 @@ public class SaveSlotScreen {
     private final int screenHeight;
     private int    selectedSlot = 0;
     private String mode         = "save";
+    private boolean confirmDelete = false;
 
     public SaveSlotScreen(int screenWidth, int screenHeight) {
         this.screenWidth  = screenWidth;
@@ -24,6 +25,15 @@ public class SaveSlotScreen {
     public void open(String mode) {
         this.mode         = mode;
         this.selectedSlot = 0;
+        this.confirmDelete = false;
+    }
+
+    public boolean isConfirmDelete() {
+        return confirmDelete;
+    }
+
+    public void setConfirmDelete(boolean confirmDelete) {
+        this.confirmDelete = confirmDelete;
     }
 
     public void navigateUp() {
@@ -42,8 +52,8 @@ public class SaveSlotScreen {
         gc.setFill(OVERLAY_DARK);
         gc.fillRect(0, 0, screenWidth, screenHeight);
 
-        double boxW = 460;
-        double boxH = 330;
+        double boxW = 500;
+        double boxH = 370;
         double boxX = screenWidth  / 2.0 - boxW / 2.0;
         double boxY = screenHeight / 2.0 - boxH / 2.0;
 
@@ -67,6 +77,21 @@ public class SaveSlotScreen {
             double sy       = slotStartY + i * slotSpacing;
             boolean sel     = i == selectedSlot;
             SaveManager.SlotInfo info = slots != null && i < slots.length ? slots[i] : null;
+
+            if (sel && confirmDelete) {
+                gc.setFill(Color.rgb(82, 35, 35));
+                gc.fillRect(slotBoxX, sy, slotBoxW, slotH);
+                gc.setStroke(Color.rgb(255, 100, 100));
+                gc.setLineWidth(2);
+                gc.strokeRect(slotBoxX + 1, sy + 1, slotBoxW - 2, slotH - 2);
+
+                gc.setFont(FONT_SM);
+                gc.setFill(TEXT_WHITE);
+                String msg = "Delete Slot " + (i + 1) + "? ENTER to confirm, ESC to cancel";
+                double mw = getTextWidth(msg, FONT_SM);
+                gc.fillText(msg, screenWidth / 2.0 - mw / 2.0, sy + 36);
+                continue;
+            }
 
             gc.setFill(sel ? Color.rgb(55, 82, 60) : Color.rgb(28, 44, 32));
             gc.fillRect(slotBoxX, sy, slotBoxW, slotH);
@@ -96,8 +121,15 @@ public class SaveSlotScreen {
 
         gc.setFont(FONT_XS);
         gc.setFill(TEXT_GRAY);
-        String hint = "WASD / Arrows - Navigate    ENTER - Confirm    ESC - Cancel";
+        String hint = confirmDelete ? "ENTER - Confirm Delete    ESC - Cancel" 
+                                    : "WASD / Arrows - Navigate    ENTER - Load / Save";
         double hw = getTextWidth(hint, FONT_XS);
-        gc.fillText(hint, screenWidth / 2.0 - hw / 2.0, boxY + boxH - 18);
+        gc.fillText(hint, screenWidth / 2.0 - hw / 2.0, boxY + boxH - 45);
+        if (!confirmDelete) {
+            String hint2 = "DEL - Delete    ESC - Cancel";
+            double hintw2 = getTextWidth(hint2, FONT_XS);
+            gc.fillText(hint2, screenWidth / 2.0 - hintw2 / 2.0, boxY + boxH - 25);
+        }
+
     }
 }

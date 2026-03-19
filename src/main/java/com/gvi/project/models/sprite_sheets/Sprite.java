@@ -8,9 +8,6 @@ public class Sprite {
 	public int imageWidth;
 	public boolean hasCollision = false;
 
-	public int originX;
-	public int originY;
-
 	public Sprite(Image image, int imageHeight, int imageWidth, boolean hasCollision) {
 		this.image = image;
 		this.imageHeight = imageHeight;

@@ -1,8 +1,8 @@
 package com.gvi.project.models.core;
 
 import com.gvi.project.models.sprite_sheets.Sprite;
+import javafx.scene.shape.Rectangle;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 

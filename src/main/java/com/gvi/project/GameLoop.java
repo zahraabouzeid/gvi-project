@@ -1,6 +1,8 @@
 package com.gvi.project;
 
+import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.Answer;
+import com.gvi.project.systems.AnimationSystem;
 import com.gvi.project.ui.LoadingScreen;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
@@ -29,27 +31,27 @@ public class GameLoop extends AnimationTimer {
 	@Override
 	public void handle(long now) {
 
-		long currentTime = System.nanoTime();
+		double deltaSeconds = (now - lastTime) / 1_000_000_000.0;
 
-		delta += (currentTime - lastTime) / gp.drawInterval;
-		timer += (currentTime - lastTime);
-		lastTime = currentTime;
+		delta += (now - lastTime) / gp.generalSettings.drawInterval;
+		timer += (now - lastTime);
+		lastTime = now;
 
-		if (delta >= 1) {
-			update();
-			renderScreen();
+		while (delta >= 1) {
+			update(deltaSeconds);
 			delta--;
 			drawCount++;
 		}
 
+		renderScreen();
+
 		if (timer >= 1_000_000_000) {
-			System.out.println("FPS: " + drawCount);
 			drawCount = 0;
 			timer = 0;
 		}
 	}
 
-	private void update() {
+	private void update(double deltaSeconds) {
 		if (gp.gameState == GameState.TITLE) {
 			if (gp.keyHandler.enterPressed) {
 				gp.keyHandler.enterPressed = false;
@@ -77,19 +79,21 @@ public class GameLoop extends AnimationTimer {
 				gp.keyHandler.enterPressed = false;
 				gp.player.setDefaultValues();
 				gp.ui.resetGame();
-				gp.assetSetter.setObject();
 				gp.interactingObjectIndex = -1;
 				gp.gameState = GameState.PLAY;
 			}
 			return;
 		}
 		if (gp.gameState == GameState.PLAY) {
+			gp.generalSettings.isDevMode = gp.keyHandler.f2Pressed;
+
 			if (gp.keyHandler.escPressed) {
 				gp.keyHandler.escPressed = false;
 				gp.ui.resetPauseScreen();
 				gp.gameState = GameState.PAUSE;
 				return;
 			}
+			gp.animationSystem.tick(deltaSeconds);
 			gp.player.update();
 		} else if (gp.gameState == GameState.QUIZ) {
 			if (gp.ui.isAnswerFeedback()) {
@@ -194,6 +198,28 @@ public class GameLoop extends AnimationTimer {
 
 	private void handleSaveSlotInput() {
 		if (slotNavCooldown > 0) slotNavCooldown--;
+
+		if (gp.ui.isConfirmDelete()) {
+			if (gp.keyHandler.escPressed) {
+				gp.keyHandler.escPressed = false;
+				gp.ui.setConfirmDelete(false);
+			} else if (gp.keyHandler.enterPressed) {
+				gp.keyHandler.enterPressed = false;
+				gp.saveManager.deleteSave(gp.ui.getSelectedSlot());
+				gp.ui.setConfirmDelete(false);
+				gp.ui.refreshSlotInfos();
+			}
+			return;
+		}
+
+		if (gp.keyHandler.delPressed) {
+			gp.keyHandler.delPressed = false;
+			if (gp.saveManager.hasSave(gp.ui.getSelectedSlot())) {
+				gp.ui.setConfirmDelete(true);
+			}
+			return;
+		}
+
 		if (gp.keyHandler.escPressed) {
 			gp.keyHandler.escPressed = false;
 			gp.ui.resetPauseScreen();
@@ -220,6 +246,28 @@ public class GameLoop extends AnimationTimer {
 
 	private void handleLoadSlotInput() {
 		if (slotNavCooldown > 0) slotNavCooldown--;
+
+		if (gp.ui.isConfirmDelete()) {
+			if (gp.keyHandler.escPressed) {
+				gp.keyHandler.escPressed = false;
+				gp.ui.setConfirmDelete(false);
+			} else if (gp.keyHandler.enterPressed) {
+				gp.keyHandler.enterPressed = false;
+				gp.saveManager.deleteSave(gp.ui.getSelectedSlot());
+				gp.ui.setConfirmDelete(false);
+				gp.ui.refreshSlotInfos();
+			}
+			return;
+		}
+
+		if (gp.keyHandler.delPressed) {
+			gp.keyHandler.delPressed = false;
+			if (gp.saveManager.hasSave(gp.ui.getSelectedSlot())) {
+				gp.ui.setConfirmDelete(true);
+			}
+			return;
+		}
+
 		if (gp.keyHandler.escPressed) {
 			gp.keyHandler.escPressed = false;
 			if (loadSlotOrigin == GameState.CHARACTER_NAME) {
