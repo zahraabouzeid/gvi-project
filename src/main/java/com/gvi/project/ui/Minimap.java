@@ -11,7 +11,7 @@ import static com.gvi.project.ui.UITheme.*;
 public class Minimap {
 
     private final GamePanel gp;
-    private static final int MINIMAP_SIZE = 120;
+    private static final int MINIMAP_SIZE = 180;
 
     public Minimap(GamePanel gp) {
         this.gp = gp;

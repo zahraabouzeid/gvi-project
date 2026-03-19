@@ -39,18 +39,18 @@ public class HUD {
         double hudY = gp.generalSettings.tileSize / 2.0;
 
         // Display player name
-        gc.setFont(FONT_SM);
+        gc.setFont(FONT_MD);
         gc.setFill(TEXT_GOLD);
-        gc.fillText("Name: " + gp.player.playerName, hudX, hudY - 10);
+        gc.fillText(gp.player.playerName, hudX, 20);
 
         drawHearts(gc);
 
-        int keySize = 28;
-        double keyY = hudY + 30;
+        int keySize = 36;
+        double keyY = hudY + 55;
         gc.drawImage(keyImage, hudX, keyY, keySize, keySize);
-        gc.setFont(FONT_SM);
+        gc.setFont(FONT_MD);
         gc.setFill(TEXT_WHITE);
-        gc.fillText("x" + gp.player.playerKeys, hudX + keySize + 4, keyY + 20);
+        gc.fillText("x" + gp.player.playerKeys, hudX + keySize + 6, keyY + 26);
 
         // Score in top center with pixel-art rounded box
         String scoreStr = "Score: " + gp.player.score;
@@ -82,9 +82,9 @@ public class HUD {
             floatingCounter--;
         }
 
-        gc.setFont(FONT_XS);
+        gc.setFont(FONT_LG);
         gc.setFill(TEXT_WHITE);
-        double timeW = getTextWidth(formattedTime, FONT_XS);
+        double timeW = getTextWidth(formattedTime, FONT_LG);
         gc.fillText(formattedTime, gp.generalSettings.screenWidth - timeW - 14, gp.generalSettings.screenHeight - 14);
 
         if (gp.player.speed > 4) {
@@ -114,8 +114,8 @@ public class HUD {
     private void drawHearts(GraphicsContext gc) {
         int hearts = (int) Math.ceil(gp.player.maxHealthHalf / 2.0);
         int startX = (int) (gp.generalSettings.tileSize / 2.0);
-        int startY = (int) (gp.generalSettings.tileSize / 2.0);
-        int spacing = 30;
+        int startY = 28;
+        int spacing = 38;
 
         for (int i = 0; i < hearts; i++) {
             int leftIndex = i * 2;
@@ -126,7 +126,7 @@ public class HUD {
     }
 
     private void drawPixelHeart(GraphicsContext gc, int x, int y, boolean leftFull, boolean rightFull) {
-        int scale = 3;
+        int scale = 4;
         int[][] mask = {
             {0, 1, 1, 0, 0, 1, 1, 0},
             {1, 1, 1, 1, 1, 1, 1, 1},

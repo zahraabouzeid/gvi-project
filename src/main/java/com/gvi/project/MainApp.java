@@ -1,16 +1,48 @@
 package com.gvi.project;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
+@SpringBootApplication
 public class MainApp extends Application {
 
+	private static final Logger log = LoggerFactory.getLogger(MainApp.class);
+	private static ConfigurableApplicationContext springContext;
+
 	public static void main(String[] args) {
-		launch();
+		launch(args);
+	}
+
+	@Override
+	public void init() {
+		try {
+			springContext = new SpringApplicationBuilder(MainApp.class)
+					.headless(false)
+					.run();
+			log.info("Spring application started.");
+		} catch (Exception exception) {
+			log.warn("Failed to start Spring. Retrying with datasource/JPA auto-configuration disabled.", exception);
+			springContext = new SpringApplicationBuilder(MainApp.class)
+					.headless(false)
+					.properties(
+							"spring.autoconfigure.exclude=" +
+									"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration," +
+									"org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration," +
+									"org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration"
+					)
+					.run();
+			log.warn("Spring application started in fallback mode without datasource/JPA auto-configuration.");
+		}
 	}
 
 	@Override
@@ -81,9 +113,22 @@ public class MainApp extends Application {
 		mainStage.show();
 	}
 
+	@Override
+	public void stop() {
+		springContext.close();
+		Platform.exit();
+	}
+
 	private void centerStage(Stage stage) {
 		Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 		stage.setX((bounds.getWidth() - stage.getWidth()) / 2);
 		stage.setY((bounds.getHeight() - stage.getHeight()) / 2);
+	}
+
+	/**
+	 * Zugriff auf Spring Beans von überall im Code
+	 */
+	public static <T> T getBean(Class<T> beanClass) {
+		return springContext.getBean(beanClass);
 	}
 }
