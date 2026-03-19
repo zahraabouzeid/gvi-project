@@ -1,7 +1,9 @@
 package com.gvi.project.repository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -13,39 +15,46 @@ import java.util.stream.Collectors;
 @Service
 public class QuestionDataService {
 
+    private static final Logger log = LoggerFactory.getLogger(QuestionDataService.class);
+
     private final QuestionRepository questionRepository;
 
-    @Autowired
-    public QuestionDataService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+    public QuestionDataService(ObjectProvider<QuestionRepository> questionRepositoryProvider) {
+        this.questionRepository = questionRepositoryProvider.getIfAvailable();
     }
 
     /**
      * Get all questions
      */
     public List<QuestionEntity> getAllQuestions() {
-        return questionRepository.findAll();
+        return requireRepository().findAll();
+    }
+
+    public List<QuestionEntity> getAllQuestionsWithDetails() {
+        List<QuestionEntity> questions = requireRepository().findAllWithDetailsOrderByIdAsc();
+        log.info("QuestionDataService loaded {} question entities with details from repository.", questions.size());
+        return questions;
     }
 
     /**
      * Get all Multiple Choice (MC) questions
      */
     public List<QuestionEntity> getAllMultipleChoiceQuestions() {
-        return questionRepository.findAllMultipleChoice();
+        return requireRepository().findAllMultipleChoice();
     }
 
     /**
      * Get all True/False (TF) questions
      */
     public List<QuestionEntity> getAllTrueFalseQuestions() {
-        return questionRepository.findAllTrueFalse();
+        return requireRepository().findAllTrueFalse();
     }
 
     /**
      * Get all Gap/Fill-in-the-blank (GAP) questions
      */
     public List<QuestionEntity> getAllGapQuestions() {
-        return questionRepository.findAllGapQuestions();
+        return requireRepository().findAllGapQuestions();
     }
 
     /**
@@ -53,57 +62,68 @@ public class QuestionDataService {
      * @param questionType the type of question (MC, TF, or GAP)
      */
     public List<QuestionEntity> getQuestionsByType(QuestionType questionType) {
-        return questionRepository.findByQuestionType(questionType);
+        return requireRepository().findByQuestionType(questionType);
     }
 
     /**
      * Get questions by question set id
      */
-    public List<QuestionEntity> getQuestionsByQuestionSet(Long questionSetId) {
-        return questionRepository.findByQuestionSetId(questionSetId);
+    public List<QuestionEntity> getQuestionsByQuestionSet(Integer questionSetId) {
+        return requireRepository().findByQuestionSetId(questionSetId);
     }
 
     /**
      * Get questions by question set id and type
      */
-    public List<QuestionEntity> getQuestionsByQuestionSetAndType(Long questionSetId, QuestionType questionType) {
-        return questionRepository.findByQuestionSetIdAndQuestionType(questionSetId, questionType);
+    public List<QuestionEntity> getQuestionsByQuestionSetAndType(Integer questionSetId, QuestionType questionType) {
+        return requireRepository().findByQuestionSetIdAndQuestionType(questionSetId, questionType);
     }
 
     /**
      * Get a single question
      */
-    public Optional<QuestionEntity> getQuestion(Long id) {
-        return questionRepository.findById(id);
+    public Optional<QuestionEntity> getQuestion(Integer id) {
+        return requireRepository().findById(id);
     }
 
     /**
      * Find questions by keyword in start text
      */
     public List<QuestionEntity> searchQuestions(String keyword) {
-        return questionRepository.findByStartTextContainingIgnoreCase(keyword);
+        return requireRepository().findByStartTextContainingIgnoreCase(keyword);
     }
 
     /**
      * Save a question
      */
     public QuestionEntity save(QuestionEntity entity) {
-        return questionRepository.save(entity);
+        return requireRepository().save(entity);
     }
 
     /**
      * Delete a question
      */
-    public void delete(Long id) {
-        questionRepository.deleteById(id);
+    public void delete(Integer id) {
+        requireRepository().deleteById(id);
+    }
+
+    public boolean isRepositoryAvailable() {
+        return questionRepository != null;
+    }
+
+    private QuestionRepository requireRepository() {
+        if (questionRepository == null) {
+            throw new IllegalStateException("QuestionRepository is not available in the current Spring context.");
+        }
+        return questionRepository;
     }
 
     /**
      * DTO class for cleaner data transfer
      */
     public static class QuestionDTO {
-        private final Long id;
-        private final Long questionSetId;
+        private final Integer id;
+        private final Integer questionSetId;
         private final QuestionType questionType;
         private final String startText;
         private final String imageUrl;
@@ -122,11 +142,11 @@ public class QuestionDataService {
             this.points = entity.getPoints();
         }
 
-        public Long getId() {
+        public Integer getId() {
             return id;
         }
 
-        public Long getQuestionSetId() {
+        public Integer getQuestionSetId() {
             return questionSetId;
         }
 

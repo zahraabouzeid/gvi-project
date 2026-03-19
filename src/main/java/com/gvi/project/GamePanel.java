@@ -7,7 +7,6 @@ import com.gvi.project.models.game_maps.GameMapLoader;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.game_maps.GameMaps;
 import com.gvi.project.models.objects.SuperObject;
-import com.gvi.project.models.questions.QuestionProvider;
 import com.gvi.project.models.questions.QuestionService;
 import com.gvi.project.manager.SpriteManager;
 import com.gvi.project.systems.AnimationSystem;
@@ -41,7 +40,7 @@ public class GamePanel {
 	public final CollisionChecker cChecker = new CollisionChecker(this);
 	public final SaveManager saveManager = new SaveManager();
 	public int interactingObjectIndex = -1;
-	public final QuestionService questionProvider = new QuestionProvider();
+	public final QuestionService questionProvider = MainApp.getBean(QuestionService.class);
 	public final RenderSystem renderSystem = new RenderSystem(this);
 	public final AnimationSystem animationSystem = new AnimationSystem(this);
 

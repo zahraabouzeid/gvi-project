@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -14,6 +16,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 @SpringBootApplication
 public class MainApp extends Application {
 
+	private static final Logger log = LoggerFactory.getLogger(MainApp.class);
 	private static ConfigurableApplicationContext springContext;
 
 	public static void main(String[] args) {
@@ -22,10 +25,24 @@ public class MainApp extends Application {
 
 	@Override
 	public void init() {
-		// Spring Boot Context starten
-		springContext = new SpringApplicationBuilder(MainApp.class)
-				.headless(false)
-				.run();
+		try {
+			springContext = new SpringApplicationBuilder(MainApp.class)
+					.headless(false)
+					.run();
+			log.info("Spring application started with datasource/JPA configuration.");
+		} catch (Exception exception) {
+			log.warn("Failed to start Spring with database access. Retrying with datasource/JPA disabled.", exception);
+			springContext = new SpringApplicationBuilder(MainApp.class)
+					.headless(false)
+					.properties(
+							"spring.autoconfigure.exclude=" +
+									"org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration," +
+									"org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration," +
+									"org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration"
+					)
+					.run();
+			log.warn("Spring application started in fallback mode without datasource/JPA.");
+		}
 	}
 
 	@Override

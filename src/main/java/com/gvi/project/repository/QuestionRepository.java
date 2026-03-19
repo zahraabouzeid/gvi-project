@@ -1,5 +1,6 @@
 package com.gvi.project.repository;
 
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +15,7 @@ import java.util.Optional;
  * Supports filtering by question type: MC (Multiple Choice), TF (True/False), GAP (Fill-in-the-blank)
  */
 @Repository
-public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> {
+public interface QuestionRepository extends JpaRepository<QuestionEntity, Integer> {
 
     /**
      * Get all questions
@@ -60,17 +61,21 @@ public interface QuestionRepository extends JpaRepository<QuestionEntity, Long> 
     /**
      * Find all questions by question set id
      */
-    List<QuestionEntity> findByQuestionSetId(Long questionSetId);
+    List<QuestionEntity> findByQuestionSetId(Integer questionSetId);
 
     /**
      * Find all questions by question set id and type
      */
-    List<QuestionEntity> findByQuestionSetIdAndQuestionType(Long questionSetId, QuestionType questionType);
+    List<QuestionEntity> findByQuestionSetIdAndQuestionType(Integer questionSetId, QuestionType questionType);
 
     /**
      * Get all questions ordered by id
      */
     List<QuestionEntity> findAllByOrderByIdAsc();
+
+    @EntityGraph(attributePaths = {"themes", "mcAnswers", "gapFields", "gapFields.options"})
+    @Query("SELECT DISTINCT q FROM QuestionEntity q ORDER BY q.id ASC")
+    List<QuestionEntity> findAllWithDetailsOrderByIdAsc();
 
     /**
      * Get all questions of a specific type ordered by id

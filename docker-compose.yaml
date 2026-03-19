@@ -8,11 +8,12 @@ services:
     environment:
       MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
       MARIADB_DATABASE: quizdb
+    command: --skip-ssl
     ports:
       - "3306:3306"
     volumes:
       - mariadb_data:/var/lib/mysql
-      - ./recources/Database.sql:/docker-entrypoint-initdb.d/Database.sql:ro
+      - ./Database.sql:/docker-entrypoint-initdb.d/Database.sql:ro
 
 volumes:
   mariadb_data:
