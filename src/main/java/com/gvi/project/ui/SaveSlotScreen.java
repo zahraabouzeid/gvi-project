@@ -122,8 +122,14 @@ public class SaveSlotScreen {
         gc.setFont(FONT_XS);
         gc.setFill(TEXT_GRAY);
         String hint = confirmDelete ? "ENTER - Confirm Delete    ESC - Cancel" 
-                                    : "WASD / Arrows - Navigate    ENTER - Load / Save  \n               DEL - Delete    ESC - Cancel";
+                                    : "WASD / Arrows - Navigate    ENTER - Load / Save";
         double hw = getTextWidth(hint, FONT_XS);
         gc.fillText(hint, screenWidth / 2.0 - hw / 2.0, boxY + boxH - 45);
+        if (!confirmDelete) {
+            String hint2 = "DEL - Delete    ESC - Cancel";
+            double hintw2 = getTextWidth(hint2, FONT_XS);
+            gc.fillText(hint2, screenWidth / 2.0 - hintw2 / 2.0, boxY + boxH - 25);
+        }
+
     }
 }
