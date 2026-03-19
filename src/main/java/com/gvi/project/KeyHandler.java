@@ -10,6 +10,7 @@ public class KeyHandler {
 	public boolean escPressed;
 	public boolean enterPressed;
 	public boolean backspacePressed;
+	public boolean delPressed;
 	public boolean tabPressed;
 	public boolean f2Pressed = false;
 	public int numberPressed = -1;
@@ -26,6 +27,7 @@ public class KeyHandler {
 			if (code == KeyCode.ESCAPE) escPressed = true;
 			if (code == KeyCode.ENTER) enterPressed = true;
 			if (code == KeyCode.BACK_SPACE) backspacePressed = true;
+			if (code == KeyCode.DELETE) delPressed = true;
 			if (code == KeyCode.TAB) tabPressed = true;
 			if (code == KeyCode.DIGIT1 || code == KeyCode.NUMPAD1) numberPressed = 1;
 			if (code == KeyCode.DIGIT2 || code == KeyCode.NUMPAD2) numberPressed = 2;
@@ -54,6 +56,8 @@ public class KeyHandler {
 			if (code == KeyCode.F) fPressed = false;
 			if (code == KeyCode.ESCAPE) escPressed = false;
 			if (code == KeyCode.ENTER) enterPressed = false;
+			if (code == KeyCode.BACK_SPACE) backspacePressed = false;
+			if (code == KeyCode.DELETE) delPressed = false;
 			if (code == KeyCode.TAB) tabPressed = false;
 			if (code == KeyCode.F2) f2Pressed = !f2Pressed;
 		});

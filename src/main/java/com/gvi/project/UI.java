@@ -137,7 +137,7 @@ public class UI {
         refreshSlotInfos();
     }
 
-    private void refreshSlotInfos() {
+    public void refreshSlotInfos() {
         cachedSlotInfos = new SaveManager.SlotInfo[] {
             gp.saveManager.getSlotInfo(1),
             gp.saveManager.getSlotInfo(2),
@@ -148,6 +148,8 @@ public class UI {
     public void navigateSlotUp()   { saveSlotScreen.navigateUp(); }
     public void navigateSlotDown() { saveSlotScreen.navigateDown(); }
     public int  getSelectedSlot()  { return saveSlotScreen.getSelectedSlot(); }
+    public boolean isConfirmDelete() { return saveSlotScreen.isConfirmDelete(); }
+    public void setConfirmDelete(boolean confirm) { saveSlotScreen.setConfirmDelete(confirm); }
 
     public void drawSaveSlotScreen(GraphicsContext gc) {
         saveSlotScreen.draw(gc, cachedSlotInfos);

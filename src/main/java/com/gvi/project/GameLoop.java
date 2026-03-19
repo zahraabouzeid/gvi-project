@@ -193,6 +193,28 @@ public class GameLoop extends AnimationTimer {
 
 	private void handleSaveSlotInput() {
 		if (slotNavCooldown > 0) slotNavCooldown--;
+
+		if (gp.ui.isConfirmDelete()) {
+			if (gp.keyHandler.escPressed) {
+				gp.keyHandler.escPressed = false;
+				gp.ui.setConfirmDelete(false);
+			} else if (gp.keyHandler.enterPressed) {
+				gp.keyHandler.enterPressed = false;
+				gp.saveManager.deleteSave(gp.ui.getSelectedSlot());
+				gp.ui.setConfirmDelete(false);
+				gp.ui.refreshSlotInfos();
+			}
+			return;
+		}
+
+		if (gp.keyHandler.delPressed) {
+			gp.keyHandler.delPressed = false;
+			if (gp.saveManager.hasSave(gp.ui.getSelectedSlot())) {
+				gp.ui.setConfirmDelete(true);
+			}
+			return;
+		}
+
 		if (gp.keyHandler.escPressed) {
 			gp.keyHandler.escPressed = false;
 			gp.ui.resetPauseScreen();
@@ -219,6 +241,28 @@ public class GameLoop extends AnimationTimer {
 
 	private void handleLoadSlotInput() {
 		if (slotNavCooldown > 0) slotNavCooldown--;
+
+		if (gp.ui.isConfirmDelete()) {
+			if (gp.keyHandler.escPressed) {
+				gp.keyHandler.escPressed = false;
+				gp.ui.setConfirmDelete(false);
+			} else if (gp.keyHandler.enterPressed) {
+				gp.keyHandler.enterPressed = false;
+				gp.saveManager.deleteSave(gp.ui.getSelectedSlot());
+				gp.ui.setConfirmDelete(false);
+				gp.ui.refreshSlotInfos();
+			}
+			return;
+		}
+
+		if (gp.keyHandler.delPressed) {
+			gp.keyHandler.delPressed = false;
+			if (gp.saveManager.hasSave(gp.ui.getSelectedSlot())) {
+				gp.ui.setConfirmDelete(true);
+			}
+			return;
+		}
+
 		if (gp.keyHandler.escPressed) {
 			gp.keyHandler.escPressed = false;
 			if (loadSlotOrigin == GameState.CHARACTER_NAME) {

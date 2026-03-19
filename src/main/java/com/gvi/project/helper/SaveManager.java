@@ -39,6 +39,14 @@ public class SaveManager {
         return Files.exists(slotFile(slot));
     }
 
+    public boolean deleteSave(int slot) {
+        try {
+            return Files.deleteIfExists(slotFile(slot));
+        } catch (IOException e) {
+            return false;
+        }
+    }
+
     public SlotInfo getSlotInfo(int slot) {
         if (!hasSave(slot)) return new SlotInfo(false, null, 0, null, null);
         try {
