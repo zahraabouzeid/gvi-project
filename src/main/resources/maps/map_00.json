@@ -335,7 +335,7 @@
       "x": 1,
       "y": 6,
       "data": {
-        "target_map_spawn_location_x": "38",
+        "target_map_spawn_location_x": "39",
         "target_map_spawn_location_y": "5",
         "direction": "left",
         "map_id": "3"
@@ -346,7 +346,7 @@
       "x": 10,
       "y": 6,
       "data": {
-        "target_map_spawn_location_x": "1",
+        "target_map_spawn_location_x": "2",
         "target_map_spawn_location_y": "24",
         "direction": "right",
         "map_id": "1"
