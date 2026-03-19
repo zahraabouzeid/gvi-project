@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  mariadb:
+    image: mariadb:11
+    container_name: local-mariadb-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: "yes"
+      MARIADB_DATABASE: quizdb
+    command: --skip-ssl
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+      - ./Database.sql:/docker-entrypoint-initdb.d/Database.sql:ro
+
+volumes:
+  mariadb_data:
