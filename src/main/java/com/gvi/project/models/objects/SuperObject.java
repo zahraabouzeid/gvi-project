@@ -61,9 +61,9 @@ public abstract class SuperObject implements Renderable {
 			worldY - gp.generalSettings.tileSize < gp.player.worldY + gp.player.screenY) {
 
 			if (spriteDirectionUp) {
-				gp.gc.drawImage(sprite.image, screenX, screenY - (sprite.imageHeight - 1) * tileSize, tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+				gp.gc.drawImage(sprite.image, screenX + (sprite.imageOffsetX * tileSize), screenY - ((sprite.imageHeight - 1) * tileSize) + (sprite.imageOffsetY * tileSize), tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
 			} else {
-				gp.gc.drawImage(sprite.image, screenX, screenY, tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+				gp.gc.drawImage(sprite.image, screenX + (sprite.imageOffsetX * tileSize), screenY + (sprite.imageOffsetY * tileSize), tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
 			}
 		}
 	}

@@ -6,6 +6,8 @@ public class Sprite {
 	public Image image;
 	public int imageHeight;
 	public int imageWidth;
+	public int imageOffsetX = 0;
+	public int imageOffsetY = 0;
 	public boolean hasCollision = false;
 
 	public Sprite(Image image, int imageHeight, int imageWidth, boolean hasCollision) {

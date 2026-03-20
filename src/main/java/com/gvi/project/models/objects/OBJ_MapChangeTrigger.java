@@ -26,7 +26,10 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 				this.sprite.imageHeight = 2;
 			break;
 			case "down":
+				this.spriteDirectionUp = true;
 				this.sprite = sheet.getSprite("yellow","bottom_to_top");
+				this.sprite.imageOffsetY = -1;
+
 			break;
 			case "left":
 				this.sprite = sheet.getSprite("yellow","left_to_right");
