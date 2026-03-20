@@ -19,16 +19,36 @@ import java.util.Map;
 
 public class SaveManager {
 
-    public record SlotInfo(boolean exists, String playerName, int score, String mapName, String savedAt) {}
-
     private static final Path SAVE_DIR = Path.of(System.getProperty("user.home"), ".sql-dungeon", "saves");
     private static final DateTimeFormatter TIMESTAMP_FMT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
-
     private final ObjectMapper mapper;
 
     public SaveManager() {
         mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    }
+
+    private static String key(String className, int x, int y) {
+        return className + "@" + x + "," + y;
+    }
+
+    private static String resolveCurrentMapName(GamePanel gp) {
+        if (gp.currentMap == null) return GameMaps.MAP_01.name();
+        try {
+            GameMaps.valueOf(gp.currentMap.name.toUpperCase());
+            return gp.currentMap.name.toUpperCase();
+        } catch (IllegalArgumentException e) {
+            return GameMaps.MAP_01.name();
+        }
+    }
+
+    private static GameMaps parseMap(String name) {
+        if (name == null) return GameMaps.MAP_01;
+        try {
+            return GameMaps.valueOf(name);
+        } catch (IllegalArgumentException e) {
+            return GameMaps.MAP_01;
+        }
     }
 
     private Path slotFile(int slot) {
@@ -68,7 +88,9 @@ public class SaveManager {
         data.score         = gp.player.score;
         data.healthHalf    = gp.player.healthHalf;
         data.maxHealthHalf = gp.player.maxHealthHalf;
-        data.playerKeys    = gp.player.playerKeys;
+        data.playerIronKeys    = gp.player.playerIronKeys;
+        data.playerGoldenKeys    = gp.player.playerGoldKeys;
+        data.playerCopperKeys    = gp.player.playerCopperKeys;
         data.currentMap    = resolveCurrentMapName(gp);
         data.savedAt       = LocalDateTime.now().format(TIMESTAMP_FMT);
 
@@ -112,7 +134,9 @@ public class SaveManager {
         gp.player.score         = data.score;
         gp.player.healthHalf    = data.healthHalf;
         gp.player.maxHealthHalf = data.maxHealthHalf;
-        gp.player.playerKeys    = data.playerKeys;
+        gp.player.playerIronKeys    = data.playerIronKeys;
+        gp.player.playerCopperKeys    = data.playerCopperKeys;
+        gp.player.playerGoldKeys    = data.playerGoldenKeys;
         gp.player.isMoving      = false;
         gp.player.isDead        = false;
 
@@ -142,26 +166,5 @@ public class SaveManager {
         }
     }
 
-    private static String key(String className, int x, int y) {
-        return className + "@" + x + "," + y;
-    }
-
-    private static String resolveCurrentMapName(GamePanel gp) {
-        if (gp.currentMap == null) return GameMaps.MAP_01.name();
-        try {
-            GameMaps.valueOf(gp.currentMap.name.toUpperCase());
-            return gp.currentMap.name.toUpperCase();
-        } catch (IllegalArgumentException e) {
-            return GameMaps.MAP_01.name();
-        }
-    }
-
-    private static GameMaps parseMap(String name) {
-        if (name == null) return GameMaps.MAP_01;
-        try {
-            return GameMaps.valueOf(name);
-        } catch (IllegalArgumentException e) {
-            return GameMaps.MAP_01;
-        }
-    }
+    public record SlotInfo(boolean exists, String playerName, int score, String mapName, String savedAt) {}
 }

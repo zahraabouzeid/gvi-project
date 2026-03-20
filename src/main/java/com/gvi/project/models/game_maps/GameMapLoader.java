@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GameMapLoader {
-	private GamePanel gp;
+	private final GamePanel gp;
 
 	Map<String, SpriteSheet> spriteSheets;
 

@@ -36,5 +36,5 @@ public class OBJ_Boots extends AnimatedObject {
 		animComp.delay = 0.8;
 
 		sprite = animComp.getCurrentSprite();
-	};
+	}
 }

@@ -50,5 +50,5 @@ public class OBJ_Door extends AnimatedObject {
 		};
 
 		sprite = animComp.getCurrentSprite();
-	};
+	}
 }

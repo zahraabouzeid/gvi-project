@@ -3,21 +3,30 @@ package com.gvi.project.models.entities;
 import com.gvi.project.GamePanel;
 import com.gvi.project.KeyHandler;
 import com.gvi.project.models.core.Entity;
+import com.gvi.project.models.objects.OBJ_Key;
 import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Player extends Entity {
-	private GamePanel gp;
-	private KeyHandler keyH;
+	private final GamePanel gp;
+	private final KeyHandler keyH;
 
 	public final int screenX;
 	public final int screenY;
 
 	public String playerName = "Player";
-	public int playerKeys = 0;
+
+	public Map<String, Integer> playerKeys = new HashMap<>();
+
+	public int playerGoldKeys = 0;
+	public int playerIronKeys = 0;
+	public int playerCopperKeys = 0;
 	public int nearbyObjectIndex = -1;
 	public int maxHealthHalf = 10;
 	public int healthHalf = 10;

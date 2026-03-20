@@ -7,7 +7,7 @@ public class SaveData {
     public String playerName;
     public int    worldX, worldY, gridX, gridY;
     public String direction;
-    public int    score, healthHalf, maxHealthHalf, playerKeys;
+    public int    score, healthHalf, maxHealthHalf, playerIronKeys, playerGoldenKeys, playerCopperKeys;
     public String currentMap;
     public String savedAt;
     public List<SavedObject> presentObjects;

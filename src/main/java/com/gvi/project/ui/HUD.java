@@ -5,23 +5,38 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
 public class HUD {
 
     private final GamePanel gp;
-    private final Image keyImage;
 
     private String floatingText = null;
     private boolean floatingPositive = true;
     private int floatingCounter = 0;
     private static final int FLOATING_DURATION = 60; // 1 second
 
-    public HUD(GamePanel gp, Image keyImage) {
+    private Map<String, Image> images;
+
+    private final double hudX;
+    private final double hudY;
+
+    public HUD(GamePanel gp) {
         this.gp = gp;
-        this.keyImage = keyImage;
+        hudX = gp.generalSettings.tileSize / 2.0;
+        hudY = gp.generalSettings.tileSize / 2.0;
+        initHudImagesLoading();
     }
+
+    public void initHudImagesLoading(){
+        images = new HashMap<>();
+
+    };
 
     public void showFloatingScore(int points) {
         floatingText = (points > 0 ? "+" : "") + points;
@@ -35,8 +50,7 @@ public class HUD {
     }
 
     public void draw(GraphicsContext gc, String formattedTime) {
-        double hudX = gp.generalSettings.tileSize / 2.0;
-        double hudY = gp.generalSettings.tileSize / 2.0;
+
 
         // Display player name
         gc.setFont(FONT_MD);
@@ -45,12 +59,7 @@ public class HUD {
 
         drawHearts(gc);
 
-        int keySize = 36;
-        double keyY = hudY + 55;
-        gc.drawImage(keyImage, hudX, keyY, keySize, keySize);
-        gc.setFont(FONT_MD);
-        gc.setFill(TEXT_WHITE);
-        gc.fillText("x" + gp.player.playerKeys, hudX + keySize + 6, keyY + 26);
+        drawKeys(gc, hudX, hudY);
 
         // Score in top center with pixel-art rounded box
         String scoreStr = "Score: " + gp.player.score;
@@ -175,4 +184,19 @@ public class HUD {
         gc.setFill(TEXT_GOLD);
         gc.fillText(text, x, y + 2);
     }
+
+    private void drawKeys(GraphicsContext gc, double hudX, double hudY) {
+
+        int keySize = 36;
+        double keyY = hudY + 55;
+        gc.drawImage(keyImage, hudX, keyY, keySize, keySize);
+        gc.setFont(FONT_MD);
+        gc.setFill(TEXT_WHITE);
+        gc.fillText("x" + gp.player.playerIronKeys, hudX + keySize + 6, keyY + 26);
+
+        gc.drawImage(keyImage, hudX, keyY, keySize, keySize);
+        gc.setFont(FONT_MD);
+        gc.setFill(TEXT_WHITE);
+        gc.fillText("x" + gp.player.playerIronKeys, hudX + keySize + 6, keyY + 26);
+    };
 }

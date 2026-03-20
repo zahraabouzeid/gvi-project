@@ -6,11 +6,12 @@ import com.gvi.project.models.entities.Player;
 
 
 public class OBJ_Key extends AnimatedObject {
-	public OBJ_Key(String spriteGroupID) {
-		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDungeon", spriteGroupID);
-		name = "Key";
+
+	public OBJ_Key(KeyTyp typ) {
+		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDungeon", typ.getSpriteGroupID());
+		name = typ.getName();
 		canInteract = true;
-		interactHint = "[F] Pick up Key";
+		interactHint = "[F] Pick up %s Key".formatted(name);
 		collision = true;
 		setUpAnimationComponent();
 	}
@@ -18,9 +19,11 @@ public class OBJ_Key extends AnimatedObject {
 	@Override
 	public void onConfirm(Player player, GamePanel gp, int objIndex) {
 		gp.playSE(1);
-		player.playerKeys++;
+
+		//gp.player.addItem(name);
+
 		gp.obj.remove(objIndex);
-		gp.ui.openMessage("You got a key!");
+		gp.ui.openMessage("You got a %s key!".formatted(name));
 	}
 
 	@Override
@@ -31,5 +34,5 @@ public class OBJ_Key extends AnimatedObject {
 		animComp.delayBetweenCycles = 0.8;
 
 		sprite = animComp.getCurrentSprite();
-	};
+	}
 }

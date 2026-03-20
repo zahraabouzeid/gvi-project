@@ -122,9 +122,9 @@ public class AnimationComponent extends Component {
 			cycleOrder.add(i);
 		}
 		this.cycleOrder = cycleOrder;
-	};
+	}
 
-	public void setCycleOrder(List<Integer> cycleOrder){
+    public void setCycleOrder(List<Integer> cycleOrder){
 		this.cycleOrder = cycleOrder;
-	};
+	}
 }

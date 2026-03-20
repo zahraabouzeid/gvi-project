@@ -38,9 +38,9 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 				this.sprite = sheet.getSprite("yellow","right_to_left");
 			break;
 		}
-	};
+	}
 
-	private void setCollisionBox(String direction){
+    private void setCollisionBox(String direction){
 		switch (direction){
 			case "up":
 			case "down":
@@ -56,9 +56,9 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 				this.collisionBox.setWidth(16 * 3);
 				break;
 		}
-	};
+	}
 
-	@Override
+    @Override
 	public void onStep(Player player, GamePanel gp, int objIndex) {
 		int xDiff = player.gridX - this.worldX / gp.generalSettings.tileSize;
 		int yDiff = player.gridY - this.worldY / gp.generalSettings.tileSize;

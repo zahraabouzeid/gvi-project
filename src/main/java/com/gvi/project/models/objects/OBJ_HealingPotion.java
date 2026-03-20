@@ -32,5 +32,5 @@ public class OBJ_HealingPotion extends AnimatedObject {
 		animComp.delayBetweenCycles = 2;
 
 		sprite = animComp.getCurrentSprite();
-	};
+	}
 }

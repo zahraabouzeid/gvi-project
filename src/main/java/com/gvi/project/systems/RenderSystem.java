@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class RenderSystem {
-	private GamePanel gp;
+	private final GamePanel gp;
 
 	public RenderSystem(GamePanel gp) {
 		this.gp = gp;

@@ -1,6 +1,7 @@
 package com.gvi.project;
 
 import com.gvi.project.helper.SaveManager;
+import com.gvi.project.models.objects.KeyTyp;
 import com.gvi.project.models.objects.OBJ_Key;
 import com.gvi.project.models.questions.Answer;
 import com.gvi.project.models.questions.Question;
@@ -49,7 +50,7 @@ public class UI {
         pauseScreen = new PauseScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         saveSlotScreen = new SaveSlotScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         loadingScreen = new LoadingScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        hud = new HUD(gp, new OBJ_Key("key_iron").sprite.image);
+        hud = new HUD(gp);
         quizDialog = new QuizDialog(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
         minimap = new Minimap(gp);
     }

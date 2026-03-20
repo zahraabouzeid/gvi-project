@@ -108,9 +108,9 @@ public class OBJ_QuizStation extends AnimatedObject {
 		animComp.setStartOffset(Math.random() * animComp.cycleLength);
 
 		sprite = animComp.getCurrentSprite();
-	};
+	}
 
-	private void spawnKey(GamePanel gp, int objIndex) {
+    private void spawnKey(GamePanel gp, int objIndex) {
 		OBJ_Key key = switch (this.name) {
 			case "crystal_blue" -> new OBJ_Key("key_iron");
 			case "crystal_green" -> new OBJ_Key("key_gold");
