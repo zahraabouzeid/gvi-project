@@ -1,8 +1,7 @@
 package com.gvi.project.models.objects;
 
-import com.gvi.project.Components.AnimationComponent;
+import com.gvi.project.components.AnimationComponent;
 import com.gvi.project.GamePanel;
-import com.gvi.project.models.entities.Player;
 
 
 public class OBJ_Key extends AnimatedObject {

@@ -1,6 +1,6 @@
 package com.gvi.project.models.objects;
 
-import com.gvi.project.Components.Component;
+import com.gvi.project.components.Component;
 import com.gvi.project.GamePanel;
 import com.gvi.project.models.core.Renderable;
 import com.gvi.project.models.entities.Player;

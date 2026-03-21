@@ -675,6 +675,7 @@
       "objectId": "QUIZ_STATION",
       "x": 38,
       "y": 6,
+      "conditions":{},
       "data": {
         "topicArea": "JOINS_SUBQUERIES",
         "spriteGroup": "crystal_green"
@@ -684,6 +685,7 @@
       "objectId": "QUIZ_STATION",
       "x": 13,
       "y": 24,
+      "conditions":{},
       "data": {
         "topicArea": "DDL_DML",
         "spriteGroup": "crystal_green"
@@ -693,6 +695,7 @@
       "objectId": "QUIZ_STATION",
       "x": 39,
       "y": 24,
+      "conditions":{},
       "data": {
         "topicArea": "ER_MODELLIERUNG",
         "spriteGroup": "crystal_green"
@@ -702,6 +705,7 @@
       "objectId": "QUIZ_STATION",
       "x": 26,
       "y": 23,
+      "conditions":{},
       "data": {
         "topicArea": "NORMALISIERUNG",
         "spriteGroup": "crystal_green"
@@ -711,6 +715,7 @@
       "objectId": "QUIZ_STATION",
       "x": 26,
       "y": 5,
+      "conditions":{},
       "data": {
         "topicArea": "SELECT_ABFRAGEN",
         "spriteGroup": "crystal_green"
@@ -720,6 +725,7 @@
       "objectId": "QUIZ_STATION",
       "x": 4,
       "y": 5,
+      "conditions":{},
       "data": {
         "topicArea": "SQL_GRUNDLAGEN",
         "spriteGroup": "crystal_green"
@@ -729,6 +735,7 @@
       "objectId": "BOOTS",
       "x": 40,
       "y": 15,
+      "conditions":{},
       "data": {
         "duration":""
       }
@@ -737,6 +744,7 @@
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 1,
       "y": 24,
+      "conditions":{},
       "data": {
         "target_map_spawn_location_x": "9",
         "target_map_spawn_location_y": "6",

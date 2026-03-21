@@ -328,12 +328,42 @@
       "objectId": "DOOR",
       "x": 5,
       "y": 3,
+      "conditions":  {
+        "and_or": "and",
+        "conditionObjects": [
+          {
+            "type": "statistic",
+            "value": 0,
+            "comparator": ">=",
+            "compareWith": "score"
+          },
+          {
+            "type": "item",
+            "value": 1,
+            "comparator":">=",
+            "compareWith": "key_copper"
+          },
+          {
+            "type": "item",
+            "value": 1,
+            "comparator":">=",
+            "compareWith": "key_iron"
+          },
+          {
+            "type": "item",
+            "value": 1,
+            "comparator":">=",
+            "compareWith": "key_gold"
+          }
+        ]
+      },
       "data": {}
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 1,
       "y": 6,
+      "conditions":{},
       "data": {
         "target_map_spawn_location_x": "39",
         "target_map_spawn_location_y": "5",
@@ -345,6 +375,7 @@
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 10,
       "y": 6,
+      "conditions":{},
       "data": {
         "target_map_spawn_location_x": "2",
         "target_map_spawn_location_y": "24",
@@ -356,6 +387,7 @@
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 5,
       "y": 10,
+      "conditions":{},
       "data": {
         "target_map_spawn_location_x": "12",
         "target_map_spawn_location_y": "4",

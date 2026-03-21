@@ -1,4 +1,4 @@
-package com.gvi.project.Components;
+package com.gvi.project.components;
 
 import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;

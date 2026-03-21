@@ -1,6 +1,6 @@
 package com.gvi.project.models.objects;
 
-import com.gvi.project.Components.AnimationComponent;
+import com.gvi.project.components.AnimationComponent;
 
 public abstract class AnimatedObject extends SuperObject{
 

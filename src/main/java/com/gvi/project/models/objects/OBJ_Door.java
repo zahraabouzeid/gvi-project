@@ -1,16 +1,34 @@
 package com.gvi.project.models.objects;
 
-import com.gvi.project.Components.AnimationComponent;
+import com.gvi.project.components.AnimationComponent;
 import com.gvi.project.GamePanel;
 import com.gvi.project.Sound;
+import com.gvi.project.helper.ConditionsHelper;
+import com.gvi.project.models.data_objects.ConditionsObject;
+
+import java.util.List;
 
 public class OBJ_Door extends AnimatedObject {
 	Sound sound = new Sound();
 	public boolean isOpen = false;
 	public boolean closable = false;
+	private boolean hasConditions = false;
+	private ConditionsObject conditions;
 
 	public OBJ_Door() {
 		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDoorUp", "door");
+		setDefaultValues();
+	}
+
+	public OBJ_Door(ConditionsObject conditions) {
+		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDoorUp", "door");
+		setDefaultValues();
+		if(conditions != null) {
+			setConditions(conditions);
+		}
+	}
+
+	private void setDefaultValues(){
 		name = "door";
 		id = name;
 		interactHint = "[F] Unlock %s".formatted(name);
@@ -18,23 +36,26 @@ public class OBJ_Door extends AnimatedObject {
 		collision = true;
 		collisionBox.setWidth(2 * 16 * 3);
 		canInteract = true;
+		hasConditions = false;
 		setUpAnimationComponent();
 	}
 
+	public void setConditions(ConditionsObject conditions) {
+		this.conditions = conditions;
+		hasConditions = true;
+	}
 
 	@Override
 	public void onConfirm(GamePanel gp, int objIndex) {
 		if (!canInteract) return;
-//		if (player.playerItems.containsKey(KeyType.IRON.getName())) {
-//			if(player.playerItems.get(KeyType.IRON.getName()) == 0) {}
-			AnimationComponent animComp = (AnimationComponent) components.get("Animation");
-			animComp.trigger();
-			sound.setFile(4);
-			sound.loop();
-			sound.play();
-			canInteract = false;
-//		}
-
+		if (!conditionsAreMeet(gp)) return;
+		AnimationComponent animComp = (AnimationComponent) components.get("Animation");
+		animComp.trigger();
+		sound.setFile(4);
+		sound.loop();
+		sound.play();
+		isOpen = true;
+		canInteract = false;
 	}
 
 	@Override
@@ -50,5 +71,10 @@ public class OBJ_Door extends AnimatedObject {
 	@Override
 	public void onDestroy() {
 		if(sound != null && sound.isRunning()) sound.stop();
+	}
+
+	private boolean conditionsAreMeet(GamePanel gp){
+		if (!hasConditions) return true;
+		return ConditionsHelper.conditionsAreMeet(gp, conditions);
 	}
 }

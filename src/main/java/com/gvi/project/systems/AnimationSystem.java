@@ -1,6 +1,6 @@
 package com.gvi.project.systems;
 
-import com.gvi.project.Components.AnimationComponent;
+import com.gvi.project.components.AnimationComponent;
 import com.gvi.project.GamePanel;
 import com.gvi.project.models.objects.SuperObject;
 

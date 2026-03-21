@@ -1,6 +1,5 @@
 package com.gvi.project.ui;
 
-import com.gvi.project.Components.AnimationComponent;
 import com.gvi.project.GamePanel;
 import com.gvi.project.models.objects.KeyType;
 import com.gvi.project.models.objects.OBJ_Key;
