@@ -7,62 +7,78 @@ import com.gvi.project.models.data_objects.ConditionsObject;
 
 public class ConditionsHelper {
 
-	public static boolean conditionsAreMet(GamePanel gp, ConditionsObject conditions) {
+	public static ConditionResult conditionsAreMet(GamePanel gp, ConditionsObject conditions) {
+
+		StringBuilder messageBuilder = new StringBuilder();
+		boolean overallResult;
 
 		if ("and".equals(conditions.and_or)) {
+			overallResult = true;
+
 			for (ConditionObject cObj : conditions.conditionObjects) {
-				if (!checkCondition(gp, cObj)) {
-					return false; // sofort abbrechen
+				ConditionResult result = checkCondition(gp, cObj);
+
+				if (!result.success) {
+					overallResult = false;
+					messageBuilder.append(result.message).append("\n");
 				}
 			}
-			return true;
-		}
+		} else if ("or".equals(conditions.and_or)) {
+			overallResult = false;
 
-		if ("or".equals(conditions.and_or)) {
 			for (ConditionObject cObj : conditions.conditionObjects) {
-				if (checkCondition(gp, cObj)) {
-					return true; // sofort erfüllt
+				ConditionResult result = checkCondition(gp, cObj);
+
+				if (result.success) {
+					return new ConditionResult(true, "");
+				} else {
+					messageBuilder.append(result.message).append("\n");
 				}
 			}
-			return false;
+		} else {
+			return new ConditionResult(false, "Invalid condition type");
 		}
 
-		return false;
+		return new ConditionResult(overallResult, messageBuilder.toString().trim());
 	}
 
-	private static boolean checkCondition(GamePanel gp, ConditionObject cObj) {
+	private static ConditionResult checkCondition(GamePanel gp, ConditionObject cObj) {
 
 		return switch (cObj.type) {
 			case "item" -> checkForItems(gp, cObj);
 			case "statistic" -> checkForStatistic(gp, cObj);
-			default -> false;
+			default -> new ConditionResult(false, "Unknown condition type");
 		};
 	}
 
-	private static boolean checkForItems(GamePanel gp, ConditionObject cObj) {
+	private static ConditionResult checkForItems(GamePanel gp, ConditionObject cObj) {
 
 		int playerValue = gp.player.playerItems.getOrDefault(cObj.compareWith, 0);
 
 		boolean result = compareValues(playerValue, cObj.value, cObj.comparator);
 
 		if (!result) {
-			gp.ui.openMessage("Missing Key".formatted(cObj.value, cObj.compareWith));
+			return new ConditionResult(false,
+					"Your are missing %s x%d".formatted(cObj.compareWith, cObj.value));
 		}
 
-		return result;
+		return new ConditionResult(true, "");
 	}
 
-	private static boolean checkForStatistic(GamePanel gp, ConditionObject cObj) {
+	private static ConditionResult checkForStatistic(GamePanel gp, ConditionObject cObj) {
 
 		return switch (cObj.compareWith) {
 			case "score" -> {
 				boolean result = compareValues(gp.player.score, cObj.value, cObj.comparator);
+
 				if (!result) {
-					gp.ui.openMessage("Needs a score of %s or higher".formatted(cObj.value));
+					yield new ConditionResult(false,
+							"Needs a score of %s or higher".formatted(cObj.value));
 				}
-				yield result;
+
+				yield new ConditionResult(true, "");
 			}
-			default -> false;
+			default -> new ConditionResult(false, "Unknown statistic");
 		};
 	}
 
@@ -76,4 +92,6 @@ public class ConditionsHelper {
 			default -> false;
 		};
 	}
+
+
 }

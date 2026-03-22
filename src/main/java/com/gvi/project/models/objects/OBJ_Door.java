@@ -3,6 +3,7 @@ package com.gvi.project.models.objects;
 import com.gvi.project.components.AnimationComponent;
 import com.gvi.project.GamePanel;
 import com.gvi.project.Sound;
+import com.gvi.project.helper.ConditionResult;
 import com.gvi.project.helper.ConditionsHelper;
 import com.gvi.project.models.data_objects.ConditionsObject;
 
@@ -75,6 +76,14 @@ public class OBJ_Door extends AnimatedObject {
 
 	private boolean conditionsAreMeet(GamePanel gp){
 		if (!hasConditions) return true;
-		return ConditionsHelper.conditionsAreMet(gp, conditions);
+
+		ConditionResult result = ConditionsHelper.conditionsAreMet(gp, conditions);
+
+		if (!result.success) {
+			gp.ui.openMessage(
+					result.message
+			);
+		}
+		return result.success ;
 	}
 }

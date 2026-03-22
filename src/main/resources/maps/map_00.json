@@ -333,25 +333,29 @@
         "conditionObjects": [
           {
             "type": "statistic",
-            "value": 0,
+            "value": 450,
+            "messageOnFailure": "Needs a score of 450 or higher",
             "comparator": ">=",
             "compareWith": "score"
           },
           {
             "type": "item",
             "value": 1,
+            "messageOnFailure": "Needs a score of 450 or higher",
             "comparator":">=",
             "compareWith": "key_copper"
           },
           {
             "type": "item",
             "value": 1,
+            "messageOnFailure": "Needs a score of 450 or higher",
             "comparator":">=",
             "compareWith": "key_iron"
           },
           {
             "type": "item",
             "value": 1,
+            "messageOnFailure": "youh",
             "comparator":">=",
             "compareWith": "key_gold"
           }
