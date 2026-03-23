@@ -66,20 +66,33 @@ public final class UIUtils {
 
     public static List<String> wrapText(String text, Font font, double maxWidth) {
         List<String> lines = new ArrayList<>();
-        String[] words = text.split(" ");
-        StringBuilder current = new StringBuilder();
-
-        for (String word : words) {
-            String test = current.isEmpty() ? word : current + " " + word;
-            if (getTextWidth(test, font) > maxWidth && !current.isEmpty()) {
-                lines.add(current.toString());
-                current = new StringBuilder(word);
-            } else {
-                current = new StringBuilder(test);
-            }
+        if (text == null || text.isEmpty()) {
+            return lines;
         }
-        if (!current.isEmpty()) {
-            lines.add(current.toString());
+        
+        // Zuerst nach echten Zeilenumbrüchen splitten
+        String[] paragraphs = text.split("\n");
+        
+        for (String paragraph : paragraphs) {
+            // Jede Zeile kann weiter umgebrochen werden, wenn sie zu lang ist
+            String[] words = paragraph.split(" ");
+            StringBuilder current = new StringBuilder();
+
+            for (String word : words) {
+                String test = current.isEmpty() ? word : current + " " + word;
+                if (getTextWidth(test, font) > maxWidth && !current.isEmpty()) {
+                    lines.add(current.toString());
+                    current = new StringBuilder(word);
+                } else {
+                    current = new StringBuilder(test);
+                }
+            }
+            if (!current.isEmpty()) {
+                lines.add(current.toString());
+            } else if (paragraph.isEmpty()) {
+                // Leerzeile hinzufügen (wichtig für Formatierung)
+                lines.add("");
+            }
         }
         return lines;
     }
