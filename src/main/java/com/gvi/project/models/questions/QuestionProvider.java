@@ -120,6 +120,11 @@ public class QuestionProvider implements QuestionService {
 		TopicArea topicArea = TopicArea.valueOf(node.get("topicArea").asText());
 		String introText = node.get("introText").asText();
 		String questionText = node.get("questionText").asText();
+		
+		// Extract difficulty from JSON if present, otherwise default to MEDIUM
+		Difficulty difficulty = node.has("difficulty") 
+			? Difficulty.valueOf(node.get("difficulty").asText().toUpperCase(Locale.ROOT))
+			: Difficulty.MEDIUM;
 
 		return switch (type) {
 			case "MULTIPLE_CHOICE" -> {
@@ -128,11 +133,11 @@ public class QuestionProvider implements QuestionService {
 					answers.add(new Answer(a.get("text").asText(), a.get("points").asInt()));
 				}
 				boolean allowMultiple = node.has("allowMultipleSelection") && node.get("allowMultipleSelection").asBoolean();
-				yield new MultipleChoiceQuestion(id, topicArea, introText, questionText, answers, allowMultiple);
+				yield new MultipleChoiceQuestion(id, topicArea, introText, questionText, answers, allowMultiple, difficulty);
 			}
 			case "TRUE_FALSE" -> {
 				boolean correctAnswer = node.get("correctAnswer").asBoolean();
-				yield new TrueFalseQuestion(id, topicArea, introText, questionText, correctAnswer);
+				yield new TrueFalseQuestion(id, topicArea, introText, questionText, correctAnswer, difficulty);
 			}
 			case "FILL_IN_BLANK" -> {
 				List<FillInBlankQuestion.Blank> blanks = new ArrayList<>();
@@ -145,7 +150,7 @@ public class QuestionProvider implements QuestionService {
 					}
 					blanks.add(new FillInBlankQuestion.Blank(textBefore, options, textAfter));
 				}
-				yield new FillInBlankQuestion(id, topicArea, introText, questionText, blanks);
+				yield new FillInBlankQuestion(id, topicArea, introText, questionText, blanks, difficulty);
 			}
 			default -> null;
 		};
@@ -176,12 +181,22 @@ public class QuestionProvider implements QuestionService {
 	}
 
 	private Question mapMultipleChoiceQuestion(QuestionEntity entity, TopicArea topicArea, String introText, String questionText) {
+		Difficulty difficulty = extractDifficulty(entity);
+		
+		// Count the number of correct answers first
+		long numberOfCorrectAnswers = entity.getMcAnswers().stream()
+				.filter(McAnswerEntity::isCorrect)
+				.count();
+		
+		int correctPoints = ScoreCalculator.calculateMultipleChoicePoints(difficulty, (int) numberOfCorrectAnswers, true);
+		int wrongPoints = ScoreCalculator.calculateMultipleChoicePoints(difficulty, (int) numberOfCorrectAnswers, false);
+		
 		List<Answer> answers = entity.getMcAnswers().stream()
 				.sorted((left, right) -> Integer.compare(
 						valueOrDefault(left.getOptionOrder(), Integer.MAX_VALUE),
 						valueOrDefault(right.getOptionOrder(), Integer.MAX_VALUE)
 				))
-				.map(answer -> new Answer(answer.getOptionText(), answer.isCorrect() ? positivePoints(entity) : 0))
+				.map(answer -> new Answer(answer.getOptionText(), answer.isCorrect() ? correctPoints : wrongPoints))
 				.toList();
 
 		if (answers.isEmpty()) {
@@ -194,11 +209,14 @@ public class QuestionProvider implements QuestionService {
 				introText,
 				questionText,
 				answers,
-				Boolean.TRUE.equals(entity.getAllowsMultiple())
+				Boolean.TRUE.equals(entity.getAllowsMultiple()),
+				difficulty
 		);
 	}
 
 	private Question mapTrueFalseQuestion(QuestionEntity entity, TopicArea topicArea, String introText, String questionText) {
+		Difficulty difficulty = extractDifficulty(entity);
+		
 		boolean correctAnswer = entity.getMcAnswers().stream()
 				.sorted((left, right) -> Integer.compare(
 						valueOrDefault(left.getOptionOrder(), Integer.MAX_VALUE),
@@ -212,16 +230,23 @@ public class QuestionProvider implements QuestionService {
 				})
 				.orElse(false);
 
-		return new TrueFalseQuestion(entity.getId(), topicArea, introText, questionText, correctAnswer);
+		return new TrueFalseQuestion(entity.getId(), topicArea, introText, questionText, correctAnswer, difficulty);
 	}
 
 	private Question mapGapQuestion(QuestionEntity entity, TopicArea topicArea, String introText, String questionText) {
-		List<FillInBlankQuestion.Blank> blanks = entity.getGapFields().stream()
+		Difficulty difficulty = extractDifficulty(entity);
+		
+		List<GapFieldEntity> gapFieldsList = entity.getGapFields().stream()
 				.sorted((left, right) -> Integer.compare(
 						valueOrDefault(left.getGapIndex(), Integer.MAX_VALUE),
 						valueOrDefault(right.getGapIndex(), Integer.MAX_VALUE)
 				))
-				.map(this::mapGapBlank)
+				.toList();
+		
+		int totalGaps = gapFieldsList.size();
+		
+		List<FillInBlankQuestion.Blank> blanks = gapFieldsList.stream()
+				.map(gapField -> mapGapBlank(gapField, difficulty, totalGaps))
 				.filter(Objects::nonNull)
 				.toList();
 
@@ -229,16 +254,19 @@ public class QuestionProvider implements QuestionService {
 			return null;
 		}
 
-		return new FillInBlankQuestion(entity.getId(), topicArea, introText, questionText, blanks);
+		return new FillInBlankQuestion(entity.getId(), topicArea, introText, questionText, blanks, difficulty);
 	}
 
-	private FillInBlankQuestion.Blank mapGapBlank(GapFieldEntity gapField) {
+	private FillInBlankQuestion.Blank mapGapBlank(GapFieldEntity gapField, Difficulty difficulty, int totalGaps) {
+		int correctPoints = ScoreCalculator.calculateGapPoints(difficulty, totalGaps, true);
+		int wrongPoints = ScoreCalculator.calculateGapPoints(difficulty, totalGaps, false);
+		
 		List<Answer> options = gapField.getOptions().stream()
 				.sorted((left, right) -> Integer.compare(
 						valueOrDefault(left.getOptionOrder(), Integer.MAX_VALUE),
 						valueOrDefault(right.getOptionOrder(), Integer.MAX_VALUE)
 				))
-				.map(this::mapGapOption)
+				.map(option -> new Answer(option.getOptionText(), option.isCorrect() ? correctPoints : wrongPoints))
 				.toList();
 
 		if (options.isEmpty()) {
@@ -252,9 +280,7 @@ public class QuestionProvider implements QuestionService {
 		);
 	}
 
-	private Answer mapGapOption(GapOptionEntity option) {
-		return new Answer(option.getOptionText(), option.isCorrect() ? 10 : 0);
-	}
+
 
 	private TopicArea resolveTopicArea(QuestionEntity entity) {
 		return entity.getThemes().stream()
@@ -289,8 +315,13 @@ public class QuestionProvider implements QuestionService {
 		return value.replaceAll("^_+", "").replaceAll("_+$", "");
 	}
 
-	private int positivePoints(QuestionEntity entity) {
-		return Math.max(1, valueOrDefault(entity.getPoints(), 10));
+	/**
+	 * Extracts the difficulty level from the question entity's points field.
+	 * Maps: 1 -> EASY, 2 -> MEDIUM, 3+ -> HARD
+	 */
+	private Difficulty extractDifficulty(QuestionEntity entity) {
+		int points = valueOrDefault(entity.getPoints(), 1);
+		return Difficulty.fromPoints(points);
 	}
 
 	private int valueOrDefault(Integer value, int defaultValue) {

@@ -104,8 +104,15 @@ public class GameLoop extends AnimationTimer {
 						if (gp.ui.advanceFillBlankIfNeeded()) {
 							return;
 						}
-						gp.player.score += 10;
-						gp.ui.showFloatingScore(10);
+						// Get the actual points from the selected answer
+						List<Answer> answers = gp.ui.getSelectableAnswers();
+						int selectedIndex = gp.ui.getSelectedAnswer() - 1;
+						int earnedPoints = (selectedIndex >= 0 && selectedIndex < answers.size()) 
+							? answers.get(selectedIndex).points() 
+							: 10; // fallback to 10
+						
+						gp.player.score += earnedPoints;
+						gp.ui.showFloatingScore(earnedPoints);
 						gp.ui.closeQuiz();
 						int idx = gp.interactingObjectIndex;
 						if (idx != -1 && gp.obj.get(idx) != null) {
@@ -116,8 +123,15 @@ public class GameLoop extends AnimationTimer {
 							}
 						}
 					} else {
-						gp.player.score = Math.max(0, gp.player.score - 10);
-						gp.ui.showFloatingScore(-10);
+						// Get the actual negative points from the selected answer
+						List<Answer> answers = gp.ui.getSelectableAnswers();
+						int selectedIndex = gp.ui.getSelectedAnswer() - 1;
+						int lostPoints = (selectedIndex >= 0 && selectedIndex < answers.size()) 
+							? answers.get(selectedIndex).points() 
+							: -10; // fallback to -10
+						
+						gp.player.score = Math.max(0, gp.player.score + lostPoints); // lostPoints is already negative
+						gp.ui.showFloatingScore(lostPoints);
 						gp.playSE(5);
 						gp.player.takeHalfHeartDamage();
 						if (gp.player.isDead) {

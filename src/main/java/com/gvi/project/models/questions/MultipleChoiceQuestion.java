@@ -7,12 +7,15 @@ public class MultipleChoiceQuestion extends Question {
 
     private final List<Answer> answers;
     private final boolean allowMultipleSelection;
+    private final int numberOfCorrectOptions;
 
     public MultipleChoiceQuestion(int id, TopicArea topicArea, String introText, String questionText,
-                                  List<Answer> answers, boolean allowMultipleSelection) {
-        super(id, topicArea, introText, questionText, QuestionType.MULTIPLE_CHOICE);
+                                  List<Answer> answers, boolean allowMultipleSelection, Difficulty difficulty) {
+        super(id, topicArea, introText, questionText, QuestionType.MULTIPLE_CHOICE, difficulty);
         this.answers = List.copyOf(answers);
         this.allowMultipleSelection = allowMultipleSelection;
+        // Count how many answers are marked as correct (points > 0)
+        this.numberOfCorrectOptions = (int) answers.stream().filter(a -> a.points() > 0).count();
     }
 
     @Override
@@ -24,11 +27,12 @@ public class MultipleChoiceQuestion extends Question {
         return allowMultipleSelection;
     }
 
+    public int getNumberOfCorrectOptions() {
+        return numberOfCorrectOptions;
+    }
+
     @Override
     public int getMaxPoints() {
-        if (allowMultipleSelection) {
-            return answers.stream().mapToInt(Answer::points).filter(p -> p > 0).sum();
-        }
-        return answers.stream().mapToInt(Answer::points).max().orElse(0);
+        return ScoreCalculator.calculateMultipleChoiceMaxPoints(getDifficulty(), numberOfCorrectOptions);
     }
 }
