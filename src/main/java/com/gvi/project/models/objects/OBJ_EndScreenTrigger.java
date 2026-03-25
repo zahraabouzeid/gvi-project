@@ -2,6 +2,7 @@ package com.gvi.project.models.objects;
 
 import com.gvi.project.GamePanel;
 import com.gvi.project.GameState;
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 
@@ -20,8 +21,8 @@ public class OBJ_EndScreenTrigger extends SuperObject {
     }
 
     private void setCollisionBox(){
-        this.collisionBox.setHeight(16 * 3);
-        this.collisionBox.setWidth(16 * 3 * 2);
+        this.collisionBox.setHeight(GeneralSettings.getTileSize());
+        this.collisionBox.setWidth(GeneralSettings.getTileSize() * 2);
     }
 
     @Override

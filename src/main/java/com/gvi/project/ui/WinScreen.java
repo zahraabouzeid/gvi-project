@@ -5,15 +5,9 @@ import javafx.scene.canvas.GraphicsContext;
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
-public class WinScreen {
+public class WinScreen extends GameScreen {
 
-    private final int screenWidth;
-    private final int screenHeight;
-
-    public WinScreen(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public WinScreen() {}
 
     public void draw(GraphicsContext gc, String formattedTime) {
         gc.setFill(OVERLAY_MEDIUM);

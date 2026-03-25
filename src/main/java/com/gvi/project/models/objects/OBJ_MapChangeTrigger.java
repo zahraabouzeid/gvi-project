@@ -1,6 +1,7 @@
 package com.gvi.project.models.objects;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.game_maps.GameMaps;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
@@ -44,24 +45,24 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 		switch (direction){
 			case "up":
 			case "down":
-				this.collisionBox.setHeight(16 * 3);
-				this.collisionBox.setWidth(16 * 3 * 2);
+				this.collisionBox.setHeight(GeneralSettings.getTileSize());
+				this.collisionBox.setWidth(GeneralSettings.getTileSize() * 2);
 				break;
 			case "left":
 			case "right":
 				if (spriteDirectionUp){
-					collisionBox.setY(-48 * (sprite.imageHeight - 1));
+					collisionBox.setY(-GeneralSettings.getTileSize() * (sprite.imageHeight - 1));
 				}
-				this.collisionBox.setHeight(48 * 2);
-				this.collisionBox.setWidth(16 * 3);
+				this.collisionBox.setHeight(GeneralSettings.getTileSize() * 2);
+				this.collisionBox.setWidth(GeneralSettings.getTileSize());
 				break;
 		}
 	}
 
     @Override
 	public void onStep(Player player, GamePanel gp, int objIndex) {
-		int xDiff = player.gridX - this.worldX / gp.generalSettings.tileSize;
-		int yDiff = player.gridY - this.worldY / gp.generalSettings.tileSize;
+		int xDiff = player.gridX - this.worldX / GeneralSettings.getTileSize();
+		int yDiff = player.gridY - this.worldY / GeneralSettings.getTileSize();
 
 		gp.playSE(3);
 		gp.loadMap(GameMaps.fromId(targetMapId));

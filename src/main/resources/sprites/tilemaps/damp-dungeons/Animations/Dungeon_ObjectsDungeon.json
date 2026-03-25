@@ -256,6 +256,50 @@
           "spriteHeight": 1
         }
       }
+    },
+    "chest_brown": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 0,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_2": {
+          "spriteX": 1,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_3": {
+          "spriteX": 2,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        }
+      }
+    },
+    "chest_red": {
+      "sprites": {
+        "frame_1": {
+          "spriteX": 0,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_2": {
+          "spriteX": 1,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "frame_3": {
+          "spriteX": 2,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        }
+      }
     }
   }
 }

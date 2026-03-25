@@ -20,7 +20,7 @@ public class OBJ_Key extends AnimatedObject {
 	public void onConfirm(GamePanel gp, int objIndex) {
 		gp.playSE(1);
 
-		gp.player.addItem(id);
+		gp.player.addItem(id, 1);
 
 		gp.obj.remove(objIndex);
 		gp.ui.openMessage("You got a %s key!".formatted(name));

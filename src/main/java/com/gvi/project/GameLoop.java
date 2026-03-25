@@ -31,9 +31,9 @@ public class GameLoop extends AnimationTimer {
 	@Override
 	public void handle(long now) {
 
-		double fixedDelta = gp.generalSettings.drawInterval / 1_000_000_000.0;
+		double fixedDelta = GeneralSettings.getDrawInterval() / 1_000_000_000.0;
 
-		delta += (now - lastTime) / gp.generalSettings.drawInterval;
+		delta += (now - lastTime) / GeneralSettings.getDrawInterval();
 		timer += (now - lastTime);
 		lastTime = now;
 
@@ -85,7 +85,7 @@ public class GameLoop extends AnimationTimer {
 			return;
 		}
 		if (gp.gameState == GameState.PLAY) {
-			gp.generalSettings.isDevMode = gp.keyHandler.f2Pressed;
+			GeneralSettings.setDevMode(gp.keyHandler.f2Pressed);
 
 			if (gp.keyHandler.escPressed) {
 				gp.keyHandler.escPressed = false;
@@ -378,9 +378,9 @@ public class GameLoop extends AnimationTimer {
 	}
 
 	private void renderScreen() {
-		gp.gc.clearRect(0, 0, gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+		gp.gc.clearRect(0, 0, GeneralSettings.getScreenWidth(), GeneralSettings.getScreenHeight());
 		gp.gc.setFill(Color.BLACK);
-		gp.gc.fillRect(0, 0, gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+		gp.gc.fillRect(0, 0, GeneralSettings.getScreenWidth(), GeneralSettings.getScreenHeight());
 
 		if (gp.gameState == GameState.TITLE) {
 			gp.ui.drawTitleScreen(gp.gc);

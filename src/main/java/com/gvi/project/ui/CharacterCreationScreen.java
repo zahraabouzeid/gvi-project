@@ -13,10 +13,8 @@ import static com.gvi.project.ui.UIUtils.*;
  * Character sprite selection screen.
  * Allows players to choose from available character sprite variations.
  */
-public class CharacterCreationScreen {
+public class CharacterCreationScreen extends GameScreen {
 
-    private final int screenWidth;
-    private final int screenHeight;
     private int blinkCounter = 0;
 
     // Bereitgestellte sprites
@@ -38,10 +36,7 @@ public class CharacterCreationScreen {
 
     private int selectedSpriteIndex = 0;
 
-    public CharacterCreationScreen(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public CharacterCreationScreen() {}
 
     public void draw(GraphicsContext gc, Player player) {
         blinkCounter++;

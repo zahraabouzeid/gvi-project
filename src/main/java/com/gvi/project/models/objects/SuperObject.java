@@ -1,5 +1,6 @@
 package com.gvi.project.models.objects;
 
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.components.Component;
 import com.gvi.project.GamePanel;
 import com.gvi.project.models.core.Renderable;
@@ -55,15 +56,15 @@ public abstract class SuperObject implements Renderable {
 
 	@Override
 	public void render(GamePanel gp) {
-		int tileSize = gp.generalSettings.tileSize;
+		int tileSize = GeneralSettings.getTileSize();
 
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-		if (worldX + gp.generalSettings.tileSize > gp.player.worldX - gp.player.screenX &&
-			worldX - gp.generalSettings.tileSize < gp.player.worldX + gp.player.screenX &&
-			worldY + gp.generalSettings.tileSize > gp.player.worldY - gp.player.screenY &&
-			worldY - gp.generalSettings.tileSize < gp.player.worldY + gp.player.screenY) {
+		if (worldX + GeneralSettings.getTileSize() > gp.player.worldX - gp.player.screenX &&
+			worldX - GeneralSettings.getTileSize() < gp.player.worldX + gp.player.screenX &&
+			worldY + GeneralSettings.getTileSize() > gp.player.worldY - gp.player.screenY &&
+			worldY - GeneralSettings.getTileSize() < gp.player.worldY + gp.player.screenY) {
 
 			if (spriteDirectionUp) {
 				gp.gc.drawImage(sprite.image, screenX + (sprite.imageOffsetX * tileSize), screenY - ((sprite.imageHeight - 1) * tileSize) + (sprite.imageOffsetY * tileSize), tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
@@ -78,17 +79,17 @@ public abstract class SuperObject implements Renderable {
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-		if (worldX + gp.generalSettings.tileSize > gp.player.worldX - gp.player.screenX &&
-			worldX - gp.generalSettings.tileSize < gp.player.worldX + gp.player.screenX &&
-			worldY + gp.generalSettings.tileSize > gp.player.worldY - gp.player.screenY &&
-			worldY - gp.generalSettings.tileSize < gp.player.worldY + gp.player.screenY) {
+		if (worldX + GeneralSettings.getTileSize() > gp.player.worldX - gp.player.screenX &&
+			worldX - GeneralSettings.getTileSize() < gp.player.worldX + gp.player.screenX &&
+			worldY + GeneralSettings.getTileSize() > gp.player.worldY - gp.player.screenY &&
+			worldY - GeneralSettings.getTileSize() < gp.player.worldY + gp.player.screenY) {
 
-			if (gp.generalSettings.isDevMode && this.collision) {
+			if (GeneralSettings.isDevMode() && this.collision) {
 				gp.gc.setFill(new Color(1, 0, 0, 0.3));
 				gp.gc.fillRect(screenX + collisionBox.getX(), screenY + collisionBox.getY(), collisionBox.getWidth(), collisionBox.getHeight());
 			}
 
-			if (gp.generalSettings.isDevMode && !this.collision) {
+			if (GeneralSettings.isDevMode() && !this.collision) {
 				gp.gc.setFill(new Color(0, 1, 0, 0.3));
 				gp.gc.fillRect(screenX + collisionBox.getX(), screenY + collisionBox.getY(), collisionBox.getWidth(), collisionBox.getHeight());
 			}

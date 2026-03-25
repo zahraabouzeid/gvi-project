@@ -1,6 +1,7 @@
 package com.gvi.project.ui;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.models.objects.KeyType;
 import com.gvi.project.models.objects.OBJ_Key;
 import com.gvi.project.models.objects.SuperObject;
@@ -25,8 +26,8 @@ public class HUD {
 
     public HUD(GamePanel gp) {
         this.gp = gp;
-        hudX = gp.generalSettings.tileSize / 2.0;
-        hudY = gp.generalSettings.tileSize / 2.0;
+        hudX = GeneralSettings.getTileSize() / 2.0;
+        hudY = GeneralSettings.getTileSize() / 2.0;
         initHudImagesLoading();
     }
 
@@ -75,14 +76,14 @@ public class HUD {
         double bgPadding = 16;
         double bgWidth = scoreTextWidth + bgPadding * 2;
         double bgHeight = 36;
-        double boxX = gp.generalSettings.screenWidth / 2.0 - bgWidth / 2.0;
+        double boxX = GeneralSettings.getScreenWidth() / 2.0 - bgWidth / 2.0;
         double boxY = 18;
         
         // Draw pixel-art box with rounded corners
         drawPixelBox(gc, boxX, boxY, bgWidth, bgHeight);
         
         // Draw score text (centered in box)
-        double scoreX = gp.generalSettings.screenWidth / 2.0 - scoreTextWidth / 2.0;
+        double scoreX = GeneralSettings.getScreenWidth() / 2.0 - scoreTextWidth / 2.0;
         double scoreY = boxY + bgHeight / 2.0 + 6;
         gc.setFill(TEXT_WHITE);
         gc.fillText(scoreStr, scoreX, scoreY);
@@ -101,7 +102,7 @@ public class HUD {
         gc.setFont(FONT_LG);
         gc.setFill(TEXT_WHITE);
         double timeW = getTextWidth(formattedTime, FONT_LG);
-        gc.fillText(formattedTime, gp.generalSettings.screenWidth - timeW - 14, gp.generalSettings.screenHeight - 14);
+        gc.fillText(formattedTime, GeneralSettings.getScreenWidth() - timeW - 14, GeneralSettings.getScreenHeight() - 14);
 
         if (gp.player.speed > 4) {
             drawSpeedBoost(gc);
@@ -116,7 +117,7 @@ public class HUD {
         gc.setFont(FONT_XS);
 
         double textW = getTextWidth(hint, FONT_XS);
-        double px = gp.generalSettings.screenWidth / 2.0 - textW / 2.0;
+        double px = GeneralSettings.getScreenWidth() / 2.0 - textW / 2.0;
         double py = gp.player.screenY - 20;
 
         // Shadow
@@ -129,7 +130,7 @@ public class HUD {
 
     private void drawHearts(GraphicsContext gc) {
         int hearts = (int) Math.ceil(gp.player.maxHealthHalf / 2.0);
-        int startX = (int) (gp.generalSettings.tileSize / 2.0);
+        int startX = (int) (GeneralSettings.getTileSize() / 2.0);
         int startY = 28;
         int spacing = 38;
 
@@ -184,7 +185,7 @@ public class HUD {
         String text = "SPEED BOOST";
         gc.setFont(FONT_XS);
         double tw = getTextWidth(text, FONT_XS);
-        double x = gp.generalSettings.screenWidth / 2.0 - tw / 2.0;
+        double x = GeneralSettings.getScreenWidth() / 2.0 - tw / 2.0;
         double y = 14;
 
         drawPixelBox(gc, x - 10, y - 12, tw + 20, 22);

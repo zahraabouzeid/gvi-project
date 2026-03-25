@@ -9,17 +9,13 @@ import static com.gvi.project.ui.UIUtils.*;
 /**
  * Screen for entering the player's character name at the start of the game.
  */
-public class CharacterNameScreen {
+public class CharacterNameScreen extends GameScreen {
 
-    private final int screenWidth;
-    private final int screenHeight;
+
     private int blinkCounter = 0;
     private final int maxNameLength = 16;
 
-    public CharacterNameScreen(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public CharacterNameScreen() {}
 
     public void draw(GraphicsContext gc, String currentName) {
         blinkCounter++;

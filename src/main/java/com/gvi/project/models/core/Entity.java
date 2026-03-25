@@ -32,7 +32,7 @@ public abstract class Entity implements Renderable{
 	public boolean canMove = false;
 
 	public Entity (){
-		spriteMap = new HashMap<String,Sprite>();
+		spriteMap = new HashMap<>();
 	}
 
 	@Override

@@ -705,6 +705,166 @@
         }
       }
     },
+    "wooden_railing": {
+      "sprites": {
+        "horizontal_connected_bottom_left": {
+          "spriteX": 5,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "horizontal_connected_bottom_right": {
+          "spriteX": 7,
+          "spriteY": 4,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "vertical_connected_left": {
+          "spriteX": 5,
+          "spriteY": 5,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "vertical_connected_right": {
+          "spriteX": 7,
+          "spriteY": 5,
+          "spriteWidth": 3,
+          "spriteHeight": 1
+        },
+        "horizontal_end_left": {
+          "spriteX": 5,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "horizontal": {
+          "spriteX": 6,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "horizontal_end_right": {
+          "spriteX": 7,
+          "spriteY": 6,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "diagonal_up_top": {
+          "spriteX": 5,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "diagonal_up_bottom": {
+          "spriteX": 5,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "diagonal_down_top": {
+          "spriteX": 5,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "diagonal_down_bottom": {
+          "spriteX": 5,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "vertical_left_end_top": {
+          "spriteX": 5,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "vertical_left_end_bottom": {
+          "spriteX": 5,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "vertical_right_end_top": {
+          "spriteX": 5,
+          "spriteY": 7,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "vertical_right_end_bottom": {
+          "spriteX": 5,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "table": {
+      "sprites": {
+        "wood": {
+          "spriteX": 9,
+          "spriteY": 4,
+          "spriteWidth": 3,
+          "spriteHeight": 3
+        },
+        "wood_damaged": {
+          "spriteX": 12,
+          "spriteY": 4,
+          "spriteWidth": 3,
+          "spriteHeight": 3
+        }
+      }
+    },
+    "stool": {
+      "sprites": {
+        "wood": {
+          "spriteX": 12,
+          "spriteY": 1,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "vase": {
+      "sprites": {
+        "multiple_medium_1": {
+          "spriteX": 16,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "multiple_medium_2": {
+          "spriteX": 17,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "multiple_big": {
+          "spriteX": 18,
+          "spriteY": 0,
+          "spriteWidth": 2,
+          "spriteHeight": 2
+        },
+        "single_medium": {
+          "spriteX": 19,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "multiple_small": {
+          "spriteX": 20,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "single_small": {
+          "spriteX": 21,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
     "shelf": {
       "sprites": {
         "horizontal_base_empty": {
@@ -736,6 +896,96 @@
           "spriteY": 0,
           "spriteWidth": 1,
           "spriteHeight": 1
+        }
+      }
+    },
+    "create": {
+      "sprites": {
+        "single_big": {
+          "spriteX": 16,
+          "spriteY": 2,
+          "spriteWidth": 2,
+          "spriteHeight": 2
+        },
+        "single_big_diagonal": {
+          "spriteX": 18,
+          "spriteY": 2,
+          "spriteWidth": 2,
+          "spriteHeight": 2
+        },
+        "single_medium_1": {
+          "spriteX": 20,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "single_medium_2": {
+          "spriteX": 21,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "single_medium_diagonal": {
+          "spriteX": 22,
+          "spriteY": 2,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "single_medium_bottom": {
+          "spriteX": 23,
+          "spriteY": 2,
+          "spriteWidth": 2,
+          "spriteHeight": 2
+        },
+        "multiple_medium": {
+          "spriteX": 23,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 2
+        },
+        "single_small": {
+          "spriteX": 23,
+          "spriteY": 0,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "books": {
+      "sprites": {
+        "stack_1": {
+          "spriteX": 24,
+          "spriteY": 10,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "stack_2": {
+          "spriteX": 24,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "stack_3": {
+          "spriteX": 25,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        },
+        "stack_4": {
+          "spriteX": 26,
+          "spriteY": 8,
+          "spriteWidth": 1,
+          "spriteHeight": 1
+        }
+      }
+    },
+    "brazier": {
+      "sprites": {
+        "extinguished": {
+          "spriteX": 23,
+          "spriteY": 9,
+          "spriteWidth": 1,
+          "spriteHeight": 2
         }
       }
     }

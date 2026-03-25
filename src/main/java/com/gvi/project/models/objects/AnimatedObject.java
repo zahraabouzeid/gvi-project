@@ -1,6 +1,7 @@
 package com.gvi.project.models.objects;
 
 import com.gvi.project.components.AnimationComponent;
+import com.gvi.project.models.sprite_sheets.SpriteSheet;
 
 public abstract class AnimatedObject extends SuperObject{
 
@@ -11,4 +12,10 @@ public abstract class AnimatedObject extends SuperObject{
 	}
 
 	public abstract void setUpAnimationComponent();
+
+	public void setAnimationSprites(String sheetPath, String spriteGroupId){
+		SpriteSheet sheet = new SpriteSheet(sheetPath);
+		AnimationComponent animComp = (AnimationComponent) this.components.get("Animation");
+		animComp.sprites = sheet.getGroupSpritesAsList(spriteGroupId);
+	}
 }

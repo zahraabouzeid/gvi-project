@@ -1,6 +1,7 @@
 package com.gvi.project.ui;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.helper.ColorHelper;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -24,10 +25,10 @@ public class Minimap {
         int minimapW = gp.currentMap.width * pixelSize;
         int minimapH = gp.currentMap.height * pixelSize;
         int margin = 10;
-        int startX = gp.generalSettings.screenWidth - MINIMAP_SIZE - margin + (MINIMAP_SIZE - minimapW) / 2;
+        int startX = GeneralSettings.getScreenWidth() - MINIMAP_SIZE - margin + (MINIMAP_SIZE - minimapW) / 2;
         int startY = margin + (MINIMAP_SIZE - minimapH) / 2;
 
-        double centerX = gp.generalSettings.screenWidth - MINIMAP_SIZE / 2.0 - margin;
+        double centerX = GeneralSettings.getScreenWidth() - MINIMAP_SIZE / 2.0 - margin;
         double centerY = margin + MINIMAP_SIZE / 2.0;
         double radius = MINIMAP_SIZE / 2.0;
 
@@ -91,8 +92,8 @@ public class Minimap {
         gc.setFill(Color.YELLOW);
         for (int i = 0; i < gp.obj.size(); i++) {
             if (gp.obj.get(i) != null) {
-                int objCol = gp.obj.get(i).worldX / gp.generalSettings.tileSize;
-                int objRow = gp.obj.get(i).worldY / gp.generalSettings.tileSize;
+                int objCol = gp.obj.get(i).worldX / GeneralSettings.getTileSize();
+                int objRow = gp.obj.get(i).worldY / GeneralSettings.getTileSize();
                 double ox = startX + objCol * pixelSize + pixelSize / 2.0;
                 double oy = startY + objRow * pixelSize + pixelSize / 2.0;
                 if (distance(ox, oy, cx, cy) <= radius) {
@@ -104,8 +105,8 @@ public class Minimap {
 
     private void drawPlayer(GraphicsContext gc, int startX, int startY,
                             double cx, double cy, double radius, int pixelSize) {
-        int playerCol = gp.player.worldX / gp.generalSettings.tileSize;
-        int playerRow = gp.player.worldY / gp.generalSettings.tileSize;
+        int playerCol = gp.player.worldX / GeneralSettings.getTileSize();
+        int playerRow = gp.player.worldY / GeneralSettings.getTileSize();
         gc.setFill(Color.RED);
         gc.fillRect(startX + playerCol * pixelSize - 1, startY + playerRow * pixelSize - 1,
                     pixelSize + 2, pixelSize + 2);

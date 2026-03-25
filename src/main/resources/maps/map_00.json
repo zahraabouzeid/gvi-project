@@ -336,53 +336,60 @@
             "value": 450,
             "messageOnFailure": "Needs a score of 450 or higher",
             "comparator": ">=",
-            "compareWith": "score"
+            "compareWith": "score",
+            "onSuccess": ""
           },
           {
             "type": "item",
             "value": 1,
-            "messageOnFailure": "Needs a score of 450 or higher",
+            "messageOnFailure": "You need 1 copper key",
             "comparator":">=",
-            "compareWith": "key_copper"
+            "compareWith": "key_copper",
+            "onSuccess": "remove"
           },
           {
             "type": "item",
             "value": 1,
-            "messageOnFailure": "Needs a score of 450 or higher",
+            "messageOnFailure": "You need 1 iron key",
             "comparator":">=",
-            "compareWith": "key_iron"
+            "compareWith": "key_iron",
+            "onSuccess": "remove"
           },
           {
             "type": "item",
             "value": 1,
-            "messageOnFailure": "youh",
+            "messageOnFailure": "You need 1 golden key",
             "comparator":">=",
-            "compareWith": "key_gold"
+            "compareWith": "key_gold",
+            "onSuccess": "remove"
           }
         ]
       },
-      "data": {}
+      "data": {
+        "type": "drop_gate"
+      }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 1,
       "y": 6,
-      "conditions":{},
+      "conditions": null,
       "data": {
         "target_map_spawn_location_x": "39",
-        "target_map_spawn_location_y": "5",
+        "target_map_spawn_location_y": "17",
         "direction": "left",
-        "map_id": "3"
+        "map_id": "3",
+        "player_direction": "down"
       }
     },
     {
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 10,
       "y": 6,
-      "conditions":{},
+      "conditions": null,
       "data": {
-        "target_map_spawn_location_x": "2",
-        "target_map_spawn_location_y": "24",
+        "target_map_spawn_location_x": "3",
+        "target_map_spawn_location_y": "26",
         "direction": "right",
         "map_id": "1"
       }
@@ -391,7 +398,7 @@
       "objectId": "MAP_CHANGE_TRIGGER",
       "x": 5,
       "y": 10,
-      "conditions":{},
+      "conditions": null,
       "data": {
         "target_map_spawn_location_x": "12",
         "target_map_spawn_location_y": "4",

@@ -19,10 +19,6 @@ import java.util.List;
 
 public class GamePanel {
 
-	public GeneralSettings generalSettings = new GeneralSettings();
-
-
-
 	public GameState gameState = GameState.TITLE;
 	public SpriteManager spriteManager = new SpriteManager();
 	public KeyHandler keyHandler = new KeyHandler();
@@ -33,7 +29,7 @@ public class GamePanel {
 	public final List<Entity> entityList = new ArrayList<>();
 	public final List<SuperObject> obj = new ArrayList<>();
 	public final List<SuperObject> hudObj = new ArrayList<>();
-	public final Canvas canvas = new Canvas(generalSettings.screenWidth, generalSettings.screenHeight);
+	public final Canvas canvas = new Canvas(GeneralSettings.getScreenWidth(), GeneralSettings.getScreenHeight());
 	public final GraphicsContext gc = canvas.getGraphicsContext2D();
 	public final GameLoop gameLoop = new GameLoop(this);
 	public final Player player = new Player(this, keyHandler);

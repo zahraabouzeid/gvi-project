@@ -6,19 +6,15 @@ import javafx.scene.paint.Color;
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
-public class PauseScreen {
+public class PauseScreen extends GameScreen {
 
     private static final String[] OPTIONS = {"Resume", "Save", "Load", "Exit"};
     private static final int OPTION_COUNT = OPTIONS.length;
 
-    private final int screenWidth;
-    private final int screenHeight;
+
     private int selectedOption = 0;
 
-    public PauseScreen(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public PauseScreen() {}
 
     public void reset() {
         selectedOption = 0;

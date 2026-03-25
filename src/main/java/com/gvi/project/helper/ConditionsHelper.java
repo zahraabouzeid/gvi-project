@@ -9,8 +9,8 @@ public class ConditionsHelper {
 
 	public static ConditionResult conditionsAreMet(GamePanel gp, ConditionsObject conditions) {
 
-		StringBuilder messageBuilder = new StringBuilder();
 		boolean overallResult;
+		ConditionResult overallResultObject = new ConditionResult();
 
 		if ("and".equals(conditions.and_or)) {
 			overallResult = true;
@@ -20,7 +20,7 @@ public class ConditionsHelper {
 
 				if (!result.success) {
 					overallResult = false;
-					messageBuilder.append(result.message).append("\n");
+					overallResultObject.addStringMessage(result.getMessage());
 				}
 			}
 		} else if ("or".equals(conditions.and_or)) {
@@ -32,14 +32,15 @@ public class ConditionsHelper {
 				if (result.success) {
 					return new ConditionResult(true, "");
 				} else {
-					messageBuilder.append(result.message).append("\n");
+					overallResultObject.addStringMessage(result.getMessage());
 				}
 			}
 		} else {
-			return new ConditionResult(false, "Invalid condition type");
+			return overallResultObject;
 		}
 
-		return new ConditionResult(overallResult, messageBuilder.toString().trim());
+		overallResultObject.success = overallResult;
+		return overallResultObject;
 	}
 
 	private static ConditionResult checkCondition(GamePanel gp, ConditionObject cObj) {
@@ -59,7 +60,7 @@ public class ConditionsHelper {
 
 		if (!result) {
 			return new ConditionResult(false,
-					"Your are missing %s x%d".formatted(cObj.compareWith, cObj.value));
+					cObj.messageOnFailure);
 		}
 
 		return new ConditionResult(true, "");
@@ -73,7 +74,7 @@ public class ConditionsHelper {
 
 				if (!result) {
 					yield new ConditionResult(false,
-							"Needs a score of %s or higher".formatted(cObj.value));
+							cObj.messageOnFailure);
 				}
 
 				yield new ConditionResult(true, "");

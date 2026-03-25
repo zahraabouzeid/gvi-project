@@ -22,8 +22,10 @@ public class ObjectFactory {
 						Integer.parseInt(data.getOrDefault("target_map_spawn_location_y", "0"))
 				);
 			case "BOOTS" -> new OBJ_Boots();
-			case "DOOR" -> new OBJ_Door(config.conditions);
+			case "DOOR" -> new OBJ_Door( data.getOrDefault("type", "drop_gate"), config.conditions);
+			case "CHEST" -> new OBJ_Chest( data.getOrDefault("type", "chest_brown"), config.conditions);
 			case "HEALING_POTION" -> new OBJ_HealingPotion();
+			case "WOOD_COLUMN" -> new OBJ_Wood_Column();
 			default -> throw new IllegalArgumentException("Unknown objectId: " + config.objectId);
 		};
 	}

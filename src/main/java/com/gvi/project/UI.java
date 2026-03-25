@@ -40,16 +40,16 @@ public class UI {
     public UI(GamePanel gp) {
         this.gp = gp;
 
-        titleScreen = new TitleScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        characterNameScreen = new CharacterNameScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        characterCreationScreen = new CharacterCreationScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        gameOverScreen = new GameOverScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        winScreen = new WinScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        pauseScreen = new PauseScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        saveSlotScreen = new SaveSlotScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
-        loadingScreen = new LoadingScreen(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        titleScreen = new TitleScreen();
+        characterNameScreen = new CharacterNameScreen();
+        characterCreationScreen = new CharacterCreationScreen();
+        gameOverScreen = new GameOverScreen();
+        winScreen = new WinScreen();
+        pauseScreen = new PauseScreen();
+        saveSlotScreen = new SaveSlotScreen();
+        loadingScreen = new LoadingScreen();
         hud = new HUD(gp);
-        quizDialog = new QuizDialog(gp.generalSettings.screenWidth, gp.generalSettings.screenHeight);
+        quizDialog = new QuizDialog();
         minimap = new Minimap(gp);
     }
 
@@ -231,14 +231,27 @@ public class UI {
     private void drawMessage(GraphicsContext gc) {
         gc.setFont(UITheme.FONT_SM);
         double msgW = UIUtils.getTextWidth(message, UITheme.FONT_SM);
-        double msgX = gp.generalSettings.screenWidth / 2.0 - msgW / 2.0;
-        double msgY = gp.generalSettings.screenHeight / 2.0 - 80;
-        UIUtils.drawPixelBox(gc, msgX - 16, msgY - 22, msgW + 32, 34);
+        double msgH = UIUtils.getTextHeight(message,UITheme.FONT_SM);
+        double fontH = UIUtils.getTextHeight("###", UITheme.FONT_SM);
+        double msgXOrigin = GeneralSettings.getScreenWidth() / 2.0 - msgW / 2.0;
+        double msgYOrigin = GeneralSettings.getScreenHeight() / 2.0 - 80;
+        double msgYOTextHeightOffset = msgYOrigin - msgH;
+        double paddingLR = 16;
+        double paddingTB = 22;
+
+        double boxX = msgXOrigin - paddingLR;
+        double boxY = msgYOrigin - paddingTB - msgH;
+        double boxW = msgW + paddingLR * 2;
+        double boxH = msgH + paddingTB;
+
+        double msgTimerMultiplier = msgH / fontH ;
+
+        UIUtils.drawPixelBox(gc, boxX, boxY, boxW, boxH - fontH / 2 + 3);
         gc.setFill(UITheme.TEXT_WHITE);
-        gc.fillText(message, msgX, msgY);
+        gc.fillText(message, msgXOrigin, msgYOTextHeightOffset );
 
         messageCounter++;
-        if (messageCounter > 120) {
+        if (messageCounter > 120 * msgTimerMultiplier) {
             messageCounter = 0;
             messageOn = false;
         }
