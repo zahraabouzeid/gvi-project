@@ -1,6 +1,7 @@
 package com.gvi.project.models.game_maps;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.helper.ConfigHelper;
 import com.gvi.project.models.game_maps.config.*;
 import com.gvi.project.models.objects.ObjectFactory;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GameMapLoader {
-	private GamePanel gp;
+	private final GamePanel gp;
 
 	Map<String, SpriteSheet> spriteSheets;
 
@@ -66,8 +67,14 @@ public class GameMapLoader {
 		if (config.objects == null) return;
 		for (GameObjectConfig objectConfig : config.objects){
 			SuperObject obj = ObjectFactory.create(objectConfig);
-			obj.worldX = objectConfig.x * gp.generalSettings.tileSize;
-			obj.worldY = objectConfig.y * gp.generalSettings.tileSize;
+
+			if (obj == null) {
+				throw new IllegalArgumentException("Unknown objectId: " + objectConfig.objectType);
+			};
+
+			obj.id = objectConfig.id != null ? objectConfig.id : "object id not set";
+			obj.worldX = objectConfig.x * GeneralSettings.getTileSize();
+			obj.worldY = objectConfig.y * GeneralSettings.getTileSize();
 			gp.obj.add(obj);
 		}
 	}
@@ -120,7 +127,7 @@ public class GameMapLoader {
 
 			//Iteriere über Spritegruppen, isoliere Teilbilder und registriere Sprites in SpriteManager
 			for (GameMapSpriteConfig usedSprite : sheetConfig.usedSprites){
-
+				System.out.println("reading: " + usedSprite.spriteGroup + "|" + usedSprite.spriteId);
 				Sprite sprite = new Sprite();
 				sprite.image = spriteSheet.getImage(usedSprite.spriteGroup, usedSprite.spriteId);
 				sprite.imageHeight = spriteSheet.getSpriteConfig(usedSprite.spriteGroup, usedSprite.spriteId).spriteHeight;
@@ -138,21 +145,21 @@ public class GameMapLoader {
 	}
 
 	private void registerBasicSprites(){
-		this.gp.spriteManager.registerSprite("empty", new Sprite(new WritableImage(gp.generalSettings.tileSize, gp.generalSettings.tileSize),1,1,false));
-		this.gp.spriteManager.registerSprite("blocker", new Sprite(new WritableImage(gp.generalSettings.tileSize, gp.generalSettings.tileSize),1,1,true));
-		this.gp.spriteManager.registerSprite("cover", new Sprite(createMonoColorImage(gp.generalSettings.tileSize, gp.generalSettings.tileSize, Color.BLACK),1,1,true));
+		this.gp.spriteManager.registerSprite("empty", new Sprite(new WritableImage(GeneralSettings.getTileSize(), GeneralSettings.getTileSize()),1,1,false));
+		this.gp.spriteManager.registerSprite("blocker", new Sprite(new WritableImage(GeneralSettings.getTileSize(), GeneralSettings.getTileSize()),1,1,true));
+		this.gp.spriteManager.registerSprite("cover", new Sprite(createMonoColorImage(GeneralSettings.getTileSize(), GeneralSettings.getTileSize(), Color.BLACK),1,1,true));
 	}
 
 	private Image createMonoColorImage(int width, int height, Color color){
 		WritableImage img = new WritableImage(
-				gp.generalSettings.tileSize,
-				gp.generalSettings.tileSize
+				GeneralSettings.getTileSize(),
+				GeneralSettings.getTileSize()
 		);
 
 		PixelWriter pw = img.getPixelWriter();
 
-		for (int y = 0; y < gp.generalSettings.tileSize; y++) {
-			for (int x = 0; x < gp.generalSettings.tileSize; x++) {
+		for (int y = 0; y < GeneralSettings.getTileSize(); y++) {
+			for (int x = 0; x < GeneralSettings.getTileSize(); x++) {
 				pw.setColor(x, y, color);
 			}
 		}

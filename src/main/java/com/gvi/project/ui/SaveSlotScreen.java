@@ -7,20 +7,15 @@ import javafx.scene.paint.Color;
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
-public class SaveSlotScreen {
+public class SaveSlotScreen extends GameScreen {
 
     private static final int SLOT_COUNT = 3;
 
-    private final int screenWidth;
-    private final int screenHeight;
     private int    selectedSlot = 0;
     private String mode         = "save";
     private boolean confirmDelete = false;
 
-    public SaveSlotScreen(int screenWidth, int screenHeight) {
-        this.screenWidth  = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public SaveSlotScreen() {}
 
     public void open(String mode) {
         this.mode         = mode;

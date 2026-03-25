@@ -1,6 +1,7 @@
 package com.gvi.project.systems;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.models.core.Renderable;
 import com.gvi.project.models.game_maps.GameMapLayer;
 import com.gvi.project.models.sprite_sheets.Sprite;
@@ -10,7 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class RenderSystem {
-	private GamePanel gp;
+	private final GamePanel gp;
 
 	public RenderSystem(GamePanel gp) {
 		this.gp = gp;
@@ -46,9 +47,9 @@ public class RenderSystem {
 		for (int worldRow = 0; worldRow < gp.currentMap.height; worldRow++) {
 			for (int worldCol = 0; worldCol < gp.currentMap.width; worldCol++) {
 				String spriteKey = layer.layout[worldCol][worldRow];
-				Sprite sprite = gp.spriteManager.getStoredSprite(spriteKey);
+				Sprite sprite = gp.spriteManager.getRegisterdSprite(spriteKey);
 
-				int tileSize = gp.generalSettings.tileSize;
+				int tileSize = GeneralSettings.getTileSize();
 
 				int worldX = worldCol * tileSize;
 				int worldY = worldRow * tileSize;
@@ -66,9 +67,9 @@ public class RenderSystem {
 
 				if (
 					screenRight > 0 &&
-					screenLeft < gp.generalSettings.screenWidth &&
+					screenLeft < GeneralSettings.getScreenWidth() &&
 					screenBottom > 0 &&
-					screenTop < gp.generalSettings.screenHeight)
+					screenTop < GeneralSettings.getScreenHeight())
 				{
 					int drawX = screenX;
 					int drawY = screenY - (sprite.imageHeight - 1) * tileSize;

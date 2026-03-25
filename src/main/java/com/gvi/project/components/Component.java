@@ -1,4 +1,4 @@
-package com.gvi.project.Components;
+package com.gvi.project.components;
 
 public class Component {
 	private String ComponentId;

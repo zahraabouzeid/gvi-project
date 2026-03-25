@@ -1,35 +1,35 @@
 package com.gvi.project.models.objects;
 
-import com.gvi.project.Components.AnimationComponent;
+import com.gvi.project.components.AnimationComponent;
 import com.gvi.project.GamePanel;
-import com.gvi.project.models.entities.Player;
 
 
 public class OBJ_Key extends AnimatedObject {
-	public OBJ_Key(String spriteGroupID) {
-		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDungeon", spriteGroupID);
-		name = "Key";
+	public OBJ_Key(KeyType typ) {
+		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDungeon", typ.getSpriteGroupID());
+		id = typ.getSpriteGroupID();
+		name = typ.getName();
 		canInteract = true;
-		interactHint = "[F] Pick up Key";
+		interactHint = "[F] Pick up %s Key".formatted(name);
 		collision = true;
 		setUpAnimationComponent();
 	}
 
 	@Override
-	public void onConfirm(Player player, GamePanel gp, int objIndex) {
+	public void onConfirm(GamePanel gp, int objIndex) {
 		gp.playSE(1);
-		player.playerKeys++;
+
+		gp.player.addItem(id, 1);
+
 		gp.obj.remove(objIndex);
-		gp.ui.openMessage("You got a key!");
+		gp.ui.openMessage("You got a %s key!".formatted(name));
 	}
 
 	@Override
 	public void setUpAnimationComponent(){
 		AnimationComponent animComp = (AnimationComponent) this.components.get("Animation");
-		animComp.isLooping();
+		animComp.setLooping(true);
 		animComp.cycleLength = 0.5;
 		animComp.delayBetweenCycles = 0.8;
-
-		sprite = animComp.getCurrentSprite();
-	};
+	}
 }

@@ -17,7 +17,7 @@ public class SpriteManager {
 		}
 	}
 
-	public Sprite getStoredSprite(String key) {
+	public Sprite getRegisterdSprite(String key) {
 		return sprites.get(key);
 	}
 

@@ -6,17 +6,11 @@ import javafx.scene.paint.Color;
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
-public class LoadingScreen {
+public class LoadingScreen extends GameScreen {
 
     public static final int DURATION = 90;
 
-    private final int screenWidth;
-    private final int screenHeight;
-
-    public LoadingScreen(int screenWidth, int screenHeight) {
-        this.screenWidth  = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public LoadingScreen() {}
 
     public void draw(GraphicsContext gc, int frame) {
         gc.setFill(Color.rgb(10, 18, 12));

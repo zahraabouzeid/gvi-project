@@ -29,8 +29,10 @@ public abstract class Entity implements Renderable{
 	public int collisionBoxDefaultX, collisionBoxDefaultY;
 	public boolean collisionActive = false;
 
+	public boolean canMove = false;
+
 	public Entity (){
-		spriteMap = new HashMap<String,Sprite>();
+		spriteMap = new HashMap<>();
 	}
 
 	@Override

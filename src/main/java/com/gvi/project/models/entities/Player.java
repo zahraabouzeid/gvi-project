@@ -1,6 +1,7 @@
 package com.gvi.project.models.entities;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.GeneralSettings;
 import com.gvi.project.KeyHandler;
 import com.gvi.project.models.core.Entity;
 import com.gvi.project.models.objects.SuperObject;
@@ -9,15 +10,23 @@ import com.gvi.project.models.sprite_sheets.SpriteSheet;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Player extends Entity {
-	private GamePanel gp;
-	private KeyHandler keyH;
+	private final GamePanel gp;
+	private final KeyHandler keyH;
 
 	public final int screenX;
 	public final int screenY;
 
 	public String playerName = "Player";
-	public int playerKeys = 0;
+
+	public Map<String, Integer> playerItems = new HashMap<>();
+
+	public int playerGoldKeys = 0;
+	public int playerIronKeys = 0;
+	public int playerCopperKeys = 0;
 	public int nearbyObjectIndex = -1;
 	public int maxHealthHalf = 10;
 	public int healthHalf = 10;
@@ -32,8 +41,8 @@ public class Player extends Entity {
 		this.gp = gp;
 		this.keyH = keyH;
 
-		screenX = gp.generalSettings.screenWidth / 2 - (gp.generalSettings.tileSize / 2);
-		screenY = gp.generalSettings.screenHeight / 2 - (gp.generalSettings.tileSize / 2);
+		screenX = GeneralSettings.getScreenWidth() / 2 - (GeneralSettings.getTileSize() / 2);
+		screenY = GeneralSettings.getScreenHeight() / 2 - (GeneralSettings.getTileSize() / 2);
 
 		this.collisionBox = new Rectangle(0,0, 48, 48);
 
@@ -48,7 +57,7 @@ public class Player extends Entity {
 
 	public void setDefaultValues() {
 		// Startposition des Spielers im Grid (Tile-Koordinaten, nicht Pixel)
-		gridX = 4; // vorher worldX = 48 * 23 = 1154px jetzt ist es grid movement
+		gridX = 9; // vorher worldX = 48 * 23 = 1154px jetzt ist es grid movement
 		gridY = 6;
 
 		// Ziel-Tile ist am Anfang gleich wie die aktuelle Position (kein laufende Bewegung)
@@ -56,8 +65,8 @@ public class Player extends Entity {
 		targetGridY = gridY;
 
 		// Pixel-Position berechnen: gridX * 48px = worldX
-		worldX = gp.generalSettings.tileSize * gridX;
-		worldY = gp.generalSettings.tileSize * gridY;
+		worldX = GeneralSettings.getTileSize() * gridX;
+		worldY = GeneralSettings.getTileSize() * gridY;
 
 		isMoving = false;
 
@@ -68,6 +77,7 @@ public class Player extends Entity {
 		healthHalf = 10;
 		isDead = false;
 		score = 0;
+		canMove = true;
 	}
 
 	public void setPlayerPosition(int gridPosX, int gridPosY){
@@ -75,8 +85,8 @@ public class Player extends Entity {
 		this.gridY = gridPosY;
 		this.targetGridX = this.gridX;
 		this.targetGridY = this.gridY;
-		this.worldX = this.gridX * gp.generalSettings.tileSize;
-		this.worldY = this.gridY * gp.generalSettings.tileSize;
+		this.worldX = this.gridX * GeneralSettings.getTileSize();
+		this.worldY = this.gridY * GeneralSettings.getTileSize();
 	}
 
 	public void takeHalfHeartDamage() {
@@ -129,8 +139,8 @@ public class Player extends Entity {
 	public void update() {
 		if (isMoving) {
 			// Ziel-Position in Pixel berechnen (targetGridX/Y * 48px)
-			int targetWorldX = targetGridX * gp.generalSettings.tileSize;
-			int targetWorldY = targetGridY * gp.generalSettings.tileSize;
+			int targetWorldX = targetGridX * GeneralSettings.getTileSize();
+			int targetWorldY = targetGridY * GeneralSettings.getTileSize();
 
 			// Spieler Schritt für Schritt Richtung Ziel bewegen (4px pro Frame)
 			// Math.min/max verhindert, dass der Spieler über das Ziel hinausschießt
@@ -157,7 +167,7 @@ public class Player extends Entity {
 			}
 		} else {
 			// Eingabe verarbeiten nur wenn der Spieler stillsteht
-			if (keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) {
+			if ((keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) && canMove) {
 				// Nächste Grid-Position berechnen basierend auf gedrückter Taste
 				int nextGridX = gridX;
 				int nextGridY = gridY;
@@ -230,15 +240,15 @@ public class Player extends Entity {
 	}
 
 	private int findNearbyObject() {
-		int interactRange = gp.generalSettings.tileSize;
+		int interactRange = GeneralSettings.getTileSize();
 
 		int playerCenterX = (int)(worldX + collisionBox.getX() + collisionBox.getWidth() / 2);
 		int playerCenterY = (int)(worldY + collisionBox.getY() + collisionBox.getHeight() / 2);
 
 		for (int i = 0; i < gp.obj.size(); i++) {
 			if (gp.obj.get(i) != null) {
-				int objCenterX = gp.obj.get(i).worldX + gp.generalSettings.tileSize / 2;
-				int objCenterY = gp.obj.get(i).worldY + gp.generalSettings.tileSize / 2;
+				int objCenterX = gp.obj.get(i).worldX + GeneralSettings.getTileSize() / 2;
+				int objCenterY = gp.obj.get(i).worldY + GeneralSettings.getTileSize() / 2;
 
 				int dx = Math.abs(playerCenterX - objCenterX);
 				int dy = Math.abs(playerCenterY - objCenterY);
@@ -254,7 +264,7 @@ public class Player extends Entity {
 	@Override
 	public void render(GamePanel gp) {
 		Sprite sprite = null;
-		int tileSize = gp.generalSettings.tileSize;
+		int tileSize = GeneralSettings.getTileSize();
 
 		switch (direction) {
 			case "up":
@@ -299,9 +309,26 @@ public class Player extends Entity {
 
 	@Override
 	public void renderCollisionBox(GamePanel gp) {
-		if(gp.generalSettings.isDevMode){
+		if(GeneralSettings.isDevMode()){
 			gp.gc.setFill(new Color(0,0,1,0.3));
 			gp.gc.fillRect(screenX + collisionBox.getX(), this.screenY + collisionBox.getY(), this.collisionBox.getWidth(), this.collisionBox.getHeight());
+		}
+	}
+
+	public void addItem(String id, int amount) {
+		System.out.println(id);
+
+		// Erhöhe Item Anzahl wenn vorhanden oder lege das Item an wenn es nicht existiert
+		if (playerItems.containsKey(id)){
+			playerItems.put(id, playerItems.get(id) + amount);
+		} else {
+			playerItems.put(id, amount);
+		}
+	}
+
+	public void removeItems(String id, int amount) {
+		if (playerItems.containsKey(id)){
+			playerItems.put(id, playerItems.get(id) - amount);
 		}
 	}
 }

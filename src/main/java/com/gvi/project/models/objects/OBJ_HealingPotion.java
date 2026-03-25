@@ -1,14 +1,14 @@
 package com.gvi.project.models.objects;
 
-import com.gvi.project.Components.AnimationComponent;
+import com.gvi.project.components.AnimationComponent;
 import com.gvi.project.GamePanel;
-import com.gvi.project.models.entities.Player;
 
 
 public class OBJ_HealingPotion extends AnimatedObject {
 	public OBJ_HealingPotion(){
 		super("/sprites/tilemaps/damp-dungeons/Animations/Dungeon_ObjectsDungeon", "potion_red");
 		name = "Healing Potion";
+		id = "potion_red";
 		canInteract = true;
 		interactHint = "[F] Use healing potion";
 		collision = true;
@@ -16,7 +16,7 @@ public class OBJ_HealingPotion extends AnimatedObject {
 	}
 
 	@Override
-	public void onConfirm(Player player, GamePanel gp, int objIndex) {
+	public void onConfirm(GamePanel gp, int objIndex) {
 		if (gp.player.healthHalf == gp.player.maxHealthHalf) return;
 
 		gp.player.healthHalf = Math.min(gp.player.healthHalf + 2, gp.player.maxHealthHalf);
@@ -27,10 +27,10 @@ public class OBJ_HealingPotion extends AnimatedObject {
 	@Override
 	public void setUpAnimationComponent(){
 		AnimationComponent animComp = (AnimationComponent) this.components.get("Animation");
-		animComp.isLooping();
+		animComp.setLooping(true);
 		animComp.cycleLength = 0.4;
 		animComp.delayBetweenCycles = 2;
 
 		sprite = animComp.getCurrentSprite();
-	};
+	}
 }

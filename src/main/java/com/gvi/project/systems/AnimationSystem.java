@@ -1,6 +1,6 @@
 package com.gvi.project.systems;
 
-import com.gvi.project.Components.AnimationComponent;
+import com.gvi.project.components.AnimationComponent;
 import com.gvi.project.GamePanel;
 import com.gvi.project.models.objects.SuperObject;
 
@@ -14,17 +14,23 @@ public class AnimationSystem {
 
 	public void tick(double delta) {
 		for (SuperObject obj : gp.obj) {
-
 			if (obj == null) continue;
+			updateSprite(obj, delta);
+		}
 
-			if (obj.components.containsKey("Animation")) {
+		for (SuperObject obj : gp.hudObj) {
+			if (obj == null) continue;
+			updateSprite(obj, delta);
+		}
+	}
 
-				AnimationComponent anim =
-						(AnimationComponent) obj.components.get("Animation");
+	private void updateSprite(SuperObject obj, double delta) {
 
-				anim.update(delta);
-				obj.sprite = anim.getCurrentSprite();
-			}
+		if (obj.components.containsKey("Animation")) {
+
+			AnimationComponent anim = (AnimationComponent) obj.components.get("Animation");
+			anim.update(delta);
+			obj.sprite = anim.getCurrentSprite();
 		}
 	}
 }

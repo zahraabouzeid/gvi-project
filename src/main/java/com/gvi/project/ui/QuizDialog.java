@@ -11,10 +11,7 @@ import java.util.List;
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
-public class QuizDialog {
-
-    private final int screenWidth;
-    private final int screenHeight;
+public class QuizDialog extends GameScreen {
 
     public boolean quizOpen = false;
     public Question currentQuestion = null;
@@ -27,10 +24,7 @@ public class QuizDialog {
 
     public static final int FEEDBACK_DURATION = 15; 
 
-    public QuizDialog(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public QuizDialog() {}
 
     public void open(Question question, int remaining) {
         this.currentQuestion = question;

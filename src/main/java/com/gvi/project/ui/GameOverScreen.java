@@ -5,16 +5,11 @@ import javafx.scene.canvas.GraphicsContext;
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
-public class GameOverScreen {
+public class GameOverScreen extends GameScreen {
 
-    private final int screenWidth;
-    private final int screenHeight;
     private int blinkCounter = 0;
 
-    public GameOverScreen(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-    }
+    public GameOverScreen() {}
 
     public void reset() {
         blinkCounter = 0;

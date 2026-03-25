@@ -64,6 +64,12 @@ public final class UIUtils {
         return temp.getLayoutBounds().getWidth();
     }
 
+    public static double getTextHeight(String text, Font font) {
+        Text temp = new Text(text);
+        temp.setFont(font);
+        return temp.getLayoutBounds().getHeight();
+    }
+
     public static List<String> wrapText(String text, Font font, double maxWidth) {
         List<String> lines = new ArrayList<>();
         String[] words = text.split(" ");

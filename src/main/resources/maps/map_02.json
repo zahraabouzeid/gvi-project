@@ -184,44 +184,7 @@
     },
     {
       "renderId": "DEKORATIONS",
-      "usedSpriteSheets": [
-        {
-          "fileName": "DungeonDecorations",
-          "filePath": "/sprites/tilemaps/damp-dungeons/Tiles/",
-          "usedSprites": [
-            {
-              "spriteGroup": "shelf",
-              "spriteId":"horizontal_base_empty",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "shelf",
-              "spriteId":"horizontal_base_books",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "shelf",
-              "spriteId":"horizontal_base_bones",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "shelf",
-              "spriteId":"horizontal_top",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "shelf",
-              "spriteId":"vertical",
-              "hasCollision": false
-            },
-            {
-              "spriteGroup": "wood_colum_beam_framing",
-              "spriteId": "column_base",
-              "hasCollision": false
-            }
-          ]
-        }
-      ],
+      "usedSpriteSheets": [],
       "spriteLayout": [
         [999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999],
         [999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999,999],
@@ -677,89 +640,163 @@
   ],
   "objects": [
     {
-      "objectId": "QUIZ_STATION",
+      "objectType": "QUIZ_STATION",
       "x": 36,
       "y": 6,
+      "id": "quiz_station_1",
+      "conditions": null,
       "data": {
         "topicArea": "JOINS_SUBQUERIES",
         "spriteGroup": "crystal_blue"
       }
     },
     {
-      "objectId": "QUIZ_STATION",
+      "objectType": "QUIZ_STATION",
       "x": 11,
       "y": 24,
+      "id": "quiz_station_2",
+      "conditions": null,
       "data": {
         "topicArea": "DDL_DML",
         "spriteGroup": "crystal_blue"
       }
     },
     {
-      "objectId": "QUIZ_STATION",
+      "objectType": "QUIZ_STATION",
       "x": 37,
       "y": 24,
+      "id": "quiz_station_3",
+      "conditions": null,
       "data": {
         "topicArea": "ER_MODELLIERUNG",
         "spriteGroup": "crystal_blue"
       }
     },
     {
-      "objectId": "QUIZ_STATION",
+      "objectType": "QUIZ_STATION",
       "x": 24,
       "y": 23,
+      "id": "quiz_station_4",
+      "conditions": null,
       "data": {
         "topicArea": "NORMALISIERUNG",
         "spriteGroup": "crystal_blue"
       }
     },
     {
-      "objectId": "QUIZ_STATION",
+      "objectType": "QUIZ_STATION",
       "x": 24,
       "y": 5,
+      "id": "quiz_station_5",
+      "conditions": null,
       "data": {
         "topicArea": "SELECT_ABFRAGEN",
         "spriteGroup": "crystal_blue"
       }
     },
     {
-      "objectId": "QUIZ_STATION",
+      "objectType": "QUIZ_STATION",
       "x": 2,
       "y": 5,
+      "id": "quiz_station_6",
+      "conditions": null,
       "data": {
         "topicArea": "SQL_GRUNDLAGEN",
         "spriteGroup": "crystal_blue"
       }
     },
     {
-      "objectId": "BOOTS",
+      "objectType": "CHEST",
       "x": 38,
       "y": 15,
+      "id": "chest_brown_1",
+      "conditions": {
+        "and_or": "and",
+        "conditionObjects": [
+          {
+            "type": "item",
+            "value": 1,
+            "messageOnFailure": "You need 1 iron key",
+            "comparator":">=",
+            "compareWith": "key_iron",
+            "onSuccess": "remove"
+          }
+        ]
+      },
       "data": {
-        "duration":""
+        "type": "chest_brown"
       }
     },
     {
-      "objectId": "HEALING_POTION",
+      "objectType": "CHEST",
       "x": 11,
       "y": 15,
-      "data": {}
-    },
-    {
-      "objectId": "MAP_CHANGE_TRIGGER",
-      "x": 12,
-      "y": 2,
+      "id": "chest_red_1",
+      "conditions": {
+        "and_or": "and",
+        "conditionObjects": [
+          {
+            "type": "item",
+            "value": 1,
+            "messageOnFailure": "You need 1 iron key",
+            "comparator":">=",
+            "compareWith": "key_iron",
+            "onSuccess": "remove"
+          }
+        ]
+      },
       "data": {
-        "target_map_spawn_location_x": "4",
-        "target_map_spawn_location_y": "9",
-        "direction": "up",
-        "map_id": "0"
+        "type": "chest_red"
       }
     },
     {
-      "objectId": "DOOR",
+      "objectType": "MAP_CHANGE_TRIGGER",
+      "x": 12,
+      "y": 1,
+      "id": "map_change_trigger_1",
+      "conditions": null,
+      "data": {
+        "target_map_spawn_location_x": "9",
+        "target_map_spawn_location_y": "9",
+        "direction": "up",
+        "map_id": "0",
+        "player_direction": "up"
+      }
+    },
+    {
+      "objectType": "DOOR",
       "x": 12,
       "y": 3,
-      "data": {}
+      "id": "door_1",
+      "conditions": {
+        "and_or": "and",
+        "conditionObjects": [
+          {
+            "type": "item",
+            "value": 1,
+            "messageOnFailure": "You need 1 iron key",
+            "comparator":">=",
+            "compareWith": "key_iron",
+            "onSuccess": "remove"
+          }
+        ]
+      },
+      "data": {
+        "type": "double_door",
+        "isOpen": "true"
+      }
+    },
+    {
+      "objectType": "EVENT_TRIGGER",
+      "x": 11,
+      "y": 4,
+      "id": "event_trigger",
+      "conditions": null,
+      "data": {
+        "width": "4",
+        "height": "2",
+        "targetObject": "door_1"
+      }
     }
   ]
 }

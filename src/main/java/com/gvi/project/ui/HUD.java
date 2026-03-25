@@ -1,9 +1,14 @@
 package com.gvi.project.ui;
 
 import com.gvi.project.GamePanel;
+import com.gvi.project.GeneralSettings;
+import com.gvi.project.models.objects.KeyType;
+import com.gvi.project.models.objects.OBJ_Key;
+import com.gvi.project.models.objects.SuperObject;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+
+import java.util.*;
 
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
@@ -11,16 +16,34 @@ import static com.gvi.project.ui.UIUtils.*;
 public class HUD {
 
     private final GamePanel gp;
-    private final Image keyImage;
 
     private String floatingText = null;
     private boolean floatingPositive = true;
     private int floatingCounter = 0;
     private static final int FLOATING_DURATION = 60; // 1 second
+    private final double hudX;
+    private final double hudY;
 
-    public HUD(GamePanel gp, Image keyImage) {
+    public HUD(GamePanel gp) {
         this.gp = gp;
-        this.keyImage = keyImage;
+        hudX = GeneralSettings.getTileSize() / 2.0;
+        hudY = GeneralSettings.getTileSize() / 2.0;
+        initHudImagesLoading();
+    }
+
+    public void initHudImagesLoading() {
+        List<SuperObject> objects = List.of(
+                new OBJ_Key(KeyType.COPPER),
+                new OBJ_Key(KeyType.IRON),
+                new OBJ_Key(KeyType.GOLD)
+        );
+
+        for (SuperObject object : objects) {
+            object.canInteract = false;
+            object.collision = false;
+
+            gp.hudObj.add(object);
+        }
     }
 
     public void showFloatingScore(int points) {
@@ -35,8 +58,7 @@ public class HUD {
     }
 
     public void draw(GraphicsContext gc, String formattedTime) {
-        double hudX = gp.generalSettings.tileSize / 2.0;
-        double hudY = gp.generalSettings.tileSize / 2.0;
+
 
         // Display player name
         gc.setFont(FONT_MD);
@@ -45,12 +67,7 @@ public class HUD {
 
         drawHearts(gc);
 
-        int keySize = 36;
-        double keyY = hudY + 55;
-        gc.drawImage(keyImage, hudX, keyY, keySize, keySize);
-        gc.setFont(FONT_MD);
-        gc.setFill(TEXT_WHITE);
-        gc.fillText("x" + gp.player.playerKeys, hudX + keySize + 6, keyY + 26);
+        drawKeys(gc, hudX, hudY);
 
         // Score in top center with pixel-art rounded box
         String scoreStr = "Score: " + gp.player.score;
@@ -59,14 +76,14 @@ public class HUD {
         double bgPadding = 16;
         double bgWidth = scoreTextWidth + bgPadding * 2;
         double bgHeight = 36;
-        double boxX = gp.generalSettings.screenWidth / 2.0 - bgWidth / 2.0;
+        double boxX = GeneralSettings.getScreenWidth() / 2.0 - bgWidth / 2.0;
         double boxY = 18;
         
         // Draw pixel-art box with rounded corners
         drawPixelBox(gc, boxX, boxY, bgWidth, bgHeight);
         
         // Draw score text (centered in box)
-        double scoreX = gp.generalSettings.screenWidth / 2.0 - scoreTextWidth / 2.0;
+        double scoreX = GeneralSettings.getScreenWidth() / 2.0 - scoreTextWidth / 2.0;
         double scoreY = boxY + bgHeight / 2.0 + 6;
         gc.setFill(TEXT_WHITE);
         gc.fillText(scoreStr, scoreX, scoreY);
@@ -85,7 +102,7 @@ public class HUD {
         gc.setFont(FONT_LG);
         gc.setFill(TEXT_WHITE);
         double timeW = getTextWidth(formattedTime, FONT_LG);
-        gc.fillText(formattedTime, gp.generalSettings.screenWidth - timeW - 14, gp.generalSettings.screenHeight - 14);
+        gc.fillText(formattedTime, GeneralSettings.getScreenWidth() - timeW - 14, GeneralSettings.getScreenHeight() - 14);
 
         if (gp.player.speed > 4) {
             drawSpeedBoost(gc);
@@ -100,7 +117,7 @@ public class HUD {
         gc.setFont(FONT_XS);
 
         double textW = getTextWidth(hint, FONT_XS);
-        double px = gp.generalSettings.screenWidth / 2.0 - textW / 2.0;
+        double px = GeneralSettings.getScreenWidth() / 2.0 - textW / 2.0;
         double py = gp.player.screenY - 20;
 
         // Shadow
@@ -113,7 +130,7 @@ public class HUD {
 
     private void drawHearts(GraphicsContext gc) {
         int hearts = (int) Math.ceil(gp.player.maxHealthHalf / 2.0);
-        int startX = (int) (gp.generalSettings.tileSize / 2.0);
+        int startX = (int) (GeneralSettings.getTileSize() / 2.0);
         int startY = 28;
         int spacing = 38;
 
@@ -168,11 +185,36 @@ public class HUD {
         String text = "SPEED BOOST";
         gc.setFont(FONT_XS);
         double tw = getTextWidth(text, FONT_XS);
-        double x = gp.generalSettings.screenWidth / 2.0 - tw / 2.0;
+        double x = GeneralSettings.getScreenWidth() / 2.0 - tw / 2.0;
         double y = 14;
 
         drawPixelBox(gc, x - 10, y - 12, tw + 20, 22);
         gc.setFill(TEXT_GOLD);
         gc.fillText(text, x, y + 2);
+    }
+
+    private void drawKeys(GraphicsContext gc, double hudX, double hudY) {
+        String text = "x %s";
+        double fontHeight = getTextHeight(text, FONT_MD);
+        double imageSize = 40;
+        double gap = 30;
+        double index = 0;
+        double imageY = hudY + 36;
+        double textY = imageY + fontHeight;
+
+        for (SuperObject keyObj : gp.hudObj) {
+            if (keyObj == null) continue;
+
+            if(keyObj.id.contains("key_")){
+                double imageX = hudX + (imageSize * index ) + (gap * index );
+
+                gc.drawImage(keyObj.sprite.image, imageX, imageY, imageSize, imageSize);
+                gc.setFont(FONT_MD);
+                gc.setFill(TEXT_WHITE);
+                gc.fillText(text.formatted(gp.player.playerItems.getOrDefault(keyObj.id, 0)), imageX + imageSize, textY);
+
+                index++;
+            }
+        }
     }
 }

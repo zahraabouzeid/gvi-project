@@ -10,15 +10,12 @@ import static com.gvi.project.ui.UIUtils.*;
  * Renders the title/start screen with game title, subtitle,
  * blinking start prompt, and control hints.
  */
-public class TitleScreen {
+public class TitleScreen extends GameScreen {
 
-    private final int screenWidth;
-    private final int screenHeight;
     private int blinkCounter = 0;
 
-    public TitleScreen(int screenWidth, int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
+    public TitleScreen() {
+        super();
     }
 
     public void draw(GraphicsContext gc) {

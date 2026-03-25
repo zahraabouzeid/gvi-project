@@ -14,8 +14,8 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 public class SpriteSheet {
-	private SpriteSheetConfig config;
-	private Image sheetImage;
+	private final SpriteSheetConfig config;
+	private final Image sheetImage;
 	private static final Logger logger = Logger.getLogger(SpriteSheet.class.getName());
 
 	/**

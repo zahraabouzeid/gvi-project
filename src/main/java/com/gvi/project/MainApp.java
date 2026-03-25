@@ -62,8 +62,8 @@ public class MainApp extends Application {
 		double desktopWidth = bounds.getWidth();
 		double desktopHeight = bounds.getHeight();
 		
-		int gameWidth = gp.generalSettings.screenWidth;
-		int gameHeight = gp.generalSettings.screenHeight;
+		int gameWidth = GeneralSettings.getScreenWidth();
+		int gameHeight = GeneralSettings.getScreenHeight();
 
 		BorderPane root = new BorderPane();
 		root.setCenter(gp.canvas);
