@@ -9,13 +9,15 @@ public abstract class Question {
     private final String introText;
     private final String questionText;
     private final QuestionType type;
+    private final Difficulty difficulty;
 
-    protected Question(int id, TopicArea topicArea, String introText, String questionText, QuestionType type) {
+    protected Question(int id, TopicArea topicArea, String introText, String questionText, QuestionType type, Difficulty difficulty) {
         this.id = id;
         this.topicArea = topicArea;
         this.introText = introText;
         this.questionText = questionText;
         this.type = type;
+        this.difficulty = difficulty;
     }
 
     public int getId() {
@@ -36,6 +38,10 @@ public abstract class Question {
 
     public QuestionType getType() {
         return type;
+    }
+
+    public Difficulty getDifficulty() {
+        return difficulty;
     }
 
     public abstract int getMaxPoints();

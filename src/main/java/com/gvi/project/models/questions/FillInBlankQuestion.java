@@ -6,8 +6,8 @@ public class FillInBlankQuestion extends Question {
 
     private final List<Blank> blanks;
 
-    public FillInBlankQuestion(int id, TopicArea topicArea, String introText, String questionText, List<Blank> blanks) {
-        super(id, topicArea, introText, questionText, QuestionType.FILL_IN_BLANK);
+    public FillInBlankQuestion(int id, TopicArea topicArea, String introText, String questionText, List<Blank> blanks, Difficulty difficulty) {
+        super(id, topicArea, introText, questionText, QuestionType.FILL_IN_BLANK, difficulty);
         this.blanks = List.copyOf(blanks);
     }
 
@@ -17,9 +17,7 @@ public class FillInBlankQuestion extends Question {
 
     @Override
     public int getMaxPoints() {
-        return blanks.stream()
-                .mapToInt(b -> b.options().stream().mapToInt(Answer::points).max().orElse(0))
-                .sum();
+        return ScoreCalculator.calculateGapMaxPoints(getDifficulty(), blanks.size());
     }
 
     @Override

@@ -5,14 +5,11 @@ import java.util.List;
 
 public class TrueFalseQuestion extends Question {
 
-    private static final int CORRECT_POINTS = 10;
-    private static final int WRONG_POINTS = -5;
-
     private final boolean correctAnswer;
 
     public TrueFalseQuestion(int id, TopicArea topicArea, String introText, String questionText,
-                             boolean correctAnswer) {
-        super(id, topicArea, introText, questionText, QuestionType.TRUE_FALSE);
+                             boolean correctAnswer, Difficulty difficulty) {
+        super(id, topicArea, introText, questionText, QuestionType.TRUE_FALSE, difficulty);
         this.correctAnswer = correctAnswer;
     }
 
@@ -22,18 +19,21 @@ public class TrueFalseQuestion extends Question {
 
     @Override
     public int getMaxPoints() {
-        return CORRECT_POINTS;
+        return ScoreCalculator.calculateTrueFalsePoints(getDifficulty(), true);
     }
 
     @Override
     public List<Answer> getAnswers() {
+        int correctPoints = ScoreCalculator.calculateTrueFalsePoints(getDifficulty(), true);
+        int wrongPoints = ScoreCalculator.calculateTrueFalsePoints(getDifficulty(), false);
+        
         return List.of(
-                new Answer("Wahr", correctAnswer ? CORRECT_POINTS : WRONG_POINTS),
-                new Answer("Falsch", correctAnswer ? WRONG_POINTS : CORRECT_POINTS)
+                new Answer("Wahr", correctAnswer ? correctPoints : wrongPoints),
+                new Answer("Falsch", correctAnswer ? wrongPoints : correctPoints)
         );
     }
 
     public int evaluate(boolean answeredTrue) {
-        return (answeredTrue == correctAnswer) ? CORRECT_POINTS : WRONG_POINTS;
+        return ScoreCalculator.calculateTrueFalsePoints(getDifficulty(), answeredTrue == correctAnswer);
     }
 }
