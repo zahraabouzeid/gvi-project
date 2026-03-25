@@ -1,5 +1,6 @@
 package com.gvi.project;
 
+import com.gvi.project.models.game_maps.GameMaps;
 import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.Answer;
 import com.gvi.project.systems.AnimationSystem;
@@ -77,6 +78,7 @@ public class GameLoop extends AnimationTimer {
 		if (gp.player.isDead) {
 			if (gp.keyHandler.enterPressed) {
 				gp.keyHandler.enterPressed = false;
+				gp.loadMap(GameMaps.MAP_00);
 				gp.player.setDefaultValues();
 				gp.ui.resetGame();
 				gp.interactingObjectIndex = -1;
