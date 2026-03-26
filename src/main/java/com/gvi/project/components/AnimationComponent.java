@@ -19,6 +19,7 @@ public class AnimationComponent extends Component {
 	private boolean looping = false;
 
 	private double timer = 0;
+	private double startOffset = 0;
 	private boolean playing = false;
 	private boolean finished = false;
 	private boolean started = false;
@@ -39,8 +40,7 @@ public class AnimationComponent extends Component {
 	}
 
 	public void setStartOffset(double offset) {
-		timer = offset;
-		started = true;
+		startOffset = offset;
 	}
 
 	public void setLooping(boolean looping) {
@@ -49,7 +49,7 @@ public class AnimationComponent extends Component {
 
 	public void trigger() {
 		playing = true;
-		timer = 0;
+		timer = startOffset;
 		started = false;
 		inCooldown = false;
 		finished = false;
@@ -62,7 +62,7 @@ public class AnimationComponent extends Component {
 
 	public void triggerLoop() {
 		trigger();
-		looping = true;
+		setLooping(true);
 	}
 
 	// 🚪 Für Tür etc.
@@ -75,22 +75,20 @@ public class AnimationComponent extends Component {
 	}
 
 	public void playForward() {
-		setCycleOrder();
 		direction = 1;
 		trigger();
 	}
 
 	public void playBackward() {
-		setCycleOrder();
 		invertCycleOrder();
-		direction = 1;
+		direction = -1;
 		trigger();
 	}
 
 	public void update(double delta) {
 		if (!playing) return;
 
-		timer += delta * direction;
+		timer += delta;
 
 		// Initial Delay
 		if (!started) {
