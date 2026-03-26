@@ -51,7 +51,7 @@ public class UI {
         characterNameScreen = new CharacterNameScreen();
         characterCreationScreen = new CharacterCreationScreen();
         gameOverScreen = new GameOverScreen();
-        winScreen = new WinScreen();
+        winScreen = new WinScreen(GeneralSettings.getScreenWidth(), GeneralSettings.getScreenHeight());
         pauseScreen = new PauseScreen();
         saveSlotScreen = new SaveSlotScreen();
         loadingScreen = new LoadingScreen();

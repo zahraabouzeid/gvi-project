@@ -59,10 +59,6 @@ public class OBJ_Chest extends AnimatedObject {
 			if (!conditionsAreMeet(gp)) return;
 			onSuccess(gp, objIndex);
 		}
-	}
-
-	@Override
-	public void onConfirm(Player player, GamePanel gp, int objIndex) {
 		// Calculate reward before finishing game
 		gp.ui.calculateReward();
 		gp.ui.gameFinished = true;

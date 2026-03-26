@@ -4,7 +4,6 @@ import com.gvi.project.helper.ImageHelper;
 import com.gvi.project.models.questions.Reward;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
 import java.io.IOException;
@@ -31,28 +30,11 @@ public class WinScreen extends GameScreen {
     
     private void loadMedalSprites() {
         try {
-            Image spritesheet = ImageHelper.getImage("/sprites/medals/medals_spritesheet.png");
-            
-            // Calculate dimensions for each medal in a 2x2 grid
-            int medalWidth = (int)(spritesheet.getWidth() / 2);
-            int medalHeight = (int)(spritesheet.getHeight() / 2);
-            
-            // Extract individual medals from spritesheet
-            // Top-left: Bronze
-            medalBronze = new WritableImage(spritesheet.getPixelReader(), 
-                50, 0, medalWidth, medalHeight);
-            
-            // Top-right: Silver
-            medalSilver = new WritableImage(spritesheet.getPixelReader(), 
-                medalWidth, 0, medalWidth, medalHeight);
-            
-            // Bottom-left: Gold
-            medalGold = new WritableImage(spritesheet.getPixelReader(), 
-                0, medalHeight, medalWidth, medalHeight);
-            
-            // Bottom-right: Gold Perfect
-            medalGoldPerfect = new WritableImage(spritesheet.getPixelReader(), 
-                medalWidth, medalHeight, medalWidth, medalHeight);
+            // Load individual medal images
+            medalBronze = ImageHelper.getImage("/sprites/medals/medal_bronze.png");
+            medalSilver = ImageHelper.getImage("/sprites/medals/medal_silver.png");
+            medalGold = ImageHelper.getImage("/sprites/medals/medal_gold.png");
+            medalGoldPerfect = ImageHelper.getImage("/sprites/medals/medal_gold_perfect.png");
                 
         } catch (IOException e) {
             System.err.println("Failed to load medal sprites: " + e.getMessage());
@@ -150,7 +132,7 @@ public class WinScreen extends GameScreen {
         // Continue hint
         gc.setFont(FONT_XS);
         gc.setFill(TEXT_GRAY);
-        text = "Press ENTER to continue";
+        text = "Drücke ENTER um neu zu starten";
         textW = getTextWidth(text, FONT_XS);
         gc.fillText(text, screenWidth / 2.0 - textW / 2.0, cby + 340);
     }
