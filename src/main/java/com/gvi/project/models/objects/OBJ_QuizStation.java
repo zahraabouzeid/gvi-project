@@ -137,7 +137,9 @@ public class OBJ_QuizStation extends AnimatedObject {
 	}
 
     private void spawnKey(GamePanel gp, int objIndex) {
-		OBJ_Key key = switch (this.id) {
+		String crystalColor = id.substring(0, id.indexOf("_quiz"));
+
+		OBJ_Key key = switch (crystalColor) {
 			case "crystal_blue" -> new OBJ_Key(KeyType.IRON);
 			case "crystal_green" -> new OBJ_Key(KeyType.GOLD);
 			default -> new OBJ_Key(KeyType.COPPER);
