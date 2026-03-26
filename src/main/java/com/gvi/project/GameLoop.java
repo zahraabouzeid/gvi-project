@@ -1,6 +1,7 @@
 package com.gvi.project;
 
 import com.gvi.project.models.game_maps.GameMaps;
+import com.gvi.project.models.objects.OBJ_QuizStation;
 import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.Answer;
 import com.gvi.project.systems.AnimationSystem;
@@ -95,6 +96,8 @@ public class GameLoop extends AnimationTimer {
 				gp.gameState = GameState.PAUSE;
 				return;
 			}
+
+			if (GeneralSettings.isDevMode()) handleDebugInput();
 
 			gp.animationSystem.tick(fixedDelta);
 			gp.player.update();
@@ -374,9 +377,65 @@ public class GameLoop extends AnimationTimer {
 		if (gp.keyHandler.enterPressed) {
 			gp.keyHandler.enterPressed = false;
 			gp.ui.applyCharacterCreation();
-			// Reload player sprites based on selected sprite set
 			gp.player.getPlayerSprites();
 			gp.gameState = GameState.PLAY;
+		}
+	}
+
+	private void handleDebugInput() {
+		KeyHandler k = gp.keyHandler;
+
+		if (k.f3Pressed) {
+			k.f3Pressed = false;
+			gp.player.addItem("key_iron", 3);
+			gp.ui.openMessage("[DEBUG] +3 Iron Keys");
+		}
+		if (k.f4Pressed) {
+			k.f4Pressed = false;
+			gp.player.addItem("key_gold", 3);
+			gp.ui.openMessage("[DEBUG] +3 Gold Keys");
+		}
+		if (k.f5Pressed) {
+			k.f5Pressed = false;
+			gp.player.addItem("key_copper", 3);
+			gp.ui.openMessage("[DEBUG] +3 Copper Keys");
+		}
+		if (k.f6Pressed) {
+			k.f6Pressed = false;
+			int nextId = gp.currentMap.Id + 1;
+			try {
+				gp.loadMap(GameMaps.fromId(nextId));
+				gp.ui.openMessage("[DEBUG] Map → " + gp.currentMap.name);
+			} catch (IllegalArgumentException ignored) {
+				gp.ui.openMessage("[DEBUG] Letzte Map erreicht");
+			}
+		}
+		if (k.f7Pressed) {
+			k.f7Pressed = false;
+			int prevId = gp.currentMap.Id - 1;
+			try {
+				gp.loadMap(GameMaps.fromId(prevId));
+				gp.ui.openMessage("[DEBUG] Map → " + gp.currentMap.name);
+			} catch (IllegalArgumentException ignored) {
+				gp.ui.openMessage("[DEBUG] Erste Map erreicht");
+			}
+		}
+		if (k.f8Pressed) {
+			k.f8Pressed = false;
+			gp.player.healthHalf = gp.player.maxHealthHalf;
+			gp.ui.openMessage("[DEBUG] Volle Gesundheit");
+		}
+		if (k.f9Pressed) {
+			k.f9Pressed = false;
+			boolean found = false;
+			for (int i = 0; i < gp.obj.size(); i++) {
+				if (gp.obj.get(i) instanceof OBJ_QuizStation qs && !qs.completed) {
+					qs.completeInstantly(gp, i);
+					found = true;
+					break;
+				}
+			}
+			if (!found) gp.ui.openMessage("[DEBUG] Keine offene Quiz-Station");
 		}
 	}
 

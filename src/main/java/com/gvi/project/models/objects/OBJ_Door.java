@@ -82,11 +82,25 @@ public class OBJ_Door extends AnimatedObject {
 		visibleInMinimap = false;
 	}
 
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+	public void setOpen() {
+		AnimationComponent animComp = (AnimationComponent) components.get("Animation");
+		isOpen = true;
+		canInteract = false;
+		collision = false;
+		visibleInMinimap = false;
+		animComp.currentFrame = animComp.sprites.size() - 1;
+		sprite = animComp.getCurrentSprite();
+	}
+
 	@Override
 	public void setUpAnimationComponent(){
 		AnimationComponent animComp = (AnimationComponent) this.components.get("Animation");
 		animComp.cycleLength = 2;
-		animComp.setLooping(false); // Tür ist One-Shot
+		animComp.setLooping(false);
 
 		animComp.onFinished = () -> {
 			this.collision = !isOpen;
@@ -96,11 +110,7 @@ public class OBJ_Door extends AnimatedObject {
 		};
 
 		if (isOpen) {
-			canInteract = false;
-			collision = false;
-			visibleInMinimap = false;
-			animComp.currentFrame = animComp.sprites.size() - 1; // letzter Frame
-			sprite = animComp.getCurrentSprite();
+			setOpen();
 		}
 	}
 

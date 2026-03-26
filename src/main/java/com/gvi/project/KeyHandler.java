@@ -13,6 +13,7 @@ public class KeyHandler {
 	public boolean delPressed;
 	public boolean tabPressed;
 	public boolean f2Pressed = false;
+	public boolean f3Pressed, f4Pressed, f5Pressed, f6Pressed, f7Pressed, f8Pressed, f9Pressed;
 	public int numberPressed = -1;
 	public String typedCharacter = "";
 
@@ -60,6 +61,13 @@ public class KeyHandler {
 			if (code == KeyCode.DELETE) delPressed = false;
 			if (code == KeyCode.TAB) tabPressed = false;
 			if (code == KeyCode.F2) f2Pressed = !f2Pressed;
+			if (code == KeyCode.F3) f3Pressed = true;
+			if (code == KeyCode.F4) f4Pressed = true;
+			if (code == KeyCode.F5) f5Pressed = true;
+			if (code == KeyCode.F6) f6Pressed = true;
+			if (code == KeyCode.F7) f7Pressed = true;
+			if (code == KeyCode.F8) f8Pressed = true;
+			if (code == KeyCode.F9) f9Pressed = true;
 		});
 
 		node.setFocusTraversable(true);

@@ -1,6 +1,7 @@
 package com.gvi.project;
 
 import com.gvi.project.helper.SaveManager;
+import com.gvi.project.manager.GameProgressManager;
 import com.gvi.project.models.core.Entity;
 import com.gvi.project.models.game_maps.GameMap;
 import com.gvi.project.models.game_maps.GameMapLoader;
@@ -36,6 +37,7 @@ public class GamePanel {
 	public final UI ui = new UI(this);
 	public final CollisionChecker cChecker = new CollisionChecker(this);
 	public final SaveManager saveManager = new SaveManager();
+	public final GameProgressManager progressManager = new GameProgressManager();
 	public int interactingObjectIndex = -1;
 	public final QuestionService questionProvider = MainApp.getBean(QuestionService.class);
 	public final RenderSystem renderSystem = new RenderSystem(this);
@@ -84,9 +86,13 @@ public class GamePanel {
 	}
 
 	public void loadMap(GameMaps map){
+		if (currentMap != null) {
+			progressManager.snapshotCurrentMap(this);
+		}
 		clearObjects();
 		GameMapLoader mapLoader = new GameMapLoader(this);
 		this.currentMap = mapLoader.loadMap(map.getConfigFileName());
+		progressManager.applySnapshotIfPresent(this);
 //		cChecker.printCollisionMap();
 	}
 

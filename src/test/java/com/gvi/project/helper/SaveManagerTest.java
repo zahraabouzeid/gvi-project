@@ -1,7 +1,7 @@
 package com.gvi.project.helper;
 
 import com.gvi.project.GamePanel;
-import com.gvi.project.KeyHandler;
+import com.gvi.project.manager.GameProgressManager;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.game_maps.GameMap;
 import com.gvi.project.models.game_maps.GameMaps;
@@ -14,6 +14,7 @@ import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -33,10 +34,10 @@ class SaveManagerTest {
 
         Files.writeString(tempDir.resolve("save_77.json"), """
                 {
-                  \"playerName\": \"Tester\",
-                  \"score\": 42,
-                  \"currentMap\": \"MAP_02\",
-                  \"savedAt\": \"01.01.2026 10:30\"
+                  "playerName": "Tester",
+                  "score": 42,
+                  "currentMap": "MAP_02",
+                  "savedAt": "01.01.2026 10:30"
                 }
                 """);
 
@@ -61,6 +62,7 @@ class SaveManagerTest {
 
         setField(gp, "player", player);
         setField(gp, "obj", new ArrayList<SuperObject>());
+        setField(gp, "progressManager", new GameProgressManager());
 
         GameMap map = new GameMap(2, "MAP_02", 10, 10);
         setField(gp, "currentMap", map);
@@ -74,9 +76,10 @@ class SaveManagerTest {
         player.score = 15;
         player.healthHalf = 7;
         player.maxHealthHalf = 10;
-        player.playerIronKeys = 1;
-        player.playerGoldKeys = 2;
-        player.playerCopperKeys = 3;
+        player.playerItems = new HashMap<>();
+        player.playerItems.put("key_iron", 1);
+        player.playerItems.put("key_gold", 2);
+        player.playerItems.put("key_copper", 3);
 
         DummyObject keepObject = new DummyObject();
         keepObject.worldX = 96;
@@ -103,9 +106,7 @@ class SaveManagerTest {
         player.score = 0;
         player.healthHalf = 1;
         player.maxHealthHalf = 1;
-        player.playerIronKeys = 0;
-        player.playerGoldKeys = 0;
-        player.playerCopperKeys = 0;
+        player.playerItems = new HashMap<>();
         player.isMoving = true;
         player.isDead = true;
 
@@ -132,9 +133,9 @@ class SaveManagerTest {
         assertEquals(15, player.score);
         assertEquals(7, player.healthHalf);
         assertEquals(10, player.maxHealthHalf);
-        assertEquals(1, player.playerIronKeys);
-        assertEquals(2, player.playerGoldKeys);
-        assertEquals(3, player.playerCopperKeys);
+        assertEquals(1, player.playerItems.get("key_iron"));
+        assertEquals(2, player.playerItems.get("key_gold"));
+        assertEquals(3, player.playerItems.get("key_copper"));
         assertFalse(player.isMoving);
         assertFalse(player.isDead);
 
@@ -154,6 +155,7 @@ class SaveManagerTest {
         Player player = allocate(Player.class);
         setField(gp, "player", player);
         setField(gp, "obj", new ArrayList<SuperObject>());
+        setField(gp, "progressManager", new GameProgressManager());
 
         assertFalse(manager.load(gp, 999));
     }
@@ -214,6 +216,7 @@ class SaveManagerTest {
                     obj.addAll(mapObjectsToLoad);
                 }
             }
+            progressManager.applySnapshotIfPresent(this);
         }
 
         @Override

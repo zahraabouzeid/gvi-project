@@ -1,29 +1,39 @@
 package com.gvi.project.helper;
 
 import java.util.List;
+import java.util.Map;
 
 public class SaveData {
 
     public String playerName;
     public int    worldX, worldY, gridX, gridY;
     public String direction;
-    public int    score, healthHalf, maxHealthHalf, playerIronKeys, playerGoldenKeys, playerCopperKeys;
+    public int    score, healthHalf, maxHealthHalf;
+    public Map<String, Integer> playerItems;
     public String currentMap;
     public String savedAt;
-    public List<SavedObject> presentObjects;
+    public Map<String, List<SavedObject>> allMapObjects;
 
     public static class SavedObject {
-        public String  className;
-        public int     worldX, worldY;
-        public boolean quizCompleted;
+        public String        className;
+        public String        objectId;
+        public int           worldX, worldY;
+        public boolean       quizCompleted;
+        public boolean       doorOpen;
+        public List<Integer> answeredQuestionIds;
 
         public SavedObject() {}
 
-        public SavedObject(String className, int worldX, int worldY, boolean quizCompleted) {
-            this.className     = className;
-            this.worldX        = worldX;
-            this.worldY        = worldY;
-            this.quizCompleted = quizCompleted;
+        public SavedObject(String className, String objectId, int worldX, int worldY,
+                           boolean quizCompleted, boolean doorOpen,
+                           List<Integer> answeredQuestionIds) {
+            this.className           = className;
+            this.objectId            = objectId;
+            this.worldX              = worldX;
+            this.worldY              = worldY;
+            this.quizCompleted       = quizCompleted;
+            this.doorOpen            = doorOpen;
+            this.answeredQuestionIds = answeredQuestionIds;
         }
     }
 }

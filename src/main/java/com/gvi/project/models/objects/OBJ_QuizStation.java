@@ -5,16 +5,20 @@ import com.gvi.project.GamePanel;
 import com.gvi.project.GameState;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.questions.Question;
+import com.gvi.project.models.questions.QuestionService;
 import com.gvi.project.models.questions.TopicArea;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class OBJ_QuizStation extends AnimatedObject {
 
 	private final TopicArea topicArea;
 	private List<Question> remainingQuestions;
+	private final List<Integer> answeredQuestionIds = new ArrayList<>();
 	public boolean completed = false;
 
 	public OBJ_QuizStation(TopicArea topicArea, String spriteGroupId) {
@@ -42,11 +46,40 @@ public class OBJ_QuizStation extends AnimatedObject {
 
 	public void markCurrentCorrect() {
 		if (remainingQuestions != null && !remainingQuestions.isEmpty()) {
+			answeredQuestionIds.add(remainingQuestions.getFirst().getId());
 			remainingQuestions.removeFirst();
 		}
 		if (remainingQuestions != null && remainingQuestions.isEmpty()) {
 			completed = true;
 		}
+	}
+
+	public List<Integer> getAnsweredQuestionIds() {
+		return Collections.unmodifiableList(answeredQuestionIds);
+	}
+
+	public void restoreProgress(List<Integer> answered, QuestionService provider) {
+		Set<Integer> answeredSet = new HashSet<>(answered);
+		this.answeredQuestionIds.clear();
+		this.answeredQuestionIds.addAll(answered);
+		this.remainingQuestions = new ArrayList<>(provider.getQuestionsByTopic(topicArea));
+		this.remainingQuestions.removeIf(q -> answeredSet.contains(q.getId()));
+		if (this.remainingQuestions.isEmpty()) {
+			completed = true;
+		}
+	}
+
+	public void completeInstantly(GamePanel gp, int objIndex) {
+		if (completed) return;
+		if (remainingQuestions == null) {
+			remainingQuestions = new ArrayList<>(gp.questionProvider.getQuestionsByTopic(topicArea));
+		}
+		while (!remainingQuestions.isEmpty()) {
+			answeredQuestionIds.add(remainingQuestions.getFirst().getId());
+			remainingQuestions.removeFirst();
+		}
+		completed = true;
+		spawnKey(gp, objIndex);
 	}
 
 	public int getRemainingCount() {

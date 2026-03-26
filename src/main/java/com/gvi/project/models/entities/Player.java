@@ -24,17 +24,13 @@ public class Player extends Entity {
 
 	public Map<String, Integer> playerItems = new HashMap<>();
 
-	public int playerGoldKeys = 0;
-	public int playerIronKeys = 0;
-	public int playerCopperKeys = 0;
 	public int nearbyObjectIndex = -1;
 	public int maxHealthHalf = 10;
 	public int healthHalf = 10;
 	public boolean isDead = false;
 	public int score = 0;
 
-	// Character sprite customization
-	public String selectedSpriteSet = "Dungeon_HeroMan1"; // Name des gewählten Sprite-Sets
+	public String selectedSpriteSet = "Dungeon_HeroMan1";
 
 
 	public Player(GamePanel gp, KeyHandler keyH) {
