@@ -169,36 +169,38 @@ public class Player extends Entity {
 				checkStepObjects();
 			}
 		} else {
-			// Eingabe verarbeiten nur wenn der Spieler stillsteht
-			if ((keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) && canMove) {
-				// Nächste Grid-Position berechnen basierend auf gedrückter Taste
-				int nextGridX = gridX;
-				int nextGridY = gridY;
+			if (!keyH.isMovementLocked()) {
+				// Eingabe verarbeiten nur wenn der Spieler stillsteht
+				if ((keyH.upPressed || keyH.downPressed || keyH.leftPressed || keyH.rightPressed) && canMove) {
+					// Nächste Grid-Position berechnen basierend auf gedrückter Taste
+					int nextGridX = gridX;
+					int nextGridY = gridY;
 
-				// Multi-Key-Input: Beide Achsen separat prüfen für diagonale Bewegung
-				if (keyH.upPressed)    nextGridY--;
-				if (keyH.downPressed)  nextGridY++;
-				if (keyH.leftPressed)  nextGridX--;
-				if (keyH.rightPressed) nextGridX++;
+					// Multi-Key-Input: Beide Achsen separat prüfen für diagonale Bewegung
+					if (keyH.upPressed) nextGridY--;
+					if (keyH.downPressed) nextGridY++;
+					if (keyH.leftPressed) nextGridX--;
+					if (keyH.rightPressed) nextGridX++;
 
-				// Direction für Sprite-Animation bestimmen
-				// Priorität: horizontale Bewegung bei Diagonalen
-				if (keyH.leftPressed) {
-					direction = "left";
-				} else if (keyH.rightPressed) {
-					direction = "right";
-				} else if (keyH.upPressed) {
-					direction = "up";
-				} else if (keyH.downPressed) {
-					direction = "down";
-				}
+					// Direction für Sprite-Animation bestimmen
+					// Priorität: horizontale Bewegung bei Diagonalen
+					if (keyH.leftPressed) {
+						direction = "left";
+					} else if (keyH.rightPressed) {
+						direction = "right";
+					} else if (keyH.upPressed) {
+						direction = "up";
+					} else if (keyH.downPressed) {
+						direction = "down";
+					}
 
-				// Kollision prüfen: Tile und Objekte am Ziel-Grid-Feld
-				// Nur wenn frei Bewegung starten
-				if (!gp.cChecker.isTileBlocked(nextGridX, nextGridY) && !gp.cChecker.isObjectBlocking(nextGridX, nextGridY)) {
-					targetGridX = nextGridX;
-					targetGridY = nextGridY;
-					isMoving = true;
+					// Kollision prüfen: Tile und Objekte am Ziel-Grid-Feld
+					// Nur wenn frei Bewegung starten
+					if (!gp.cChecker.isTileBlocked(nextGridX, nextGridY) && !gp.cChecker.isObjectBlocking(nextGridX, nextGridY)) {
+						targetGridX = nextGridX;
+						targetGridY = nextGridY;
+						isMoving = true;
+					}
 				}
 			}
 		}
