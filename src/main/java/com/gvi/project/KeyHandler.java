@@ -19,10 +19,32 @@ public class KeyHandler {
 	public boolean f10Pressed = false; // Cheat: Win with Gold Perfect
 	public int numberPressed = -1;
 	public String typedCharacter = "";
+	private boolean movementLocked = false;
+
+	private KeyCode lastKeyCode;
+
+	public void lockMovement() {
+		movementLocked = true;
+	}
+
+	public void unlockMovement() {
+		movementLocked = false;
+	}
+
+	public boolean isMovementLocked() {
+		return movementLocked;
+	}
 
 	public void setupKeyListeners(Node node) {
 		node.setOnKeyPressed(e -> {
 			KeyCode code = e.getCode();
+
+			if (movementLocked && code != lastKeyCode) {
+				unlockMovement();
+			}
+
+			lastKeyCode = code;
+
 			if (code == KeyCode.W || code == KeyCode.UP) upPressed = true;
 			if (code == KeyCode.A || code == KeyCode.LEFT) leftPressed = true;
 			if (code == KeyCode.S || code == KeyCode.DOWN) downPressed = true;
@@ -37,11 +59,11 @@ public class KeyHandler {
 			if (code == KeyCode.DIGIT2 || code == KeyCode.NUMPAD2) numberPressed = 2;
 			if (code == KeyCode.DIGIT3 || code == KeyCode.NUMPAD3) numberPressed = 3;
 			if (code == KeyCode.DIGIT4 || code == KeyCode.NUMPAD4) numberPressed = 4;
-				if (code == KeyCode.DIGIT5 || code == KeyCode.NUMPAD5) numberPressed = 5;
-				if (code == KeyCode.DIGIT6 || code == KeyCode.NUMPAD6) numberPressed = 6;
-				if (code == KeyCode.DIGIT7 || code == KeyCode.NUMPAD7) numberPressed = 7;
-				if (code == KeyCode.DIGIT8 || code == KeyCode.NUMPAD8) numberPressed = 8;
-				if (code == KeyCode.DIGIT9 || code == KeyCode.NUMPAD9) numberPressed = 9;
+			if (code == KeyCode.DIGIT5 || code == KeyCode.NUMPAD5) numberPressed = 5;
+			if (code == KeyCode.DIGIT6 || code == KeyCode.NUMPAD6) numberPressed = 6;
+			if (code == KeyCode.DIGIT7 || code == KeyCode.NUMPAD7) numberPressed = 7;
+			if (code == KeyCode.DIGIT8 || code == KeyCode.NUMPAD8) numberPressed = 8;
+			if (code == KeyCode.DIGIT9 || code == KeyCode.NUMPAD9) numberPressed = 9;
 			
 			// Cheat keys for testing reward system
 			if (code == KeyCode.F7) f7Pressed = true;
@@ -64,6 +86,7 @@ public class KeyHandler {
 
 		node.setOnKeyReleased(e -> {
 			KeyCode code = e.getCode();
+
 			if (code == KeyCode.W || code == KeyCode.UP) upPressed = false;
 			if (code == KeyCode.A || code == KeyCode.LEFT) leftPressed = false;
 			if (code == KeyCode.S || code == KeyCode.DOWN) downPressed = false;
@@ -79,6 +102,10 @@ public class KeyHandler {
 			if (code == KeyCode.F8) f8Pressed = false;
 			if (code == KeyCode.F9) f9Pressed = false;
 			if (code == KeyCode.F10) f10Pressed = false;
+
+			if (!upPressed && !leftPressed && !downPressed && !rightPressed){
+				unlockMovement();
+			}
 		});
 
 		node.setFocusTraversable(true);

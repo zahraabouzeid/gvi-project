@@ -69,6 +69,9 @@ public class OBJ_MapChangeTrigger extends SuperObject {
 
 		gp.playSE(3);
 		gp.loadMap(GameMaps.fromId(targetMapId));
+
+		gp.keyHandler.lockMovement();
+
 		player.setPlayerPosition(targetMapSpawnLocationX + xDiff, targetMapSpawnLocationY + yDiff);
 		player.direction = playerDirection;
 	}
