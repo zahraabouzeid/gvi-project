@@ -1,8 +1,11 @@
 package com.gvi.project;
 
 import com.gvi.project.models.objects.SuperObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class CollisionChecker {
+	private static final Logger log = LoggerFactory.getLogger(CollisionChecker.class);
 	GamePanel gp;
 	public boolean[][] collisionMap;
 
@@ -49,16 +52,14 @@ public class CollisionChecker {
 
 	public void printCollisionMap(){
 		StringBuilder output = new StringBuilder();
-		int i = 0;
 
 		for(int y = 0; y< collisionMap.length; y++){
 			for(int x = 0; x< collisionMap[y].length; x++){
 				output.append("|").append(collisionMap[y][x] ? "1" : " ");
-				i++;
 			}
 			output.append("|\n");
 		}
 
-		System.out.println(output);
+		log.debug("Collision map:\n{}", output);
 	}
 }

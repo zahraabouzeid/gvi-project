@@ -1,11 +1,15 @@
 package com.gvi.project;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.net.URL;
 
 public class Sound {
+	private static final Logger log = LoggerFactory.getLogger(Sound.class);
 	Clip clip;
 	URL[] soundURL = new URL[30];
 
@@ -26,7 +30,7 @@ public class Sound {
 			c.open(ais);
 			c.close();
 		} catch (Exception e) {
-			// ignore preload errors
+			log.debug("Preload failed for sound index {}", i, e);
 		}
 	}
 
@@ -36,7 +40,7 @@ public class Sound {
 			clip = AudioSystem.getClip();
 			clip.open(ais);
 		} catch (Exception e){
-			e.printStackTrace();
+			log.warn("Failed to load sound at index {}", i, e);
 		}
 	}
 

@@ -5,6 +5,8 @@ import com.gvi.project.models.questions.Reward;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -12,6 +14,8 @@ import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
 public class WinScreen extends GameScreen {
+
+    private static final Logger log = LoggerFactory.getLogger(WinScreen.class);
 
     private final int screenWidth;
     private final int screenHeight;
@@ -37,7 +41,7 @@ public class WinScreen extends GameScreen {
             medalGoldPerfect = ImageHelper.getImage("/sprites/medals/medal_gold_perfect.png");
                 
         } catch (IOException e) {
-            System.err.println("Failed to load medal sprites: " + e.getMessage());
+			log.warn("Failed to load medal sprites.", e);
         }
     }
 

@@ -5,6 +5,11 @@ import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
@@ -15,7 +20,10 @@ import static com.gvi.project.ui.UIUtils.*;
  */
 public class CharacterCreationScreen extends GameScreen {
 
+    private static final Logger log = LoggerFactory.getLogger(CharacterCreationScreen.class);
+
     private int blinkCounter = 0;
+    private final Set<String> spriteLoadErrorsLogged = new HashSet<>();
 
     // Bereitgestellte sprites
     private final String[] availableSpriteNames = {
@@ -129,8 +137,10 @@ public class CharacterCreationScreen extends GameScreen {
                 gc.setLineWidth(2);
                 gc.strokeRect(spriteX - lineWidthSpriteBox, spriteY - lineWidthSpriteBox, spriteSize * sprite.imageWidth + lineWidthSpriteBox * 2, spriteSize * sprite.imageHeight + lineWidthSpriteBox * 2);
             } catch (Exception e) {
-                // Better error message for debugging
-                System.err.println("Failed to load sprite: " + availableSpriteIds[i] + " - " + e.getMessage());
+                String spriteId = availableSpriteIds[i];
+                if (spriteLoadErrorsLogged.add(spriteId)) {
+                    log.warn("Failed to load character selection sprite '{}'", spriteId, e);
+                }
                 
                 // Fallback if sprite loading fails
                 gc.setFill(Color.web("#555555"));

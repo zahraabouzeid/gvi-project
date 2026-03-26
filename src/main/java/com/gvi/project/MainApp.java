@@ -98,17 +98,8 @@ public class MainApp extends Application {
 		mainStage.setFullScreenExitKeyCombination(javafx.scene.input.KeyCombination.valueOf("ESCAPE"));
 
 		// Debug-Ausgabe um Skalierungsprobleme zu erkennen
-		System.out.println("=== Bildschirm-Skalierung Debug ===");
-		System.out.println("Screen Output Scale X: " + outputScaleX);
-		System.out.println("Screen Output Scale Y: " + outputScaleY);
-		System.out.println("Desktop Width: " + desktopWidth + " px");
-		System.out.println("Desktop Height: " + desktopHeight + " px");
-		System.out.println("Game Width: " + gameWidth + " px");
-		System.out.println("Game Height: " + gameHeight + " px");
-		System.out.println("Calculated Scale: " + scale);
-		System.out.println("Scaled Game Width: " + scaledGameWidth + " px");
-		System.out.println("Scaled Game Height: " + scaledGameHeight + " px");
-		System.out.println("===================================");
+		log.debug("Screen scaling debug: outputScaleX={}, outputScaleY={}, desktopWidth={}, desktopHeight={}, gameWidth={}, gameHeight={}, scale={}, scaledGameWidth={}, scaledGameHeight={}",
+				outputScaleX, outputScaleY, desktopWidth, desktopHeight, gameWidth, gameHeight, scale, scaledGameWidth, scaledGameHeight);
 
 		mainStage.show();
 	}

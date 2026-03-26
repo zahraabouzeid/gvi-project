@@ -7,16 +7,17 @@ import com.gvi.project.models.sprite_sheets.config.SpriteSheetConfig;
 import javafx.scene.image.Image;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Logger;
 
 public class SpriteSheet {
 	private final SpriteSheetConfig config;
 	private final Image sheetImage;
-	private static final Logger logger = Logger.getLogger(SpriteSheet.class.getName());
+	private static final Logger log = LoggerFactory.getLogger(SpriteSheet.class);
 
 	/**
 	 *
@@ -44,11 +45,11 @@ public class SpriteSheet {
 
 			// Überprüfe ob die angeforderten Koordinaten im Bild liegen
 			if (startX < 0 || startY < 0 || startX + width > sheetImage.getWidth() || startY + height > sheetImage.getHeight()) {
-				logger.warning(String.format(
-					"Sprite coordinates out of bounds for %s:%s. Config: x=%d, y=%d, w=%d, h=%d. Image: %dx%d",
-					spriteGroupId, spriteId, startX, startY, width, height, 
-					(int)sheetImage.getWidth(), (int)sheetImage.getHeight()
-				));
+				log.warn(
+						"Sprite coordinates out of bounds for {}:{}. Config: x={}, y={}, w={}, h={}. Image: {}x{}",
+						spriteGroupId, spriteId, startX, startY, width, height,
+						(int) sheetImage.getWidth(), (int) sheetImage.getHeight()
+				);
 				// Erstelle ein leeres Bild als Fallback
 				return new WritableImage(width, height);
 			}
@@ -58,8 +59,7 @@ public class SpriteSheet {
 
 			return subImage;
 		} catch (Exception e) {
-			logger.severe("Error loading sprite: group=" + spriteGroupId + ", id=" + spriteId + ". Error: " + e.getMessage());
-			e.printStackTrace();
+			log.error("Error loading sprite: group={}, id={}", spriteGroupId, spriteId, e);
 			// Erstelle ein leeres Fallback-Bild
 			return new WritableImage(16, 16);
 		}

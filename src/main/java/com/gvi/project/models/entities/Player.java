@@ -9,11 +9,14 @@ import com.gvi.project.models.sprite_sheets.Sprite;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Player extends Entity {
+	private static final Logger log = LoggerFactory.getLogger(Player.class);
 	private final GamePanel gp;
 	private final KeyHandler keyH;
 
@@ -113,8 +116,7 @@ public class Player extends Entity {
 			spriteMap.put("right_1", sheet.getSprite("walk", "right_1"));
 			spriteMap.put("right_2", sheet.getSprite("walk", "right_2"));
 		} catch (Exception e) {
-			System.err.println("Error loading player sprites for: " + selectedSpriteSet);
-			e.printStackTrace();
+			log.warn("Error loading player sprites for '{}'. Trying fallback sprite set.", selectedSpriteSet, e);
 			// Fallback zu HeroMan1 wenn das Sprite nicht geladen werden kann
 			try {
 				String spriteSetPath = "/sprites/tilemaps/damp-dungeons/Characters/Dungeon_HeroMan1";
@@ -129,10 +131,9 @@ public class Player extends Entity {
 				spriteMap.put("right_1", sheet.getSprite("walk", "right_1"));
 				spriteMap.put("right_2", sheet.getSprite("walk", "right_2"));
 				selectedSpriteSet = "Dungeon_HeroMan1";
-				System.out.println("Fallback zu HeroMan1 Sprite");
+				log.info("Fallback to default sprite set '{}'.", selectedSpriteSet);
 			} catch (Exception e2) {
-				System.err.println("ERROR: Could not load even fallback sprite!");
-				e2.printStackTrace();
+				log.error("Could not load fallback player sprite set.", e2);
 			}
 		}
 	}
@@ -318,7 +319,7 @@ public class Player extends Entity {
 	}
 
 	public void addItem(String id, int amount) {
-		System.out.println(id);
+		log.debug("Adding item '{}' with amount {}", id, amount);
 
 		// Erhöhe Item Anzahl wenn vorhanden oder lege das Item an wenn es nicht existiert
 		if (playerItems.containsKey(id)){

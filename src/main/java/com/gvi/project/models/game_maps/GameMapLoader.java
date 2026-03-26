@@ -12,6 +12,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public class GameMapLoader {
+	private static final Logger log = LoggerFactory.getLogger(GameMapLoader.class);
 	private final GamePanel gp;
 
 	Map<String, SpriteSheet> spriteSheets;
@@ -127,7 +130,7 @@ public class GameMapLoader {
 
 			//Iteriere über Spritegruppen, isoliere Teilbilder und registriere Sprites in SpriteManager
 			for (GameMapSpriteConfig usedSprite : sheetConfig.usedSprites){
-				System.out.println("reading: " + usedSprite.spriteGroup + "|" + usedSprite.spriteId);
+				log.debug("Reading sprite {}|{} from sheet {}", usedSprite.spriteGroup, usedSprite.spriteId, sheetConfig.fileName);
 				Sprite sprite = new Sprite();
 				sprite.image = spriteSheet.getImage(usedSprite.spriteGroup, usedSprite.spriteId);
 				sprite.imageHeight = spriteSheet.getSpriteConfig(usedSprite.spriteGroup, usedSprite.spriteId).spriteHeight;

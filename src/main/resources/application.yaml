@@ -5,7 +5,31 @@ spring:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration
       - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 
+# Logging levels you can use (from most to least verbose):
+# TRACE -> very detailed flow/events (method-level tracing)
+# DEBUG -> technical diagnostics for development
+# INFO  -> important normal runtime events
+# WARN  -> recoverable/non-fatal problems
+# ERROR -> failures and exceptions that need attention
+#
+# RMI/JMX log noise control:
+# - Keep these on INFO (or higher) to suppress periodic monitoring chatter.
+# - Set to DEBUG only when you actively troubleshoot JMX/RMI transport issues.
+logging:
+  level:
+    root: ${app.logging.level-root:INFO}
+    com.gvi.project: ${app.logging.level-project:INFO}
+    sun.rmi.transport.tcp: ${app.logging.level-rmi-transport:INFO}
+    sun.rmi.loader: ${app.logging.level-rmi-loader:INFO}
+    javax.management.remote.rmi: ${app.logging.level-jmx-rmi:INFO}
+
 app:
+  logging:
+    level-root: INFO
+    level-project: DEBUG
+    level-rmi-transport: INFO
+    level-rmi-loader: INFO
+    level-jmx-rmi: INFO
   quiz:
     max-questions: 10
     sqlite:

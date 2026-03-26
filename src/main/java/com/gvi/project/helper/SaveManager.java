@@ -6,6 +6,8 @@ import com.gvi.project.GamePanel;
 import com.gvi.project.models.game_maps.GameMaps;
 import com.gvi.project.models.objects.OBJ_QuizStation;
 import com.gvi.project.models.objects.SuperObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -18,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class SaveManager {
+
+    private static final Logger log = LoggerFactory.getLogger(SaveManager.class);
 
     private static final Path DEFAULT_SAVE_DIR = Path.of(System.getProperty("user.home"), ".sql-dungeon", "saves");
     private static final DateTimeFormatter TIMESTAMP_FMT = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
@@ -114,7 +118,7 @@ public class SaveManager {
             mapper.writeValue(slotFile(slot).toFile(), data);
             return true;
         } catch (IOException e) {
-            System.err.println("[SaveManager] save slot " + slot + " failed: " + e.getMessage());
+            log.warn("Save slot {} failed", slot, e);
             return false;
         }
     }
@@ -125,7 +129,7 @@ public class SaveManager {
         try {
             data = mapper.readValue(slotFile(slot).toFile(), SaveData.class);
         } catch (IOException e) {
-            System.err.println("[SaveManager] load slot " + slot + " failed: " + e.getMessage());
+            log.warn("Load slot {} failed", slot, e);
             return false;
         }
 

@@ -2,10 +2,14 @@ package com.gvi.project.ui;
 
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 
 public final class UITheme {
+
+    private static final Logger log = LoggerFactory.getLogger(UITheme.class);
 
     public static final Color BOX_BG = Color.rgb(42, 64, 48);
     public static final Color BOX_BORDER_OUTER = Color.rgb(198, 160, 48);
@@ -55,7 +59,7 @@ public final class UITheme {
                 }
             }
         } catch (Exception e) {
-            System.err.println("Could not load pixel font: " + e.getMessage());
+            log.warn("Could not load pixel font, using fallback fonts.", e);
         }
         // Fallback 
         FONT_XS = Font.font("Arial", 14);
