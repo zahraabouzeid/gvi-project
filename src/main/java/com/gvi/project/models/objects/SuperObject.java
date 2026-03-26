@@ -65,16 +65,45 @@ public abstract class SuperObject implements Renderable {
 		int screenX = worldX - gp.player.worldX + gp.player.screenX;
 		int screenY = worldY - gp.player.worldY + gp.player.screenY;
 
-		if (worldX + GeneralSettings.getTileSize() > gp.player.worldX - gp.player.screenX &&
-			worldX - GeneralSettings.getTileSize() < gp.player.worldX + gp.player.screenX &&
-			worldY + GeneralSettings.getTileSize() > gp.player.worldY - gp.player.screenY &&
-			worldY - GeneralSettings.getTileSize() < gp.player.worldY + gp.player.screenY) {
+		int spriteWidth  = tileSize * sprite.imageWidth;
+		int spriteHeight = tileSize * sprite.imageHeight;
 
+		int screenLeft   = screenX;
+		int screenRight  = screenX + spriteWidth;
+
+		int screenTop;
+		int screenBottom;
+
+		if (spriteDirectionUp) {
+			screenTop    = screenY - (spriteHeight - tileSize);
+			screenBottom = screenY + tileSize;
+		} else {
+			screenTop    = screenY;
+			screenBottom = screenY + spriteHeight;
+		}
+
+		if (
+				screenRight > 0 &&
+						screenLeft < GeneralSettings.getScreenWidth() &&
+						screenBottom > 0 &&
+						screenTop < GeneralSettings.getScreenHeight()
+		) {
+			int drawX = screenX + (sprite.imageOffsetX * tileSize);
+
+			int drawY;
 			if (spriteDirectionUp) {
-				gp.gc.drawImage(sprite.image, screenX + (sprite.imageOffsetX * tileSize), screenY - ((sprite.imageHeight - 1) * tileSize) + (sprite.imageOffsetY * tileSize), tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+				drawY = screenY - ((sprite.imageHeight - 1) * tileSize) + (sprite.imageOffsetY * tileSize);
 			} else {
-				gp.gc.drawImage(sprite.image, screenX + (sprite.imageOffsetX * tileSize), screenY + (sprite.imageOffsetY * tileSize), tileSize * sprite.imageWidth, tileSize * sprite.imageHeight);
+				drawY = screenY + (sprite.imageOffsetY * tileSize);
 			}
+
+			gp.gc.drawImage(
+					sprite.image,
+					drawX,
+					drawY,
+					spriteWidth,
+					spriteHeight
+			);
 		}
 	}
 
