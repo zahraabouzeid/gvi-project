@@ -8,4 +8,8 @@ spring:
 app:
   quiz:
     sqlite:
-      path: ${user.dir}/quizdb.db
+      path: ${user.dir}/AllQuestions.db
+
+
+
+
