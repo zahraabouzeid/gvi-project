@@ -730,7 +730,7 @@ Write-Info "Using Maven command: $mavenCommand"
 
 $targetDir = Join-Path $ProjectRoot "target"
 $libsDir = Join-Path $targetDir "libs"
-$distDir = Join-Path $targetDir "dist"
+$distDir = Join-Path $ProjectRoot "dist"
 $portableRoot = Join-Path $distDir $AppName
 $singleFileExe = Join-Path $distDir ($AppName + ".exe")
 
@@ -806,15 +806,32 @@ if (Test-Path -LiteralPath $singleFileExe) {
 
 New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
+$jpackageInputDir = Join-Path $targetDir "jpackage-input"
+if (Test-Path -LiteralPath $jpackageInputDir) {
+    Remove-Item -LiteralPath $jpackageInputDir -Recurse -Force -ErrorAction SilentlyContinue
+}
+New-Item -ItemType Directory -Path $jpackageInputDir -Force | Out-Null
+Copy-Item -LiteralPath $mainJar.FullName -Destination $jpackageInputDir -Force
+if (Test-Path -LiteralPath $libsDir) {
+    Copy-Item -LiteralPath $libsDir -Destination (Join-Path $jpackageInputDir "libs") -Recurse -Force
+}
+Write-Info "Prepared jpackage input: main JAR + libs only."
+
 $jpackageArgs = @(
     "--type", "app-image",
     "--dest", $distDir,
     "--name", $AppName,
-    "--input", $targetDir,
+    "--input", $jpackageInputDir,
     "--main-jar", $mainJar.Name,
     "--main-class", $metadata.MainClass,
     "--java-options", "--enable-native-access=ALL-UNNAMED"
 )
+
+$iconPath = Join-Path $ProjectRoot "icon.ico"
+if (Test-Path -LiteralPath $iconPath) {
+    $jpackageArgs += @("--icon", $iconPath)
+    Write-Info "Using icon: $iconPath"
+}
 
 if (-not [string]::IsNullOrWhiteSpace($metadata.Version)) {
     $jpackageArgs += @("--app-version", $metadata.Version)
@@ -838,9 +855,14 @@ if (-not $KeepPortableFolder) {
     Remove-Item -LiteralPath $portableRoot -Recurse -Force -ErrorAction SilentlyContinue
 }
 
+Write-Info "Cleaning up target directory..."
+Remove-Item -LiteralPath $targetDir -Recurse -Force -ErrorAction SilentlyContinue
+
 Write-Host ""
 Write-Host "[build-exe] Build finished."
 Write-Host "Single-file portable EXE: $singleFileExe"
 if ($KeepPortableFolder) {
     Write-Host "Temporary portable folder kept: $portableRoot"
 }
+
+exit 0
