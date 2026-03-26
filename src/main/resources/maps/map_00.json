@@ -297,32 +297,32 @@
         "conditionObjects": [
           {
             "type": "statistic",
-            "value": 450,
-            "messageOnFailure": "Needs a score of 450 or higher",
+            "value": 500,
+            "messageOnFailure": "Needs a score of 500 or higher",
             "comparator": ">=",
             "compareWith": "score",
             "onSuccess": ""
           },
           {
             "type": "item",
-            "value": 1,
-            "messageOnFailure": "You need 1 copper key",
+            "value": 3,
+            "messageOnFailure": "You need 3 copper keys",
             "comparator":">=",
             "compareWith": "key_copper",
             "onSuccess": "remove"
           },
           {
             "type": "item",
-            "value": 1,
-            "messageOnFailure": "You need 1 iron key",
+            "value": 3,
+            "messageOnFailure": "You need 3 iron keys",
             "comparator":">=",
             "compareWith": "key_iron",
             "onSuccess": "remove"
           },
           {
             "type": "item",
-            "value": 1,
-            "messageOnFailure": "You need 1 golden key",
+            "value": 3,
+            "messageOnFailure": "You need 3 golden keys",
             "comparator":">=",
             "compareWith": "key_gold",
             "onSuccess": "remove"

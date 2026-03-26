@@ -188,11 +188,45 @@ public class QuizDialog extends GameScreen {
         if (currentQuestion == null) return;
 
         double boxW = screenWidth - 80;
-        double boxH = 240;
         double boxX = 40;
-        double boxY = screenHeight - boxH - 20;
-
         double questionLineHeight = 18;
+        double maxTextW = boxW - 36;
+
+        // Calculate required box height dynamically
+        double contentHeight = 26; // Initial top padding
+        contentHeight += 12; // Topic line + spacing
+
+        String introText = normalizeQuestionWhitespace(currentQuestion.getIntroText());
+        if (!introText.isEmpty()) {
+            List<String> introLines = wrapMultilineText(introText, FONT_XS, maxTextW);
+            contentHeight += introLines.size() * 14 + 6;
+        }
+
+        List<String> questionLines = wrapMultilineText(currentQuestion.getQuestionText(), FONT_SM, maxTextW);
+
+        if (currentQuestion.getType() == QuestionType.FILL_IN_BLANK) {
+            FillInBlankQuestion fib = (FillInBlankQuestion) currentQuestion;
+            contentHeight += 20; // Blank info
+            contentHeight += questionLines.size() * questionLineHeight;
+            
+            String blankLine = buildFillBlankLine(fib, fillBlankIndex);
+            List<String> blankLines = wrapText(blankLine, FONT_SM, maxTextW);
+            contentHeight += 10 + blankLines.size() * questionLineHeight;
+        } else {
+            contentHeight += questionLines.size() * questionLineHeight;
+        }
+
+        contentHeight += 16; // Spacing before answers
+
+        // Calculate answer grid height
+        List<Answer> answers = getSelectableAnswers();
+        double answerGridHeight = calculateAnswerGridHeight(boxW, answers, Integer.MAX_VALUE);
+        contentHeight += answerGridHeight;
+
+        contentHeight += 30; // Bottom padding for hint (increased from 20)
+        
+        double boxH = Math.max(240, contentHeight); // Minimum 240, but grow as needed
+        double boxY = screenHeight - boxH - 50; // 50px padding from bottom
 
         drawPixelBox(gc, boxX, boxY, boxW, boxH);
 
@@ -216,9 +250,6 @@ public class QuizDialog extends GameScreen {
 
         contentY += 12;
 
-        double maxTextW = boxW - 36;
-
-        String introText = normalizeQuestionWhitespace(currentQuestion.getIntroText());
         if (!introText.isEmpty()) {
             gc.setFont(FONT_XS);
             gc.setFill(TEXT_GRAY);
@@ -231,8 +262,6 @@ public class QuizDialog extends GameScreen {
 
         gc.setFont(FONT_SM);
         gc.setFill(TEXT_WHITE);
-
-        List<String> questionLines = wrapMultilineText(currentQuestion.getQuestionText(), FONT_SM, maxTextW);
 
         if (currentQuestion.getType() == QuestionType.FILL_IN_BLANK) {
             FillInBlankQuestion fib = (FillInBlankQuestion) currentQuestion;

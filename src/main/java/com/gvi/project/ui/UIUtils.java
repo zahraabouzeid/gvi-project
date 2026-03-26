@@ -72,21 +72,35 @@ public final class UIUtils {
 
     public static List<String> wrapText(String text, Font font, double maxWidth) {
         List<String> lines = new ArrayList<>();
-        String[] words = text.split(" ");
-        StringBuilder current = new StringBuilder();
+        
+        // Handle explicit line breaks (\n) from database
+        String normalized = text.replace("\r\n", "\n").replace('\r', '\n');
+        String[] rawLines = normalized.split("\n", -1);
+        
+        for (String rawLine : rawLines) {
+            if (rawLine.isEmpty()) {
+                lines.add("");
+                continue;
+            }
+            
+            // Wrap each line by words if it exceeds maxWidth
+            String[] words = rawLine.split(" ");
+            StringBuilder current = new StringBuilder();
 
-        for (String word : words) {
-            String test = current.isEmpty() ? word : current + " " + word;
-            if (getTextWidth(test, font) > maxWidth && !current.isEmpty()) {
+            for (String word : words) {
+                String test = current.isEmpty() ? word : current + " " + word;
+                if (getTextWidth(test, font) > maxWidth && !current.isEmpty()) {
+                    lines.add(current.toString());
+                    current = new StringBuilder(word);
+                } else {
+                    current = new StringBuilder(test);
+                }
+            }
+            if (!current.isEmpty()) {
                 lines.add(current.toString());
-                current = new StringBuilder(word);
-            } else {
-                current = new StringBuilder(test);
             }
         }
-        if (!current.isEmpty()) {
-            lines.add(current.toString());
-        }
+        
         return lines;
     }
 
