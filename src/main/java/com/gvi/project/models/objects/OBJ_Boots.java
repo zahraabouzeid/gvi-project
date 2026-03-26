@@ -35,6 +35,6 @@ public class OBJ_Boots extends AnimatedObject {
 		animComp.delayBetweenCycles = 2;
 		animComp.delay = 0.8;
 
-		sprite = animComp.getCurrentSprite();
+		animComp.triggerLoop();
 	}
 }

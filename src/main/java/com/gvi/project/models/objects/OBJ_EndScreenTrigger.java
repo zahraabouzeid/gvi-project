@@ -1,7 +1,6 @@
 package com.gvi.project.models.objects;
 
 import com.gvi.project.GamePanel;
-import com.gvi.project.GameState;
 import com.gvi.project.GeneralSettings;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;

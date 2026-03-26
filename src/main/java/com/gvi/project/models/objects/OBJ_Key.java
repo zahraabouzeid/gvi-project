@@ -31,5 +31,6 @@ public class OBJ_Key extends AnimatedObject {
 		animComp.setLooping(true);
 		animComp.cycleLength = 0.5;
 		animComp.delayBetweenCycles = 0.8;
+		animComp.triggerLoop();
 	}
 }

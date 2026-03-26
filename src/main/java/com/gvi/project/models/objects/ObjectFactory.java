@@ -47,6 +47,9 @@ public class ObjectFactory {
 				eventTrigger.setDimensions(Integer.parseInt(data.getOrDefault("width", "1")), Integer.parseInt(data.getOrDefault("height", "1")));
 				object = eventTrigger;
 				break;
+			case "END_SCREEN_TRIGGER":
+				object = new OBJ_EndScreenTrigger();
+				break;
 			default:
 				object = null;
 		}
