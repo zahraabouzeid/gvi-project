@@ -90,12 +90,12 @@ public class SqliteQuestionLoader {
 
     private void loadThemes(Connection connection, Map<Integer, QuestionEntity> questions) throws SQLException {
         String sql = """
-                SELECT qt.question_id, t.theme_id, t.name, t.description
-                FROM Question_Theme qt
-                INNER JOIN theme t ON t.theme_id = qt.theme_id
-                ORDER BY qt.question_id ASC, t.theme_id ASC
+                SELECT question_id, theme_name
+                FROM question_theme_assignment
+                ORDER BY question_id ASC, theme_name ASC
                 """;
 
+        int syntheticThemeId = 1;
         try (PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
@@ -105,9 +105,9 @@ public class SqliteQuestionLoader {
                 }
 
                 ThemeEntity theme = new ThemeEntity();
-                theme.setId(resultSet.getInt("theme_id"));
-                theme.setName(resultSet.getString("name"));
-                theme.setDescription(resultSet.getString("description"));
+                theme.setId(syntheticThemeId++);
+                theme.setName(resultSet.getString("theme_name"));
+                theme.setDescription(null);
                 question.getThemes().add(theme);
             }
         }

@@ -201,7 +201,7 @@ public class QuizDialog extends GameScreen {
 
         gc.setFont(FONT_XS);
         gc.setFill(TEXT_GOLD);
-        String topicText = currentQuestion.getTopicArea().getDisplayName();
+        String topicText = resolveTopicLabel();
         if (remainingQuestions > 0) {
             topicText += "  (" + remainingQuestions + " uebrig)";
         }
@@ -219,6 +219,9 @@ public class QuizDialog extends GameScreen {
         double maxTextW = boxW - 36;
 
         String introText = normalizeQuestionWhitespace(currentQuestion.getIntroText());
+        if (introText.equals(resolveTopicLabel())) {
+            introText = "";
+        }
         if (!introText.isEmpty()) {
             gc.setFont(FONT_XS);
             gc.setFill(TEXT_GRAY);
@@ -271,7 +274,12 @@ public class QuizDialog extends GameScreen {
         if (!answerFeedback) {
             gc.setFont(FONT_XS);
             gc.setFill(TEXT_GRAY);
-            String hint = "Mit [1-4] Antworten markieren";
+            int maxSelectable = Math.min(9, getSelectableAnswers().size());
+            String rangeHint = maxSelectable <= 1 ? "[1]" : "[1-" + maxSelectable + "]";
+            String hint = "Mit " + rangeHint + " Antworten markieren";
+            if (getSelectableAnswers().size() > 9) {
+                hint += " (max 9)";
+            }
             gc.fillText(hint, contentX, boxY + boxH - 10);
         }
     }
@@ -524,5 +532,9 @@ public class QuizDialog extends GameScreen {
             return "";
         }
         return text.replaceAll("[ \\t\\f\\x0B]+", " ").trim();
+    }
+
+    private String resolveTopicLabel() {
+        return currentQuestion == null ? "" : currentQuestion.getTopicArea().getDisplayName();
     }
 }

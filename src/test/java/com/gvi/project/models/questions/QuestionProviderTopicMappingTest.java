@@ -30,22 +30,27 @@ class QuestionProviderTopicMappingTest {
     }
 
     @Test
-    void resolveTopicAreaDistributesUnknownThemesAcrossRooms() throws Exception {
+    void resolveTopicAreaMapsBusinessThemeToConfiguredRoomTopic() throws Exception {
         QuestionProvider provider = new QuestionProvider(null);
+        QuestionEntity entity = new QuestionEntity();
+        entity.setId(2);
+        entity.setThemes(Set.of(createTheme("Wirtschaft")));
 
-        QuestionEntity first = new QuestionEntity();
-        first.setId(1);
-        first.setThemes(Set.of(createTheme("Wirtschaft")));
+        TopicArea topicArea = invokeResolveTopicArea(provider, entity);
 
-        QuestionEntity second = new QuestionEntity();
-        second.setId(2);
-        second.setThemes(Set.of(createTheme("Wirtschaft")));
+        assertEquals(TopicArea.SELECT_ABFRAGEN, topicArea);
+    }
 
-        TopicArea firstArea = invokeResolveTopicArea(provider, first);
-        TopicArea secondArea = invokeResolveTopicArea(provider, second);
+    @Test
+    void resolveTopicAreaFallsBackToSqlGrundlagenForUnknownTheme() throws Exception {
+        QuestionProvider provider = new QuestionProvider(null);
+        QuestionEntity entity = new QuestionEntity();
+        entity.setId(3);
+        entity.setThemes(Set.of(createTheme("Unbekanntes Thema")));
 
-        assertEquals(TopicArea.SQL_GRUNDLAGEN, firstArea);
-        assertEquals(TopicArea.SELECT_ABFRAGEN, secondArea);
+        TopicArea topicArea = invokeResolveTopicArea(provider, entity);
+
+        assertEquals(TopicArea.SQL_GRUNDLAGEN, topicArea);
     }
 
     private ThemeEntity createTheme(String name) {
