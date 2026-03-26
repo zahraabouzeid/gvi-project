@@ -7,6 +7,7 @@ import com.gvi.project.models.questions.MultipleChoiceQuestion;
 import com.gvi.project.models.questions.Question;
 import com.gvi.project.models.questions.QuestionType;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.text.Font;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,6 +27,7 @@ public class QuizDialog extends GameScreen {
     private static final double DIALOG_SIDE_MARGIN = 40;
     private static final double DIALOG_BOTTOM_MARGIN = 20;
     private static final double DIALOG_TOP_MIN_MARGIN = 20;
+    private static final double MIN_QUESTION_FONT_SIZE = 10;
 
     public boolean quizOpen = false;
     public Question currentQuestion = null;
@@ -178,7 +180,10 @@ public class QuizDialog extends GameScreen {
         if (currentQuestion == null) return;
 
         double boxW = screenWidth - (DIALOG_SIDE_MARGIN * 2);
-        double boxH = calculateDialogHeight(boxW);
+        LayoutConfig layout = calculateLayout(boxW);
+        Font questionFont = layout.questionFont();
+        double questionLineHeight = layout.questionLineHeight();
+        double boxH = layout.dialogHeight();
         double boxX = DIALOG_SIDE_MARGIN;
         double boxY = screenHeight - boxH - DIALOG_BOTTOM_MARGIN;
         if (boxY < DIALOG_TOP_MIN_MARGIN) {
@@ -231,22 +236,23 @@ public class QuizDialog extends GameScreen {
             gc.fillText(blankInfo, contentX, contentY + 14);
             contentY += 20;
 
-            gc.setFont(FONT_SM);
+            gc.setFont(questionFont);
             gc.setFill(TEXT_WHITE);
-            for (String line : wrapText(currentQuestion.getQuestionText(), FONT_SM, maxTextW)) {
-                contentY += 18;
+            for (String line : wrapText(currentQuestion.getQuestionText(), questionFont, maxTextW)) {
+                contentY += questionLineHeight;
                 gc.fillText(line, contentX, contentY);
             }
 
             contentY += 10;
             String blankLine = buildFillBlankLine(fib, fillBlankIndex);
-            for (String line : wrapText(blankLine, FONT_SM, maxTextW)) {
-                contentY += 18;
+            for (String line : wrapText(blankLine, questionFont, maxTextW)) {
+                contentY += questionLineHeight;
                 gc.fillText(line, contentX, contentY);
             }
         } else {
-            for (String line : wrapText(currentQuestion.getQuestionText(), FONT_SM, maxTextW)) {
-                contentY += 18;
+            gc.setFont(questionFont);
+            for (String line : wrapText(currentQuestion.getQuestionText(), questionFont, maxTextW)) {
+                contentY += questionLineHeight;
                 gc.fillText(line, contentX, contentY);
             }
         }
@@ -397,7 +403,29 @@ public class QuizDialog extends GameScreen {
                 .orElse(-10);
     }
 
-    private double calculateDialogHeight(double boxW) {
+    private LayoutConfig calculateLayout(double boxW) {
+        double maxHeight = screenHeight - DIALOG_TOP_MIN_MARGIN - DIALOG_BOTTOM_MARGIN;
+        Font baseFont = FONT_SM;
+        String family = baseFont.getFamily();
+        double size = baseFont.getSize();
+
+        while (size >= MIN_QUESTION_FONT_SIZE) {
+            Font questionFont = Font.font(family, size);
+            double questionLineHeight = Math.ceil(getTextHeight("Ag", questionFont)) + 2;
+            double dialogHeight = calculateDialogHeight(boxW, questionFont, questionLineHeight);
+            if (dialogHeight <= maxHeight) {
+                return new LayoutConfig(questionFont, questionLineHeight, dialogHeight);
+            }
+            size -= 1;
+        }
+
+        Font minQuestionFont = Font.font(family, MIN_QUESTION_FONT_SIZE);
+        double minQuestionLineHeight = Math.ceil(getTextHeight("Ag", minQuestionFont)) + 2;
+        double minDialogHeight = calculateDialogHeight(boxW, minQuestionFont, minQuestionLineHeight);
+        return new LayoutConfig(minQuestionFont, minQuestionLineHeight, Math.min(minDialogHeight, maxHeight));
+    }
+
+    private double calculateDialogHeight(double boxW, Font questionFont, double questionLineHeight) {
         double maxTextW = boxW - 36;
         double contentHeight = 0;
 
@@ -410,12 +438,12 @@ public class QuizDialog extends GameScreen {
         }
 
         if (currentQuestion != null) {
-            contentHeight += wrapText(currentQuestion.getQuestionText(), FONT_SM, maxTextW).size() * 18.0;
+            contentHeight += wrapText(currentQuestion.getQuestionText(), questionFont, maxTextW).size() * questionLineHeight;
             if (currentQuestion.getType() == QuestionType.FILL_IN_BLANK) {
                 FillInBlankQuestion fib = (FillInBlankQuestion) currentQuestion;
                 contentHeight += 20;
                 contentHeight += 10;
-                contentHeight += wrapText(buildFillBlankLine(fib, fillBlankIndex), FONT_SM, maxTextW).size() * 18.0;
+                contentHeight += wrapText(buildFillBlankLine(fib, fillBlankIndex), questionFont, maxTextW).size() * questionLineHeight;
             }
         }
 
@@ -432,6 +460,8 @@ public class QuizDialog extends GameScreen {
         double maxHeight = screenHeight - DIALOG_TOP_MIN_MARGIN - DIALOG_BOTTOM_MARGIN;
         return Math.max(minHeight, Math.min(maxHeight, contentHeight + chromeHeight));
     }
+
+    private record LayoutConfig(Font questionFont, double questionLineHeight, double dialogHeight) {}
 
     private String getNumberLabel(int answerNumber, boolean isSelected) {
         return isMultiSelectQuestion()
