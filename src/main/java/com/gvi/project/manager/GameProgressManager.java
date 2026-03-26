@@ -5,6 +5,7 @@ import com.gvi.project.helper.SaveData;
 import com.gvi.project.models.objects.KeyType;
 import com.gvi.project.models.objects.OBJ_Boots;
 import com.gvi.project.models.objects.OBJ_Door;
+import com.gvi.project.models.objects.OBJ_EventTrigger;
 import com.gvi.project.models.objects.OBJ_HealingPotion;
 import com.gvi.project.models.objects.OBJ_Key;
 import com.gvi.project.models.objects.OBJ_QuizStation;
@@ -28,8 +29,9 @@ public class GameProgressManager {
         List<SaveData.SavedObject> snapshot = new ArrayList<>();
         for (SuperObject obj : gp.obj) {
             if (obj == null) continue;
-            boolean doorOpen = (obj instanceof OBJ_Door d) && d.isOpen();
-            boolean quizDone = (obj instanceof OBJ_QuizStation qs) && qs.completed;
+            boolean doorOpen  = (obj instanceof OBJ_Door d)          && d.isOpen();
+            boolean quizDone  = (obj instanceof OBJ_QuizStation qs)   && qs.completed;
+            boolean triggered = (obj instanceof OBJ_EventTrigger et)   && et.isTriggered();
             List<Integer> answered = (obj instanceof OBJ_QuizStation qs)
                     ? new ArrayList<>(qs.getAnsweredQuestionIds())
                     : null;
@@ -37,7 +39,7 @@ public class GameProgressManager {
                     obj.getClass().getSimpleName(),
                     obj.id,
                     obj.worldX, obj.worldY,
-                    quizDone, doorOpen, answered
+                    quizDone, doorOpen, triggered, answered
             ));
         }
         mapSnapshots.put(key, snapshot);
@@ -122,6 +124,9 @@ public class GameProgressManager {
             } else if (saved.answeredQuestionIds != null && !saved.answeredQuestionIds.isEmpty()) {
                 qs.restoreProgress(saved.answeredQuestionIds, gp.questionProvider);
             }
+        }
+        if (obj instanceof OBJ_EventTrigger et && saved.triggered) {
+            et.setTriggered();
         }
     }
 

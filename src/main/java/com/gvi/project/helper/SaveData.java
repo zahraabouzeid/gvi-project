@@ -20,12 +20,13 @@ public class SaveData {
         public int           worldX, worldY;
         public boolean       quizCompleted;
         public boolean       doorOpen;
+        public boolean       triggered;
         public List<Integer> answeredQuestionIds;
 
         public SavedObject() {}
 
         public SavedObject(String className, String objectId, int worldX, int worldY,
-                           boolean quizCompleted, boolean doorOpen,
+                           boolean quizCompleted, boolean doorOpen, boolean triggered,
                            List<Integer> answeredQuestionIds) {
             this.className           = className;
             this.objectId            = objectId;
@@ -33,6 +34,7 @@ public class SaveData {
             this.worldY              = worldY;
             this.quizCompleted       = quizCompleted;
             this.doorOpen            = doorOpen;
+            this.triggered           = triggered;
             this.answeredQuestionIds = answeredQuestionIds;
         }
     }

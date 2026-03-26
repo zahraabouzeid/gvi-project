@@ -17,6 +17,18 @@ public class OBJ_EventTrigger extends SuperObject {
 		this.collisionBox.setWidth(width * GeneralSettings.getTileSize());
 	}
 
+
+
+
+	
+	public boolean isTriggered() {
+		return triggered;
+	}
+
+	public void setTriggered() {
+		this.triggered = true;
+	}
+
 	@Override
 	public void onStep(Player player, GamePanel gp, int objIndex) {
 		for (SuperObject obj : gp.obj){
