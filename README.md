@@ -4,6 +4,8 @@
 
 Teammitglieder: Zahraa, Masuma, Rebecca, Amélie, Dominik, Sascha
 
+https://drive.google.com/drive/folders/14LnamkSIiWLrd7tkbNGR6vc9F_UsY8fM Link zur Jar im Google Drive
+
 <a href="https://gamificationoflearning.atlassian.net/jira/software/projects/SCRUM/boards/1?jql=" target="_blank">Storyboard</a>
 
 ## 1. Meeting
