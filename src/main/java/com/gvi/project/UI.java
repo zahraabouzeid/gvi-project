@@ -3,6 +3,8 @@ package com.gvi.project;
 import com.gvi.project.helper.SaveManager;
 import com.gvi.project.models.questions.Answer;
 import com.gvi.project.models.questions.Question;
+import com.gvi.project.models.questions.Reward;
+import com.gvi.project.models.questions.RewardCalculator;
 import com.gvi.project.ui.*;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -32,6 +34,11 @@ public class UI {
     private int messageCounter = 0;
     public boolean gameFinished = false;
     double playtime;
+    
+    // Reward system tracking
+    private int maxPossiblePoints = 0;
+    private Reward earnedReward = Reward.NONE;
+    private double performancePercentage = 0.0;
 
     private final DecimalFormat df = new DecimalFormat("#.00");
 
@@ -44,7 +51,7 @@ public class UI {
         characterNameScreen = new CharacterNameScreen();
         characterCreationScreen = new CharacterCreationScreen();
         gameOverScreen = new GameOverScreen();
-        winScreen = new WinScreen();
+        winScreen = new WinScreen(GeneralSettings.getScreenWidth(), GeneralSettings.getScreenHeight());
         pauseScreen = new PauseScreen();
         saveSlotScreen = new SaveSlotScreen();
         loadingScreen = new LoadingScreen();
@@ -103,6 +110,47 @@ public class UI {
         playtime = 0;
         gameOverScreen.reset();
         hud.reset();
+        maxPossiblePoints = 0;
+        earnedReward = Reward.NONE;
+        performancePercentage = 0.0;
+    }
+
+    /**
+     * Adds max possible points for a question (to be called when question is presented).
+     * @param points the maximum points achievable for this question
+     */
+    public void addMaxPossiblePoints(int points) {
+        maxPossiblePoints += Math.abs(points); // Use absolute value
+    }
+
+    /**
+     * Sets the max possible points (for testing purposes).
+     * @param points the total max points
+     */
+    public void setMaxPossiblePoints(int points) {
+        maxPossiblePoints = points;
+    }
+
+    /**
+     * Calculates and stores the final reward based on player's score.
+     * Should be called when game is finished.
+     */
+    public void calculateReward() {
+        RewardCalculator calculator = new RewardCalculator(gp.player.score, maxPossiblePoints);
+        performancePercentage = calculator.calculatePercentage();
+        earnedReward = calculator.calculateReward();
+    }
+
+    public int getMaxPossiblePoints() {
+        return maxPossiblePoints;
+    }
+
+    public Reward getEarnedReward() {
+        return earnedReward;
+    }
+
+    public double getPerformancePercentage() {
+        return performancePercentage;
     }
 
     public void showFloatingScore(int points) {
@@ -213,7 +261,8 @@ public class UI {
         }
 
         if (gameFinished) {
-            winScreen.draw(gc, df.format(playtime));
+            winScreen.draw(gc, df.format(playtime), earnedReward, performancePercentage, 
+                          gp.player.score, maxPossiblePoints);
             return;
         }
 

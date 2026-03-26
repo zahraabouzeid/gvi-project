@@ -104,6 +104,11 @@ public class HUD {
         double timeW = getTextWidth(formattedTime, FONT_LG);
         gc.fillText(formattedTime, GeneralSettings.getScreenWidth() - timeW - 14, GeneralSettings.getScreenHeight() - 14);
 
+        // Dev mode indicator
+        if (GeneralSettings.isDevMode()) {
+            drawDevMode(gc);
+        }
+
         if (gp.player.speed > 4) {
             drawSpeedBoost(gc);
         }
@@ -193,6 +198,29 @@ public class HUD {
         gc.fillText(text, x, y + 2);
     }
 
+    private void drawDevMode(GraphicsContext gc) {
+        String devText = "DEV MODE [F2]";
+        gc.setFont(FONT_XS);
+        double dtw = getTextWidth(devText, FONT_XS);
+        double dx = GeneralSettings.getScreenWidth() - dtw - 20;
+        double dy = 20;
+
+        drawPixelBox(gc, dx - 8, dy - 14, dtw + 16, 22);
+        gc.setFill(Color.rgb(255, 80, 80)); // Red for dev mode
+        gc.fillText(devText, dx, dy);
+
+        // Reward test hints
+        String hintText = "F7:Bronze | F8:Silver | F9:Gold | F10:Perfect";
+        gc.setFont(FONT_XS);
+        double htw = getTextWidth(hintText, FONT_XS);
+        double hx = GeneralSettings.getScreenWidth() - htw - 20;
+        double hy = 44;
+
+        drawPixelBox(gc, hx - 8, hy - 14, htw + 16, 22);
+        gc.setFill(TEXT_GRAY);
+        gc.fillText(hintText, hx, hy);
+    }
+    
     private void drawKeys(GraphicsContext gc, double hudX, double hudY) {
         String text = "x %s";
         double fontHeight = getTextHeight(text, FONT_MD);

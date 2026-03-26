@@ -71,6 +71,8 @@ public class OBJ_QuizStation extends AnimatedObject {
 
 		Question question = getNextQuestion();
 		if (question != null) {
+			// Track max possible points for reward calculation
+			gp.ui.addMaxPossiblePoints(question.getMaxPoints());
 			gp.ui.openQuiz(question, getRemainingCount());
 			gp.interactingObjectIndex = objIndex;
 			gp.gameState = GameState.QUIZ;
@@ -91,6 +93,8 @@ public class OBJ_QuizStation extends AnimatedObject {
 		} else {
 			Question next = getNextQuestion();
 			if (next != null) {
+				// Track max possible points for reward calculation
+				gp.ui.addMaxPossiblePoints(next.getMaxPoints());
 				gp.ui.openQuiz(next, getRemainingCount());
 				gp.interactingObjectIndex = objIndex;
 				gp.gameState = GameState.QUIZ;

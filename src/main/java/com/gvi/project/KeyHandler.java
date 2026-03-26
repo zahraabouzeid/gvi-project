@@ -13,6 +13,10 @@ public class KeyHandler {
 	public boolean delPressed;
 	public boolean tabPressed;
 	public boolean f2Pressed = false;
+	// public boolean f7Pressed = false;  // Cheat: Win with Bronze
+	// public boolean f8Pressed = false;  // Cheat: Win with Silver
+	// public boolean f9Pressed = false;  // Cheat: Win with Gold
+	// public boolean f10Pressed = false; // Cheat: Win with Gold Perfect
 	public int numberPressed = -1;
 	public String typedCharacter = "";
 
@@ -33,6 +37,12 @@ public class KeyHandler {
 			if (code == KeyCode.DIGIT2 || code == KeyCode.NUMPAD2) numberPressed = 2;
 			if (code == KeyCode.DIGIT3 || code == KeyCode.NUMPAD3) numberPressed = 3;
 			if (code == KeyCode.DIGIT4 || code == KeyCode.NUMPAD4) numberPressed = 4;
+			
+			// Cheat keys for testing reward system
+			// if (code == KeyCode.F7) f7Pressed = true;
+			// if (code == KeyCode.F8) f8Pressed = true;
+			// if (code == KeyCode.F9) f9Pressed = true;
+			// if (code == KeyCode.F10) f10Pressed = true;
 		});
 
 		// Handle text input (including uppercase) with onKeyTyped event
@@ -60,6 +70,10 @@ public class KeyHandler {
 			if (code == KeyCode.DELETE) delPressed = false;
 			if (code == KeyCode.TAB) tabPressed = false;
 			if (code == KeyCode.F2) f2Pressed = !f2Pressed;
+			// if (code == KeyCode.F7) f7Pressed = false;
+			// if (code == KeyCode.F8) f8Pressed = false;
+			// if (code == KeyCode.F9) f9Pressed = false;
+			// if (code == KeyCode.F10) f10Pressed = false;
 		});
 
 		node.setFocusTraversable(true);

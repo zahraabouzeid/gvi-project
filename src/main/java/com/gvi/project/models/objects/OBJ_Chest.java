@@ -59,9 +59,13 @@ public class OBJ_Chest extends AnimatedObject {
 			if (!conditionsAreMeet(gp)) return;
 			onSuccess(gp, objIndex);
 		}
+		// Calculate reward before finishing game
+		gp.ui.calculateReward();
+		gp.ui.gameFinished = true;
+		gp.stopMusic();
+		gp.playSE(4);
 	}
-
-	@Override
+	
 	public void setUpAnimationComponent(){
 		AnimationComponent animComp = (AnimationComponent) this.components.get("Animation");
 		animComp.cycleLength = 1;
