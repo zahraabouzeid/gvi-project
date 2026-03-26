@@ -288,6 +288,14 @@
   ],
   "objects": [
     {
+      "objectType": "END_SCREEN_TRIGGER",
+      "x": 9,
+      "y": 1,
+      "id": "end_screen_trigger_1",
+      "conditions": null,
+      "data": {}
+    },
+    {
       "objectType": "DOOR",
       "x": 9,
       "y": 3,

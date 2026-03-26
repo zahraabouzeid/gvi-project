@@ -31,6 +31,6 @@ public class OBJ_HealingPotion extends AnimatedObject {
 		animComp.cycleLength = 0.4;
 		animComp.delayBetweenCycles = 2;
 
-		sprite = animComp.getCurrentSprite();
+		animComp.triggerLoop();
 	}
 }

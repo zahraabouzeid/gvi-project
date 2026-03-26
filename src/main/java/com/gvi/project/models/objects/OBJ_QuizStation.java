@@ -134,6 +134,8 @@ public class OBJ_QuizStation extends AnimatedObject {
 		animComp.setStartOffset(Math.random() * animComp.cycleLength);
 
 		sprite = animComp.getCurrentSprite();
+
+		animComp.triggerLoop();
 	}
 
     private void spawnKey(GamePanel gp, int objIndex) {
