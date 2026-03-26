@@ -643,7 +643,7 @@
       "objectType": "QUIZ_STATION",
       "x": 36,
       "y": 6,
-      "id": "quiz_station_1",
+      "id": "crystal_blue_quiz_station_1",
       "conditions": null,
       "data": {
         "topicArea": "JOINS_SUBQUERIES",
@@ -654,7 +654,7 @@
       "objectType": "QUIZ_STATION",
       "x": 11,
       "y": 24,
-      "id": "quiz_station_2",
+      "id": "crystal_blue_quiz_station_2",
       "conditions": null,
       "data": {
         "topicArea": "DDL_DML",
@@ -665,7 +665,7 @@
       "objectType": "QUIZ_STATION",
       "x": 37,
       "y": 24,
-      "id": "quiz_station_3",
+      "id": "crystal_blue_quiz_station_3",
       "conditions": null,
       "data": {
         "topicArea": "ER_MODELLIERUNG",
@@ -676,7 +676,7 @@
       "objectType": "QUIZ_STATION",
       "x": 24,
       "y": 23,
-      "id": "quiz_station_4",
+      "id": "crystal_blue_quiz_station_4",
       "conditions": null,
       "data": {
         "topicArea": "NORMALISIERUNG",
@@ -687,7 +687,7 @@
       "objectType": "QUIZ_STATION",
       "x": 24,
       "y": 5,
-      "id": "quiz_station_5",
+      "id": "crystal_blue_quiz_station_5",
       "conditions": null,
       "data": {
         "topicArea": "SELECT_ABFRAGEN",
@@ -698,7 +698,7 @@
       "objectType": "QUIZ_STATION",
       "x": 2,
       "y": 5,
-      "id": "quiz_station_6",
+      "id": "crystal_blue_quiz_station_6",
       "conditions": null,
       "data": {
         "topicArea": "SQL_GRUNDLAGEN",
