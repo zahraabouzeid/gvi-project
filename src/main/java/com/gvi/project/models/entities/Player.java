@@ -68,6 +68,8 @@ public class Player extends Entity {
 		worldX = GeneralSettings.getTileSize() * gridX;
 		worldY = GeneralSettings.getTileSize() * gridY;
 
+		playerItems = new HashMap<>();
+
 		isMoving = false;
 
 		// 4 Pixel pro Frame → 48px / 4 = 12 Frames pro Tile-Übergang

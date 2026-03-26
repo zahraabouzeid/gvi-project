@@ -53,6 +53,8 @@ public class GameLoop extends AnimationTimer {
 	}
 
 	private void update(double fixedDelta) {
+		GeneralSettings.setDevMode(gp.keyHandler.f2Pressed);
+
 		if (gp.gameState == GameState.TITLE) {
 			if (gp.keyHandler.enterPressed) {
 				gp.keyHandler.enterPressed = false;
@@ -164,12 +166,7 @@ public class GameLoop extends AnimationTimer {
 						if (gp.ui.advanceFillBlankIfNeeded()) {
 							return;
 						}
-						// Get the actual points from the selected answer
-						List<Answer> answers = gp.ui.getSelectableAnswers();
-						int selectedIndex = gp.ui.getSelectedAnswer() - 1;
-						int earnedPoints = (selectedIndex >= 0 && selectedIndex < answers.size()) 
-							? answers.get(selectedIndex).points() 
-							: 10; // fallback to 10
+						int earnedPoints = gp.ui.getResolvedQuizPoints();
 						
 						gp.player.score += earnedPoints;
 						gp.ui.showFloatingScore(earnedPoints);
@@ -183,12 +180,7 @@ public class GameLoop extends AnimationTimer {
 							}
 						}
 					} else {
-						// Get the actual negative points from the selected answer
-						List<Answer> answers = gp.ui.getSelectableAnswers();
-						int selectedIndex = gp.ui.getSelectedAnswer() - 1;
-						int lostPoints = (selectedIndex >= 0 && selectedIndex < answers.size()) 
-							? answers.get(selectedIndex).points() 
-							: -10; // fallback to -10
+						int lostPoints = gp.ui.getResolvedQuizPoints();
 						
 						gp.player.score = Math.max(0, gp.player.score + lostPoints); // lostPoints is already negative
 						gp.ui.showFloatingScore(lostPoints);
@@ -201,22 +193,19 @@ public class GameLoop extends AnimationTimer {
 							gp.gameState = GameState.PLAY;
 							return;
 						}
-						gp.ui.setSelectedAnswer(-1);
-						gp.ui.setAnswerFeedback(false);
-						gp.ui.setAnswerCorrect(false);
-						gp.ui.setFeedbackCounter(0);
+						gp.ui.resetQuizAfterWrongAnswer();
 					}
 				}
 			} else {
 				int num = gp.keyHandler.numberPressed;
 				if (num >= 1 && gp.ui.getCurrentQuestion() != null) {
-					List<Answer> answers = gp.ui.getSelectableAnswers();
-					if (num <= answers.size()) {
+					if (gp.ui.handleQuizNumberInput(num)) {
 						gp.keyHandler.numberPressed = -1;
-						gp.ui.setSelectedAnswer(num);
-						gp.ui.setAnswerCorrect(answers.get(num - 1).points() > 0);
-						gp.ui.setAnswerFeedback(true);
 					}
+				}
+				if (gp.keyHandler.enterPressed && gp.ui.getCurrentQuestion() != null) {
+					gp.keyHandler.enterPressed = false;
+					gp.ui.submitQuizSelection();
 				}
 				if (gp.keyHandler.escPressed) {
 					gp.keyHandler.escPressed = false;

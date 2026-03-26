@@ -86,6 +86,12 @@ public class UI {
     public int getFeedbackCounter()           { return quizDialog.feedbackCounter; }
     public void setFeedbackCounter(int v)     { quizDialog.feedbackCounter = v; }
     public boolean isQuizOpen()               { return quizDialog.quizOpen; }
+    public boolean isMultipleChoiceQuestion() { return quizDialog.isMultipleChoiceQuestion(); }
+    public boolean isMultiSelectQuestion()    { return quizDialog.isMultiSelectQuestion(); }
+    public boolean handleQuizNumberInput(int number) { return quizDialog.handleNumberInput(number); }
+    public boolean submitQuizSelection()      { return quizDialog.submitSelectionIfNeeded(); }
+    public int getResolvedQuizPoints()        { return quizDialog.getResolvedPoints(); }
+    public void resetQuizAfterWrongAnswer()   { quizDialog.resetAfterWrongAnswer(); }
 
 
     public void openMessage(String msg) {

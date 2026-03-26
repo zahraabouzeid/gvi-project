@@ -118,8 +118,8 @@ public class QuestionProvider implements QuestionService {
 		String type = node.get("type").asText();
 		int id = node.get("id").asInt();
 		TopicArea topicArea = TopicArea.valueOf(node.get("topicArea").asText());
-		String introText = node.get("introText").asText();
-		String questionText = node.get("questionText").asText();
+		String introText = normalizeQuestionText(node.get("introText").asText());
+		String questionText = normalizeQuestionText(node.get("questionText").asText());
 		
 		// Extract difficulty from JSON if present, otherwise default to MEDIUM
 		Difficulty difficulty = node.has("difficulty") 
@@ -130,7 +130,7 @@ public class QuestionProvider implements QuestionService {
 			case "MULTIPLE_CHOICE" -> {
 				List<Answer> answers = new ArrayList<>();
 				for (JsonNode a : node.get("answers")) {
-					answers.add(new Answer(a.get("text").asText(), a.get("points").asInt()));
+					answers.add(new Answer(normalizeQuestionText(a.get("text").asText()), a.get("points").asInt()));
 				}
 				boolean allowMultiple = node.has("allowMultipleSelection") && node.get("allowMultipleSelection").asBoolean();
 				yield new MultipleChoiceQuestion(id, topicArea, introText, questionText, answers, allowMultiple, difficulty);
@@ -142,11 +142,11 @@ public class QuestionProvider implements QuestionService {
 			case "FILL_IN_BLANK" -> {
 				List<FillInBlankQuestion.Blank> blanks = new ArrayList<>();
 				for (JsonNode b : node.get("blanks")) {
-					String textBefore = b.get("textBefore").asText();
-					String textAfter = b.get("textAfter").asText();
+					String textBefore = normalizeQuestionText(b.get("textBefore").asText());
+					String textAfter = normalizeQuestionText(b.get("textAfter").asText());
 					List<Answer> options = new ArrayList<>();
 					for (JsonNode o : b.get("options")) {
-						options.add(new Answer(o.get("text").asText(), o.get("points").asInt()));
+						options.add(new Answer(normalizeQuestionText(o.get("text").asText()), o.get("points").asInt()));
 					}
 					blanks.add(new FillInBlankQuestion.Blank(textBefore, options, textAfter));
 				}
@@ -170,8 +170,8 @@ public class QuestionProvider implements QuestionService {
 
 	private Question mapDatabaseQuestion(QuestionEntity entity) {
 		TopicArea topicArea = resolveTopicArea(entity);
-		String introText = topicArea.getDisplayName();
-		String questionText = entity.getStartText() == null ? "" : entity.getStartText();
+		String introText = normalizeQuestionText(topicArea.getDisplayName());
+		String questionText = normalizeQuestionText(entity.getStartText());
 
 		return switch (entity.getQuestionType()) {
 			case MC -> mapMultipleChoiceQuestion(entity, topicArea, introText, questionText);
@@ -196,7 +196,7 @@ public class QuestionProvider implements QuestionService {
 						valueOrDefault(left.getOptionOrder(), Integer.MAX_VALUE),
 						valueOrDefault(right.getOptionOrder(), Integer.MAX_VALUE)
 				))
-				.map(answer -> new Answer(answer.getOptionText(), answer.isCorrect() ? correctPoints : wrongPoints))
+				.map(answer -> new Answer(normalizeQuestionText(answer.getOptionText()), answer.isCorrect() ? correctPoints : wrongPoints))
 				.toList();
 
 		if (answers.isEmpty()) {
@@ -274,9 +274,9 @@ public class QuestionProvider implements QuestionService {
 		}
 
 		return new FillInBlankQuestion.Blank(
-				nullToEmpty(gapField.getTextBefore()),
+				normalizeQuestionText(gapField.getTextBefore()),
 				options,
-				nullToEmpty(gapField.getTextAfter())
+				normalizeQuestionText(gapField.getTextAfter())
 		);
 	}
 
@@ -330,5 +330,21 @@ public class QuestionProvider implements QuestionService {
 
 	private String nullToEmpty(String value) {
 		return value == null ? "" : value;
+	}
+
+	private String normalizeQuestionText(String value) {
+		if (value == null || value.isEmpty()) {
+			return "";
+		}
+
+		String normalizedNewlines = value.replace("\r\n", "\n").replace('\r', '\n');
+		String[] lines = normalizedNewlines.split("\n", -1);
+		List<String> normalizedLines = new ArrayList<>(lines.length);
+
+		for (String line : lines) {
+			normalizedLines.add(line.replaceAll("[ \\t\\f\\x0B]+", " ").trim());
+		}
+
+		return String.join("\n", normalizedLines);
 	}
 }
