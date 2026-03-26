@@ -199,6 +199,9 @@ public class QuizDialog extends GameScreen {
         contentHeight += 12; // Topic line + spacing
 
         String introText = normalizeQuestionWhitespace(currentQuestion.getIntroText());
+        if (introText.equals(resolveTopicLabel())) {
+            introText = "";
+        }
         if (!introText.isEmpty()) {
             List<String> introLines = wrapMultilineText(introText, FONT_XS, maxTextW);
             contentHeight += introLines.size() * 14 + 6;
@@ -252,12 +255,6 @@ public class QuizDialog extends GameScreen {
 
         contentY += 12;
 
-        double maxTextW = boxW - 36;
-
-        String introText = normalizeQuestionWhitespace(currentQuestion.getIntroText());
-        if (introText.equals(resolveTopicLabel())) {
-            introText = "";
-        }
         if (!introText.isEmpty()) {
             gc.setFont(FONT_XS);
             gc.setFill(TEXT_GRAY);
