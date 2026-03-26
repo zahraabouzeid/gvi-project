@@ -144,7 +144,7 @@ public class GameLoop extends AnimationTimer {
 						gp.keyHandler.numberPressed = -1;
 					}
 				}
-				if (gp.keyHandler.enterPressed && gp.ui.getCurrentQuestion() != null && gp.ui.isMultipleChoiceQuestion()) {
+				if (gp.keyHandler.enterPressed && gp.ui.getCurrentQuestion() != null) {
 					gp.keyHandler.enterPressed = false;
 					gp.ui.submitQuizSelection();
 				}

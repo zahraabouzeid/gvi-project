@@ -110,50 +110,52 @@ public class QuizDialog extends GameScreen {
             return false;
         }
 
-        if (isMultipleChoiceQuestion()) {
+        if (isMultiSelectQuestion()) {
             if (selectedAnswers.contains(number)) {
                 selectedAnswers.remove(number);
             } else {
-                if (isMultiSelectQuestion()) {
-                    selectedAnswers.add(number);
-                } else {
-                    selectedAnswers.clear();
-                    selectedAnswers.add(number);
-                    selectedAnswer = number;
-                }
+                selectedAnswers.add(number);
             }
             return true;
         }
 
+        // Radio-button style single selection (MC single, TRUE_FALSE, GAP)
         selectedAnswer = number;
         selectedAnswers.clear();
         selectedAnswers.add(number);
-        answerCorrect = answers.get(number - 1).points() > 0;
-        resolvedPoints = answers.get(number - 1).points();
-        answerFeedback = true;
-        feedbackCounter = 0;
         return true;
     }
 
     public boolean submitSelectionIfNeeded() {
-        if (!isMultipleChoiceQuestion() || answerFeedback) {
+        if (currentQuestion == null || answerFeedback) {
             return false;
         }
         if (selectedAnswers.isEmpty()) {
             return false;
         }
 
-        Set<Integer> correctIndices = new LinkedHashSet<>();
         List<Answer> answers = getSelectableAnswers();
-        for (int i = 0; i < answers.size(); i++) {
-            if (answers.get(i).points() > 0) {
-                correctIndices.add(i + 1);
+        if (isMultiSelectQuestion()) {
+            Set<Integer> correctIndices = new LinkedHashSet<>();
+            for (int i = 0; i < answers.size(); i++) {
+                if (answers.get(i).points() > 0) {
+                    correctIndices.add(i + 1);
+                }
             }
+
+            answerCorrect = selectedAnswers.equals(correctIndices);
+            resolvedPoints = answerCorrect ? sumPoints(correctIndices, answers) : calculateWrongPointsForMulti(answers);
+            selectedAnswer = -1;
+        } else {
+            int selectedIndex = selectedAnswers.iterator().next() - 1;
+            if (selectedIndex < 0 || selectedIndex >= answers.size()) {
+                return false;
+            }
+            selectedAnswer = selectedIndex + 1;
+            resolvedPoints = answers.get(selectedIndex).points();
+            answerCorrect = resolvedPoints > 0;
         }
 
-        answerCorrect = selectedAnswers.equals(correctIndices);
-        resolvedPoints = answerCorrect ? sumPoints(correctIndices, answers) : calculateWrongPointsForMulti(answers);
-        selectedAnswer = -1;
         answerFeedback = true;
         feedbackCounter = 0;
         return true;
@@ -186,7 +188,7 @@ public class QuizDialog extends GameScreen {
         if (currentQuestion == null) return;
 
         double boxW = screenWidth - 80;
-        double boxH = 200;
+        double boxH = 240;
         double boxX = 40;
         double boxY = screenHeight - boxH - 20;
 
@@ -208,7 +210,7 @@ public class QuizDialog extends GameScreen {
         // ESC 
         gc.setFont(FONT_XS);
         gc.setFill(TEXT_GRAY);
-        String escHint = isMultipleChoiceQuestion() ? "[ENTER] bestaetigen  [ESC]" : "[ESC]";
+        String escHint = "[ENTER] bestaetigen  [ESC]";
         double escW = getTextWidth(escHint, FONT_XS);
         gc.fillText(escHint, boxX + boxW - escW - 18, contentY);
 
@@ -266,7 +268,7 @@ public class QuizDialog extends GameScreen {
         // 2x2 answer grid
         drawAnswerGrid(gc, contentX, contentY, boxW, boxX, boxY, boxH, Integer.MAX_VALUE);
 
-        if (isMultipleChoiceQuestion() && !answerFeedback) {
+        if (!answerFeedback) {
             gc.setFont(FONT_XS);
             gc.setFill(TEXT_GRAY);
             String hint = "Mit [1-4] Antworten markieren";
@@ -299,7 +301,7 @@ public class QuizDialog extends GameScreen {
 
                 if (answerFeedback && isSelected) {
                     gc.setFill(answers.get(index).points() > 0 ? CORRECT_BG : WRONG_BG);
-                } else if (!answerFeedback && isMultipleChoiceQuestion() && isSelected) {
+                } else if (!answerFeedback && isSelected) {
                     gc.setFill(CORRECT_BG);
                 } else {
                     gc.setFill(ANSWER_BG);
