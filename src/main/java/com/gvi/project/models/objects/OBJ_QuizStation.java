@@ -141,6 +141,8 @@ public class OBJ_QuizStation extends AnimatedObject {
 	@Override
 	public void onConfirm(GamePanel gp, int objIndex) {
 		markCurrentCorrect();
+
+
 		gp.playSE(1);
 
 		if (completed) {
