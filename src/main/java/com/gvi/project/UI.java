@@ -78,7 +78,7 @@ public class UI {
     
     /**
      * Initialisiert die Gesamtanzahl der Fragen für das Belohnungssystem.
-     * Diese Zahl wird verwendet für die Berechnung: (richtige Antworten / Gesamtfragen) * 100
+     * Diese Zahl wird verwendet für die Berechnung: (richtige Antworten / Gesamtfragen) * 100 
      */
     private void initializeTotalQuestionCount() {
         try {
