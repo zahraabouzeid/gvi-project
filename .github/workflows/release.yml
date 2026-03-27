@@ -56,13 +56,17 @@ jobs:
       - name: Build single-file EXE
         run: .\build-exe.ps1 -SkipTests
         shell: powershell
-      - name: Upload dist artifacts
+      - name: Upload EXE artifact
         uses: actions/upload-artifact@v4
         with:
-          name: dist
-          path: |
-            dist/*.exe
-            dist/*.zip
+          name: exe
+          path: dist/*.exe
+          if-no-files-found: error
+      - name: Upload app ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-zip
+          path: dist/*.zip
           if-no-files-found: error
 
   pages:
@@ -95,16 +99,23 @@ jobs:
             VERSION="${GITHUB_REF_NAME#v}"
             echo "value=$VERSION" >> $GITHUB_OUTPUT
           fi
-      - name: Download dist artifacts
+      - name: Prepare release assets directory
+        run: mkdir -p release-assets
+      - name: Download EXE artifact
         uses: actions/download-artifact@v4
         with:
-          name: dist
-          path: dist
+          name: exe
+          path: release-assets/exe
+      - name: Download app ZIP artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: app-zip
+          path: release-assets/app-zip
       - name: Download JaCoCo artifact
         uses: actions/download-artifact@v4
         with:
           name: jacoco-report
-          path: dist
+          path: release-assets/jacoco
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -114,7 +125,8 @@ jobs:
           body: |
             JaCoCo report: ${{ needs.pages.outputs.page_url }}
           generate_release_notes: true
+          fail_on_unmatched_files: true
           files: |
-            dist/*.exe
-            dist/jacoco-report.zip
-            dist/*.zip
+            release-assets/exe/*.exe
+            release-assets/app-zip/*.zip
+            release-assets/jacoco/jacoco-report.zip
