@@ -26,7 +26,7 @@ class QuestionProviderTopicMappingTest {
 
         TopicArea topicArea = invokeResolveTopicArea(provider, entity);
 
-        assertEquals(TopicArea.SQL_GRUNDLAGEN, topicArea);
+        assertEquals(TopicArea.DATENBANK_SQL, topicArea);
     }
 
     @Test
@@ -38,7 +38,7 @@ class QuestionProviderTopicMappingTest {
 
         TopicArea topicArea = invokeResolveTopicArea(provider, entity);
 
-        assertEquals(TopicArea.SELECT_ABFRAGEN, topicArea);
+        assertEquals(TopicArea.WIRTSCHAFT, topicArea);
     }
 
     @Test
@@ -50,7 +50,7 @@ class QuestionProviderTopicMappingTest {
 
         TopicArea topicArea = invokeResolveTopicArea(provider, entity);
 
-        assertEquals(TopicArea.SQL_GRUNDLAGEN, topicArea);
+        assertEquals(TopicArea.DATENBANK_SQL, topicArea);
     }
 
     private ThemeEntity createTheme(String name) {
