@@ -188,8 +188,7 @@ public class GameLoop extends AnimationTimer {
 						gp.player.score += earnedPoints;
 						gp.ui.showFloatingScore(earnedPoints);
 						
-						// Prüfe sofort, ob ein neuer Schwellenwert erreicht wurde (Benutzerführung: sofortige Belohnung)
-						gp.ui.checkRewardThreshold(gp);
+						// Reward-Check erfolgt nur beim Öffnen der Truhe, nicht nach jeder Frage
 						
 						gp.ui.closeQuiz();
 						int idx = gp.interactingObjectIndex;

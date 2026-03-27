@@ -77,17 +77,20 @@ public class UI {
     }
     
     /**
-     * Initialisiert die Gesamtanzahl der Fragen für das Belohnungssystem.
-     * Diese Zahl wird verwendet für die Berechnung: (richtige Antworten / Gesamtfragen) * 100
+     * Initialisiert die maximalen Punkte für das Belohnungssystem.
+     * Fester Wert: 1636 Punkte für alle 563 Fragen im gesamten Spiel.
+     * Berechnung: Summe aller maximalen Punkte über alle Fragen (TF=1×s, MC=(2+n)×s, GAP=(3+n)×s)
+     * Die Prozentberechnung erfolgt über das GESAMTE Spiel, nicht pro Themenbereich.
      */
     private void initializeTotalQuestionCount() {
         try {
             int totalQuestions = gp.questionProvider.getTotalQuestionCount();
-            maxPossiblePoints = totalQuestions;
-            log.info("Belohnungssystem initialisiert mit {} Gesamtfragen", totalQuestions);
+            // Fester Wert für das GESAMTE Spiel - Belohnung wird nur beim Truhe-Öffnen berechnet
+            maxPossiblePoints = 1636;
+            log.info("Belohnungssystem initialisiert mit {} Fragen und {} maximalen Punkten (gesamtes Spiel)", totalQuestions, maxPossiblePoints);
         } catch (Exception e) {
             log.error("Fehler beim Laden der Gesamtanzahl der Fragen", e);
-            maxPossiblePoints = 0;
+            maxPossiblePoints = 1636; // Fallback auf festen Wert
         }
     }
 
@@ -142,17 +145,20 @@ public class UI {
         playtime = 0;
         gameOverScreen.reset();
         hud.reset();
-        maxPossiblePoints = 0;
+        maxPossiblePoints = 1636; // Fester Wert für das gesamte Spiel
         earnedReward = Reward.NONE;
         performancePercentage = 0.0;
     }
 
     /**
-     * Adds max possible points for a question (to be called when question is presented).
+     * Adds max possible points for a question (DEPRECATED - not used anymore).
+     * maxPossiblePoints is now a fixed value of 1636 for the entire game.
+     * This method is kept for backward compatibility and testing purposes only.
      * @param points the maximum points achievable for this question
      */
     public void addMaxPossiblePoints(int points) {
-        maxPossiblePoints += Math.abs(points); // Use absolute value
+        // Not used anymore - maxPossiblePoints is fixed at 1636
+        // Kept for backward compatibility
     }
 
     /**

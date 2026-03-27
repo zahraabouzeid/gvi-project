@@ -114,8 +114,8 @@ public class OBJ_QuizStation extends AnimatedObject {
 
 		Question question = getNextQuestion();
 		if (question != null) {
-			// Öffne Quiz-Dialog mit der nächsten Frage
-			// maxPossiblePoints wird automatisch beim Spielstart auf die Gesamtzahl aller Fragen gesetzt (563)
+			// Öffne Quiz-Dialog mit der ersten Frage
+			// maxPossiblePoints ist fester Wert (1636) für das gesamte Spiel
 			gp.ui.openQuiz(question, getRemainingCount());
 			gp.interactingObjectIndex = objIndex;
 			gp.gameState = GameState.QUIZ;
@@ -149,8 +149,7 @@ public class OBJ_QuizStation extends AnimatedObject {
 		} else {
 			Question next = getNextQuestion();
 			if (next != null) {
-				// Track max possible points for reward calculation
-				gp.ui.addMaxPossiblePoints(next.getMaxPoints());
+				// maxPossiblePoints ist fester Wert (1636) für das gesamte Spiel
 				gp.ui.openQuiz(next, getRemainingCount());
 				gp.interactingObjectIndex = objIndex;
 				gp.gameState = GameState.QUIZ;

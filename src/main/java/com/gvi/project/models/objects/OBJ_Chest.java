@@ -59,8 +59,8 @@ public class OBJ_Chest extends AnimatedObject {
 			if (!conditionsAreMeet(gp)) return;
 			onSuccess(gp, objIndex);
 		}
-		// Truhe geöffnet - Das Spiel ist beendet
-		// Die Belohnung wird automatisch beim Erreichen der Schwellenwerte angezeigt
+		// Truhe geöffnet - Berechne Belohnung basierend auf Gesamtpunkten
+		gp.ui.checkRewardThreshold(gp);
 	}
 	
 	public void setUpAnimationComponent(){
