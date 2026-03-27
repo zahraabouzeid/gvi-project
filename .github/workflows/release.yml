@@ -12,6 +12,8 @@ on:
         description: 'Version (z.B. 1.2.0)'
         required: true
   push:
+    branches:
+      - main
     tags:
       - 'v*'
 
@@ -95,8 +97,11 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "value=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-          else
+          elif [ "${{ github.ref_type }}" = "tag" ]; then
             VERSION="${GITHUB_REF_NAME#v}"
+            echo "value=$VERSION" >> $GITHUB_OUTPUT
+          else
+            VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
             echo "value=$VERSION" >> $GITHUB_OUTPUT
           fi
       - name: Prepare release assets directory
