@@ -2,6 +2,7 @@ package com.gvi.project;
 
 import com.gvi.project.helper.SaveManager;
 import com.gvi.project.manager.GameProgressManager;
+import com.gvi.project.manager.HighScoreManager;
 import com.gvi.project.models.core.Entity;
 import com.gvi.project.models.game_maps.GameMap;
 import com.gvi.project.models.game_maps.GameMapLoader;
@@ -39,6 +40,7 @@ public class GamePanel {
 	public final CollisionChecker cChecker = new CollisionChecker(this);
 	public final SaveManager saveManager = new SaveManager();
 	public final GameProgressManager progressManager = new GameProgressManager();
+	public final HighScoreManager highScoreManager = new HighScoreManager();
 	public int interactingObjectIndex = -1;
 	public final QuestionService questionProvider = MainApp.getBean(QuestionService.class);
 	public final int maxQuestionsPerQuizStation = Math.max(1,

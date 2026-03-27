@@ -9,6 +9,7 @@ public class SaveData {
     public int    worldX, worldY, gridX, gridY;
     public String direction;
     public int    score, healthHalf, maxHealthHalf;
+    public double playtime;
     public Map<String, Integer> playerItems;
     public String currentMap;
     public String savedAt;

@@ -26,6 +26,7 @@ public class UI {
     private final CharacterCreationScreen characterCreationScreen;
     private final GameOverScreen gameOverScreen;
     private final WinScreen winScreen;
+    private final EndScreen endScreen;
     private final PauseScreen pauseScreen;
     private final SaveSlotScreen saveSlotScreen;
     private final LoadingScreen loadingScreen;
@@ -39,8 +40,10 @@ public class UI {
     public String message = "";
     private int messageCounter = 0;
     public boolean gameFinished = false;
-    double playtime;
-    
+    private boolean gameComplete = false; // true = Win-Tür betreten, ENTER → Hauptmenü
+    private boolean isNewHighScore = false;
+    public double playtime;
+
     // Reward system tracking - Belohnungssystem für Medaillen
     private int maxPossiblePoints = 0;
     private Reward earnedReward = Reward.NONE;
@@ -65,6 +68,7 @@ public class UI {
         characterCreationScreen = new CharacterCreationScreen();
         gameOverScreen = new GameOverScreen();
         winScreen = new WinScreen(GeneralSettings.getScreenWidth(), GeneralSettings.getScreenHeight());
+        endScreen = new EndScreen(GeneralSettings.getScreenWidth(), GeneralSettings.getScreenHeight());
         pauseScreen = new PauseScreen();
         saveSlotScreen = new SaveSlotScreen();
         loadingScreen = new LoadingScreen();
@@ -140,7 +144,10 @@ public class UI {
     public void resetGame() {
         closeQuiz();
         gameFinished = false;
+        gameComplete = false;
+        isNewHighScore = false;
         shouldShowWinScreen = false;
+        rewardPersistence.resetSession();
         messageOn = false;
         playtime = 0;
         gameOverScreen.reset();
@@ -206,6 +213,10 @@ public class UI {
         return shouldShowWinScreen;
     }
     
+    public boolean isGameComplete() {
+        return gameComplete;
+    }
+
     /**
      * Schließt den Winscreen und setzt das entsprechende Flag zurück.
      * Das Spiel läuft nahtlos weiter (kein Reset).
@@ -213,6 +224,20 @@ public class UI {
     public void closeWinScreen() {
         shouldShowWinScreen = false;
         gameFinished = false;
+    }
+
+    /**
+     * Wird beim Durchschreiten der Win-Tür aufgerufen.
+     * Berechnet die finale Belohnung, aktualisiert den High Score und
+     * zeigt den End-Screen. ENTER führt danach zum Hauptmenü.
+     */
+    public void triggerGameComplete(GamePanel gp) {
+        calculateReward();
+        isNewHighScore = gp.highScoreManager.updateHighScore(gp.player.score);
+        gameFinished = true;
+        gameComplete = true;
+        gp.stopMusic();
+        gp.playSE(4);
     }
     
     /**
@@ -356,9 +381,15 @@ public class UI {
             return;
         }
 
+        if (gameComplete) {
+            endScreen.draw(gc, gp.player.playerName, gp.player.score, maxPossiblePoints,
+                          performancePercentage, df.format(playtime),
+                          gp.highScoreManager.getHighScore(), isNewHighScore, earnedReward);
+            return;
+        }
+
         if (gameFinished) {
-            winScreen.draw(gc, df.format(playtime), earnedReward, performancePercentage, 
-                          gp.player.score, maxPossiblePoints);
+            winScreen.draw(gc, earnedReward);
             return;
         }
 

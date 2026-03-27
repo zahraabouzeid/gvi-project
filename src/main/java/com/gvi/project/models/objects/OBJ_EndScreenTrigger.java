@@ -26,8 +26,13 @@ public class OBJ_EndScreenTrigger extends SuperObject {
 
     @Override
     public void onStep(Player player, GamePanel gp, int objIndex) {
-        // TODO: GameEnd Screen Trigger implementieren!!
+        if (!triggered) {
+            triggered = true;
+            gp.ui.triggerGameComplete(gp);
+        }
     }
+
+    private boolean triggered = false;
 }
 
 

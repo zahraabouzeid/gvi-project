@@ -73,12 +73,20 @@ public class GameLoop extends AnimationTimer {
 			}
 			return;
 		}
-		// Winscreen-Handling: Nahtloser Spielfluss ohne Reset
-		// Wenn der Spieler ENTER drückt, wird nur der Screen geschlossen, Spiel läuft weiter
+		// Winscreen-Handling
 		if (gp.ui.gameFinished) {
 			if (gp.keyHandler.enterPressed) {
 				gp.keyHandler.enterPressed = false;
-				gp.ui.closeWinScreen(); // Schließt nur den Screen, kein Reset
+				if (gp.ui.isGameComplete()) {
+					// End-Screen: zurück zum Hauptmenü
+					gp.loadMap(GameMaps.MAP_00);
+					gp.player.setDefaultValues();
+					gp.ui.resetGame();
+					gp.interactingObjectIndex = -1;
+					gp.gameState = GameState.TITLE;
+				} else {
+					gp.ui.closeWinScreen(); // Medaillen-Popup: Spiel läuft weiter
+				}
 			}
 			return;
 		}
@@ -158,7 +166,7 @@ public class GameLoop extends AnimationTimer {
 				gp.keyHandler.f11Pressed = false;
 				// Reset alle Medaillen (nur im Dev-Mode)
 				gp.ui.resetAllRewards();
-				gp.ui.openMessage("Alle Medaillen zurückgesetzt!");
+				gp.ui.openMessage("All medals reset!");
 				return;
 			}
 
@@ -187,9 +195,11 @@ public class GameLoop extends AnimationTimer {
 						// Punkte hinzufügen
 						gp.player.score += earnedPoints;
 						gp.ui.showFloatingScore(earnedPoints);
-						
-						// Reward-Check erfolgt nur beim Öffnen der Truhe, nicht nach jeder Frage
-						
+
+						// Medaillen-Schwellenwert prüfen (Score-Monitoring)
+						gp.ui.checkRewardThreshold(gp);
+						if (gp.ui.gameFinished) return; // Medaillen-Popup: Eingabe erst bei nächstem Frame
+
 						gp.ui.closeQuiz();
 						int idx = gp.interactingObjectIndex;
 						if (idx != -1 && gp.obj.get(idx) != null) {
@@ -375,7 +385,9 @@ public class GameLoop extends AnimationTimer {
 			int slot = gp.ui.getSelectedSlot();
 			if (gp.saveManager.hasSave(slot)) {
 				gp.saveManager.load(gp, slot);
+				double savedPlaytime = gp.ui.playtime;
 				gp.ui.resetGame();
+				gp.ui.playtime = savedPlaytime;
 				loadingCounter = 0;
 				gp.gameState = GameState.LOADING;
 			}
@@ -454,6 +466,8 @@ public class GameLoop extends AnimationTimer {
 			gp.keyHandler.enterPressed = false;
 			gp.ui.applyCharacterCreation();
 			gp.player.getPlayerSprites();
+			gp.player.setDefaultValues();
+			gp.ui.resetGame();
 			loadingCounter = 0;
 			gp.gameState = GameState.LOADING;
 		}
@@ -500,7 +514,7 @@ public class GameLoop extends AnimationTimer {
 		if (k.f8Pressed) {
 			k.f8Pressed = false;
 			gp.player.healthHalf = gp.player.maxHealthHalf;
-			gp.ui.openMessage("[DEBUG] Volle Gesundheit");
+			gp.ui.openMessage("[DEBUG] Full Health");
 		}
 		if (k.f9Pressed) {
 			k.f9Pressed = false;
@@ -512,7 +526,7 @@ public class GameLoop extends AnimationTimer {
 					break;
 				}
 			}
-			if (!found) gp.ui.openMessage("[DEBUG] Keine offene Quiz-Station");
+			if (!found) gp.ui.openMessage("[DEBUG] No open quiz station");
 		}
 		if (k.f10Pressed) {
 			k.f10Pressed = false;
@@ -534,12 +548,11 @@ public class GameLoop extends AnimationTimer {
 		}
 		if (k.f12Pressed) {
 			k.f12Pressed = false;
-			gp.player.score = 990;
-			gp.ui.setMaxPossiblePoints(1000);
-			gp.ui.calculateReward();
-			gp.ui.gameFinished = true;
-			gp.stopMusic();
-			gp.playSE(4);
+			gp.player.score += 500;
+			gp.ui.checkRewardThreshold(gp);
+			if (!gp.ui.gameFinished) {
+				gp.ui.openMessage("[DEBUG] Score +500 → " + gp.player.score);
+			}
 		}
 	}
 
