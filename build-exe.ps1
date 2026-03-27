@@ -732,7 +732,7 @@ $targetDir = Join-Path $ProjectRoot "target"
 $libsDir = Join-Path $targetDir "libs"
 $distDir = Join-Path $ProjectRoot "dist"
 $portableRoot = Join-Path $distDir $AppName
-$singleFileExe = Join-Path $distDir ($AppName + ".exe")
+$singleFileExe = Join-Path $ProjectRoot ($AppName + ".exe")
 
 $buildArgs = @("clean", "package")
 if ($SkipTests) {
