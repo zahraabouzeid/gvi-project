@@ -99,10 +99,7 @@ public class WinScreen extends GameScreen {
                 double medalX = (screenWidth - medalWidth) / 2.0;
                 double medalY = cby + 165;
                 
-                    gc.setFill(Color.MAGENTA);
-                    gc.fillRect(medalX, medalY, medalWidth, medalHeight);
-    
-                // Draw pixelated background for medal
+                // Draw medal sprite
                 gc.drawImage(medalSprite, medalX, medalY, medalWidth, medalHeight);
             }
 
