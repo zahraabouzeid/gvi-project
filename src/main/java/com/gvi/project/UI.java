@@ -8,6 +8,8 @@ import com.gvi.project.models.questions.Reward;
 import com.gvi.project.models.questions.RewardCalculator;
 import com.gvi.project.ui.*;
 import javafx.scene.canvas.GraphicsContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.Set;
 
 public class UI {
 
+    private static final Logger log = LoggerFactory.getLogger(UI.class);
+    
     private final GamePanel gp;
 
     private final TitleScreen titleScreen;
@@ -67,6 +71,24 @@ public class UI {
         hud = new HUD(gp);
         quizDialog = new QuizDialog();
         minimap = new Minimap(gp);
+        
+        // Initialisiere das Belohnungssystem mit der Gesamtanzahl aller Fragen
+        initializeTotalQuestionCount();
+    }
+    
+    /**
+     * Initialisiert die Gesamtanzahl der Fragen für das Belohnungssystem.
+     * Diese Zahl wird verwendet für die Berechnung: (richtige Antworten / Gesamtfragen) * 100
+     */
+    private void initializeTotalQuestionCount() {
+        try {
+            int totalQuestions = gp.questionProvider.getTotalQuestionCount();
+            maxPossiblePoints = totalQuestions;
+            log.info("Belohnungssystem initialisiert mit {} Gesamtfragen", totalQuestions);
+        } catch (Exception e) {
+            log.error("Fehler beim Laden der Gesamtanzahl der Fragen", e);
+            maxPossiblePoints = 0;
+        }
     }
 
     public void openQuiz(Question question, int remaining) {

@@ -59,14 +59,8 @@ public class OBJ_Chest extends AnimatedObject {
 			if (!conditionsAreMeet(gp)) return;
 			onSuccess(gp, objIndex);
 		}
-		// Berechne finale Belohnung am Spielende (Truhe geöffnet)
-		// Der Winscreen wird nur angezeigt, wenn eine neue Medaille erreicht wurde
-		gp.ui.calculateReward();
-		if (gp.ui.shouldShowWinScreen()) {
-			gp.ui.gameFinished = true;
-			gp.stopMusic();
-			gp.playSE(4);
-		}
+		// Truhe geöffnet - Das Spiel ist beendet
+		// Die Belohnung wird automatisch beim Erreichen der Schwellenwerte angezeigt
 	}
 	
 	public void setUpAnimationComponent(){
