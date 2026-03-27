@@ -12,14 +12,12 @@ on:
         description: 'Version (z.B. 1.2.0)'
         required: true
   push:
-    branches: [main]
+    tags:
+      - 'v*'
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: >
-      github.event_name == 'workflow_dispatch' ||
-      contains(github.event.head_commit.message, '[ci deploy]')
     steps:
       - uses: actions/checkout@v4
       - name: Set up Java 21
@@ -94,7 +92,7 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "value=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
           else
-            VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+            VERSION="${GITHUB_REF_NAME#v}"
             echo "value=$VERSION" >> $GITHUB_OUTPUT
           fi
       - name: Download dist artifacts
