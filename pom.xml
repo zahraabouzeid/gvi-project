@@ -6,7 +6,7 @@
     <groupId>com.gvi.project</groupId>
     <artifactId>gviProjekt</artifactId>
     <!-- Make sure to update the version for each release -->
-    <version>1.0.0</version> 
+    <version>1.0.2</version> 
     <name>Byte Dungeon</name>
     <description>JavaFX desktop application for the GVI project</description>
     <packaging>jar</packaging>
@@ -144,6 +144,75 @@
                 <configuration>
                     <useModulePath>false</useModulePath>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.13</version>
+                <configuration>
+                    <includes>
+                        <include>com/gvi/project/helper/ColorHelper*</include>
+                        <include>com/gvi/project/helper/ConditionResult*</include>
+                        <include>com/gvi/project/helper/ConfigHelper*</include>
+                        <include>com/gvi/project/helper/SaveData*</include>
+                        <include>com/gvi/project/helper/SaveManager*</include>
+                        <include>com/gvi/project/manager/RewardPersistenceManager*</include>
+                        <include>com/gvi/project/models/Question*</include>
+                        <include>com/gvi/project/models/questions/Answer*</include>
+                        <include>com/gvi/project/models/questions/Difficulty*</include>
+                        <include>com/gvi/project/models/questions/FillInBlankQuestion*</include>
+                        <include>com/gvi/project/models/questions/MultipleChoiceQuestion*</include>
+                        <include>com/gvi/project/models/questions/Question</include>
+                        <include>com/gvi/project/models/questions/QuestionType*</include>
+                        <include>com/gvi/project/models/questions/Reward*</include>
+                        <include>com/gvi/project/models/questions/ScoreCalculator*</include>
+                        <include>com/gvi/project/models/questions/TopicArea*</include>
+                        <include>com/gvi/project/models/questions/TrueFalseQuestion*</include>
+                        <include>com/gvi/project/repository/GapFieldEntity*</include>
+                        <include>com/gvi/project/repository/GapOptionEntity*</include>
+                        <include>com/gvi/project/repository/McAnswerEntity*</include>
+                        <include>com/gvi/project/repository/QuestionEntity*</include>
+                        <include>com/gvi/project/repository/QuestionType*</include>
+                        <include>com/gvi/project/repository/ThemeEntity*</include>
+                    </includes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.80</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Manifest mit Main-Class -->

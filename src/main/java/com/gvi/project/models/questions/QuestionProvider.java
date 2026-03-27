@@ -175,6 +175,38 @@ public class QuestionProvider implements QuestionService {
 		return new ArrayList<>(loadQuestions());
 	}
 
+	/**
+	 * Returns the total count of all questions available.
+	 * This count is used for reward calculation: (correct answers / total questions) * 100
+	 * @return total number of questions
+	 */
+	@Override
+	public int getTotalQuestionCount() {
+		QuestionDataService questionDataService;
+		try {
+			questionDataService = questionDataServiceProvider.getIfAvailable();
+			if (questionDataService != null && questionDataService.isQuestionSourceAvailable()) {
+				try {
+					// Try to get count from database
+					long count = questionDataService.getQuestionCount();
+					if (count > 0) {
+						log.info("Total question count from database: {}", count);
+						return (int) count;
+					}
+				} catch (Exception e) {
+					log.warn("Could not get question count from database, using loaded questions", e);
+				}
+			}
+		} catch (Exception e) {
+			log.warn("QuestionDataService not available, using loaded questions count", e);
+		}
+		
+		// Fallback: return size of loaded questions
+		int loadedCount = loadQuestions().size();
+		log.info("Total question count from loaded questions: {}", loadedCount);
+		return loadedCount;
+	}
+
 	private Question mapDatabaseQuestion(QuestionEntity entity) {
 		TopicArea topicArea = resolveTopicArea(entity);
 		String introText = normalizeQuestionText(topicArea.getDisplayName());

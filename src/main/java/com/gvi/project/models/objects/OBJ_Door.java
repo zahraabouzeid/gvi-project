@@ -77,6 +77,12 @@ public class OBJ_Door extends AnimatedObject {
 			onSuccess(gp);
 		}
 
+		AnimationComponent animComp = (AnimationComponent) components.get("Animation");
+		if(!isOpen){
+			animComp.invertCycleOrder();
+		} else {
+			animComp.playBackward();
+		}
 		runAnimation();
 		canInteract = false;
 		visibleInMinimap = false;

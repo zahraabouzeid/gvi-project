@@ -13,8 +13,16 @@ public class KeyHandler {
 	public boolean delPressed;
 	public boolean tabPressed;
 	public boolean f2Pressed = false;
-	public boolean f3Pressed, f4Pressed, f5Pressed, f6Pressed, f7Pressed, f8Pressed, f9Pressed;
-	public boolean f10Pressed, f11Pressed, f12Pressed;
+	public boolean f3Pressed = false;  // Debug: Add iron keys
+	public boolean f4Pressed = false;  // Debug: Add gold keys
+	public boolean f5Pressed = false;  // Debug: Add copper keys
+	public boolean f6Pressed = false;  // Debug: Next map
+	public boolean f7Pressed = false;  // Cheat/Debug: Win with Bronze or previous map
+	public boolean f8Pressed = false;  // Cheat/Debug: Win with Silver or heal
+	public boolean f9Pressed = false;  // Cheat/Debug: Win with Gold or complete quiz
+	public boolean f10Pressed = false; // Cheat/Debug: Win with Gold Perfect or test score
+	public boolean f11Pressed = false; // Dev: Reset all rewards or test score
+	public boolean f12Pressed = false; // Debug: Test score
 	public int numberPressed = -1;
 	public String typedCharacter = "";
 	private boolean movementLocked = false;
@@ -57,17 +65,21 @@ public class KeyHandler {
 			if (code == KeyCode.DIGIT2 || code == KeyCode.NUMPAD2) numberPressed = 2;
 			if (code == KeyCode.DIGIT3 || code == KeyCode.NUMPAD3) numberPressed = 3;
 			if (code == KeyCode.DIGIT4 || code == KeyCode.NUMPAD4) numberPressed = 4;
-			if (code == KeyCode.DIGIT5 || code == KeyCode.NUMPAD5) numberPressed = 5;
-			if (code == KeyCode.DIGIT6 || code == KeyCode.NUMPAD6) numberPressed = 6;
-			if (code == KeyCode.DIGIT7 || code == KeyCode.NUMPAD7) numberPressed = 7;
-			if (code == KeyCode.DIGIT8 || code == KeyCode.NUMPAD8) numberPressed = 8;
-			if (code == KeyCode.DIGIT9 || code == KeyCode.NUMPAD9) numberPressed = 9;
 			
+			// Debug and cheat keys
+			if (code == KeyCode.F3) f3Pressed = true;
+			if (code == KeyCode.F4) f4Pressed = true;
+			if (code == KeyCode.F5) f5Pressed = true;
+			if (code == KeyCode.F6) f6Pressed = true;
+			if (code == KeyCode.F7) f7Pressed = true;
+			if (code == KeyCode.F8) f8Pressed = true;
+			if (code == KeyCode.F9) f9Pressed = true;
 			if (code == KeyCode.F10) f10Pressed = true;
 			if (code == KeyCode.F11) f11Pressed = true;
 			if (code == KeyCode.F12) f12Pressed = true;
 		});
 
+		// Handle text input (including uppercase) with onKeyTyped event
 		node.setOnKeyTyped(e -> {
 			String text = e.getCharacter();
 			if (text != null && !text.isEmpty()) {
@@ -92,16 +104,16 @@ public class KeyHandler {
 			if (code == KeyCode.DELETE) delPressed = false;
 			if (code == KeyCode.TAB) tabPressed = false;
 			if (code == KeyCode.F2) f2Pressed = !f2Pressed;
-			if (code == KeyCode.F3) f3Pressed = true;
-			if (code == KeyCode.F4) f4Pressed = true;
-			if (code == KeyCode.F5) f5Pressed = true;
-			if (code == KeyCode.F6) f6Pressed = true;
-			if (code == KeyCode.F7) f7Pressed = true;
-			if (code == KeyCode.F8) f8Pressed = true;
-			if (code == KeyCode.F9) f9Pressed = true;
-			if (code == KeyCode.F10) f10Pressed = true;
-			if (code == KeyCode.F11) f11Pressed = true;
-			if (code == KeyCode.F12) f12Pressed = true;
+			if (code == KeyCode.F3) f3Pressed = false;
+			if (code == KeyCode.F4) f4Pressed = false;
+			if (code == KeyCode.F5) f5Pressed = false;
+			if (code == KeyCode.F6) f6Pressed = false;
+			if (code == KeyCode.F7) f7Pressed = false;
+			if (code == KeyCode.F8) f8Pressed = false;
+			if (code == KeyCode.F9) f9Pressed = false;
+			if (code == KeyCode.F10) f10Pressed = false;
+			if (code == KeyCode.F11) f11Pressed = false;
+			if (code == KeyCode.F12) f12Pressed = false;
 		});
 
 		node.setFocusTraversable(true);

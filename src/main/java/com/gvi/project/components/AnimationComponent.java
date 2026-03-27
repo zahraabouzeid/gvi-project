@@ -19,7 +19,6 @@ public class AnimationComponent extends Component {
 	private boolean looping = false;
 
 	private double timer = 0;
-	private double startOffset = 0;
 	private boolean playing = false;
 	private boolean finished = false;
 	private boolean started = false;
@@ -39,8 +38,8 @@ public class AnimationComponent extends Component {
 		setCycleOrder();
 	}
 
-	public void setStartOffset(double offset) {
-		startOffset = offset;
+	public void setStartOffset(double startOffset) {
+		delay = startOffset;
 	}
 
 	public void setLooping(boolean looping) {
@@ -49,7 +48,7 @@ public class AnimationComponent extends Component {
 
 	public void trigger() {
 		playing = true;
-		timer = startOffset;
+		timer = 0;
 		started = false;
 		inCooldown = false;
 		finished = false;

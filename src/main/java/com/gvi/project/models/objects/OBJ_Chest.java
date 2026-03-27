@@ -59,11 +59,8 @@ public class OBJ_Chest extends AnimatedObject {
 			if (!conditionsAreMeet(gp)) return;
 			onSuccess(gp, objIndex);
 		}
-		// Calculate reward before finishing game
-//		gp.ui.calculateReward();
-//		gp.ui.gameFinished = true;
-//		gp.stopMusic();
-//		gp.playSE(4);
+		// Truhe geöffnet - Berechne Belohnung basierend auf Gesamtpunkten
+		gp.ui.checkRewardThreshold(gp);
 	}
 	
 	public void setUpAnimationComponent(){
@@ -89,6 +86,7 @@ public class OBJ_Chest extends AnimatedObject {
 					switch (condition.onSuccess) {
 						case "remove":
 							gp.player.removeItems(condition.compareWith, condition.value);
+							this.canInteract = false;
 							break;
 						default:
 							break;

@@ -114,8 +114,8 @@ public class OBJ_QuizStation extends AnimatedObject {
 
 		Question question = getNextQuestion();
 		if (question != null) {
-			// Track max possible points for reward calculation
-			gp.ui.addMaxPossiblePoints(question.getMaxPoints());
+			// Öffne Quiz-Dialog mit der ersten Frage
+			// maxPossiblePoints ist fester Wert (1636) für das gesamte Spiel
 			gp.ui.openQuiz(question, getRemainingCount());
 			gp.interactingObjectIndex = objIndex;
 			gp.gameState = GameState.QUIZ;
@@ -141,6 +141,8 @@ public class OBJ_QuizStation extends AnimatedObject {
 	@Override
 	public void onConfirm(GamePanel gp, int objIndex) {
 		markCurrentCorrect();
+
+
 		gp.playSE(1);
 
 		if (completed) {
@@ -149,8 +151,7 @@ public class OBJ_QuizStation extends AnimatedObject {
 		} else {
 			Question next = getNextQuestion();
 			if (next != null) {
-				// Track max possible points for reward calculation
-				gp.ui.addMaxPossiblePoints(next.getMaxPoints());
+				// maxPossiblePoints ist fester Wert (1636) für das gesamte Spiel
 				gp.ui.openQuiz(next, getRemainingCount());
 				gp.interactingObjectIndex = objIndex;
 				gp.gameState = GameState.QUIZ;

@@ -430,6 +430,108 @@ function Install-7ZipIfNeeded {
     return $sevenZipExe
 }
 
+function Create-SfxConfig {
+    param(
+        [Parameter(Mandatory = $true)][string]$ConfigPath,
+        [Parameter(Mandatory = $true)][string]$ExecutableRelativePath,
+        [Parameter(Mandatory = $true)][string]$Title
+    )
+
+    @"
+;!@Install@!UTF-8!
+Title="$Title"
+RunProgram="$ExecutableRelativePath"
+;!@InstallEnd@!
+"@ | Set-Content -Path $ConfigPath -Encoding UTF8
+}
+
+function Build-SingleFilePortableExe {
+    param(
+        [Parameter(Mandatory = $true)][string]$PortableRoot,
+        [Parameter(Mandatory = $true)][string]$OutputExe,
+        [Parameter(Mandatory = $true)][string]$AppExeName
+    )
+
+    $sevenZipExe = Install-7ZipIfNeeded
+    $sevenZipSfx = Find-7ZipSfxModule
+
+    if (-not $sevenZipSfx) {
+        throw "7z.sfx wurde nicht gefunden. Installiere die normale 7-Zip Desktop-Version."
+    }
+
+    $workDir = Join-Path ([System.IO.Path]::GetTempPath()) ("gvi-sfx-" + [Guid]::NewGuid().ToString("N"))
+    New-Item -ItemType Directory -Path $workDir -Force | Out-Null
+
+    try {
+        $stagingDir = Join-Path $workDir "payload"
+        New-Item -ItemType Directory -Path $stagingDir -Force | Out-Null
+
+        $portableFolderName = Split-Path $PortableRoot -Leaf
+        $portableCopyTarget = Join-Path $stagingDir $portableFolderName
+        Copy-Item -LiteralPath $PortableRoot -Destination $portableCopyTarget -Recurse -Force
+
+        $archivePath = Join-Path $workDir "payload.7z"
+        $configPath = Join-Path $workDir "config.txt"
+        $runProgram = "$portableFolderName\$AppExeName"
+
+        Create-SfxConfig -ConfigPath $configPath -ExecutableRelativePath $runProgram -Title $portableFolderName
+
+        Push-Location $stagingDir
+        try {
+            & $sevenZipExe a -t7z $archivePath * -mx=9 | Out-Null
+            if ($LASTEXITCODE -ne 0) {
+                throw "7-Zip Archiv-Erstellung fehlgeschlagen."
+            }
+        }
+        finally {
+            Pop-Location
+        }
+
+        $outputDir = Split-Path $OutputExe -Parent
+        if (-not (Test-Path -LiteralPath $outputDir)) {
+            New-Item -ItemType Directory -Path $outputDir -Force | Out-Null
+        }
+
+        $sfxBytes = [System.IO.File]::ReadAllBytes($sevenZipSfx)
+        $cfgBytes = [System.Text.Encoding]::UTF8.GetBytes((Get-Content -LiteralPath $configPath -Raw))
+        $archiveBytes = [System.IO.File]::ReadAllBytes($archivePath)
+
+        $fs = [System.IO.File]::Open($OutputExe, [System.IO.FileMode]::Create, [System.IO.FileAccess]::Write)
+        try {
+            $fs.Write($sfxBytes, 0, $sfxBytes.Length)
+            $fs.Write($cfgBytes, 0, $cfgBytes.Length)
+            $fs.Write($archiveBytes, 0, $archiveBytes.Length)
+        }
+        finally {
+            $fs.Dispose()
+        }
+
+        Write-Info "Single-file portable EXE created: $OutputExe"
+    }
+    finally {
+        Remove-Item -LiteralPath $workDir -Recurse -Force -ErrorAction SilentlyContinue
+    }
+}
+
+function Build-PortableZip {
+    param(
+        [Parameter(Mandatory = $true)][string]$PortableRoot,
+        [Parameter(Mandatory = $true)][string]$OutputZip
+    )
+
+    $outputDir = Split-Path $OutputZip -Parent
+    if (-not (Test-Path -LiteralPath $outputDir)) {
+        New-Item -ItemType Directory -Path $outputDir -Force | Out-Null
+    }
+
+    if (Test-Path -LiteralPath $OutputZip) {
+        Remove-Item -LiteralPath $OutputZip -Force
+    }
+
+    Compress-Archive -Path $PortableRoot -DestinationPath $OutputZip -CompressionLevel Optimal
+    Write-Info "Portable ZIP created: $OutputZip"
+}
+
 function Get-MavenCommand {
     $wrapper = Join-Path $ProjectRoot "mvnw.cmd"
     if (Test-Path -LiteralPath $wrapper) {
@@ -607,88 +709,6 @@ function Copy-PortablePayload {
     }
 }
 
-function Create-SfxConfig {
-    param(
-        [Parameter(Mandatory = $true)][string]$ConfigPath,
-        [Parameter(Mandatory = $true)][string]$ExecutableRelativePath,
-        [Parameter(Mandatory = $true)][string]$Title
-    )
-
-    @"
-;!@Install@!UTF-8!
-Title="$Title"
-RunProgram="$ExecutableRelativePath"
-;!@InstallEnd@!
-"@ | Set-Content -Path $ConfigPath -Encoding UTF8
-}
-
-function Build-SingleFilePortableExe {
-    param(
-        [Parameter(Mandatory = $true)][string]$PortableRoot,
-        [Parameter(Mandatory = $true)][string]$OutputExe,
-        [Parameter(Mandatory = $true)][string]$AppExeName
-    )
-
-    $sevenZipExe = Install-7ZipIfNeeded
-    $sevenZipSfx = Find-7ZipSfxModule
-
-    if (-not $sevenZipSfx) {
-        throw "7z.sfx wurde nicht gefunden. Installiere die normale 7-Zip Desktop-Version."
-    }
-
-    $workDir = Join-Path ([System.IO.Path]::GetTempPath()) ("gvi-sfx-" + [Guid]::NewGuid().ToString("N"))
-    New-Item -ItemType Directory -Path $workDir -Force | Out-Null
-
-    try {
-        $stagingDir = Join-Path $workDir "payload"
-        New-Item -ItemType Directory -Path $stagingDir -Force | Out-Null
-
-        $portableFolderName = Split-Path $PortableRoot -Leaf
-        $portableCopyTarget = Join-Path $stagingDir $portableFolderName
-        Copy-Item -LiteralPath $PortableRoot -Destination $portableCopyTarget -Recurse -Force
-
-        $archivePath = Join-Path $workDir "payload.7z"
-        $configPath = Join-Path $workDir "config.txt"
-        $runProgram = "$portableFolderName\$AppExeName"
-
-        Create-SfxConfig -ConfigPath $configPath -ExecutableRelativePath $runProgram -Title $portableFolderName
-
-        Push-Location $stagingDir
-        try {
-            & $sevenZipExe a -t7z $archivePath * -mx=9 | Out-Null
-            if ($LASTEXITCODE -ne 0) {
-                throw "7-Zip Archiv-Erstellung fehlgeschlagen."
-            }
-        }
-        finally {
-            Pop-Location
-        }
-
-        $outputDir = Split-Path $OutputExe -Parent
-        if (-not (Test-Path -LiteralPath $outputDir)) {
-            New-Item -ItemType Directory -Path $outputDir -Force | Out-Null
-        }
-
-        $sfxBytes = [System.IO.File]::ReadAllBytes($sevenZipSfx)
-        $cfgBytes = [System.Text.Encoding]::UTF8.GetBytes((Get-Content -LiteralPath $configPath -Raw))
-        $archiveBytes = [System.IO.File]::ReadAllBytes($archivePath)
-
-        $fs = [System.IO.File]::Open($OutputExe, [System.IO.FileMode]::Create, [System.IO.FileAccess]::Write)
-        try {
-            $fs.Write($sfxBytes, 0, $sfxBytes.Length)
-            $fs.Write($cfgBytes, 0, $cfgBytes.Length)
-            $fs.Write($archiveBytes, 0, $archiveBytes.Length)
-        }
-        finally {
-            $fs.Dispose()
-        }
-
-        Write-Info "Single-file portable EXE created: $OutputExe"
-    }
-    finally {
-        Remove-Item -LiteralPath $workDir -Recurse -Force -ErrorAction SilentlyContinue
-    }
-}
 
 Throw-IfNotWindows
 
@@ -733,6 +753,7 @@ $libsDir = Join-Path $targetDir "libs"
 $distDir = Join-Path $ProjectRoot "dist"
 $portableRoot = Join-Path $distDir $AppName
 $singleFileExe = Join-Path $distDir ($AppName + ".exe")
+$outputZip = Join-Path $distDir ($AppName + ".zip")
 
 $buildArgs = @("clean", "package")
 if ($SkipTests) {
@@ -804,6 +825,15 @@ if (Test-Path -LiteralPath $singleFileExe) {
     }
 }
 
+if (Test-Path -LiteralPath $outputZip) {
+    try {
+        Remove-Item -LiteralPath $outputZip -Force -ErrorAction Stop
+    }
+    catch {
+        Write-Info "Existing ZIP could not be removed before rebuild."
+    }
+}
+
 New-Item -ItemType Directory -Path $distDir -Force | Out-Null
 
 $jpackageInputDir = Join-Path $targetDir "jpackage-input"
@@ -848,7 +878,15 @@ if (-not (Test-Path -LiteralPath $appExePath)) {
 Copy-PortablePayload -PortableRoot $portableRoot -ProjectRoot $ProjectRoot
 Write-Info "Portable app created temporarily: $appExePath"
 
-Build-SingleFilePortableExe -PortableRoot $portableRoot -OutputExe $singleFileExe -AppExeName ($AppName + ".exe")
+Build-PortableZip -PortableRoot $portableRoot -OutputZip $outputZip
+
+try {
+    Build-SingleFilePortableExe -PortableRoot $portableRoot -OutputExe $singleFileExe -AppExeName ($AppName + ".exe")
+}
+catch {
+    Write-Info "Single-file EXE konnte nicht erstellt werden (7-Zip fehlt oder blockiert): $($_.Exception.Message)"
+    Write-Info "ZIP wurde trotzdem erstellt."
+}
 
 if (-not $KeepPortableFolder) {
     Write-Info "Removing temporary portable folder..."
@@ -860,7 +898,10 @@ Remove-Item -LiteralPath $targetDir -Recurse -Force -ErrorAction SilentlyContinu
 
 Write-Host ""
 Write-Host "[build-exe] Build finished."
-Write-Host "Single-file portable EXE: $singleFileExe"
+Write-Host "Portable ZIP: $outputZip"
+if (Test-Path -LiteralPath $singleFileExe) {
+    Write-Host "Single-file EXE: $singleFileExe"
+}
 if ($KeepPortableFolder) {
     Write-Host "Temporary portable folder kept: $portableRoot"
 }

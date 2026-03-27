@@ -168,6 +168,18 @@ public class QuestionDataService {
         return questionRepository != null || (sqliteQuestionLoader != null && sqliteQuestionLoader.isAvailable());
     }
 
+    /**
+     * Get the total count of all questions in the database.
+     * Used for reward calculation: (correct answers / total questions) * 100
+     * @return total number of questions
+     */
+    public long getQuestionCount() {
+        if (questionRepository != null) {
+            return questionRepository.count();
+        }
+        return loadQuestionsFromSqlite().size();
+    }
+
     private QuestionRepository requireRepository() {
         if (questionRepository == null) {
             throw new IllegalStateException("QuestionRepository is not available in the current Spring context.");

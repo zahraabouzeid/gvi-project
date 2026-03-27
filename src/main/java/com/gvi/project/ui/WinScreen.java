@@ -13,6 +13,11 @@ import java.io.IOException;
 import static com.gvi.project.ui.UITheme.*;
 import static com.gvi.project.ui.UIUtils.*;
 
+/**
+ * WinScreen zeigt die erreichte Medaille an, wenn ein neuer Schwellenwert erreicht wurde.
+ * Jede Medaille wird nur einmal angezeigt (einmaliger Trigger).
+ * Das Spiel läuft nach dem Schließen nahtlos weiter ohne Reset.
+ */
 public class WinScreen extends GameScreen {
 
     private static final Logger log = LoggerFactory.getLogger(WinScreen.class);
@@ -34,14 +39,14 @@ public class WinScreen extends GameScreen {
     
     private void loadMedalSprites() {
         try {
-            // Load individual medal images
+            // Lade die Medaillen-Sprites aus dem Resources-Ordner
             medalBronze = ImageHelper.getImage("/sprites/medals/medal_bronze.png");
             medalSilver = ImageHelper.getImage("/sprites/medals/medal_silver.png");
             medalGold = ImageHelper.getImage("/sprites/medals/medal_gold.png");
             medalGoldPerfect = ImageHelper.getImage("/sprites/medals/medal_gold_perfect.png");
                 
         } catch (IOException e) {
-			log.warn("Failed to load medal sprites.", e);
+            System.err.println("Failed to load medal sprites: " + e.getMessage());
         }
     }
 
@@ -81,35 +86,35 @@ public class WinScreen extends GameScreen {
         textW = getTextWidth(text, FONT_SM);
         gc.fillText(text, screenWidth / 2.0 - textW / 2.0, cby + 150);
 
-        // Reward Section
+        // Reward Section - Zeigt die erreichte Medaille an
         if (reward != Reward.NONE) {
-            // Get appropriate medal sprite
+            // Hole das passende Medaillen-Sprite
             Image medalSprite = getMedalSprite(reward);
             
             if (medalSprite != null) {
-                // Draw medal centered - preserve aspect ratio
+                // Zeichne Medaille zentriert mit korrektem Seitenverhältnis
                 double medalHeight = 128;
                 double medalWidth = medalSprite.getWidth() * (medalHeight / medalSprite.getHeight());
-                // Center on screen
+                // Zentriere auf dem Bildschirm
                 double medalX = (screenWidth - medalWidth) / 2.0;
                 double medalY = cby + 165;
                 
-                // Draw pixelated medal sprite
+                // Draw medal sprite
                 gc.drawImage(medalSprite, medalX, medalY, medalWidth, medalHeight);
             }
 
-            // Reward text
+            // Medaillen-Text mit passender Farbe
             gc.setFont(FONT_MD);
             Color rewardColor;
             switch (reward) {
                 case GOLD_PERFECT:
-                    rewardColor = Color.rgb(255, 220, 0); // Bright Gold
+                    rewardColor = Color.rgb(255, 220, 0); // Helles Gold für Special
                     break;
                 case GOLD:
                     rewardColor = Color.rgb(255, 215, 0); // Gold
                     break;
                 case SILVER:
-                    rewardColor = Color.rgb(192, 192, 192); // Silver
+                    rewardColor = Color.rgb(192, 192, 192); // Silber
                     break;
                 case BRONZE:
                     rewardColor = Color.rgb(205, 127, 50); // Bronze
@@ -122,7 +127,7 @@ public class WinScreen extends GameScreen {
             textW = getTextWidth(text, FONT_MD);
             gc.fillText(text, screenWidth / 2.0 - textW / 2.0, cby + 315);
         } else {
-            // No reward
+            // Keine Medaille erreicht
             gc.setFont(FONT_SM);
             gc.setFill(TEXT_GRAY);
             text = "Leider keine Medaille - versuche es erneut!";
@@ -130,19 +135,19 @@ public class WinScreen extends GameScreen {
             gc.fillText(text, screenWidth / 2.0 - textW / 2.0, cby + 220);
         }
 
-        // Continue hint
+        // Hinweis zum Weiterspielen (nahtloser Spielfluss)
         gc.setFont(FONT_XS);
         gc.setFill(TEXT_GRAY);
-        text = "Drücke ENTER um neu zu starten";
+        text = "Drücke ENTER um weiterzuspielen";
         textW = getTextWidth(text, FONT_XS);
         gc.fillText(text, screenWidth / 2.0 - textW / 2.0, cby + 340);
     }
 
     /**
-     * Gets the appropriate medal sprite based on reward tier.
+     * Gibt das passende Medaillen-Sprite basierend auf der Belohnungsstufe zurück.
      * 
-     * @param reward the reward tier
-     * @return the medal sprite image
+     * @param reward die Belohnungsstufe
+     * @return das Medaillen-Sprite oder null wenn keine Medaille
      */
     private Image getMedalSprite(Reward reward) {
         switch (reward) {

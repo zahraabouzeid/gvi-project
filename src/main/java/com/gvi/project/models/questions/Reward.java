@@ -1,15 +1,20 @@
 package com.gvi.project.models.questions;
 
 /**
- * Represents the reward tier (medal) based on performance.
- * According to M6 concept: Bronze, Silver, Gold based on percentage thresholds.
+ * Repräsentiert die Belohnungsstufen (Medaillen) basierend auf der Performance.
+ * 
+ * Schwellenwerte:
+ * - Bronze:  59% - 73%
+ * - Silber:  74% - 88%
+ * - Gold:    89% - 97%
+ * - Special: 98% - 100%
  */
 public enum Reward {
     NONE("Keine Medaille", 0),
     BRONZE("Bronze", 59),
     SILVER("Silber", 74),
     GOLD("Gold", 89),
-    GOLD_PERFECT("Gold Perfect", 98);
+    GOLD_PERFECT("Special", 98);
 
     private final String displayName;
     private final int minPercentage;
