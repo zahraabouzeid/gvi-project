@@ -35,7 +35,8 @@ Der Schwierigkeitsgrad wird als Faktor `s` verwendet (z. B. 1 = leicht, 2 = mitt
 	mit $n_{luecken}$ = Anzahl korrekt gefüllter Lücken.
 
 ## Schwellenwerte
-- `Gold`: Leistung $\ge 89\%$
+- `Diamon`: Leistung $\ge 98\%$
+- `Gold`: Leistung $\ge 89\%$ und $< 98\%$
 - `Silber`: Leistung $\ge 74\%$ und $< 89\%$
 - `Bronze`: Leistung $\ge 59\%$ und $< 74\%$
 - Unter $60\%$: keine Medaille

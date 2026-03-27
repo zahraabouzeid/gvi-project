@@ -1,17 +1,17 @@
 package com.gvi.project.models.questions;
 
 /**
- * Calculates the performance reward based on total points achieved.
- * Implements the reward system concept from M6.
+ * Berechnet die Performance-Belohnung basierend auf den erreichten Punkten.
+ * Implementiert das Belohnungssystem-Konzept aus den Anforderungen.
  * 
- * Formula: Performance% = (achievedPoints / maxPoints) * 100
+ * Formel: Performance% = (erreichte Punkte / max. Punkte) * 100
  * 
- * Thresholds:
- * - Gold Perfect: >= 98%
- * - Gold:         >= 89% and < 98%
- * - Silver:       >= 74% and < 89%
- * - Bronze:       >= 59% and < 74%
- * - None:         < 59%
+ * Schwellenwerte:
+ * - Special: >= 98%
+ * - Gold:    >= 89% und < 98%
+ * - Silber:  >= 74% und < 89%
+ * - Bronze:  >= 59% und < 74%
+ * - Keine:   < 59%
  */
 public class RewardCalculator {
 

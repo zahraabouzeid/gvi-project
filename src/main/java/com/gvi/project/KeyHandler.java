@@ -17,6 +17,7 @@ public class KeyHandler {
 	public boolean f8Pressed = false;  // Cheat: Win with Silver
 	public boolean f9Pressed = false;  // Cheat: Win with Gold
 	public boolean f10Pressed = false; // Cheat: Win with Gold Perfect
+	public boolean f11Pressed = false; // Dev: Reset all rewards
 	public int numberPressed = -1;
 	public String typedCharacter = "";
 
@@ -43,6 +44,7 @@ public class KeyHandler {
 			if (code == KeyCode.F8) f8Pressed = true;
 			if (code == KeyCode.F9) f9Pressed = true;
 			if (code == KeyCode.F10) f10Pressed = true;
+			if (code == KeyCode.F11) f11Pressed = true;
 		});
 
 		// Handle text input (including uppercase) with onKeyTyped event
@@ -74,6 +76,7 @@ public class KeyHandler {
 			if (code == KeyCode.F8) f8Pressed = false;
 			if (code == KeyCode.F9) f9Pressed = false;
 			if (code == KeyCode.F10) f10Pressed = false;
+			if (code == KeyCode.F11) f11Pressed = false;
 		});
 
 		node.setFocusTraversable(true);
