@@ -91,7 +91,7 @@ public class SaveManager {
         data.playerItems   = new HashMap<>(gp.player.playerItems);
         data.currentMap    = resolveCurrentMapName(gp);
         data.savedAt       = LocalDateTime.now().format(TIMESTAMP_FMT);
-        data.playtime      = gp.ui.playtime;
+        data.playtime      = gp.ui != null ? gp.ui.playtime : 0;
 
         gp.progressManager.snapshotCurrentMap(gp);
         data.allMapObjects = new HashMap<>(gp.progressManager.getSnapshots());
@@ -130,7 +130,7 @@ public class SaveManager {
         gp.player.playerItems   = data.playerItems != null ? new HashMap<>(data.playerItems) : new HashMap<>();
         gp.player.isMoving      = false;
         gp.player.isDead        = false;
-        gp.ui.playtime          = data.playtime;
+        if (gp.ui != null) gp.ui.playtime = data.playtime;
 
         gp.progressManager.reset();
         gp.currentMap = null;
