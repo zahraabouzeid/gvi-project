@@ -18,6 +18,8 @@ import java.util.Set;
 public class UI {
 
     private static final Logger log = LoggerFactory.getLogger(UI.class);
+    // Fixed maximum score budget across the full campaign.
+    private static final int TOTAL_GAME_MAX_POINTS = 1636;
     
     private final GamePanel gp;
 
@@ -89,12 +91,12 @@ public class UI {
     private void initializeTotalQuestionCount() {
         try {
             int totalQuestions = gp.questionProvider.getTotalQuestionCount();
-            // Fester Wert für das GESAMTE Spiel - Belohnung wird nur beim Truhe-Öffnen berechnet
-            maxPossiblePoints = 1636;
+            // The reward system is calculated against the whole game, not the active room.
+            maxPossiblePoints = TOTAL_GAME_MAX_POINTS;
             log.info("Belohnungssystem initialisiert mit {} Fragen und {} maximalen Punkten (gesamtes Spiel)", totalQuestions, maxPossiblePoints);
         } catch (Exception e) {
             log.error("Fehler beim Laden der Gesamtanzahl der Fragen", e);
-            maxPossiblePoints = 1636; // Fallback auf festen Wert
+            maxPossiblePoints = TOTAL_GAME_MAX_POINTS;
         }
     }
 
@@ -152,19 +154,19 @@ public class UI {
         playtime = 0;
         gameOverScreen.reset();
         hud.reset();
-        maxPossiblePoints = 1636; // Fester Wert für das gesamte Spiel
+        maxPossiblePoints = TOTAL_GAME_MAX_POINTS;
         earnedReward = Reward.NONE;
         performancePercentage = 0.0;
     }
 
     /**
      * Adds max possible points for a question (DEPRECATED - not used anymore).
-     * maxPossiblePoints is now a fixed value of 1636 for the entire game.
+     * maxPossiblePoints is now a fixed value for the entire game.
      * This method is kept for backward compatibility and testing purposes only.
      * @param points the maximum points achievable for this question
      */
     public void addMaxPossiblePoints(int points) {
-        // Not used anymore - maxPossiblePoints is fixed at 1636
+        // Not used anymore - maxPossiblePoints is fixed for the full campaign.
         // Kept for backward compatibility
     }
 

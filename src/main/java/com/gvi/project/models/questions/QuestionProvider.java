@@ -3,7 +3,6 @@ package com.gvi.project.models.questions;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gvi.project.repository.GapFieldEntity;
-import com.gvi.project.repository.GapOptionEntity;
 import com.gvi.project.repository.McAnswerEntity;
 import com.gvi.project.repository.QuestionDataService;
 import com.gvi.project.repository.QuestionEntity;

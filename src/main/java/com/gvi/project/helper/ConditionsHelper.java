@@ -8,39 +8,36 @@ import com.gvi.project.models.data_objects.ConditionsObject;
 public class ConditionsHelper {
 
 	public static ConditionResult conditionsAreMet(GamePanel gp, ConditionsObject conditions) {
-
-		boolean overallResult;
-		ConditionResult overallResultObject = new ConditionResult();
-
 		if ("and".equals(conditions.and_or)) {
-			overallResult = true;
-
-			for (ConditionObject cObj : conditions.conditionObjects) {
-				ConditionResult result = checkCondition(gp, cObj);
-
-				if (!result.success) {
-					overallResult = false;
-					overallResultObject.addStringMessage(result.getMessage());
-				}
-			}
-		} else if ("or".equals(conditions.and_or)) {
-			overallResult = false;
-
-			for (ConditionObject cObj : conditions.conditionObjects) {
-				ConditionResult result = checkCondition(gp, cObj);
-
-				if (result.success) {
-					return new ConditionResult(true, "");
-				} else {
-					overallResultObject.addStringMessage(result.getMessage());
-				}
-			}
-		} else {
-			return overallResultObject;
+			return evaluateConditions(gp, conditions, true);
 		}
 
-		overallResultObject.success = overallResult;
-		return overallResultObject;
+		if ("or".equals(conditions.and_or)) {
+			return evaluateConditions(gp, conditions, false);
+		}
+
+		return new ConditionResult();
+	}
+
+	private static ConditionResult evaluateConditions(GamePanel gp, ConditionsObject conditions, boolean requireAll) {
+		ConditionResult overallResult = new ConditionResult();
+		overallResult.success = requireAll;
+
+		for (ConditionObject conditionObject : conditions.conditionObjects) {
+			ConditionResult result = checkCondition(gp, conditionObject);
+
+			if (result.success) {
+				if (!requireAll) {
+					return new ConditionResult(true, "");
+				}
+				continue;
+			}
+
+			overallResult.success = false;
+			overallResult.addStringMessage(result.getMessage());
+		}
+
+		return overallResult;
 	}
 
 	private static ConditionResult checkCondition(GamePanel gp, ConditionObject cObj) {

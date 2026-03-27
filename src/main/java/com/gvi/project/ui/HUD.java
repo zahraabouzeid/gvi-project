@@ -25,6 +25,8 @@ import static com.gvi.project.ui.UIUtils.*;
 public class HUD {
 
     private static final Logger log = LoggerFactory.getLogger(HUD.class);
+    private static final double MEDAL_SIZE = 40;
+    private static final double MEDAL_SPACING = 44;
 
     private final GamePanel gp;
 
@@ -298,21 +300,20 @@ public class HUD {
         if (achievedRewards.isEmpty()) return;
 
         List<Reward> sortedRewards = new ArrayList<>(achievedRewards);
+        // Keep medal progression stable from left to right as the player unlocks better rewards.
         sortedRewards.sort(Comparator.comparingInt(Reward::getMinPercentage));
 
-        double medalSize = 40;
-        double medalSpacing = 44;
         double startX = hudX;
-        double startY = GeneralSettings.getScreenHeight() - medalSize - 16;
+        double startY = GeneralSettings.getScreenHeight() - MEDAL_SIZE - 16;
         double currentX = startX;
 
         for (Reward reward : sortedRewards) {
             if (reward == Reward.NONE) continue;
             Image medalImage = getMedalImage(reward);
             if (medalImage != null) {
-                gc.drawImage(medalImage, currentX, startY, medalSize, medalSize);
+                gc.drawImage(medalImage, currentX, startY, MEDAL_SIZE, MEDAL_SIZE);
             }
-            currentX += medalSpacing;
+            currentX += MEDAL_SPACING;
         }
     }
     
@@ -326,19 +327,6 @@ public class HUD {
             case GOLD: return medalGold;
             case GOLD_PERFECT: return medalGoldPerfect;
             default: return null;
-        }
-    }
-    
-    /**
-     * Gibt die passende Farbe für eine Medaille zurück.
-     */
-    private Color getMedalColor(Reward reward) {
-        switch (reward) {
-            case BRONZE: return Color.rgb(205, 127, 50);
-            case SILVER: return Color.rgb(192, 192, 192);
-            case GOLD: return Color.rgb(255, 215, 0);
-            case GOLD_PERFECT: return Color.rgb(255, 220, 0);
-            default: return TEXT_WHITE;
         }
     }
 }

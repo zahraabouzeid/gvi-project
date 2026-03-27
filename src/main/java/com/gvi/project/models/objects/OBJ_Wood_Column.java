@@ -1,10 +1,8 @@
 package com.gvi.project.models.objects;
 
 import com.gvi.project.GamePanel;
-import com.gvi.project.helper.ImageHelper;
 import com.gvi.project.models.sprite_sheets.SpriteSheet;
 
-import java.io.IOException;
 
 public class OBJ_Wood_Column extends SuperObject {
 	public OBJ_Wood_Column() {

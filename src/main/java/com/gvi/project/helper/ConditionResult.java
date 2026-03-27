@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ConditionResult {
 	public boolean success;
-	private List<String> messages = new ArrayList();
+	private final List<String> messages = new ArrayList<>();
 
 	public ConditionResult() {}
 

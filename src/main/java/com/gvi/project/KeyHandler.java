@@ -43,40 +43,7 @@ public class KeyHandler {
 
 	public void setupKeyListeners(Node node) {
 		node.setOnKeyPressed(e -> {
-			KeyCode code = e.getCode();
-
-			if (movementLocked && code != lastKeyCode) {
-				unlockMovement();
-			}
-
-			lastKeyCode = code;
-
-			if (code == KeyCode.W || code == KeyCode.UP) upPressed = true;
-			if (code == KeyCode.A || code == KeyCode.LEFT) leftPressed = true;
-			if (code == KeyCode.S || code == KeyCode.DOWN) downPressed = true;
-			if (code == KeyCode.D || code == KeyCode.RIGHT) rightPressed = true;
-			if (code == KeyCode.F) fPressed = true;
-			if (code == KeyCode.ESCAPE) escPressed = true;
-			if (code == KeyCode.ENTER) enterPressed = true;
-			if (code == KeyCode.BACK_SPACE) backspacePressed = true;
-			if (code == KeyCode.DELETE) delPressed = true;
-			if (code == KeyCode.TAB) tabPressed = true;
-			if (code == KeyCode.DIGIT1 || code == KeyCode.NUMPAD1) numberPressed = 1;
-			if (code == KeyCode.DIGIT2 || code == KeyCode.NUMPAD2) numberPressed = 2;
-			if (code == KeyCode.DIGIT3 || code == KeyCode.NUMPAD3) numberPressed = 3;
-			if (code == KeyCode.DIGIT4 || code == KeyCode.NUMPAD4) numberPressed = 4;
-			
-			// Debug and cheat keys
-			if (code == KeyCode.F3) f3Pressed = true;
-			if (code == KeyCode.F4) f4Pressed = true;
-			if (code == KeyCode.F5) f5Pressed = true;
-			if (code == KeyCode.F6) f6Pressed = true;
-			if (code == KeyCode.F7) f7Pressed = true;
-			if (code == KeyCode.F8) f8Pressed = true;
-			if (code == KeyCode.F9) f9Pressed = true;
-			if (code == KeyCode.F10) f10Pressed = true;
-			if (code == KeyCode.F11) f11Pressed = true;
-			if (code == KeyCode.F12) f12Pressed = true;
+			handleKeyPressed(e.getCode());
 		});
 
 		// Handle text input (including uppercase) with onKeyTyped event
@@ -91,32 +58,86 @@ public class KeyHandler {
 		});
 
 		node.setOnKeyReleased(e -> {
-			KeyCode code = e.getCode();
-
-			if (code == KeyCode.W || code == KeyCode.UP) upPressed = false;
-			if (code == KeyCode.A || code == KeyCode.LEFT) leftPressed = false;
-			if (code == KeyCode.S || code == KeyCode.DOWN) downPressed = false;
-			if (code == KeyCode.D || code == KeyCode.RIGHT) rightPressed = false;
-			if (code == KeyCode.F) fPressed = false;
-			if (code == KeyCode.ESCAPE) escPressed = false;
-			if (code == KeyCode.ENTER) enterPressed = false;
-			if (code == KeyCode.BACK_SPACE) backspacePressed = false;
-			if (code == KeyCode.DELETE) delPressed = false;
-			if (code == KeyCode.TAB) tabPressed = false;
-			if (code == KeyCode.F2) f2Pressed = !f2Pressed;
-			if (code == KeyCode.F3) f3Pressed = false;
-			if (code == KeyCode.F4) f4Pressed = false;
-			if (code == KeyCode.F5) f5Pressed = false;
-			if (code == KeyCode.F6) f6Pressed = false;
-			if (code == KeyCode.F7) f7Pressed = false;
-			if (code == KeyCode.F8) f8Pressed = false;
-			if (code == KeyCode.F9) f9Pressed = false;
-			if (code == KeyCode.F10) f10Pressed = false;
-			if (code == KeyCode.F11) f11Pressed = false;
-			if (code == KeyCode.F12) f12Pressed = false;
+			handleKeyReleased(e.getCode());
 		});
 
 		node.setFocusTraversable(true);
 		node.requestFocus();
+	}
+
+	private void handleKeyPressed(KeyCode code) {
+		if (movementLocked && code != lastKeyCode) {
+			unlockMovement();
+		}
+
+		lastKeyCode = code;
+		updateMovementKeys(code, true);
+		updateActionKeys(code, true);
+		updateNumberPressed(code);
+		updateDebugKeys(code, true);
+	}
+
+	private void handleKeyReleased(KeyCode code) {
+		updateMovementKeys(code, false);
+		updateActionKeys(code, false);
+		updateDebugKeys(code, false);
+	}
+
+	private void updateMovementKeys(KeyCode code, boolean pressed) {
+		switch (code) {
+			case W, UP -> upPressed = pressed;
+			case A, LEFT -> leftPressed = pressed;
+			case S, DOWN -> downPressed = pressed;
+			case D, RIGHT -> rightPressed = pressed;
+			default -> {
+			}
+		}
+	}
+
+	private void updateActionKeys(KeyCode code, boolean pressed) {
+		switch (code) {
+			case F -> fPressed = pressed;
+			case ESCAPE -> escPressed = pressed;
+			case ENTER -> enterPressed = pressed;
+			case BACK_SPACE -> backspacePressed = pressed;
+			case DELETE -> delPressed = pressed;
+			case TAB -> tabPressed = pressed;
+			default -> {
+			}
+		}
+	}
+
+	private void updateNumberPressed(KeyCode code) {
+		switch (code) {
+			case DIGIT1, NUMPAD1 -> numberPressed = 1;
+			case DIGIT2, NUMPAD2 -> numberPressed = 2;
+			case DIGIT3, NUMPAD3 -> numberPressed = 3;
+			case DIGIT4, NUMPAD4 -> numberPressed = 4;
+			default -> {
+			}
+		}
+	}
+
+	private void updateDebugKeys(KeyCode code, boolean pressed) {
+		switch (code) {
+			// F2 is a latched toggle, the remaining debug keys are momentary actions.
+			case F2 -> {
+				if (!pressed) {
+					f2Pressed = !f2Pressed;
+				}
+			}
+			case F3 -> f3Pressed = pressed;
+			case F4 -> f4Pressed = pressed;
+			case F5 -> f5Pressed = pressed;
+			case F6 -> f6Pressed = pressed;
+			case F7 -> f7Pressed = pressed;
+			case F8 -> f8Pressed = pressed;
+			case F9 -> f9Pressed = pressed;
+			case F10 -> f10Pressed = pressed;
+			case F11 -> f11Pressed = pressed;
+			case F12 -> f12Pressed = pressed;
+			default -> {
+			}
+		}
 	}
 }

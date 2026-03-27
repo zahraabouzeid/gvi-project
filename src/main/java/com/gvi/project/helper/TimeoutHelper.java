@@ -5,35 +5,34 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class TimeoutHelper {
-	private static ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+	private static ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
 	public static void setTimeout (Runnable task, long delay, TimeUnit unit) {
+		scheduleTimeout(task, delay, unit);
+	}
 
-		if (scheduler.isShutdown()) {
-			scheduler = Executors.newScheduledThreadPool(1);
-		}
+	public static void setTimeout (Runnable task, long delayMillis) {
+		scheduleTimeout(task, delayMillis, TimeUnit.MILLISECONDS);
+	}
 
-		scheduler.schedule( () -> {
+	private static void scheduleTimeout(Runnable task, long delay, TimeUnit unit) {
+		ScheduledExecutorService activeScheduler = ensureScheduler();
+
+		activeScheduler.schedule(() -> {
 			try {
 				task.run();
 			} finally {
-				scheduler.shutdown();
+				// Keep the shutdown tied to the scheduler that accepted this task.
+				activeScheduler.shutdown();
 			}
 		}, delay, unit);
 	}
 
-	public static void setTimeout (Runnable task, long delayMillis) {
-
+	private static synchronized ScheduledExecutorService ensureScheduler() {
 		if (scheduler.isShutdown()) {
-			scheduler = Executors.newScheduledThreadPool(1);
+			scheduler = Executors.newSingleThreadScheduledExecutor();
 		}
 
-		scheduler.schedule( () -> {
-			try {
-				task.run();
-			} finally {
-				scheduler.shutdown();
-			}
-		}, delayMillis, TimeUnit.MILLISECONDS);
+		return scheduler;
 	}
 }
