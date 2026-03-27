@@ -6,7 +6,7 @@
     <groupId>com.gvi.project</groupId>
     <artifactId>gviProjekt</artifactId>
     <!-- Make sure to update the version for each release -->
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <name>Byte Dungeon</name>
     <description>JavaFX desktop application for the GVI project</description>
     <packaging>jar</packaging>

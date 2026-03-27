@@ -86,6 +86,7 @@ public class OBJ_Chest extends AnimatedObject {
 					switch (condition.onSuccess) {
 						case "remove":
 							gp.player.removeItems(condition.compareWith, condition.value);
+							this.canInteract = false;
 							break;
 						default:
 							break;
