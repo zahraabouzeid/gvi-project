@@ -20,11 +20,17 @@ public class RewardPersistenceManager {
     private static final Logger log = LoggerFactory.getLogger(RewardPersistenceManager.class);
     private static final String SAVE_DIR = "saves";
     private static final String REWARD_FILE = "rewards.dat";
+    private final Path savePath;
     
     // Set der bereits erreichten und angezeigten Medaillen
     private final Set<Reward> achievedRewards;
     
     public RewardPersistenceManager() {
+        this(Paths.get(SAVE_DIR));
+    }
+
+    RewardPersistenceManager(Path saveDirectory) {
+        this.savePath = saveDirectory.resolve(REWARD_FILE);
         this.achievedRewards = new HashSet<>();
         loadRewards();
     }
@@ -131,7 +137,7 @@ public class RewardPersistenceManager {
      * @return Path zur Reward-Datei
      */
     private Path getSavePath() {
-        return Paths.get(SAVE_DIR, REWARD_FILE);
+        return savePath;
     }
     
     /**
