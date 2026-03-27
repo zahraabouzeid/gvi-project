@@ -59,11 +59,8 @@ public class OBJ_Chest extends AnimatedObject {
 			if (!conditionsAreMeet(gp)) return;
 			onSuccess(gp, objIndex);
 		}
-		// Calculate reward before finishing game
-//		gp.ui.calculateReward();
-//		gp.ui.gameFinished = true;
-//		gp.stopMusic();
-//		gp.playSE(4);
+		// Truhe geöffnet - Das Spiel ist beendet
+		// Die Belohnung wird automatisch beim Erreichen der Schwellenwerte angezeigt
 	}
 	
 	public void setUpAnimationComponent(){

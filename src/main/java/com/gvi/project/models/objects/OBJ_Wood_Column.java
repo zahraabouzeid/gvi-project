@@ -23,9 +23,13 @@ public class OBJ_Wood_Column extends SuperObject {
 
 	@Override
 	public void onConfirm(GamePanel gp, int objIndex) {
-		gp.ui.gameFinished = true;
-		gp.stopMusic();
-		gp.playSE(4);
+		// Berechne Belohnung und zeige Winscreen nur bei neuer Medaille
+		gp.ui.calculateReward();
+		if (gp.ui.shouldShowWinScreen()) {
+			gp.ui.gameFinished = true;
+			gp.stopMusic();
+			gp.playSE(4);
+		}
 	}
 
 }

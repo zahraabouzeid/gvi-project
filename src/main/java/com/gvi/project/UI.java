@@ -1,18 +1,24 @@
 package com.gvi.project;
 
 import com.gvi.project.helper.SaveManager;
+import com.gvi.project.manager.RewardPersistenceManager;
 import com.gvi.project.models.questions.Answer;
 import com.gvi.project.models.questions.Question;
 import com.gvi.project.models.questions.Reward;
 import com.gvi.project.models.questions.RewardCalculator;
 import com.gvi.project.ui.*;
 import javafx.scene.canvas.GraphicsContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Set;
 
 public class UI {
 
+    private static final Logger log = LoggerFactory.getLogger(UI.class);
+    
     private final GamePanel gp;
 
     private final TitleScreen titleScreen;
@@ -35,10 +41,14 @@ public class UI {
     public boolean gameFinished = false;
     double playtime;
     
-    // Reward system tracking
+    // Reward system tracking - Belohnungssystem für Medaillen
     private int maxPossiblePoints = 0;
     private Reward earnedReward = Reward.NONE;
     private double performancePercentage = 0.0;
+    private boolean shouldShowWinScreen = false; // Flag: Winscreen nur anzeigen wenn neue Medaille erreicht
+    
+    // Manager für permanentes Speichern von Medaillen
+    private final RewardPersistenceManager rewardPersistence;
 
     private final DecimalFormat df = new DecimalFormat("#.00");
 
@@ -46,6 +56,9 @@ public class UI {
 
     public UI(GamePanel gp) {
         this.gp = gp;
+
+        // Initialisiere RewardPersistenceManager für Medaillen-Speicherung
+        rewardPersistence = new RewardPersistenceManager();
 
         titleScreen = new TitleScreen();
         characterNameScreen = new CharacterNameScreen();
@@ -58,6 +71,24 @@ public class UI {
         hud = new HUD(gp);
         quizDialog = new QuizDialog();
         minimap = new Minimap(gp);
+        
+        // Initialisiere das Belohnungssystem mit der Gesamtanzahl aller Fragen
+        initializeTotalQuestionCount();
+    }
+    
+    /**
+     * Initialisiert die Gesamtanzahl der Fragen für das Belohnungssystem.
+     * Diese Zahl wird verwendet für die Berechnung: (richtige Antworten / Gesamtfragen) * 100
+     */
+    private void initializeTotalQuestionCount() {
+        try {
+            int totalQuestions = gp.questionProvider.getTotalQuestionCount();
+            maxPossiblePoints = totalQuestions;
+            log.info("Belohnungssystem initialisiert mit {} Gesamtfragen", totalQuestions);
+        } catch (Exception e) {
+            log.error("Fehler beim Laden der Gesamtanzahl der Fragen", e);
+            maxPossiblePoints = 0;
+        }
     }
 
     public void openQuiz(Question question, int remaining) {
@@ -106,6 +137,7 @@ public class UI {
     public void resetGame() {
         closeQuiz();
         gameFinished = false;
+        shouldShowWinScreen = false;
         messageOn = false;
         playtime = 0;
         gameOverScreen.reset();
@@ -132,13 +164,18 @@ public class UI {
     }
 
     /**
-     * Calculates and stores the final reward based on player's score.
-     * Should be called when game is finished.
+     * Berechnet die erreichte Belohnung basierend auf dem Spieler-Score.
+     * Prüft, ob die Medaille neu ist und angezeigt werden soll.
+     * Implementiert einmaliger Trigger: Jede Medaille wird nur einmal angezeigt.
      */
     public void calculateReward() {
         RewardCalculator calculator = new RewardCalculator(gp.player.score, maxPossiblePoints);
         performancePercentage = calculator.calculatePercentage();
         earnedReward = calculator.calculateReward();
+        
+        // Prüfe ob diese Medaille neu ist (einmaliger Trigger)
+        // checkAndMarkReward gibt true zurück, wenn die Medaille neu ist
+        shouldShowWinScreen = rewardPersistence.checkAndMarkReward(earnedReward);
     }
 
     public int getMaxPossiblePoints() {
@@ -151,6 +188,59 @@ public class UI {
 
     public double getPerformancePercentage() {
         return performancePercentage;
+    }
+    
+    /**
+     * Prüft, ob der Winscreen angezeigt werden soll.
+     * Wird nur true, wenn eine neue Medaille erreicht wurde.
+     * 
+     * @return true, wenn der Winscreen angezeigt werden soll
+     */
+    public boolean shouldShowWinScreen() {
+        return shouldShowWinScreen;
+    }
+    
+    /**
+     * Schließt den Winscreen und setzt das entsprechende Flag zurück.
+     * Das Spiel läuft nahtlos weiter (kein Reset).
+     */
+    public void closeWinScreen() {
+        shouldShowWinScreen = false;
+        gameFinished = false;
+    }
+    
+    /**
+     * Prüft, ob ein neuer Schwellenwert erreicht wurde und zeigt ggf. den Winscreen an.
+     * Diese Methode wird nach jeder Punktevergabe aufgerufen (Benutzerführung: sofortige Belohnung).
+     * 
+     * @param gp das GamePanel für Sound-Effekte
+     */
+    public void checkRewardThreshold(GamePanel gp) {
+        // Berechne aktuelle Belohnung
+        calculateReward();
+        
+        // Wenn eine neue Medaille erreicht wurde, zeige Winscreen
+        if (shouldShowWinScreen()) {
+            gameFinished = true;
+            gp.stopMusic();
+            gp.playSE(4); // Victory sound
+        }
+    }
+    
+    /**
+     * Gibt alle bereits erreichten Medaillen zurück (für HUD-Anzeige).
+     * 
+     * @return Set aller erreichten Medaillen
+     */
+    public Set<Reward> getAchievedRewards() {
+        return rewardPersistence.getAchievedRewards();
+    }
+    
+    /**
+     * Setzt alle erreichten Medaillen zurück (nur für Dev-Mode/Testing).
+     */
+    public void resetAllRewards() {
+        rewardPersistence.resetAllRewards();
     }
 
     public void showFloatingScore(int points) {

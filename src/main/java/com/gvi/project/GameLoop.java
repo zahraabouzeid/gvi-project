@@ -73,14 +73,12 @@ public class GameLoop extends AnimationTimer {
 			}
 			return;
 		}
+		// Winscreen-Handling: Nahtloser Spielfluss ohne Reset
+		// Wenn der Spieler ENTER drückt, wird nur der Screen geschlossen, Spiel läuft weiter
 		if (gp.ui.gameFinished) {
 			if (gp.keyHandler.enterPressed) {
 				gp.keyHandler.enterPressed = false;
-				gp.loadMap(GameMaps.MAP_00);
-				gp.player.setDefaultValues();
-				gp.ui.resetGame();
-				gp.interactingObjectIndex = -1;
-				gp.gameState = GameState.PLAY;
+				gp.ui.closeWinScreen(); // Schließt nur den Screen, kein Reset
 			}
 			return;
 		}
@@ -96,6 +94,74 @@ public class GameLoop extends AnimationTimer {
 			return;
 		}
 		if (gp.gameState == GameState.PLAY) {
+			GeneralSettings.setDevMode(gp.keyHandler.f2Pressed);
+
+			// Cheat-Keys zum Testen des Belohnungssystems
+			// Simuliert das Erreichen verschiedener Medaillen-Schwellenwerte
+			if (gp.keyHandler.f7Pressed) {
+				gp.keyHandler.f7Pressed = false;
+				// Bronze: 60% (600/1000)
+				gp.player.score = 600;
+				gp.ui.setMaxPossiblePoints(1000);
+				gp.ui.calculateReward();
+				// Winscreen wird nur angezeigt, wenn die Medaille neu ist
+				if (gp.ui.shouldShowWinScreen()) {
+					gp.ui.gameFinished = true;
+					gp.stopMusic();
+					gp.playSE(4);
+				}
+				return;
+			}
+			if (gp.keyHandler.f8Pressed) {
+				gp.keyHandler.f8Pressed = false;
+				// Silber: 80% (800/1000)
+				gp.player.score = 800;
+				gp.ui.setMaxPossiblePoints(1000);
+				gp.ui.calculateReward();
+				// Winscreen wird nur angezeigt, wenn die Medaille neu ist
+				if (gp.ui.shouldShowWinScreen()) {
+					gp.ui.gameFinished = true;
+					gp.stopMusic();
+					gp.playSE(4);
+				}
+				return;
+			}
+			if (gp.keyHandler.f9Pressed) {
+				gp.keyHandler.f9Pressed = false;
+				// Gold: 95% (950/1000)
+				gp.player.score = 950;
+				gp.ui.setMaxPossiblePoints(1000);
+				gp.ui.calculateReward();
+				// Winscreen wird nur angezeigt, wenn die Medaille neu ist
+				if (gp.ui.shouldShowWinScreen()) {
+					gp.ui.gameFinished = true;
+					gp.stopMusic();
+					gp.playSE(4);
+				}
+				return;
+			}
+			if (gp.keyHandler.f10Pressed) {
+				gp.keyHandler.f10Pressed = false;
+				// Special Medaille: 99% (990/1000)
+				gp.player.score = 990;
+				gp.ui.setMaxPossiblePoints(1000);
+				gp.ui.calculateReward();
+				// Winscreen wird nur angezeigt, wenn die Medaille neu ist
+				if (gp.ui.shouldShowWinScreen()) {
+					gp.ui.gameFinished = true;
+					gp.stopMusic();
+					gp.playSE(4);
+				}
+				return;
+			}
+			if (gp.keyHandler.f11Pressed) {
+				gp.keyHandler.f11Pressed = false;
+				// Reset alle Medaillen (nur im Dev-Mode)
+				gp.ui.resetAllRewards();
+				gp.ui.openMessage("Alle Medaillen zurückgesetzt!");
+				return;
+			}
+
 			if (gp.keyHandler.escPressed) {
 				gp.keyHandler.escPressed = false;
 				gp.ui.resetPauseScreen();
@@ -118,8 +184,13 @@ public class GameLoop extends AnimationTimer {
 						}
 						int earnedPoints = gp.ui.getResolvedQuizPoints();
 						
+						// Punkte hinzufügen
 						gp.player.score += earnedPoints;
 						gp.ui.showFloatingScore(earnedPoints);
+						
+						// Prüfe sofort, ob ein neuer Schwellenwert erreicht wurde (Benutzerführung: sofortige Belohnung)
+						gp.ui.checkRewardThreshold(gp);
+						
 						gp.ui.closeQuiz();
 						int idx = gp.interactingObjectIndex;
 						if (idx != -1 && gp.obj.get(idx) != null) {
