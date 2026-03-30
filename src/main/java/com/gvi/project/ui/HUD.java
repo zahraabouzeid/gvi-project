@@ -34,6 +34,14 @@ public class HUD {
     private boolean floatingPositive = true;
     private int floatingCounter = 0;
     private static final int FLOATING_DURATION = 60; // 1 second
+    
+    // Dungeon Theme Display
+    private String dungeonThemeText = null;
+    private int dungeonThemeCounter = 0;
+    private static final int DUNGEON_THEME_DURATION = 180; // 3 seconds
+    private static final double THEME_BOX_WIDTH = 320;
+    private static final double THEME_BOX_HEIGHT = 150;
+    
     private final double hudX;
     private final double hudY;
     
@@ -86,9 +94,20 @@ public class HUD {
         floatingCounter = FLOATING_DURATION;
     }
 
+    /**
+     * Displays the dungeon theme titles for the current map.
+     * Shows for a few seconds below the score box.
+     */
+    public void showDungeonTheme(String themeText) {
+        this.dungeonThemeText = themeText;
+        this.dungeonThemeCounter = DUNGEON_THEME_DURATION;
+    }
+
     public void reset() {
         floatingText = null;
         floatingCounter = 0;
+        dungeonThemeText = null;
+        dungeonThemeCounter = 0;
     }
 
     public void draw(GraphicsContext gc, String formattedTime) {
@@ -140,6 +159,45 @@ public class HUD {
         double hsTextY = hsBoxY + hsBoxHeight / 2.0 + 4;
         gc.setFill(Color.rgb(255, 200, 80)); // Golden color for best score
         gc.fillText(hsStr, hsTextX, hsTextY);
+
+        // Dungeon Theme Display
+        if (dungeonThemeCounter > 0 && dungeonThemeText != null) {
+            double alpha = dungeonThemeCounter / (double) DUNGEON_THEME_DURATION;
+            double themeBoxY = hsBoxY + hsBoxHeight + 12;
+            
+            // Fixed box dimensions
+            double themeBoxX = GeneralSettings.getScreenWidth() / 2.0 - THEME_BOX_WIDTH / 2.0;
+            
+            String[] lines = dungeonThemeText.split("\n");
+            
+            // Draw semi-transparent background
+            gc.setFill(Color.rgb(30, 30, 60, 0.8 * alpha));
+            gc.fillRect(themeBoxX, themeBoxY, THEME_BOX_WIDTH, THEME_BOX_HEIGHT);
+            
+            // Draw border
+            gc.setStroke(Color.rgb(150, 120, 255, alpha));
+            gc.setLineWidth(2);
+            gc.strokeRect(themeBoxX, themeBoxY, THEME_BOX_WIDTH, THEME_BOX_HEIGHT);
+    
+            // Draw theme text lines centered in the box
+            gc.setFont(FONT_SM);
+            gc.setFill(Color.rgb(200, 180, 255, alpha));
+            
+            double lineHeight = 18;
+            double totalTextHeight = (lines.length * lineHeight);
+            double startingY = themeBoxY + (THEME_BOX_HEIGHT - totalTextHeight) / 2.0 + 12;
+            
+            for (int i = 0; i < lines.length; i++) {
+                String line = lines[i];
+                if (line.trim().isEmpty()) continue;
+                
+                double lineWidth = getTextWidth(line, FONT_SM);
+                double textX = GeneralSettings.getScreenWidth() / 2.0 - lineWidth / 2.0;
+                gc.fillText(line, textX, startingY + (i * lineHeight));
+            }
+            
+            dungeonThemeCounter--;
+        }
 
         if (floatingCounter > 0 && floatingText != null) {
             double alpha = floatingCounter / (double) FLOATING_DURATION;
