@@ -4,6 +4,7 @@ import com.gvi.project.GamePanel;
 import com.gvi.project.GeneralSettings;
 import com.gvi.project.helper.ColorHelper;
 import com.gvi.project.models.objects.SuperObject;
+import com.gvi.project.models.sprite_sheets.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
@@ -82,8 +83,15 @@ public class Minimap {
                 if (distance(tileX, tileY, cx, cy) > radius) continue;
 
                 String tileKey = gp.currentMap.getLayer("FLOOR").layout[col][row];
-                gc.setFill(getTileColor(tileKey));
-                gc.fillRect(startX + col * pixelSize, startY + row * pixelSize, pixelSize, pixelSize);
+                try {
+                    gc.setFill(getTileColor(tileKey));
+                    gc.fillRect(startX + col * pixelSize, startY + row * pixelSize, pixelSize, pixelSize);
+                } catch (Exception e) {
+                    // Fallback bei Fehler
+                    System.err.println("Fehler beim Zeichnen von Tile [" + col + "," + row + "] mit Key: " + tileKey);
+                    gc.setFill(Color.MAGENTA);
+                    gc.fillRect(startX + col * pixelSize, startY + row * pixelSize, pixelSize, pixelSize);
+                }
             }
         }
     }
@@ -111,7 +119,7 @@ public class Minimap {
         int playerRow = gp.player.worldY / GeneralSettings.getTileSize();
         gc.setFill(Color.RED);
         gc.fillRect(startX + playerCol * pixelSize - 1, startY + playerRow * pixelSize - 1,
-                    pixelSize + 2, pixelSize + 2);
+                pixelSize + 2, pixelSize + 2);
     }
 
     private double distance(double x1, double y1, double x2, double y2) {
@@ -119,11 +127,19 @@ public class Minimap {
     }
 
     private Color getTileColor(String tileKey) {
-        if (tileKey.equals("empty")) {
+        if (tileKey.equals("empty") || tileKey == null) {
             return Color.TRANSPARENT;
         }
 
-        Image image = gp.spriteManager.getRegisterdSprite(tileKey).image;
-        return ColorHelper.getMostCommonColor(image);
+        Sprite sprite = gp.spriteManager.getRegisterdSprite(tileKey);
+
+        // Null-Check: Wenn Sprite nicht registriert ist, verwende Default-Farbe
+        if (sprite == null || sprite.image == null) {
+            // Für Debugging: Ausgabe, welcher Key fehlt
+            System.err.println("Minimap: Sprite nicht gefunden für Key: " + tileKey);
+            return Color.DARKGRAY; // oder eine andere Default-Farbe
+        }
+
+        return ColorHelper.getMostCommonColor(sprite.image);
     }
 }

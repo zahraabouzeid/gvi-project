@@ -1,17 +1,13 @@
 package com.gvi.project.models.questions;
 
 public enum TopicArea {
-    SQL_GRUNDLAGEN("SQL Grundlagen"),
-    SELECT_ABFRAGEN("SELECT & Abfragen"),
-    NORMALISIERUNG("Normalisierung"),
-    ER_MODELLIERUNG("ER-Modellierung"),
-    DDL_DML("DDL & DML"),
-    JOINS_SUBQUERIES("Joins & Subqueries"),
+    DATENBANK_SQL("Datenbank - SQL"),
+    DATENBANKEN_MODELLIERUNG("Datenbanken Modellierung"),
+    PROGRAMMIERUNG_PSEUDOCODE("Programmierung Pseudocode"),
+    MASCHINELLES_LERNEN("Maschinelles Lernen"),
     WIRTSCHAFT("Wirtschaft"),
     RECHT("Recht"),
-    DB_MODELLIERUNG("Datenbanken Modellierung / UML"),
-    PSEUDOCODE("Programmierung Pseudocode"),
-    MASCHINELLES_LERNEN("Maschinelles Lernen");
+    UML("UML");
 
     private final String displayName;
 

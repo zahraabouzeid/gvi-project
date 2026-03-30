@@ -717,7 +717,7 @@
       "id": "crystal_red_quiz_station_1",
       "conditions": null,
       "data": {
-        "topicArea": "JOINS_SUBQUERIES",
+        "topicArea": "WIRTSCHAFT",
         "spriteGroup": "crystal_red"
       }
     },
@@ -728,7 +728,7 @@
       "id": "crystal_red_quiz_station_2",
       "conditions": null,
       "data": {
-        "topicArea": "DDL_DML",
+        "topicArea": "RECHT",
         "spriteGroup": "crystal_red"
       }
     },
@@ -739,7 +739,7 @@
       "id": "crystal_red_quiz_station_3",
       "conditions": null,
       "data": {
-        "topicArea": "ER_MODELLIERUNG",
+        "topicArea": "UML",
         "spriteGroup": "crystal_red"
       }
     },
@@ -750,7 +750,7 @@
       "id": "crystal_red_quiz_station_4",
       "conditions": null,
       "data": {
-        "topicArea": "NORMALISIERUNG",
+        "topicArea": "WIRTSCHAFT",
         "spriteGroup": "crystal_red"
       }
     },
@@ -761,7 +761,7 @@
       "id": "crystal_red_quiz_station_5",
       "conditions": null,
       "data": {
-        "topicArea": "SELECT_ABFRAGEN",
+        "topicArea": "RECHT",
         "spriteGroup": "crystal_red"
       }
     },
@@ -772,7 +772,7 @@
       "id": "crystal_red_quiz_station_6",
       "conditions": null,
       "data": {
-        "topicArea": "SQL_GRUNDLAGEN",
+        "topicArea": "UML",
         "spriteGroup": "crystal_red"
       }
     },

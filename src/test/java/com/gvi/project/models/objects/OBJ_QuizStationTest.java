@@ -69,7 +69,7 @@ class OBJ_QuizStationTest {
     private Question createQuestion(int id) {
         return new TrueFalseQuestion(
                 id,
-                TopicArea.SQL_GRUNDLAGEN,
+                TopicArea.DATENBANK_SQL,
                 "intro",
                 "question",
                 true,

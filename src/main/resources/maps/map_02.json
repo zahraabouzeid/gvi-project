@@ -646,7 +646,7 @@
       "id": "crystal_blue_quiz_station_1",
       "conditions": null,
       "data": {
-        "topicArea": "JOINS_SUBQUERIES",
+        "topicArea": "PROGRAMMIERUNG_PSEUDOCODE",
         "spriteGroup": "crystal_blue"
       }
     },
@@ -657,7 +657,7 @@
       "id": "crystal_blue_quiz_station_2",
       "conditions": null,
       "data": {
-        "topicArea": "DDL_DML",
+        "topicArea": "PROGRAMMIERUNG_PSEUDOCODE",
         "spriteGroup": "crystal_blue"
       }
     },
@@ -668,7 +668,7 @@
       "id": "crystal_blue_quiz_station_3",
       "conditions": null,
       "data": {
-        "topicArea": "ER_MODELLIERUNG",
+        "topicArea": "PROGRAMMIERUNG_PSEUDOCODE",
         "spriteGroup": "crystal_blue"
       }
     },
@@ -679,7 +679,7 @@
       "id": "crystal_blue_quiz_station_4",
       "conditions": null,
       "data": {
-        "topicArea": "NORMALISIERUNG",
+        "topicArea": "MASCHINELLES_LERNEN",
         "spriteGroup": "crystal_blue"
       }
     },
@@ -690,7 +690,7 @@
       "id": "crystal_blue_quiz_station_5",
       "conditions": null,
       "data": {
-        "topicArea": "SELECT_ABFRAGEN",
+        "topicArea": "MASCHINELLES_LERNEN",
         "spriteGroup": "crystal_blue"
       }
     },
@@ -701,7 +701,7 @@
       "id": "crystal_blue_quiz_station_6",
       "conditions": null,
       "data": {
-        "topicArea": "SQL_GRUNDLAGEN",
+        "topicArea": "MASCHINELLES_LERNEN",
         "spriteGroup": "crystal_blue"
       }
     },

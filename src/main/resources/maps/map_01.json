@@ -730,7 +730,7 @@
       "id": "crystal_green_quiz_station_1",
       "conditions": null,
       "data": {
-        "topicArea": "JOINS_SUBQUERIES",
+        "topicArea": "DATENBANK_SQL",
         "spriteGroup": "crystal_green"
       }
     },
@@ -741,10 +741,7 @@
       "id": "crystal_green_quiz_station_2",
       "conditions": null,
       "data": {
-
-
-        
-        "topicArea": "DDL_DML",
+        "topicArea": "DATENBANK_SQL",
         "spriteGroup": "crystal_green"
       }
     },
@@ -755,7 +752,7 @@
       "id": "crystal_green_quiz_station_3",
       "conditions": null,
       "data": {
-        "topicArea": "ER_MODELLIERUNG",
+        "topicArea": "DATENBANK_SQL",
         "spriteGroup": "crystal_green"
       }
     },
@@ -766,7 +763,7 @@
       "id": "crystal_green_quiz_station_4",
       "conditions": null,
       "data": {
-        "topicArea": "NORMALISIERUNG",
+        "topicArea": "DATENBANKEN_MODELLIERUNG",
         "spriteGroup": "crystal_green"
       }
     },
@@ -777,7 +774,7 @@
       "id": "crystal_green_quiz_station_5",
       "conditions": null,
       "data": {
-        "topicArea": "SELECT_ABFRAGEN",
+        "topicArea": "DATENBANKEN_MODELLIERUNG",
         "spriteGroup": "crystal_green"
       }
     },
@@ -788,7 +785,7 @@
       "id": "crystal_green_quiz_station_6",
       "conditions": null,
       "data": {
-        "topicArea": "SQL_GRUNDLAGEN",
+        "topicArea": "DATENBANKEN_MODELLIERUNG",
         "spriteGroup": "crystal_green"
       }
     },

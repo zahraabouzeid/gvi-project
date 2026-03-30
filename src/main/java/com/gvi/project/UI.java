@@ -280,6 +280,10 @@ public class UI {
         hud.showFloatingScore(points);
     }
 
+    public void showDungeonTheme(String themeText) {
+        hud.showDungeonTheme(themeText);
+    }
+
     public void drawTitleScreen(GraphicsContext gc) {
         titleScreen.draw(gc);
     }

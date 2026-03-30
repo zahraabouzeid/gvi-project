@@ -20,7 +20,7 @@ class MultipleChoiceQuestionTest {
 
         MultipleChoiceQuestion question = new MultipleChoiceQuestion(
                 7,
-                TopicArea.SELECT_ABFRAGEN,
+                TopicArea.DATENBANK_SQL,
                 "Intro",
                 "Frage",
                 answers,
@@ -31,7 +31,7 @@ class MultipleChoiceQuestionTest {
         answers.add(new Answer("D", 3));
 
         assertEquals(7, question.getId());
-        assertEquals(TopicArea.SELECT_ABFRAGEN, question.getTopicArea());
+        assertEquals(TopicArea.DATENBANK_SQL, question.getTopicArea());
         assertEquals("Intro", question.getIntroText());
         assertEquals("Frage", question.getQuestionText());
         assertEquals(QuestionType.MULTIPLE_CHOICE, question.getType());
@@ -46,7 +46,7 @@ class MultipleChoiceQuestionTest {
     void getAnswersShouldReturnImmutableCopy() {
         MultipleChoiceQuestion question = new MultipleChoiceQuestion(
                 1,
-                TopicArea.SQL_GRUNDLAGEN,
+                TopicArea.DATENBANK_SQL,
                 null,
                 "Frage",
                 List.of(new Answer("A", 1)),

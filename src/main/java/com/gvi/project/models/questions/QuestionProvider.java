@@ -326,8 +326,8 @@ public class QuestionProvider implements QuestionService {
 		if (mapped != null) {
 			return mapped;
 		}
-		log.warn("Unknown or missing theme '{}' for question {}. Falling back to {}.", themeName, entity.getId(), TopicArea.SQL_GRUNDLAGEN);
-		return TopicArea.SQL_GRUNDLAGEN;
+		log.warn("Unknown or missing theme '{}' for question {}. Falling back to {}.", themeName, entity.getId(), TopicArea.DATENBANK_SQL);
+		return TopicArea.DATENBANK_SQL;
 	}
 
 	private TopicArea mapTopicArea(String rawValue) {
@@ -344,13 +344,13 @@ public class QuestionProvider implements QuestionService {
 		normalized = trimUnderscores(normalized);
 
 		normalized = switch (normalized) {
-			case "DATENBANK_SQL" -> "SQL_GRUNDLAGEN";
-			case "DATENBANKEN_MODELLIERUNG", "DATENBANK_MODELLIERUNG" -> "ER_MODELLIERUNG";
-			case "PROGRAMMIERUNG_PSEUDOCODE" -> "DDL_DML";
-			case "WIRTSCHAFT" -> "SELECT_ABFRAGEN";
-			case "RECHT" -> "NORMALISIERUNG";
-			case "MASCHINELLES_LERNEN" -> "JOINS_SUBQUERIES";
-			case "UML" -> "ER_MODELLIERUNG";
+			case "DATENBANK_SQL" -> "DATENBANK_SQL";
+			case "DATENBANKEN_MODELLIERUNG", "DATENBANK_MODELLIERUNG" -> "DATENBANKEN_MODELLIERUNG";
+			case "PROGRAMMIERUNG_PSEUDOCODE" -> "PROGRAMMIERUNG_PSEUDOCODE";
+			case "WIRTSCHAFT" -> "WIRTSCHAFT";
+			case "RECHT" -> "RECHT";
+			case "MASCHINELLES_LERNEN" -> "MASCHINELLES_LERNEN";
+			case "UML" -> "UML";
 			default -> normalized;
 		};
 

@@ -8,6 +8,7 @@ import com.gvi.project.models.game_maps.GameMap;
 import com.gvi.project.models.game_maps.GameMapLoader;
 import com.gvi.project.models.entities.Player;
 import com.gvi.project.models.game_maps.GameMaps;
+import com.gvi.project.models.game_maps.DungeonThemeConfig;
 import com.gvi.project.models.objects.SuperObject;
 import com.gvi.project.models.questions.QuestionService;
 import com.gvi.project.manager.SpriteManager;
@@ -98,6 +99,15 @@ public class GamePanel {
 		GameMapLoader mapLoader = new GameMapLoader(this);
 		this.currentMap = mapLoader.loadMap(map.getConfigFileName());
 		progressManager.applySnapshotIfPresent(this);
+		
+		// Show dungeon theme for maps 1, 2, 3
+		if (map == GameMaps.MAP_01 || map == GameMaps.MAP_02 || map == GameMaps.MAP_03) {
+			DungeonThemeConfig themeConfig = DungeonThemeConfig.getConfigForMap(map);
+			if (themeConfig != null) {
+				String themeDisplayText = formatDungeonThemeForDisplay(themeConfig);
+				ui.showDungeonTheme(themeDisplayText);
+			}
+		}
 //		cChecker.printCollisionMap();
 	}
 
@@ -106,5 +116,25 @@ public class GamePanel {
 			o.onDestroy();
 		}
 		obj.clear();
+	}
+
+	/**
+	 * Formats the dungeon theme configuration for display in the UI.
+	 * Shows title and topic area names.
+	 */
+	private String formatDungeonThemeForDisplay(DungeonThemeConfig config) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(config.getTitle()).append("\n");
+		
+		// Add topic areas (themes)
+		var topicAreas = config.getTopicAreas();
+		if (!topicAreas.isEmpty()) {
+			sb.append("\nThemen:\n");
+			for (var topic : topicAreas) {
+				sb.append("• ").append(topic.getDisplayName()).append("\n");
+			}
+		}
+		
+		return sb.toString();
 	}
 }

@@ -24,7 +24,7 @@ class FillInBlankQuestionTest {
 
         FillInBlankQuestion question = new FillInBlankQuestion(
                 9,
-                TopicArea.DDL_DML,
+                TopicArea.DATENBANKEN_MODELLIERUNG,
                 "Intro",
                 "Lückentext",
                 List.of(firstBlank, secondBlank),
