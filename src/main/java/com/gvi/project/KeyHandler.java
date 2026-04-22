@@ -119,6 +119,12 @@ public class KeyHandler {
 			case DIGIT2, NUMPAD2 -> numberPressed = 2;
 			case DIGIT3, NUMPAD3 -> numberPressed = 3;
 			case DIGIT4, NUMPAD4 -> numberPressed = 4;
+			case DIGIT5, NUMPAD5 -> numberPressed = 5;
+			case DIGIT6, NUMPAD6 -> numberPressed = 6;
+			case DIGIT7, NUMPAD7 -> numberPressed = 7;
+			case DIGIT8, NUMPAD8 -> numberPressed = 8;
+			case DIGIT9, NUMPAD9 -> numberPressed = 9;
+			case DIGIT0, NUMPAD0 -> numberPressed = 10;
 			default -> {
 			}
 		}
